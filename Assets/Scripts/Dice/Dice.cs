@@ -1,9 +1,10 @@
+using Mirror;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Dice : MonoBehaviour
+public class Dice : NetworkBehaviour
 {
     public Transform[] diceFaces;
     public Rigidbody rb;
@@ -57,12 +58,17 @@ public class Dice : MonoBehaviour
             }
         }
 
-        Debug.Log($"Dice result {topFace + 1}");
+        //Debug.Log($"Dice result {topFace + 1}");
+        SendResult($"Dice result {topFace + 1}");
 
         OnDiceResult?.Invoke(_diceIndex, topFace + 1);
         return topFace + 1;
     }
-
+    [ClientRpc]
+    private void SendResult(string result)
+    {
+        Debug.Log(result);
+    }
     public void RollDice(float throwForce, float rollForce, int i)
     {
         _diceIndex = i;

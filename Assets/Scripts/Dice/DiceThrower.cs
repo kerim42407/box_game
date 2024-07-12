@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
+using Mirror;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DiceThrower : MonoBehaviour
+public class DiceThrower : NetworkBehaviour
 {
     public Dice diceToThrow;
     public int amountOfDice = 1;
@@ -16,35 +15,33 @@ public class DiceThrower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RollDice();
-        }
+
     }
 
-    private async void RollDice()
+    public async void RollDice()
     {
-        if(diceToThrow == null)
+        if (diceToThrow == null)
         {
             return;
         }
 
-        foreach(var _dice in _spawnedDice)
+        foreach (var _dice in _spawnedDice)
         {
             Destroy(_dice);
         }
 
-        for(int i = 0; i < amountOfDice; i++)
+        for (int i = 0; i < amountOfDice; i++)
         {
             Dice dice = Instantiate(diceToThrow, transform.position, transform.rotation);
             _spawnedDice.Add(dice.gameObject);
             dice.RollDice(throwForce, rollForce, i);
+            NetworkServer.Spawn(dice.gameObject);
             await Task.Yield();
         }
     }
