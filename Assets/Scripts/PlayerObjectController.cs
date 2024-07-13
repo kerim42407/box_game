@@ -1,5 +1,7 @@
 using Mirror;
 using Steamworks;
+using UnityEngine;
+using System;
 
 public class PlayerObjectController : NetworkBehaviour
 {
@@ -9,6 +11,9 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar] public ulong playerSteamID;
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string playerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool ready;
+
+    // Cosmetics
+    [SyncVar(hook = nameof(SendPlayerColor))] public int playerColor;
 
     private MyNetworkManager manager;
 
@@ -22,6 +27,11 @@ public class PlayerObjectController : NetworkBehaviour
             }
             return manager = MyNetworkManager.singleton as MyNetworkManager;
         }
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void PlayerReadyUpdate(bool oldValue, bool newValue)
@@ -44,7 +54,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     public void ChangeReady()
     {
-        if (authority)
+        if (GetComponent<NetworkIdentity>().isOwned)
         {
             CmdSetPlayerReady();
         }
@@ -88,5 +98,47 @@ public class PlayerObjectController : NetworkBehaviour
         {
             LobbyController.instance.UpdatePlayerList();
         }
+    }
+
+    // Start Game
+
+    public void CanStartGame(string sceneName)
+    {
+        if (GetComponent<NetworkIdentity>().isOwned)
+        {
+            CmdCanStartGame(sceneName);
+        }
+    }
+
+
+    [Command]
+    public void CmdCanStartGame(string sceneName)
+    {
+        manager.StartGame(sceneName);
+    }
+
+    // Cosmetics
+    [Command]
+    public void CmdSendPlayerColor(int newValue)
+    {
+        SendPlayerColor(playerColor, newValue);
+        Debug.Log(GetComponent<NetworkIdentity>().netId + ", " + playerColor);
+    }
+
+    public void SendPlayerColor(int oldValue, int newValue)
+    {
+        if (isServer)
+        {
+            playerColor = newValue;
+        }
+        if (isClient && (oldValue != newValue))
+        {
+            UpdateColor(newValue);
+        }
+    }
+
+    private void UpdateColor(int message)
+    {
+        playerColor = message;
     }
 }

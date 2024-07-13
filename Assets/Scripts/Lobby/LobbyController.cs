@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyController : MonoBehaviour
 {
@@ -219,5 +220,10 @@ public class LobbyController : MonoBehaviour
                 objectToRemove = null;
             }
         }
+    }
+
+    public void StartGame(string sceneName)
+    {
+        localPlayerController.CanStartGame(sceneName);
     }
 }

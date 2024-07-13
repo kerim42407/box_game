@@ -25,6 +25,11 @@ public class MyNetworkManager : NetworkManager
             NetworkServer.AddPlayerForConnection(conn, gamePlayerInstance.gameObject);
         }
     }
+
+    public void StartGame(string sceneName)
+    {
+        ServerChangeScene(sceneName);
+    }
     public override void OnStartServer()
     {
         base.OnStartServer();
