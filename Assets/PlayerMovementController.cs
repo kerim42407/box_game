@@ -24,7 +24,6 @@ public class PlayerMovementController : NetworkBehaviour
 
     private void Update()
     {
-        
         if (SceneManager.GetActiveScene().name == "Game")
         {
             if (playerModel.activeSelf == false)
@@ -35,7 +34,7 @@ public class PlayerMovementController : NetworkBehaviour
             }
             else
             {
-                //Debug.Log("Active");
+
             }
             if (identity.isOwned)
             {
@@ -46,21 +45,12 @@ public class PlayerMovementController : NetworkBehaviour
             {
 
             }
-            //if (authority)
-            //{
-                
-            //}
-            //else
-            //{
-                
-            //}
         }
     }
 
     public void SetPosition()
     {
         transform.position = new Vector3(Random.Range(-5, 5), 0.8f, Random.Range(-15, 7));
-        Debug.Log(identity.netId + ", " + transform.position);
     }
 
     public void Movement()
@@ -76,7 +66,6 @@ public class PlayerMovementController : NetworkBehaviour
     // Cosmetics
     public void PlayerCosmeticsSetup()
     {
-        //Debug.Log(playerColors[GetComponent<PlayerObjectController>().playerColor]);
         playerMesh.material = playerColors[GetComponent<PlayerObjectController>().playerColor];
     }
 }

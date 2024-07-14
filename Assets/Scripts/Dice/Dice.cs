@@ -1,5 +1,6 @@
 using Mirror;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,9 +17,26 @@ public class Dice : NetworkBehaviour
 
     public static UnityAction<int, int> OnDiceResult;
 
+    private GameManager gameManager;
+
+    // Manager
+    private MyNetworkManager manager;
+    private MyNetworkManager Manager
+    {
+        get
+        {
+            if (manager != null)
+            {
+                return manager;
+            }
+            return manager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -58,15 +76,15 @@ public class Dice : NetworkBehaviour
             }
         }
 
-        //Debug.Log($"Dice result {topFace + 1}");
-        SendResult($"Dice result {topFace + 1}");
-
+        SendResult($"{topFace + 1}");
         OnDiceResult?.Invoke(_diceIndex, topFace + 1);
         return topFace + 1;
     }
     [ClientRpc]
     private void SendResult(string result)
     {
+        gameManager.UpdateDiceResultText(result);
+        gameManager.PassTurn();
         Debug.Log(result);
     }
     public void RollDice(float throwForce, float rollForce, int i)

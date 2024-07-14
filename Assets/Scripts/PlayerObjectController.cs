@@ -1,7 +1,8 @@
 using Mirror;
 using Steamworks;
 using UnityEngine;
-using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerObjectController : NetworkBehaviour
 {
@@ -15,8 +16,10 @@ public class PlayerObjectController : NetworkBehaviour
     // Cosmetics
     [SyncVar(hook = nameof(SendPlayerColor))] public int playerColor;
 
-    private MyNetworkManager manager;
+    [SyncVar] public bool canPlay;
+    public GamePlayerListItem gamePlayerListItem;
 
+    private MyNetworkManager manager;
     private MyNetworkManager Manager
     {
         get
@@ -29,10 +32,34 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
+    [HideInInspector] public PlayerInputController playerInputController;
+
     private void Start()
     {
+        playerInputController = GetComponent<PlayerInputController>();
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            if (!playerInputController.enabled)
+            {
+                playerInputController.enabled = true;
+            }
+        }
+
+    }
+
+    //[ClientRpc]
+    //public void EnablePlayerInputController()
+    //{
+    //    if (!playerInputController.enabled)
+    //    {
+    //        playerInputController.enabled = true;
+    //    }
+    //}
 
     private void PlayerReadyUpdate(bool oldValue, bool newValue)
     {
@@ -122,7 +149,6 @@ public class PlayerObjectController : NetworkBehaviour
     public void CmdSendPlayerColor(int newValue)
     {
         SendPlayerColor(playerColor, newValue);
-        Debug.Log(GetComponent<NetworkIdentity>().netId + ", " + playerColor);
     }
 
     public void SendPlayerColor(int oldValue, int newValue)

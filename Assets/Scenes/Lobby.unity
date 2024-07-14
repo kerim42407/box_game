@@ -2277,6 +2277,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4084941ff96e66c4495bc37aee508aa8, type: 2}
   currentColorImage: {fileID: 806850721}
   currentColorText: {fileID: 279631121}
+  localPlayerObject: {fileID: 0}
+  localPlayerController: {fileID: 0}
 --- !u!1 &1985161535
 GameObject:
   m_ObjectHideFlags: 0
