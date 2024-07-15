@@ -13,10 +13,18 @@ public class PlayerMovementController : NetworkBehaviour
 
     public NetworkIdentity identity;
 
+    private PlaygroundController playgroundController;
+
     private void Awake()
     {
         identity = GetComponent<NetworkIdentity>();
     }
+
+    private void OnEnable()
+    {
+        GetReferences();    
+    }
+
     private void Start()
     {
         playerModel.SetActive(false);
@@ -28,7 +36,6 @@ public class PlayerMovementController : NetworkBehaviour
         {
             if (playerModel.activeSelf == false)
             {
-                SetPosition();
                 playerModel.SetActive(true);
                 PlayerCosmeticsSetup();
             }
@@ -38,7 +45,6 @@ public class PlayerMovementController : NetworkBehaviour
             }
             if (identity.isOwned)
             {
-
                 Movement();
             }
             else
@@ -48,9 +54,9 @@ public class PlayerMovementController : NetworkBehaviour
         }
     }
 
-    public void SetPosition()
+    public void SetStartPosition()
     {
-        transform.position = new Vector3(Random.Range(-5, 5), 0.8f, Random.Range(-15, 7));
+        transform.position = playgroundController.startPoint.transform.position;
     }
 
     public void Movement()
@@ -67,5 +73,18 @@ public class PlayerMovementController : NetworkBehaviour
     public void PlayerCosmeticsSetup()
     {
         playerMesh.material = playerColors[GetComponent<PlayerObjectController>().playerColor];
+    }
+
+    private void GetReferences()
+    {
+        if (GameObject.Find("Game Manager"))
+        {
+            playgroundController = GameObject.Find("Game Manager").GetComponent<GameManager>().playgroundController;
+            SetStartPosition();
+        }
+        else
+        {
+            Invoke(nameof(GetReferences), 1f);
+        }
     }
 }

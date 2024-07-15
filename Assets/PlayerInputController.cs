@@ -15,6 +15,7 @@ public class PlayerInputController : NetworkBehaviour
     {
         identity = GetComponent<NetworkIdentity>();
         localPlayerController = GetComponent<PlayerObjectController>();
+        
     }
 
     private void OnEnable()
@@ -50,7 +51,8 @@ public class PlayerInputController : NetworkBehaviour
     {
         if (GameObject.Find("Game Manager"))
         {
-            diceThrower = GameObject.Find("Game Manager").GetComponent<DiceThrower>();
+            GameObject gameManager = GameObject.Find("Game Manager");
+            diceThrower = gameManager.GetComponent<DiceThrower>();
         }
         else
         {

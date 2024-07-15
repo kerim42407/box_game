@@ -10,8 +10,8 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] private PlayerObjectController gamePlayerPrefab;
     public List<PlayerObjectController> gamePlayers { get; } = new List<PlayerObjectController>();
 
-
-    private int clientCount;
+    public GameObject playGroundPrefab;
+    public GameObject currentPlayground;
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
@@ -53,6 +53,16 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStartClient();
         Debug.Log("Client Connected");
+    }
+
+    public void InstantiatePlayground()
+    {
+        currentPlayground = Instantiate(playGroundPrefab);
+        foreach(PlayerObjectController playerObjectController in gamePlayers)
+        {
+            playerObjectController.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
+            playerObjectController.SetStartPosition();
+        }
     }
 
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DiceThrower : NetworkBehaviour
 {
     public Dice diceToThrow;
-    public int amountOfDice = 1;
+    public int amountOfDice = 2;
     public float throwForce = 5f;
     public float rollForce = 10f;
 

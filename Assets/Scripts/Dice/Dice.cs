@@ -83,9 +83,8 @@ public class Dice : NetworkBehaviour
     [ClientRpc]
     private void SendResult(string result)
     {
-        gameManager.UpdateDiceResultText(result);
-        gameManager.PassTurn();
-        Debug.Log(result);
+        //gameManager.UpdateDiceResultText(result);
+        //gameManager.PassTurn();
     }
     public void RollDice(float throwForce, float rollForce, int i)
     {

@@ -1,41 +1,56 @@
 using Mirror;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class UIManager : NetworkBehaviour
+public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public GameManager gameManager;
 
-    private void Awake()
+    [SerializeField] private TMP_Text diceOneText, diceTwoText;
+    private int diceOneResult, diceTwoResult;
+    private bool diceOne, diceTwo;
+
+    private void OnEnable()
     {
-        if(instance == null)
+        Dice.OnDiceResult += SetText;
+    }
+
+    private void OnDisable()
+    {
+        Dice.OnDiceResult -= SetText;
+    }
+
+    private void SetText(int diceIndex, int diceResult)
+    {
+        if (diceIndex == 0)
         {
-            instance = this;
+            diceOneResult = diceResult;
+            diceOne = true;
+            CheckDiceResult();
+            //diceOneText.SetText($"Dice one: {diceResult}");
         }
         else
         {
-            Destroy(this);
+            diceTwoResult = diceResult;
+            diceTwo = true;
+            CheckDiceResult();
+            //diceTwoText.SetText($"Dice two: {diceResult}");
         }
     }
 
-    public event Action<int> OnPlayerDiceResultChanged;
+    private void CheckDiceResult()
+    {
+        if (diceOne && diceTwo)
+        {
+            Debug.Log($"Dice result: {diceOneResult} + {diceTwoResult} = {diceOneResult + diceTwoResult}");
+            gameManager.OnDiceResult(diceOneResult + diceTwoResult);
+            gameManager.turnIndex++;
+            diceOne = false;
+            diceTwo = false;
+        }
+        else
+        {
 
-    [ClientRpc]
-    public void ChangeDiceResult(int result)
-    {
-        OnPlayerDiceResultChanged?.Invoke(result);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }

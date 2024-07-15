@@ -1,13 +1,14 @@
 using Mirror;
-using Steamworks;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public GameObject gamePlayerListPanel;
     public GameObject gamePlayerListItemPrefab;
+    public PlaygroundController playgroundController;
 
-    public int turnIndex = -1;
+    [SyncVar(hook = nameof(TurnIndexUpdate))] public int turnIndex;
+    private int _turnIndex;
 
     // Manager
     private MyNetworkManager manager;
@@ -28,17 +29,25 @@ public class GameManager : MonoBehaviour
     {
         //Manager.gamePlayers[0].canPlay = true;
         //Manager.gamePlayers[0].playerInputController.canThrow = true;
+        Manager.InstantiatePlayground();
         InstantiateGamePlayerListItems();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnDiceResult(int result)
+    {
+        Debug.Log("Applying dice result");
+        Manager.gamePlayers[turnIndex].MovePlayer(result);
     }
 
     private void InstantiateGamePlayerListItems()
     {
-        for(int i = 0; i < Manager.gamePlayers.Count; i++)
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
             GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
             qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
@@ -46,29 +55,59 @@ public class GameManager : MonoBehaviour
             Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
             qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
         }
-        PassTurn();
+        StartTurn();
     }
 
-    public void PassTurn()
+    [Server]
+    private void IncreaseTurnIndex()
     {
-        if(turnIndex != -1)
+        turnIndex++;
+        Invoke(nameof(IncreaseTurnIndex), 5f);
+    }
+
+    private void TurnIndexUpdate(int oldValue, int newValue)
+    {
+        if (isServer)
         {
-            Manager.gamePlayers[turnIndex].gamePlayerListItem.playerTurnIcon.color = Color.red;
-            Manager.gamePlayers[turnIndex].canPlay = false;
+            if(newValue == Manager.gamePlayers.Count)
+            {
+                turnIndex = 0;
+            }
+            else
+            {
+                //turnIndex++;
+            }
+        }
+        if (isClient)
+        {
+            StartTurn();
         }
         
-        if(turnIndex == Manager.gamePlayers.Count - 1)
+    }
+
+    public void StartTurn()
+    {
+        //Debug.Log($"Current turn: {turnIndex}");
+        UpdateUIOnStartTurn();
+    }
+
+    private void UpdateUIOnStartTurn()
+    {
+        for(int i = 0; i < Manager.gamePlayers.Count; i++)
         {
-            turnIndex = 0;
+            if(i == turnIndex)
+            {
+                Manager.gamePlayers[i].canPlay = true;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
+                Manager.gamePlayers[i].playerInputController.canThrow = true;
+            }
+            else
+            {
+                Manager.gamePlayers[i].canPlay = false;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
+                Manager.gamePlayers[i].playerInputController.canThrow = false;
+            }
         }
-        else
-        {
-            turnIndex++;
-        }
-        Manager.gamePlayers[turnIndex].canPlay = true;
-        Manager.gamePlayers[turnIndex].gamePlayerListItem.playerTurnIcon.color = Color.green;
-        Manager.gamePlayers[turnIndex].playerInputController.canThrow = true;
-        Debug.Log($"Current turn: {turnIndex}");
     }
 
     public void UpdateDiceResultText(string result)

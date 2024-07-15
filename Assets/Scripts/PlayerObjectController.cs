@@ -1,8 +1,8 @@
 using Mirror;
 using Steamworks;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerObjectController : NetworkBehaviour
 {
@@ -33,6 +33,21 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     [HideInInspector] public PlayerInputController playerInputController;
+    public PlaygroundController playgroundController;
+    [SyncVar] public int playerLocation;
+
+    private bool move;
+    Vector3 startPosition;
+    Vector3 target;
+    private int destinationIndex;
+    
+
+    public List<Transform> targetTransforms = new List<Transform>();
+
+    private Transform firstPos, lastPos;
+    public float journeyTime = 10.0f;
+    private float startTime;
+
 
     private void Start()
     {
@@ -50,16 +65,94 @@ public class PlayerObjectController : NetworkBehaviour
             }
         }
 
+        if (GetComponent<NetworkIdentity>().isOwned)
+        {
+            if (move)
+            {
+                if(transform.position == lastPos.position)
+                {
+                    SetDestination(targetTransforms[destinationIndex].position);
+                }
+                else
+                {
+                    Vector3 center = (firstPos.position + lastPos.position) * 0.5f;
+
+                    center -= new Vector3(0, 1, 0);
+
+                    Vector3 firstPosCenter = firstPos.position - center;
+                    Vector3 lastPosCenter = lastPos.position - center;
+
+                    float fracComplete = (Time.time - startTime) / journeyTime;
+
+                    transform.position = Vector3.Slerp(firstPosCenter, lastPosCenter, fracComplete);
+                    transform.position += center;
+                }
+            }
+        }
+        
     }
 
-    //[ClientRpc]
-    //public void EnablePlayerInputController()
-    //{
-    //    if (!playerInputController.enabled)
-    //    {
-    //        playerInputController.enabled = true;
-    //    }
-    //}
+    public void SetStartPosition()
+    {
+        transform.position = playgroundController.locations[0].transform.position;
+        playerLocation = 0;
+    }
+    public void MovePlayer(int locationIndex)
+    {
+        for (int i = playerLocation; i < locationIndex; i++)
+        {
+            targetTransforms.Add(playgroundController.locations[i + 1].transform);
+        }
+        if (playerLocation + locationIndex >= playgroundController.locations.Count)
+        {
+            playerLocation = (playerLocation + locationIndex) - playgroundController.locations.Count;
+        }
+        else
+        {
+            playerLocation = playerLocation + locationIndex;
+        }
+        //firstPos = transform;
+        //lastPos = targetTransforms[5];
+        //startTime = Time.time;
+        //move = true;
+        //Debug.Log(journeyTime);
+        //transform.position = playgroundController.locations[playerLocation].transform.position;
+
+        SetDestination(targetTransforms[destinationIndex].position);
+    }
+
+    public void MoveTest()
+    {
+
+    }
+
+    public void SetDestination(Vector3 destination)
+    {
+        if (transform.position == destination)
+        {
+            Debug.Log("Reached target");
+            if (destinationIndex == targetTransforms.Count)
+            {
+
+            }
+            else
+            {
+                destinationIndex++;
+                target = targetTransforms[destinationIndex].position;
+            }
+
+        }
+        else
+        {
+            target = targetTransforms[destinationIndex].position;
+        }
+        firstPos = transform;
+        lastPos = targetTransforms[destinationIndex];
+        move = true;
+        startTime = Time.time;
+        Debug.Log(firstPos.position);
+        Debug.Log(lastPos.position);
+    }
 
     private void PlayerReadyUpdate(bool oldValue, bool newValue)
     {
