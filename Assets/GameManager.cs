@@ -42,7 +42,7 @@ public class GameManager : NetworkBehaviour
     public void OnDiceResult(int result)
     {
         Debug.Log("Applying dice result");
-        Manager.gamePlayers[turnIndex].MovePlayer(result);
+        Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(result);
     }
 
     private void InstantiateGamePlayerListItems()
@@ -62,7 +62,6 @@ public class GameManager : NetworkBehaviour
     private void IncreaseTurnIndex()
     {
         turnIndex++;
-        Invoke(nameof(IncreaseTurnIndex), 5f);
     }
 
     private void TurnIndexUpdate(int oldValue, int newValue)

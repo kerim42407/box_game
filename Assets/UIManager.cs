@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log($"Dice result: {diceOneResult} + {diceTwoResult} = {diceOneResult + diceTwoResult}");
             gameManager.OnDiceResult(diceOneResult + diceTwoResult);
-            gameManager.turnIndex++;
             diceOne = false;
             diceTwo = false;
         }

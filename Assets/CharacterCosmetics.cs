@@ -24,9 +24,17 @@ public class CharacterCosmetics : MonoBehaviour
     }
     public void FindLocalPlayer()
     {
-        localPlayerObject = GameObject.Find("LocalGamePlayer");
-        localPlayerController = localPlayerObject.GetComponent<PlayerObjectController>();
-        localPlayerController.CmdSendPlayerColor(currentColorIndex);
+        if (GameObject.Find("LocalGamePlayer"))
+        {
+            localPlayerObject = GameObject.Find("LocalGamePlayer");
+            localPlayerController = localPlayerObject.GetComponent<PlayerObjectController>();
+            localPlayerController.CmdSendPlayerColor(currentColorIndex);
+        }
+        else
+        {
+            Invoke(nameof(FindLocalPlayer), .1f);
+        }
+        
     }
 
     public void NextColor()

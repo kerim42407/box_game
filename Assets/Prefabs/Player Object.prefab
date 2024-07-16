@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 842506574876847795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1549349128384201979}
   - component: {fileID: 1817132955790707819}
   - component: {fileID: -5412821068625096937}
+  - component: {fileID: 7485177149424546135}
   m_Layer: 0
   m_Name: Player Object
   m_TagString: Untagged
@@ -109,12 +110,12 @@ MonoBehaviour:
   ready: 0
   playerColor: 0
   canPlay: 0
+  playerLocation: 0
   gamePlayerListItem: {fileID: 0}
+  gameManager: {fileID: 0}
   playerInputController: {fileID: 0}
   playgroundController: {fileID: 0}
-  playerLocation: 0
-  targetTransforms: []
-  journeyTime: 100
+  playerMoveController: {fileID: 0}
 --- !u!136 &5042440310681225469
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -217,6 +218,38 @@ MonoBehaviour:
   identity: {fileID: 0}
   diceThrower: {fileID: 0}
   canThrow: 0
+--- !u!114 &7485177149424546135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153096612930116058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb4af42ed3c19f479b6d9b2a1f97a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerModel: {fileID: 842506574876847795}
+  playerMesh: {fileID: 4559822849553578941}
+  playerColors:
+  - {fileID: 2100000, guid: 3f6e413a3e79b1841a23dea4e9e69120, type: 2}
+  - {fileID: 2100000, guid: fe638d82dc8eb2646aae58d63621566d, type: 2}
+  - {fileID: 2100000, guid: f38de6617cf8b744e9bfca71d6ad5494, type: 2}
+  - {fileID: 2100000, guid: 7f6c66d7b0a042348a0b0e0e7041f919, type: 2}
+  - {fileID: 2100000, guid: 6b02277c582130d4f8f52f1bf7ce845b, type: 2}
+  - {fileID: 2100000, guid: 2aced890d4c2b624292980faad2ddc15, type: 2}
+  - {fileID: 2100000, guid: 4084941ff96e66c4495bc37aee508aa8, type: 2}
+  shouldMove: 0
+  destinationIndex: 0
+  destinationTransforms: []
+  firstTransform: {fileID: 0}
+  startTime: 0
+  journeyTime: 1
+  didCosmetic: 0
 --- !u!1 &8065855131862938251
 GameObject:
   m_ObjectHideFlags: 0

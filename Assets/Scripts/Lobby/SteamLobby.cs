@@ -60,7 +60,6 @@ public class SteamLobby : MonoBehaviour
             return;
         }
 
-        Debug.Log("Lobby created successfully");
         myNetworkManager.StartHost();
 
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey, SteamUser.GetSteamID().ToString());

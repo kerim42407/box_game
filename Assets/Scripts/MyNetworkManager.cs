@@ -32,7 +32,6 @@ public class MyNetworkManager : NetworkManager
     public override void OnStartServer()
     {
         base.OnStartServer();
-        Debug.Log("Server Started");
     }
 
     //public override void OnClientConnect()
@@ -52,16 +51,17 @@ public class MyNetworkManager : NetworkManager
     public override void OnStartClient()
     {
         base.OnStartClient();
-        Debug.Log("Client Connected");
     }
 
     public void InstantiatePlayground()
     {
         currentPlayground = Instantiate(playGroundPrefab);
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
         foreach(PlayerObjectController playerObjectController in gamePlayers)
         {
             playerObjectController.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
-            playerObjectController.SetStartPosition();
+            playerObjectController.playerMoveController.SetStartPosition();
         }
     }
 
