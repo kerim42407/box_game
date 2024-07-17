@@ -39,11 +39,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: factory_windowSquare
     second: {fileID: 2100000, guid: 6e3753a91ce17c74f8dd91e5e9d29a9a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: playerColor
-    second: {fileID: 2100000, guid: 5584242dc6e66134cbe2d64f94d7a7bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

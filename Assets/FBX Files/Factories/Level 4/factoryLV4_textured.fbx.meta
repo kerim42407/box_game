@@ -33,12 +33,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: factory_chimneyBig
-    second: {fileID: 2100000, guid: 835bcb470f6b3b74baae9837461d0b48, type: 2}
+    second: {fileID: 2100000, guid: 6c4a4c61834e03c45b731f6a3cd9a68a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: factory_door
-    second: {fileID: 2100000, guid: 6a4c1305ee2bab247aa756975994c8e7, type: 2}
+    second: {fileID: 2100000, guid: c8bb26b65a421f440a3e24098dfc5109, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -53,12 +53,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: factory_windowSquare
-    second: {fileID: 2100000, guid: f86467a07929bd945a6cbe6174860494, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: playerColor
-    second: {fileID: 2100000, guid: 490f4b625865d4f4c8251401a964e06a, type: 2}
+    second: {fileID: 2100000, guid: 6e3753a91ce17c74f8dd91e5e9d29a9a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
