@@ -226,4 +226,16 @@ public class LobbyController : MonoBehaviour
     {
         localPlayerController.CanStartGame(sceneName);
     }
+
+    public void BackButton()
+    {
+        if (localPlayerController.isServer)
+        {
+            Manager.StopHost();
+        }
+        if (localPlayerController.isClient)
+        {
+            Manager.StartClient();
+        }
+    }
 }

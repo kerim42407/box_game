@@ -65,4 +65,17 @@ public class LobbiesListManager : MonoBehaviour
         listOfLobbies.Clear();
     }
 
+    public void BackButton()
+    {
+        foreach (GameObject lobbyItem in listOfLobbies)
+        {
+            Destroy(lobbyItem);
+        }
+        listOfLobbies.Clear();
+        lobbiesButton.SetActive(true);
+        hostButton.SetActive(true);
+
+        lobbiesMenu.SetActive(false);
+    }
+
 }
