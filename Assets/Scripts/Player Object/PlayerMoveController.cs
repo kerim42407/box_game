@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class PlayerMoveController : NetworkBehaviour
 {
@@ -16,13 +16,13 @@ public class PlayerMoveController : NetworkBehaviour
     [HideInInspector] public List<Transform> destinationTransforms;
     [HideInInspector] public Transform firstTransform;
     [HideInInspector] public float startTime;
-    [HideInInspector] public float journeyTime = 1.0f;
+    public float journeyTime = .1f;
 
     private PlayerObjectController playerObjectController;
     private PlaygroundController playgroundController;
 
     public bool didCosmetic;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class PlayerMoveController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -46,7 +46,7 @@ public class PlayerMoveController : NetworkBehaviour
                 {
                     destinationIndex = 0;
                     shouldMove = false;
-                    playerObjectController.gameManager.turnIndex++;
+                    OnStopLocation();
                 }
                 else
                 {
@@ -72,6 +72,298 @@ public class PlayerMoveController : NetworkBehaviour
         }
     }
 
+    private void OnStopLocation()
+    {
+        GameObject playerLocation = playgroundController.locations[playerObjectController.playerLocation];
+        LocationController locationController = playerLocation.GetComponent<LocationController>();
+        LocationController.LocationType locationType = locationController.locationType;
+        //Debug.Log($"Stopped on: {locationController.locationName}. Location type is: {locationController.locationType}.");
+
+        if (locationType == LocationController.LocationType.RegularFactory || locationType == LocationController.LocationType.BigFactory || locationType == LocationController.LocationType.GoldenFactory)
+        {
+            FactoryController factoryController = playerLocation.GetComponent<FactoryController>();
+            NetworkConnectionToClient target = playerObjectController.Manager.gamePlayers[playerObjectController.gameManager.turnIndex].connectionToClient;
+
+            float buyPrice = playerObjectController.gameManager.factoryPricesPerLevel[factoryController.factoryLevel] * factoryController.priceMultiplier;
+
+            if (factoryController.ownerPlayer) // Factory has owner
+            {
+                if (factoryController.ownerPlayer == playerObjectController) // Factory owned by local player
+                {
+                    if (factoryController.factoryLevel < factoryController.maxFactoryLevel) // Factory level smaller than it's max level
+                    {
+                        float upgradePrice = playerObjectController.gameManager.factoryPricesPerLevel[factoryController.factoryLevel] * factoryController.priceMultiplier;
+                        if (playerObjectController.playerMoney >= upgradePrice) // Player has enough money to upgrade factory
+                        {
+                            Debug.Log("You already bought this factory, factory level is smaller than it's max level and you have enough money to upgrade it");
+                            RpcSetFactoryUpgradePanelData(target, locationController.locationName, upgradePrice);
+                        }
+                        else // Player has not enough money to upgrade factory
+                        {
+                            Debug.Log("You already bought this factory, factory level is smaller than it's max level but you don't have enough money to upgrade it");
+                            playerObjectController.gameManager.turnIndex++;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("You already bought this factory but factory level is at it's max level. You can't upgrade this factory.");
+                        playerObjectController.gameManager.turnIndex++;
+                    }
+                }
+                else // Factory owned by another player
+                {
+                    if (factoryController.factoryLevel < 3)
+                    {
+                        if (playerObjectController.playerMoney >= buyPrice)
+                        {
+                            if (playerObjectController.playerMoney >= factoryController.rentRate)
+                            {
+                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                                RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true, false);
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to buy this factory from him. You have enoughy money to pay rent. You can't ignore");
+                            }
+                            else
+                            {
+                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                                RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, false, false);
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to buy this factory from him. You don't have enough money to pay rent. You can't ignore");
+                                // TO DO Can not pay rent
+                            }
+                        }
+                        else
+                        {
+                            if (playerObjectController.playerMoney >= factoryController.rentRate)
+                            {
+                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You do not have enough money to buy this factory from him. You have enough money to pay rent. You can't ignore");
+                            }
+                            else
+                            {
+                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You do not have enough money to buy this factory from him. You do not have enough money to pay rent. You can't ignore");
+                                // TO DO Can not pay rent
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                        factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                        playerObjectController.gameManager.CmdUpdateTurnIndex();
+                        Debug.Log($"{factoryController.ownerPlayer.playerName} has this factory. It's level is higher than 2. You can't buy this factory from him.");
+                    }
+
+                }
+            }
+            else // Factory has no owner
+            {
+                if (playerObjectController.playerMoney >= buyPrice)
+                {
+                    Debug.Log("Factory has no owner and you have enough money to buy it.");
+                    RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true, true);
+                }
+                else
+                {
+                    Debug.Log("Factory has no owner but you don't have enough money to buy it.");
+                    playerObjectController.gameManager.CmdUpdateTurnIndex();
+                }
+
+            }
+
+        }
+        else if(locationType == LocationController.LocationType.Resource)
+        {
+            float buyPrice = playerObjectController.gameManager.resourceBuyPrice;
+            ResourceController resourceController = playerLocation.GetComponent<ResourceController>();
+            NetworkConnectionToClient target = playerObjectController.Manager.gamePlayers[playerObjectController.gameManager.turnIndex].connectionToClient;
+
+            if (resourceController.ownerPlayer) // Resource has owner
+            {
+                if(resourceController.ownerPlayer == playerObjectController) // Resource owned by local player
+                {
+                    playerObjectController.gameManager.CmdUpdateTurnIndex();
+                }
+                else // Resource owned by another player
+                {
+                    playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - resourceController.rentRate);
+                    resourceController.ownerPlayer.CmdUpdatePlayerMoney(resourceController.ownerPlayer.playerMoney + resourceController.rentRate);
+                    playerObjectController.gameManager.CmdUpdateTurnIndex();
+                }
+            }
+            else // Resource has no owner
+            {
+                RpcSetResourceBuyPanelData(target, locationController.locationName, buyPrice);
+            }
+        }
+        else
+        {
+            playerObjectController.gameManager.turnIndex++;
+        }
+    }
+
+    [TargetRpc]
+    private void Test(NetworkConnectionToClient target)
+    {
+        Debug.Log("Test");
+    }
+
+
+    [TargetRpc]
+    private void RpcSetFactoryBuyPanelData(NetworkConnectionToClient target, string locationName, float buyPrice, bool canBuy, bool canPayRent, bool canCancel)
+    {
+        GameObject playerLocation = playgroundController.locations[playerObjectController.playerLocation];
+        FactoryController factoryController = playerLocation.GetComponent<FactoryController>();
+        UIManager uiManager = playerObjectController.gameManager.uiManager;
+        GameObject factoryBuyPanel = Instantiate(uiManager.factoryBuyPanelPrefab, uiManager.mainCanvas.transform);
+        FactoryBuyPanelData factoryBuyPanelData = factoryBuyPanel.GetComponent<FactoryBuyPanelData>();
+        factoryBuyPanelData.locationNameText.text = locationName;
+
+        factoryBuyPanelData.factoryLevelText.text = factoryController.factoryLevel.ToString();
+        if (factoryController.factoryLevel == 0)
+        {
+            factoryBuyPanelData.rentRateText.text = $"Rent rate: {factoryController.CalculateRentRate(factoryController.factoryLevel)} => {factoryController.CalculateRentRate(factoryController.factoryLevel + 1)}";
+        }
+        else
+        {
+            factoryBuyPanelData.rentRateText.text = $"Rent rate: {factoryController.CalculateRentRate(factoryController.factoryLevel)}";
+        }
+        if (factoryController.ownerPlayer)
+        {
+            factoryBuyPanelData.ownerNameText.text = factoryController.ownerPlayer.playerName;
+        }
+        else
+        {
+            factoryBuyPanelData.ownerNameText.text = "No owner";
+        }
+
+        factoryBuyPanelData.buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Buy for: " + buyPrice.ToString();
+
+        if (canBuy)
+        {
+            factoryBuyPanelData.buyButton.onClick.AddListener(() =>
+            {
+                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - buyPrice);
+                if (factoryController.ownerPlayer)
+                {
+                    factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + buyPrice);
+                }
+                playgroundController.CmdBuyFactory(playerObjectController.playerLocation, playerObjectController);
+                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                Destroy(factoryBuyPanel);
+            });
+        }
+        else
+        {
+            factoryBuyPanelData.buyButton.interactable = false;
+        }
+
+        if (factoryController.ownerPlayer)
+        {
+            if (canPayRent)
+            {
+                factoryBuyPanelData.payRentButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Pay rent: {factoryController.rentRate}";
+                factoryBuyPanelData.payRentButton.onClick.AddListener(() =>
+                {
+                    playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                    factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                    playerObjectController.gameManager.CmdUpdateTurnIndex();
+                    Destroy(factoryBuyPanel);
+                });
+            }
+            else
+            {
+                factoryBuyPanelData.payRentButton.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            factoryBuyPanelData.payRentButton.gameObject.SetActive(false);
+        }
+
+        if (canCancel)
+        {
+            factoryBuyPanelData.cancelButton.onClick.AddListener(() =>
+            {
+                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                Destroy(factoryBuyPanel);
+            });
+        }
+        else
+        {
+            factoryBuyPanelData.cancelButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    [TargetRpc]
+    private void RpcSetFactoryUpgradePanelData(NetworkConnectionToClient target, string locationName, float upgradePrice)
+    {
+        GameObject playerLocation = playgroundController.locations[playerObjectController.playerLocation];
+        FactoryController factoryController = playerLocation.GetComponent<FactoryController>();
+        UIManager uiManager = playerObjectController.gameManager.uiManager;
+        GameObject factoryUpgradePanel = Instantiate(uiManager.factoryUpgradePanelPrefab, uiManager.mainCanvas.transform);
+        FactoryUpgradePanelData factoryUpgradePanelData = factoryUpgradePanel.GetComponent<FactoryUpgradePanelData>();
+        factoryUpgradePanelData.locationNameText.text = locationName;
+        factoryUpgradePanelData.rentRateText.text = $"{factoryController.CalculateRentRate(factoryController.factoryLevel)} => {factoryController.CalculateRentRate(factoryController.factoryLevel + 1)}";
+        factoryUpgradePanelData.factoryLevelText.text = $"{factoryController.factoryLevel} => {factoryController.factoryLevel + 1}";
+        factoryUpgradePanelData.upgradeButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Upgrade for: " + upgradePrice.ToString();
+
+        if (playerObjectController.playerMoney < upgradePrice)
+        {
+            factoryUpgradePanelData.upgradeButton.interactable = false;
+        }
+        else
+        {
+            factoryUpgradePanelData.upgradeButton.interactable = true;
+            factoryUpgradePanelData.upgradeButton.onClick.AddListener(() =>
+            {
+                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - upgradePrice);
+                playgroundController.CmdUpgradeFactory(playerObjectController.playerLocation);
+                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                Destroy(factoryUpgradePanel);
+            });
+        }
+
+        factoryUpgradePanelData.cancelButton.onClick.AddListener(() =>
+        {
+            playerObjectController.gameManager.CmdUpdateTurnIndex();
+            Destroy(factoryUpgradePanelData);
+        });
+    }
+    [TargetRpc]
+    private void RpcSetResourceBuyPanelData(NetworkConnectionToClient target, string locationName, float buyPrice)
+    {
+        GameObject playerLocation = playgroundController.locations[playerObjectController.playerLocation];
+        ResourceController resourceController = playerLocation.GetComponent<ResourceController>();
+        UIManager uiManager = playerObjectController.gameManager.uiManager;
+        GameObject resourceBuyPanel = Instantiate(uiManager.resourceBuyPanelPrefab, uiManager.mainCanvas.transform);
+        ResourceBuyPanelData resourceBuyPanelData = resourceBuyPanel.GetComponent<ResourceBuyPanelData>();
+
+        resourceBuyPanelData.locationNameText.text = locationName;
+        resourceBuyPanelData.rentRateText.text = $"Rent rate: 0 => {resourceController.CalculateRentRate()}";
+        resourceBuyPanelData.ownerNameText.text = "No owner";
+        resourceBuyPanelData.buyButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Buy for: " + buyPrice.ToString();
+        resourceBuyPanelData.buyButton.onClick.AddListener(() =>
+        {
+            playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - buyPrice);
+            playgroundController.CmdBuyResource(playerObjectController.playerLocation, playerObjectController);
+            playerObjectController.gameManager.CmdUpdateTurnIndex();
+            Destroy(resourceBuyPanel);
+        });
+        resourceBuyPanelData.cancelButton.onClick.AddListener(() =>
+        {
+            playerObjectController.gameManager.CmdUpdateTurnIndex();
+            Destroy(resourceBuyPanelData);
+        });
+    }
+
     public void MovePlayer(int locationIndex)
     {
         if (!playgroundController)
@@ -82,7 +374,7 @@ public class PlayerMoveController : NetworkBehaviour
         firstTransform = playgroundController.locations[playerObjectController.playerLocation].transform;
         for (int i = playerObjectController.playerLocation; i < playerObjectController.playerLocation + locationIndex; i++)
         {
-            if(i >= 39)
+            if (i >= 39)
             {
                 destinationTransforms.Add(playgroundController.locations[(i + 1) - 40].transform);
             }
@@ -99,7 +391,7 @@ public class PlayerMoveController : NetworkBehaviour
         {
             playerObjectController.playerLocation = playerObjectController.playerLocation + locationIndex;
         }
-        
+
         shouldMove = true;
         startTime = Time.time;
     }

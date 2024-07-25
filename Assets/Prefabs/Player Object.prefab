@@ -111,6 +111,7 @@ MonoBehaviour:
   playerColor: 0
   canPlay: 0
   playerLocation: 0
+  playerMoney: 200000
   gamePlayerListItem: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputController: {fileID: 0}
@@ -248,7 +249,7 @@ MonoBehaviour:
   destinationTransforms: []
   firstTransform: {fileID: 0}
   startTime: 0
-  journeyTime: 1
+  journeyTime: 0.5
   didCosmetic: 0
 --- !u!1 &8065855131862938251
 GameObject:

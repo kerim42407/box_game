@@ -35,6 +35,7 @@ public class Dice : NetworkBehaviour
 
     private void Awake()
     {
+        // Get references
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }

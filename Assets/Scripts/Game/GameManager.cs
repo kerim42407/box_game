@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
+    public GameObject playgroundPrefab;
+
+
     public GameObject gamePlayerListPanel;
     public GameObject gamePlayerListItemPrefab;
     public PlaygroundController playgroundController;
+    public UIManager uiManager;
+    [HideInInspector] public Material[] playerColors;
 
     [SyncVar(hook = nameof(TurnIndexUpdate))] public int turnIndex;
     private int _turnIndex;
 
     // Manager
     private MyNetworkManager manager;
-    private MyNetworkManager Manager
+    public MyNetworkManager Manager
     {
         get
         {
@@ -24,13 +29,32 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    // Game Variables
+    public float regularFactoryPriceMultiplier;
+    public float bigFactoryPriceMultiplier;
+    public float goldenFactoryPriceMultiplier;
+    public float[] factoryPricesPerLevel;
+    public float[] factoryValuePerLevel;
+    public float resourceBuyPrice; // Resource location purchase price
+    public float resourceValue; 
+
     // Start is called before the first frame update
     void Start()
     {
-        //Manager.gamePlayers[0].canPlay = true;
-        //Manager.gamePlayers[0].playerInputController.canThrow = true;
-        Manager.InstantiatePlayground();
+        //Manager.InstantiatePlayground();
+        if (isServer)
+        {
+            InstantiatePlayground();
+        }
+        if (isClient)
+        {
+            SetReferences();
+        }
         InstantiateGamePlayerListItems();
+        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            playerObjectController.UpdatePlayerMoney(0, playerObjectController.playerMoney);
+        }
     }
 
     // Update is called once per frame
@@ -39,9 +63,26 @@ public class GameManager : NetworkBehaviour
 
     }
 
+    [Server]
+    public void InstantiatePlayground()
+    {
+        GameObject playground = Instantiate(playgroundPrefab);
+        NetworkServer.Spawn(playground);
+    }
+
+    public void SetReferences()
+    {
+        playgroundController = GameObject.FindGameObjectWithTag("Playground").GetComponent<PlaygroundController>();
+        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            playerObjectController.playgroundController = playgroundController;
+            playerObjectController.playerMoveController.SetStartPosition();
+        }
+    }
+
     public void OnDiceResult(int result)
     {
-        Debug.Log("Applying dice result");
+        Debug.Log($"Applying dice result: {result}");
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(result);
     }
 
@@ -64,24 +105,30 @@ public class GameManager : NetworkBehaviour
         turnIndex++;
     }
 
+    [Command(requiresAuthority = false)]
+    public void CmdUpdateTurnIndex()
+    {
+        TurnIndexUpdate(turnIndex, turnIndex + 1);
+    }
+
     private void TurnIndexUpdate(int oldValue, int newValue)
     {
         if (isServer)
         {
-            if(newValue == Manager.gamePlayers.Count)
+            if (newValue == Manager.gamePlayers.Count)
             {
                 turnIndex = 0;
             }
             else
             {
-                //turnIndex++;
+                turnIndex = newValue;
             }
         }
         if (isClient)
         {
             StartTurn();
         }
-        
+
     }
 
     public void StartTurn()
@@ -92,9 +139,9 @@ public class GameManager : NetworkBehaviour
 
     private void UpdateUIOnStartTurn()
     {
-        for(int i = 0; i < Manager.gamePlayers.Count; i++)
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
-            if(i == turnIndex)
+            if (i == turnIndex)
             {
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
@@ -107,12 +154,6 @@ public class GameManager : NetworkBehaviour
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
             }
         }
-    }
-
-    public void UpdateDiceResultText(string result)
-    {
-        Debug.Log(Manager.gamePlayers[turnIndex].gamePlayerListItem.playerDiceResultText.text);
-        Manager.gamePlayers[turnIndex].gamePlayerListItem.playerDiceResultText.text = result;
     }
 
 }

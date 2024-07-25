@@ -5,10 +5,15 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameManager gameManager;
+    public GameObject mainCanvas;
 
     [SerializeField] private TMP_Text diceOneText, diceTwoText;
     private int diceOneResult, diceTwoResult;
     private bool diceOne, diceTwo;
+
+    public GameObject factoryBuyPanelPrefab;
+    public GameObject factoryUpgradePanelPrefab;
+    public GameObject resourceBuyPanelPrefab;
 
     private void OnEnable()
     {
@@ -42,7 +47,7 @@ public class UIManager : MonoBehaviour
     {
         if (diceOne && diceTwo)
         {
-            Debug.Log($"Dice result: {diceOneResult} + {diceTwoResult} = {diceOneResult + diceTwoResult}");
+            //Debug.Log($"Dice result: {diceOneResult} + {diceTwoResult} = {diceOneResult + diceTwoResult}");
             gameManager.OnDiceResult(diceOneResult + diceTwoResult);
             diceOne = false;
             diceTwo = false;

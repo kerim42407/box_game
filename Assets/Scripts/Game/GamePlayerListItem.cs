@@ -15,7 +15,7 @@ public class GamePlayerListItem : MonoBehaviour
     public TextMeshProUGUI playerNameText;
     public RawImage playerIcon;
     public Image playerTurnIcon;
-    public TextMeshProUGUI playerDiceResultText;
+    public TextMeshProUGUI playerMoneyText;
 
     protected Callback<AvatarImageLoaded_t> imageLoaded;
 

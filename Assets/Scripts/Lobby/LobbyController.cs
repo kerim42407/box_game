@@ -28,6 +28,8 @@ public class LobbyController : MonoBehaviour
     public Button startGameButton;
     public TextMeshProUGUI readyButtonText;
 
+    public int startingGameMoney;
+
     // Manager
     private MyNetworkManager manager;
     private MyNetworkManager Manager

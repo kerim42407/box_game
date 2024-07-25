@@ -1,6 +1,5 @@
 using Mirror;
 using Steamworks;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +17,12 @@ public class PlayerObjectController : NetworkBehaviour
 
     [SyncVar] public bool canPlay;
     [SyncVar] public int playerLocation;
+    [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney = 200000;
 
     public GamePlayerListItem gamePlayerListItem;
 
     private MyNetworkManager manager;
-    private MyNetworkManager Manager
+    public MyNetworkManager Manager
     {
         get
         {
@@ -57,7 +57,7 @@ public class PlayerObjectController : NetworkBehaviour
             }
             if (!gameManager)
             {
-                if(GameObject.Find("Game Manager"))
+                if (GameObject.Find("Game Manager"))
                 {
                     gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
                 }
@@ -68,8 +68,8 @@ public class PlayerObjectController : NetworkBehaviour
             }
         }
 
-        
-        
+
+
     }
 
     private void PlayerReadyUpdate(bool oldValue, bool newValue)
@@ -153,6 +153,7 @@ public class PlayerObjectController : NetworkBehaviour
     public void CmdCanStartGame(string sceneName)
     {
         manager.StartGame(sceneName);
+        
     }
 
     // Cosmetics
@@ -177,5 +178,30 @@ public class PlayerObjectController : NetworkBehaviour
     private void UpdateColor(int message)
     {
         playerColor = message;
+    }
+
+    // Player Money
+    [Command(requiresAuthority = false)]
+    public void CmdUpdatePlayerMoney(float newValue)
+    {
+        UpdatePlayerMoney(playerMoney, newValue);
+    }
+
+    public void UpdatePlayerMoney(float oldValue, float newValue)
+    {
+        if (isServer)
+        {
+            playerMoney = newValue;
+        }
+        if (isClient && (oldValue != newValue))
+        {
+            UpdateMoney(newValue);
+        }
+    }
+
+    private void UpdateMoney(float value)
+    {
+        playerMoney = value;
+        gamePlayerListItem.playerMoneyText.text = playerMoney.ToString();
     }
 }

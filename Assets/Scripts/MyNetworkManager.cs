@@ -10,9 +10,6 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] private PlayerObjectController gamePlayerPrefab;
     public List<PlayerObjectController> gamePlayers { get; } = new List<PlayerObjectController>();
 
-    public GameObject playGroundPrefab;
-    public GameObject currentPlayground;
-
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         if(SceneManager.GetActiveScene().name == "Lobby")
@@ -55,14 +52,11 @@ public class MyNetworkManager : NetworkManager
 
     public void InstantiatePlayground()
     {
-        currentPlayground = Instantiate(playGroundPrefab);
-        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        gameManager.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
-        foreach(PlayerObjectController playerObjectController in gamePlayers)
-        {
-            playerObjectController.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
-            playerObjectController.playerMoveController.SetStartPosition();
-        }
+        //foreach(PlayerObjectController playerObjectController in gamePlayers)
+        //{
+        //    playerObjectController.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
+        //    playerObjectController.playerMoveController.SetStartPosition();
+        //}
     }
 
 }
