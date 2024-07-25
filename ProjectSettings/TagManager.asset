@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Factory
   - Playground
+  - Resource
   layers:
   - Default
   - TransparentFX

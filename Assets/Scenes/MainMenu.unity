@@ -1564,8 +1564,6 @@ MonoBehaviour:
   evaluationInterval: 3
   timeInterpolationGui: 0
   gamePlayerPrefab: {fileID: 0}
-  playGroundPrefab: {fileID: 0}
-  currentPlayground: {fileID: 0}
 --- !u!4 &1335700311
 Transform:
   m_ObjectHideFlags: 0
@@ -2047,7 +2045,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 5153096612930116058, guid: 4b6cc1ab8be4664448631b31dac74444, type: 3}
   - {fileID: 4432381936566570498, guid: 245e936503fcddd4bb044d54c05e255b, type: 3}
-  - {fileID: 8549471015355425793, guid: b4966a787732b1e4fa90f1c3ec0d2d54, type: 3}
+  - {fileID: 4409482221867638266, guid: 7ef7b467db5383c46b52629c404cce08, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -2065,9 +2063,6 @@ MonoBehaviour:
   timeInterpolationGui: 0
   gamePlayerPrefab: {fileID: 2740312576520242844, guid: 4b6cc1ab8be4664448631b31dac74444,
     type: 3}
-  playGroundPrefab: {fileID: 8549471015355425793, guid: b4966a787732b1e4fa90f1c3ec0d2d54,
-    type: 3}
-  currentPlayground: {fileID: 0}
 --- !u!4 &1829846382
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class FactoryBuyPanelData : MonoBehaviour
     public TextMeshProUGUI locationNameText;
     public TextMeshProUGUI rentRateText;
     public Button buyButton;
-    public Button payRentButton;
     public Button cancelButton;
     public TextMeshProUGUI factoryLevelText;
     public TextMeshProUGUI ownerNameText;

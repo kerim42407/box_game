@@ -11,6 +11,11 @@ public class PlaygroundController : NetworkBehaviour
     public GameObject level2FactoryPrefab;
     public GameObject level3FactoryPrefab;
     public GameObject level4FactoryPrefab;
+    public GameObject clayResourcePrefab;
+    public GameObject copperResourcePrefab;
+    public GameObject ironResourcePrefab;
+    public GameObject cottonResourcePrefab;
+    public GameObject coalResourcePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +66,8 @@ public class PlaygroundController : NetworkBehaviour
         factoryController.UpdateRentRate();
     }
 
+    // Buy Resource
+    [Command(requiresAuthority = false)]
     public void CmdBuyResource(int locationIndex, PlayerObjectController newOwner)
     {
         RpcBuyResource(locationIndex, newOwner);
@@ -69,8 +76,8 @@ public class PlaygroundController : NetworkBehaviour
     [ClientRpc]
     private void RpcBuyResource(int locationIndex, PlayerObjectController newOwner)
     {
+        ResourceController resourceController = locations[locationIndex].GetComponent<ResourceController>();
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
-        ResourceController resourceController = locationController.GetComponent<ResourceController>();
 
         resourceController.ownerPlayer = newOwner;
         resourceController.UpdateRentRate();

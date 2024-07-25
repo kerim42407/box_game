@@ -112,54 +112,47 @@ public class PlayerMoveController : NetworkBehaviour
                 }
                 else // Factory owned by another player
                 {
-                    if (factoryController.factoryLevel < 3)
+                    if (playerObjectController.playerMoney >= factoryController.rentRate)
                     {
-                        if (playerObjectController.playerMoney >= buyPrice)
+                        playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                        factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                        if (factoryController.factoryLevel < 3)
                         {
-                            if (playerObjectController.playerMoney >= factoryController.rentRate)
+                            buyPrice = playerObjectController.gameManager.factoryPricesPerLevel[factoryController.factoryLevel] * factoryController.priceMultiplier;
+                            if (playerObjectController.playerMoney >= buyPrice)
                             {
-                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
-                                RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true, false);
-                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to buy this factory from him. You have enoughy money to pay rent. You can't ignore");
+                                RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true);
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to pay rent. You have enough money to buy this factory from him.");
                             }
                             else
                             {
-                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
-                                RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, false, false);
-                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to buy this factory from him. You don't have enough money to pay rent. You can't ignore");
-                                // TO DO Can not pay rent
+                                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You have enough money to pay rent. You don't have enough money to buy this factory from him.");
                             }
                         }
                         else
                         {
-                            if (playerObjectController.playerMoney >= factoryController.rentRate)
+                            buyPrice = playerObjectController.gameManager.factoryPricesPerLevel[factoryController.factoryLevel] * factoryController.priceMultiplier;
+                            if (playerObjectController.playerMoney >= buyPrice)
                             {
-                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
                                 playerObjectController.gameManager.CmdUpdateTurnIndex();
-                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You do not have enough money to buy this factory from him. You have enough money to pay rent. You can't ignore");
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is higher than 2. You have enough money to pay rent. You have enough money to buy this factory from him. You can't buy" +
+                                $"this factory because of it's level.");
                             }
                             else
                             {
-                                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                                factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
                                 playerObjectController.gameManager.CmdUpdateTurnIndex();
-                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is lower than 3. You do not have enough money to buy this factory from him. You do not have enough money to pay rent. You can't ignore");
-                                // TO DO Can not pay rent
+                                Debug.Log($"{factoryController.ownerPlayer.playerName} own this factory. It's level is higher than 2. You have enough money to pay rent. You don't have enough money to buy this factory from him. You can't buy" +
+                                $"this factory because of it's level.");
                             }
                         }
-
                     }
                     else
                     {
                         playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
                         factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
-                        playerObjectController.gameManager.CmdUpdateTurnIndex();
-                        Debug.Log($"{factoryController.ownerPlayer.playerName} has this factory. It's level is higher than 2. You can't buy this factory from him.");
+                        // TO DO Can't pay rent
                     }
-
                 }
             }
             else // Factory has no owner
@@ -167,7 +160,7 @@ public class PlayerMoveController : NetworkBehaviour
                 if (playerObjectController.playerMoney >= buyPrice)
                 {
                     Debug.Log("Factory has no owner and you have enough money to buy it.");
-                    RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true, true);
+                    RpcSetFactoryBuyPanelData(target, locationController.locationName, buyPrice, true, true);
                 }
                 else
                 {
@@ -199,7 +192,15 @@ public class PlayerMoveController : NetworkBehaviour
             }
             else // Resource has no owner
             {
-                RpcSetResourceBuyPanelData(target, locationController.locationName, buyPrice);
+                if(playerObjectController.playerMoney >= buyPrice)
+                {
+                    RpcSetResourceBuyPanelData(target, locationController.locationName, buyPrice);
+                }
+                else
+                {
+                    playerObjectController.gameManager.CmdUpdateTurnIndex();
+                }
+                
             }
         }
         else
@@ -216,7 +217,7 @@ public class PlayerMoveController : NetworkBehaviour
 
 
     [TargetRpc]
-    private void RpcSetFactoryBuyPanelData(NetworkConnectionToClient target, string locationName, float buyPrice, bool canBuy, bool canPayRent, bool canCancel)
+    private void RpcSetFactoryBuyPanelData(NetworkConnectionToClient target, string locationName, float buyPrice, bool canBuy, bool canCancel)
     {
         GameObject playerLocation = playgroundController.locations[playerObjectController.playerLocation];
         FactoryController factoryController = playerLocation.GetComponent<FactoryController>();
@@ -262,29 +263,6 @@ public class PlayerMoveController : NetworkBehaviour
         else
         {
             factoryBuyPanelData.buyButton.interactable = false;
-        }
-
-        if (factoryController.ownerPlayer)
-        {
-            if (canPayRent)
-            {
-                factoryBuyPanelData.payRentButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Pay rent: {factoryController.rentRate}";
-                factoryBuyPanelData.payRentButton.onClick.AddListener(() =>
-                {
-                    playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                    factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
-                    playerObjectController.gameManager.CmdUpdateTurnIndex();
-                    Destroy(factoryBuyPanel);
-                });
-            }
-            else
-            {
-                factoryBuyPanelData.payRentButton.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            factoryBuyPanelData.payRentButton.gameObject.SetActive(false);
         }
 
         if (canCancel)
