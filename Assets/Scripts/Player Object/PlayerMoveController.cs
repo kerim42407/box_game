@@ -42,6 +42,10 @@ public class PlayerMoveController : NetworkBehaviour
         {
             if (transform.position == destinationTransforms[destinationIndex].position)
             {
+                if(destinationTransforms[destinationIndex] == playgroundController.locations[0].transform)
+                {
+                    playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney + playerObjectController.gameManager.startingPointIncome);
+                }
                 if (destinationIndex == destinationTransforms.Count - 1)
                 {
                     destinationIndex = 0;

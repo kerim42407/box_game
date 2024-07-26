@@ -36,7 +36,8 @@ public class GameManager : NetworkBehaviour
     public float[] factoryPricesPerLevel;
     public float[] factoryValuePerLevel;
     public float resourceBuyPrice; // Resource location purchase price
-    public float resourceValue; 
+    public float resourceValue;
+    public float startingPointIncome;
 
     // Start is called before the first frame update
     void Start()

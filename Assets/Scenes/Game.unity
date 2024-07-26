@@ -529,6 +529,7 @@ MonoBehaviour:
   - 75000
   resourceBuyPrice: 20000
   resourceValue: 8000
+  startingPointIncome: 35000
 --- !u!114 &583519885
 MonoBehaviour:
   m_ObjectHideFlags: 0
