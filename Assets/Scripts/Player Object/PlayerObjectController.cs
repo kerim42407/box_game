@@ -1,5 +1,6 @@
 using Mirror;
 using Steamworks;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,8 +17,9 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(SendPlayerColor))] public int playerColor;
 
     [SyncVar] public bool canPlay;
+    [SyncVar] public bool canSell;
     [SyncVar] public int playerLocation;
-    [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney = 200000;
+    [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney = 100000;
 
     public GamePlayerListItem gamePlayerListItem;
 
@@ -36,9 +38,13 @@ public class PlayerObjectController : NetworkBehaviour
     public GameManager gameManager;
 
     [HideInInspector] public PlayerInputController playerInputController;
-    public PlaygroundController playgroundController;
-
+    [HideInInspector] public PlaygroundController playgroundController;
     [HideInInspector] public PlayerMoveController playerMoveController;
+    [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
+
+    public List<LocationController> ownedLocations = new();
+    public List<LocationController> locationsToBeSold = new();
+    public float locationsToBeSoldValue;
 
     private void Start()
     {

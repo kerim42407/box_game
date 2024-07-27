@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
@@ -34,10 +35,14 @@ public class GameManager : NetworkBehaviour
     public float bigFactoryPriceMultiplier;
     public float goldenFactoryPriceMultiplier;
     public float[] factoryPricesPerLevel;
-    public float[] factoryValuePerLevel;
+    public float[] factoryRentRatePerLevel;
     public float resourceBuyPrice; // Resource location purchase price
-    public float resourceValue;
+    public float resourceRentRate;
     public float startingPointIncome;
+
+    public GameObject mainCamera;
+    public List<Transform> cameraTransforms;
+    private int cameraPositionIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -55,13 +60,50 @@ public class GameManager : NetworkBehaviour
         foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
         {
             playerObjectController.UpdatePlayerMoney(0, playerObjectController.playerMoney);
+            playerObjectController.playerMoveController.mainCamera = Camera.main;
         }
+
+        //mainCamera.transform.position = cameraTransforms[cameraPositionIndex].position;
+        //mainCamera.transform.rotation = cameraTransforms[cameraPositionIndex].rotation;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    if(cameraPositionIndex == 0)
+        //    {
+        //        cameraPositionIndex = 4;
+        //    }
+        //    else
+        //    {
+        //        cameraPositionIndex--;
+        //    }
+            
+        //    UpdateCameraPos();
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    if (cameraPositionIndex == 4)
+        //    {
+        //        cameraPositionIndex = 0;
+        //    }
+        //    else
+        //    {
+        //        cameraPositionIndex++;
+        //    }
 
+        //    UpdateCameraPos();
+        //}
+    }
+
+    private void UpdateCameraPos()
+    {
+        mainCamera.transform.position = cameraTransforms[cameraPositionIndex].position;
+        mainCamera.transform.rotation = cameraTransforms[cameraPositionIndex].rotation;
     }
 
     [Server]

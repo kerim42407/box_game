@@ -22,11 +22,22 @@ public class ResourceController : MonoBehaviour
 
     public float CalculateRentRate()
     {
-        return gameManager.resourceValue;
+        return gameManager.resourceRentRate;
     }
 
     public void UpdateRentRate()
     {
-        rentRate = gameManager.resourceValue;
+        rentRate = gameManager.resourceRentRate;
+        locationController.UpdateRentRate(rentRate);
+    }
+
+    public void UpdateLocationValue()
+    {
+        locationController.locationValue = gameManager.resourceRentRate;
+    }
+
+    public void UpdateOwnerPlayer()
+    {
+        locationController.ownerPlayer = ownerPlayer;
     }
 }

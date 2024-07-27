@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LocationController : MonoBehaviour
@@ -6,16 +7,23 @@ public class LocationController : MonoBehaviour
     public ProductionType productionType;
     public enum LocationType { Starting, Special, Card, RegularFactory, BigFactory, GoldenFactory, Resource }
     public LocationType locationType;
-
+    public int locationIndex;
     public string locationName;
 
     public Material playerColorMaterial;
 
-    private FactoryController factoryController;
-    private ResourceController resourceController;
+    public FactoryController factoryController;
+    public ResourceController resourceController;
     private PlaygroundController playgroundController;
 
     public bool isBuyable;
+
+    [HideInInspector] public GameObject sellLocationToggle;
+    public float locationValue;
+    public float rentRate;
+    public PlayerObjectController ownerPlayer;
+
+    private TextMeshPro rentRateText;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +44,12 @@ public class LocationController : MonoBehaviour
 
     }
 
+    public void UpdateRentRate(float rentRate)
+    {
+        locationValue = rentRate;
+        rentRateText.text = $"{locationValue/1000}K" ;
+    }
+
     private void SetProductionType()
     {
         if (locationType == LocationType.RegularFactory || locationType == LocationType.BigFactory || locationType == LocationType.GoldenFactory)
@@ -43,20 +57,19 @@ public class LocationController : MonoBehaviour
             factoryController = GetComponent<FactoryController>();
         }
     }
-
     private void CheckLocationType()
     {
         if (locationType == LocationType.Starting)
         {
-
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.Special)
         {
-
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.Card)
         {
-
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.RegularFactory)
         {
@@ -64,6 +77,8 @@ public class LocationController : MonoBehaviour
             factoryController.priceMultiplier = playgroundController.gameManager.regularFactoryPriceMultiplier;
             factoryController.maxFactoryLevel = 3;
             Instantiate(SpawnFactory(1), transform);
+            SpawnRentRateTextPrefab();
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.BigFactory)
         {
@@ -71,6 +86,8 @@ public class LocationController : MonoBehaviour
             factoryController.priceMultiplier = playgroundController.gameManager.bigFactoryPriceMultiplier;
             factoryController.maxFactoryLevel = 3;
             Instantiate(SpawnFactory(1), transform);
+            SpawnRentRateTextPrefab();
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.GoldenFactory)
         {
@@ -78,14 +95,17 @@ public class LocationController : MonoBehaviour
             factoryController.priceMultiplier = playgroundController.gameManager.goldenFactoryPriceMultiplier;
             factoryController.maxFactoryLevel = 4;
             Instantiate(SpawnFactory(1), transform);
+            SpawnRentRateTextPrefab();
+            SpawnLocationNameTextPrefab();
         }
         else if (locationType == LocationType.Resource)
         {
             resourceController = GetComponent<ResourceController>();
             Instantiate(SpawnResource(), transform);
+            SpawnRentRateTextPrefab();
+            SpawnLocationNameTextPrefab();
         }
     }
-
     private GameObject SpawnFactory(int factoryLevel)
     {
         if (factoryLevel == 1)
@@ -105,7 +125,6 @@ public class LocationController : MonoBehaviour
             return playgroundController.level4FactoryPrefab;
         }
     }
-
     private GameObject SpawnResource()
     {
         if (productionType == ProductionType.Clay)
@@ -134,5 +153,110 @@ public class LocationController : MonoBehaviour
         //{
         //    GetComponent<MeshRenderer>().materials[1].color = playerColorMaterial.color;
         //}
+    }
+    private void SpawnRentRateTextPrefab()
+    {
+        GameObject rentRateText;
+        if (productionType == ProductionType.Clay)
+        {
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+        }
+        else if (productionType == ProductionType.Copper)
+        {
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+        }
+        else if (productionType == ProductionType.Iron)
+        {
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+        }
+        else if (productionType == ProductionType.Cotton)
+        {
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+        }
+        else
+        {
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+        }
+        rentRateText.transform.localPosition = new Vector3(.675f, 0, 0);
+        rentRateText.transform.localEulerAngles = GetRentRateTextRotation();
+    }
+    private void SpawnLocationNameTextPrefab()
+    {
+        GameObject locationNameText;
+        if (productionType == ProductionType.Clay)
+        {
+            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
+            locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
+        }
+        else if (productionType == ProductionType.Copper)
+        {
+            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
+            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+        }
+        else if (productionType == ProductionType.Iron)
+        {
+            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
+            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+        }
+        else if (productionType == ProductionType.Cotton)
+        {
+            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
+            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+        }
+        else
+        {
+            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
+            locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
+        }
+        
+        locationNameText.transform.localEulerAngles = GetLocationNameTextRotation();
+        locationNameText.GetComponent<TextMeshPro>().text = locationName;
+    }
+    private Vector3 GetRentRateTextRotation()
+    {
+        if (productionType == ProductionType.Clay)
+        {
+            return new Vector3(90,90,0);
+        }
+        else if (productionType == ProductionType.Copper)
+        {
+            return new Vector3(90, -90, 0);
+        }
+        else if (productionType == ProductionType.Iron)
+        {
+            return new Vector3(90, -90, 0);
+        }
+        else if (productionType == ProductionType.Cotton)
+        {
+            return new Vector3(90, -90, 0);
+        }
+        else
+        {
+            return new Vector3(90, 90, 0);
+
+        }
+    }
+    private Vector3 GetLocationNameTextRotation()
+    {
+        if (productionType == ProductionType.Clay)
+        {
+            return new Vector3(75, 90, 0);
+        }
+        else if (productionType == ProductionType.Copper)
+        {
+            return new Vector3(50, -90, 0);
+        }
+        else if (productionType == ProductionType.Iron)
+        {
+            return new Vector3(50, -90, 0);
+        }
+        else if (productionType == ProductionType.Cotton)
+        {
+            return new Vector3(50, -90, 0);
+        }
+        else
+        {
+            return new Vector3(75, 90, 0);
+        }
     }
 }

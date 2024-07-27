@@ -16,6 +16,10 @@ public class PlaygroundController : NetworkBehaviour
     public GameObject ironResourcePrefab;
     public GameObject cottonResourcePrefab;
     public GameObject coalResourcePrefab;
+    public GameObject rentRateTextPrefab;
+    public GameObject locationNameTextPrefab;
+    public GameObject sellLocationTogglePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,14 +45,27 @@ public class PlaygroundController : NetworkBehaviour
     {
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+
+        // Remove old owner
+        if (factoryController.ownerPlayer)
+        {
+            factoryController.ownerPlayer.ownedLocations.Remove(locationController);
+        }
+
+        // Assign new owner
         factoryController.ownerPlayer = newOwner;
-        if(factoryController.factoryLevel == 0)
+        newOwner.ownedLocations.Add(locationController);
+
+        // If purchasing the factory for the first time, upgrade to level 1
+        if (factoryController.factoryLevel == 0)
         {
             factoryController.factoryLevel = 1;
             factoryController.UpdateRentRate();
+            factoryController.UpdateLocationValue();
+            factoryController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
-        
+
     }
 
     // Upgrade Factory
@@ -64,6 +81,7 @@ public class PlaygroundController : NetworkBehaviour
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
         factoryController.factoryLevel++;
         factoryController.UpdateRentRate();
+        factoryController.UpdateLocationValue();
     }
 
     // Buy Resource
@@ -80,9 +98,43 @@ public class PlaygroundController : NetworkBehaviour
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
 
         resourceController.ownerPlayer = newOwner;
+        newOwner.ownedLocations.Add(locationController);
         resourceController.UpdateRentRate();
+        resourceController.UpdateLocationValue();
+        resourceController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
 
     }
 
+    // Sell Locations To The Bank
+    [Command(requiresAuthority = false)]
+    public void CmdSellLocationToTheBank(int locationIndex, PlayerObjectController owner)
+    {
+        RpcSellLocationToTheBank(locationIndex, owner);
+    }
+    [ClientRpc]
+    private void RpcSellLocationToTheBank(int locationIndex, PlayerObjectController owner)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        if (locationController.factoryController)
+        {
+            FactoryController factoryController = locationController.factoryController;
+            factoryController.ownerPlayer = null;
+            factoryController.ownerPlayer.ownedLocations.Remove(locationController);
+            factoryController.factoryLevel = 0;
+            factoryController.UpdateRentRate();
+            factoryController.UpdateLocationValue();
+            factoryController.UpdateOwnerPlayer();
+        }
+        else if (locationController.resourceController)
+        {
+            ResourceController resourceController = locationController.resourceController;
+            resourceController.ownerPlayer = null;
+            resourceController.ownerPlayer.ownedLocations.Remove(locationController);
+            resourceController.UpdateRentRate();
+            resourceController.UpdateLocationValue();
+            resourceController.UpdateOwnerPlayer();
+        }
+        locationController.playerColorMaterial.color = new Color(1, 0, 0);
+    }
 }

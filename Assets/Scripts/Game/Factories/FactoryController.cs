@@ -28,11 +28,22 @@ public class FactoryController : MonoBehaviour
 
     public float CalculateRentRate(int _factoryLevel)
     {
-        return gameManager.factoryValuePerLevel[_factoryLevel];
+        return gameManager.factoryRentRatePerLevel[_factoryLevel] * priceMultiplier;
     }
 
     public void UpdateRentRate()
     {
-        rentRate = gameManager.factoryValuePerLevel[factoryLevel];
+        rentRate = gameManager.factoryRentRatePerLevel[factoryLevel] * priceMultiplier;
+        locationController.UpdateRentRate(rentRate);
+    }
+
+    public void UpdateLocationValue()
+    {
+        locationController.locationValue = gameManager.factoryRentRatePerLevel[factoryLevel];
+    }
+
+    public void UpdateOwnerPlayer()
+    {
+        locationController.ownerPlayer = ownerPlayer;
     }
 }

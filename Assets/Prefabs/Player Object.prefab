@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 3591308161235277143}
   - component: {fileID: 2740312576520242844}
   - component: {fileID: 5042440310681225469}
-  - component: {fileID: 1549349128384201979}
   - component: {fileID: 1817132955790707819}
   - component: {fileID: -5412821068625096937}
   - component: {fileID: 7485177149424546135}
@@ -111,12 +110,16 @@ MonoBehaviour:
   playerColor: 0
   canPlay: 0
   playerLocation: 0
-  playerMoney: 200000
+  playerMoney: 50000
   gamePlayerListItem: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputController: {fileID: 0}
   playgroundController: {fileID: 0}
   playerMoveController: {fileID: 0}
+  sellLocationsPanelData: {fileID: 0}
+  ownedLocations: []
+  locationsToBeSold: []
+  locationsToBeSoldValue: 0
 --- !u!136 &5042440310681225469
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -140,33 +143,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1549349128384201979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5153096612930116058}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16de672b0b692e94080e7b1b8848427d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  speed: 0.1
-  playerModel: {fileID: 842506574876847795}
-  playerMesh: {fileID: 4559822849553578941}
-  playerColors:
-  - {fileID: 2100000, guid: 3f6e413a3e79b1841a23dea4e9e69120, type: 2}
-  - {fileID: 2100000, guid: fe638d82dc8eb2646aae58d63621566d, type: 2}
-  - {fileID: 2100000, guid: f38de6617cf8b744e9bfca71d6ad5494, type: 2}
-  - {fileID: 2100000, guid: 7f6c66d7b0a042348a0b0e0e7041f919, type: 2}
-  - {fileID: 2100000, guid: 6b02277c582130d4f8f52f1bf7ce845b, type: 2}
-  - {fileID: 2100000, guid: 2aced890d4c2b624292980faad2ddc15, type: 2}
-  - {fileID: 2100000, guid: 4084941ff96e66c4495bc37aee508aa8, type: 2}
-  identity: {fileID: 0}
 --- !u!114 &1817132955790707819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +226,7 @@ MonoBehaviour:
   firstTransform: {fileID: 0}
   startTime: 0
   journeyTime: 0.5
+  mainCamera: {fileID: 0}
   didCosmetic: 0
 --- !u!1 &8065855131862938251
 GameObject:

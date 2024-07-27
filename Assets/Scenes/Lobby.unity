@@ -2507,7 +2507,6 @@ MonoBehaviour:
   localPlayerController: {fileID: 0}
   startGameButton: {fileID: 128268024}
   readyButtonText: {fileID: 315927685}
-  startingGameMoney: 0
 --- !u!4 &1862562556
 Transform:
   m_ObjectHideFlags: 0

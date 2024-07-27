@@ -20,13 +20,16 @@ public class PlayerMoveController : NetworkBehaviour
 
     private PlayerObjectController playerObjectController;
     private PlaygroundController playgroundController;
+    [HideInInspector] public Camera mainCamera;
 
     public bool didCosmetic;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         playerObjectController = GetComponent<PlayerObjectController>();
     }
 
@@ -42,7 +45,7 @@ public class PlayerMoveController : NetworkBehaviour
         {
             if (transform.position == destinationTransforms[destinationIndex].position)
             {
-                if(destinationTransforms[destinationIndex] == playgroundController.locations[0].transform)
+                if (destinationTransforms[destinationIndex] == playgroundController.locations[0].transform)
                 {
                     playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney + playerObjectController.gameManager.startingPointIncome);
                 }
@@ -153,8 +156,9 @@ public class PlayerMoveController : NetworkBehaviour
                     }
                     else
                     {
-                        playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
-                        factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                        //playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - factoryController.rentRate);
+                        //factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + factoryController.rentRate);
+                        RpcSetSellOwnedLocationsPanelData(target, factoryController.rentRate);
                         // TO DO Can't pay rent
                     }
                 }
@@ -175,7 +179,7 @@ public class PlayerMoveController : NetworkBehaviour
             }
 
         }
-        else if(locationType == LocationController.LocationType.Resource)
+        else if (locationType == LocationController.LocationType.Resource)
         {
             float buyPrice = playerObjectController.gameManager.resourceBuyPrice;
             ResourceController resourceController = playerLocation.GetComponent<ResourceController>();
@@ -183,7 +187,7 @@ public class PlayerMoveController : NetworkBehaviour
 
             if (resourceController.ownerPlayer) // Resource has owner
             {
-                if(resourceController.ownerPlayer == playerObjectController) // Resource owned by local player
+                if (resourceController.ownerPlayer == playerObjectController) // Resource owned by local player
                 {
                     playerObjectController.gameManager.CmdUpdateTurnIndex();
                 }
@@ -196,7 +200,7 @@ public class PlayerMoveController : NetworkBehaviour
             }
             else // Resource has no owner
             {
-                if(playerObjectController.playerMoney >= buyPrice)
+                if (playerObjectController.playerMoney >= buyPrice)
                 {
                     RpcSetResourceBuyPanelData(target, locationController.locationName, buyPrice);
                 }
@@ -204,7 +208,7 @@ public class PlayerMoveController : NetworkBehaviour
                 {
                     playerObjectController.gameManager.CmdUpdateTurnIndex();
                 }
-                
+
             }
         }
         else
@@ -283,7 +287,6 @@ public class PlayerMoveController : NetworkBehaviour
         }
 
     }
-
     [TargetRpc]
     private void RpcSetFactoryUpgradePanelData(NetworkConnectionToClient target, string locationName, float upgradePrice)
     {
@@ -344,6 +347,66 @@ public class PlayerMoveController : NetworkBehaviour
             playerObjectController.gameManager.CmdUpdateTurnIndex();
             Destroy(resourceBuyPanelData);
         });
+    }
+    [TargetRpc]
+    public void RpcSetSellOwnedLocationsPanelData(NetworkConnectionToClient target, float rentRate)
+    {
+        playerObjectController.canSell = true;
+        LocationController locationController = playgroundController.locations[playerObjectController.playerLocation].GetComponent<LocationController>();
+        UIManager uiManager = playerObjectController.gameManager.uiManager;
+        foreach (LocationController _locationController in playerObjectController.ownedLocations)
+        {
+            GameObject sellLocationToggle = Instantiate(playgroundController.sellLocationTogglePrefab, _locationController.transform);
+            sellLocationToggle.transform.localPosition = new Vector3(1, .1f, 0);
+            _locationController.tag = "Saleable Location";
+            _locationController.sellLocationToggle = sellLocationToggle;
+        }
+        GameObject sellLocationsPanel = Instantiate(uiManager.sellLocationsPanelPrefab, uiManager.mainCanvas.transform);
+        SellLocationsPanelData sellLocationsPanelData = sellLocationsPanel.GetComponent<SellLocationsPanelData>();
+        playerObjectController.sellLocationsPanelData = sellLocationsPanelData;
+        sellLocationsPanelData.theMoneyYouNeedText.text = $"Rent rate: {rentRate}";
+        sellLocationsPanelData.yourMoneyAfterSalesText.text = $"Your money after sales: {playerObjectController.playerMoney}";
+        sellLocationsPanelData.confirmButton.interactable = false;
+    }
+
+    public void SetSellLocationsPanelButtonData()
+    {
+        LocationController _locationController = playgroundController.locations[playerObjectController.playerLocation].GetComponent<LocationController>(); // The location stopped on.
+        float rentRate = _locationController.locationValue;
+        float value = 0;
+        foreach (LocationController locationController in playerObjectController.locationsToBeSold)
+        {
+            value += locationController.locationValue;
+        }
+        playerObjectController.sellLocationsPanelData.yourMoneyAfterSalesText.text = $"Your money after sales: {playerObjectController.playerMoney + value}";
+        if (playerObjectController.playerMoney + value >= rentRate)
+        {
+            playerObjectController.sellLocationsPanelData.confirmButton.onClick.RemoveAllListeners();
+            playerObjectController.sellLocationsPanelData.confirmButton.onClick.AddListener(() =>
+            {
+                foreach (LocationController _locationController in playerObjectController.ownedLocations)
+                {
+                    Destroy(_locationController.sellLocationToggle);
+                    _locationController.sellLocationToggle = null;
+                    _locationController.tag = "Untagged";
+                }
+                playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney + value - rentRate);
+                _locationController.ownerPlayer.CmdUpdatePlayerMoney(_locationController.ownerPlayer.playerMoney + rentRate);
+                foreach(LocationController locationController in playerObjectController.locationsToBeSold)
+                {
+                    playgroundController.CmdSellLocationToTheBank(locationController.locationIndex, playerObjectController);
+                }
+                playerObjectController.gameManager.CmdUpdateTurnIndex();
+                playerObjectController.canSell = false;
+                
+                Destroy(playerObjectController.sellLocationsPanelData.gameObject);
+            });
+            playerObjectController.sellLocationsPanelData.confirmButton.interactable = true;
+        }
+        else
+        {
+            playerObjectController.sellLocationsPanelData.confirmButton.interactable = false;
+        }
     }
 
     public void MovePlayer(int locationIndex)

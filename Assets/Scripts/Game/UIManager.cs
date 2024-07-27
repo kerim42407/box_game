@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject factoryBuyPanelPrefab;
     public GameObject factoryUpgradePanelPrefab;
     public GameObject resourceBuyPanelPrefab;
+    public GameObject sellLocationsPanelPrefab;
 
     private void OnEnable()
     {
