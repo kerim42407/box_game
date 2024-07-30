@@ -13,8 +13,7 @@ public class FactoryController : MonoBehaviour
 
     public PlayerObjectController ownerPlayer;
 
-    public float priceMultiplier;
-    public float rentRate;
+    public float factoryPriceCoef;
     public int factoryLevel;
     public int maxFactoryLevel;
 
@@ -26,20 +25,29 @@ public class FactoryController : MonoBehaviour
         productionType = locationController.productionType;
     }
 
+    public float CalculateBuyFromBankPrice()
+    {
+        return gameManager.baseFactoryPrice * factoryPriceCoef;
+    }
+
+    public float CalculateSellToBankPrice()
+    {
+        return CalculateBuyFromBankPrice() / 2;
+    }
+
+    public float CalculateUpgradePrice()
+    {
+        return gameManager.baseFactoryPrice * gameManager.factoryPriceCoefPerLevel[factoryLevel + 1] * factoryPriceCoef;
+    }
+
+    public float CalculateSellToAnotherPrice(int _factoryLevel)
+    {
+        return gameManager.baseFactoryPrice * gameManager.factoryPriceCoefPerLevel[_factoryLevel] * factoryPriceCoef * gameManager.bonus;
+    }
+
     public float CalculateRentRate(int _factoryLevel)
     {
-        return gameManager.factoryRentRatePerLevel[_factoryLevel] * priceMultiplier;
-    }
-
-    public void UpdateRentRate()
-    {
-        rentRate = gameManager.factoryRentRatePerLevel[factoryLevel] * priceMultiplier;
-        locationController.UpdateRentRate(rentRate);
-    }
-
-    public void UpdateLocationValue()
-    {
-        locationController.locationValue = gameManager.factoryRentRatePerLevel[factoryLevel];
+        return CalculateSellToAnotherPrice(_factoryLevel) / 3;
     }
 
     public void UpdateOwnerPlayer()

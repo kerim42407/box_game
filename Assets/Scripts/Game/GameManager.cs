@@ -1,5 +1,6 @@
 using Mirror;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
@@ -31,18 +32,24 @@ public class GameManager : NetworkBehaviour
     }
 
     // Game Variables
-    public float regularFactoryPriceMultiplier;
-    public float bigFactoryPriceMultiplier;
-    public float goldenFactoryPriceMultiplier;
-    public float[] factoryPricesPerLevel;
-    public float[] factoryRentRatePerLevel;
     public float resourceBuyPrice; // Resource location purchase price
     public float resourceRentRate;
     public float startingPointIncome;
 
+    public float baseFactoryPrice;
+    public float regularFactoryPriceCoef;
+    public float bigFactoryPriceCoef;
+    public float goldenFactoryPriceCoef;
+    public float[] factoryPriceCoefPerLevel;
+
+    public float bonus;
+
     public GameObject mainCamera;
     public List<Transform> cameraTransforms;
     private int cameraPositionIndex;
+
+    public TMP_InputField inputField;
+    public GameObject customDiceButton;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +58,13 @@ public class GameManager : NetworkBehaviour
         if (isServer)
         {
             InstantiatePlayground();
+            inputField.gameObject.SetActive(true);
+            customDiceButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            inputField.gameObject.SetActive(false);
+            customDiceButton.gameObject.SetActive(false);
         }
         if (isClient)
         {
@@ -129,6 +143,11 @@ public class GameManager : NetworkBehaviour
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(result);
     }
 
+    public void CustomDiceResult(int result)
+    {
+        Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(int.Parse(inputField.text));
+    }
+
     private void InstantiateGamePlayerListItems()
     {
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
@@ -136,6 +155,7 @@ public class GameManager : NetworkBehaviour
             GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
             qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
             qwe.GetComponent<GamePlayerListItem>().playerSteamID = Manager.gamePlayers[i].playerSteamID;
+            qwe.GetComponent<GamePlayerListItem>().background.color = playerColors[Manager.gamePlayers[i].playerColor].color;
             Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
             qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
         }

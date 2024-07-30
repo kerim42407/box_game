@@ -109,8 +109,9 @@ MonoBehaviour:
   ready: 0
   playerColor: 0
   canPlay: 0
+  canSell: 0
   playerLocation: 0
-  playerMoney: 50000
+  playerMoney: 100000
   gamePlayerListItem: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputController: {fileID: 0}

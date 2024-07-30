@@ -20,20 +20,19 @@ public class ResourceController : MonoBehaviour
         gameManager = locationController.transform.parent.GetComponent<PlaygroundController>().gameManager;
     }
 
+    public float CalculateBuyFromBankPrice()
+    {
+        return gameManager.resourceBuyPrice;
+    }
+
+    public float CalculateSellToBankPrice()
+    {
+        return CalculateBuyFromBankPrice() / 2;
+    }
+
     public float CalculateRentRate()
     {
         return gameManager.resourceRentRate;
-    }
-
-    public void UpdateRentRate()
-    {
-        rentRate = gameManager.resourceRentRate;
-        locationController.UpdateRentRate(rentRate);
-    }
-
-    public void UpdateLocationValue()
-    {
-        locationController.locationValue = gameManager.resourceRentRate;
     }
 
     public void UpdateOwnerPlayer()

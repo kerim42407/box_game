@@ -19,7 +19,6 @@ public class LocationController : MonoBehaviour
     public bool isBuyable;
 
     [HideInInspector] public GameObject sellLocationToggle;
-    public float locationValue;
     public float rentRate;
     public PlayerObjectController ownerPlayer;
 
@@ -44,10 +43,43 @@ public class LocationController : MonoBehaviour
 
     }
 
-    public void UpdateRentRate(float rentRate)
+    public float GetLocationBuyFromBankPrice()
     {
-        locationValue = rentRate;
-        rentRateText.text = $"{locationValue/1000}K" ;
+        if (factoryController)
+        {
+            return factoryController.CalculateBuyFromBankPrice();
+        }
+        else
+        {
+            return resourceController.CalculateBuyFromBankPrice();
+        }
+    }
+    public float GetLocationSellPriceToTheBank()
+    {
+        if (factoryController)
+        {
+            return factoryController.CalculateSellToBankPrice();
+        }
+        else
+        {
+            return resourceController.CalculateSellToBankPrice();
+        }
+    }
+    public float GetLocationRentRate()
+    {
+        if (factoryController)
+        {
+            return factoryController.CalculateRentRate(factoryController.factoryLevel);
+        }
+        else
+        {
+            return resourceController.CalculateRentRate();
+        }
+    }
+    public void UpdateRentRate()
+    {
+        rentRate = GetLocationRentRate();
+        rentRateText.text = $"{rentRate / 1000}K";
     }
 
     private void SetProductionType()
@@ -74,7 +106,7 @@ public class LocationController : MonoBehaviour
         else if (locationType == LocationType.RegularFactory)
         {
             factoryController = GetComponent<FactoryController>();
-            factoryController.priceMultiplier = playgroundController.gameManager.regularFactoryPriceMultiplier;
+            factoryController.factoryPriceCoef = playgroundController.gameManager.regularFactoryPriceCoef;
             factoryController.maxFactoryLevel = 3;
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
@@ -83,7 +115,7 @@ public class LocationController : MonoBehaviour
         else if (locationType == LocationType.BigFactory)
         {
             factoryController = GetComponent<FactoryController>();
-            factoryController.priceMultiplier = playgroundController.gameManager.bigFactoryPriceMultiplier;
+            factoryController.factoryPriceCoef = playgroundController.gameManager.bigFactoryPriceCoef;
             factoryController.maxFactoryLevel = 3;
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
@@ -92,7 +124,7 @@ public class LocationController : MonoBehaviour
         else if (locationType == LocationType.GoldenFactory)
         {
             factoryController = GetComponent<FactoryController>();
-            factoryController.priceMultiplier = playgroundController.gameManager.goldenFactoryPriceMultiplier;
+            factoryController.factoryPriceCoef = playgroundController.gameManager.goldenFactoryPriceCoef;
             factoryController.maxFactoryLevel = 4;
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
@@ -156,26 +188,25 @@ public class LocationController : MonoBehaviour
     }
     private void SpawnRentRateTextPrefab()
     {
-        GameObject rentRateText;
         if (productionType == ProductionType.Clay)
         {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
         }
         else if (productionType == ProductionType.Copper)
         {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
         }
         else if (productionType == ProductionType.Iron)
         {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
         }
         else if (productionType == ProductionType.Cotton)
         {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
         }
         else
         {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform);
+            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
         }
         rentRateText.transform.localPosition = new Vector3(.675f, 0, 0);
         rentRateText.transform.localEulerAngles = GetRentRateTextRotation();

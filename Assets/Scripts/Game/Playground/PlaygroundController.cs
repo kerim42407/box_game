@@ -60,8 +60,7 @@ public class PlaygroundController : NetworkBehaviour
         if (factoryController.factoryLevel == 0)
         {
             factoryController.factoryLevel = 1;
-            factoryController.UpdateRentRate();
-            factoryController.UpdateLocationValue();
+            locationController.UpdateRentRate();
             factoryController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
@@ -78,10 +77,11 @@ public class PlaygroundController : NetworkBehaviour
     [ClientRpc]
     private void RpcUpgradeFactory(int locationIndex)
     {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
+
         factoryController.factoryLevel++;
-        factoryController.UpdateRentRate();
-        factoryController.UpdateLocationValue();
+        locationController.UpdateRentRate();
     }
 
     // Buy Resource
@@ -99,8 +99,7 @@ public class PlaygroundController : NetworkBehaviour
 
         resourceController.ownerPlayer = newOwner;
         newOwner.ownedLocations.Add(locationController);
-        resourceController.UpdateRentRate();
-        resourceController.UpdateLocationValue();
+        locationController.UpdateRentRate();
         resourceController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
 
@@ -119,20 +118,20 @@ public class PlaygroundController : NetworkBehaviour
         if (locationController.factoryController)
         {
             FactoryController factoryController = locationController.factoryController;
-            factoryController.ownerPlayer = null;
+            
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
+            factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
-            factoryController.UpdateRentRate();
-            factoryController.UpdateLocationValue();
+            locationController.UpdateRentRate();
             factoryController.UpdateOwnerPlayer();
         }
         else if (locationController.resourceController)
         {
             ResourceController resourceController = locationController.resourceController;
-            resourceController.ownerPlayer = null;
+            
             resourceController.ownerPlayer.ownedLocations.Remove(locationController);
-            resourceController.UpdateRentRate();
-            resourceController.UpdateLocationValue();
+            resourceController.ownerPlayer = null;
+            locationController.UpdateRentRate();
             resourceController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = new Color(1, 0, 0);
