@@ -4,6 +4,8 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using TMPro;
+using Mirror.FizzySteam;
+using Edgegap;
 
 public class SteamLobby : MonoBehaviour
 {
@@ -49,8 +51,8 @@ public class SteamLobby : MonoBehaviour
 
     public void HostLobby()
     {
-        //SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, myNetworkManager.maxConnections);
-        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, myNetworkManager.maxConnections);
+        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, myNetworkManager.maxConnections);
+        //SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, myNetworkManager.maxConnections);
     }
 
     private void OnLobbyCreated(LobbyCreated_t callback)

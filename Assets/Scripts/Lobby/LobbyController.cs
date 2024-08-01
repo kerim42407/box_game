@@ -52,6 +52,11 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    public void InviteFriendsUI()
+    {
+        SteamFriends.ActivateGameOverlayInviteDialog(new CSteamID(currentLobbyID));
+    }
+
     public void ReadyPlayer()
     {
         localPlayerController.ChangeReady();
