@@ -14,9 +14,12 @@ public class LobbyController : MonoBehaviour
     public TextMeshProUGUI lobbyNameText;
 
     // Player Data
-    public GameObject playerListViewContent;
+    //public GameObject playerListViewContent;
     public GameObject playerListItemPrefab;
     public GameObject localPlayerObject;
+
+    //
+    public GameObject playerListContainer;
 
     // Other Data
     public ulong currentLobbyID;
@@ -145,7 +148,10 @@ public class LobbyController : MonoBehaviour
     {
         foreach (PlayerObjectController player in Manager.gamePlayers)
         {
-            GameObject newPlayerItem = Instantiate(playerListItemPrefab) as GameObject;
+            //GameObject newPlayerItem = Instantiate(playerListItemPrefab) as GameObject;
+            //PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
+
+            GameObject newPlayerItem = playerListContainer.transform.GetChild(2).gameObject;
             PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
 
             newPlayerItemScript.playerName = player.playerName;
@@ -154,7 +160,7 @@ public class LobbyController : MonoBehaviour
             newPlayerItemScript.ready = player.ready;
             newPlayerItemScript.SetPlayerValues();
 
-            newPlayerItem.transform.SetParent(playerListViewContent.transform);
+            //newPlayerItem.transform.SetParent(playerListViewContent.transform);
             newPlayerItem.transform.localScale = Vector3.one;
 
             playerListItems.Add(newPlayerItemScript);
@@ -164,11 +170,34 @@ public class LobbyController : MonoBehaviour
 
     public void CreateClientPlayerItem()
     {
+        int index = 0;
         foreach (PlayerObjectController player in Manager.gamePlayers)
         {
             if (!playerListItems.Any(b => b.connectionID == player.connectionID))
             {
-                GameObject newPlayerItem = Instantiate(playerListItemPrefab) as GameObject;
+                //GameObject newPlayerItem = Instantiate(playerListItemPrefab) as GameObject;
+                //PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
+                //if(player.playerLobbyIndex == 0)
+                //{
+                //    index = 2;
+                //}
+                //else if(player.playerIDNumber == 2)
+                //{
+                //    index = 0;
+                //}
+                //else if(player.playerIDNumber == 3)
+                //{
+                //    index = 1;
+                //}
+                //else if(player.playerIDNumber == 4)
+                //{
+                //    index = 3;
+                //}
+                //else if(player.playerIDNumber == 5)
+                //{
+                //    index = 4;
+                //}
+                GameObject newPlayerItem = playerListContainer.transform.GetChild(player.playerLobbyIndex).gameObject;
                 PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
 
                 newPlayerItemScript.playerName = player.playerName;
@@ -177,11 +206,13 @@ public class LobbyController : MonoBehaviour
                 newPlayerItemScript.ready = player.ready;
                 newPlayerItemScript.SetPlayerValues();
 
-                newPlayerItem.transform.SetParent(playerListViewContent.transform);
+                //newPlayerItem.transform.SetParent(playerListViewContent.transform);
                 newPlayerItem.transform.localScale = Vector3.one;
 
                 playerListItems.Add(newPlayerItemScript);
             }
+            
+            
         }
     }
 
@@ -223,10 +254,29 @@ public class LobbyController : MonoBehaviour
             {
                 GameObject objectToRemove = playerlistItemToRemove.gameObject;
                 playerListItems.Remove(playerlistItemToRemove);
-                Destroy(objectToRemove);
+                //Destroy(objectToRemove);
+                ClearPlayerListItem(playerlistItemToRemove);
                 objectToRemove = null;
             }
         }
+    }
+
+    private void ClearPlayerListItem(PlayerListItem objectToClear)
+    {
+        GameObject _gameObject = objectToClear.gameObject;
+        Destroy(objectToClear);
+        PlayerListItem _playerListItem = _gameObject.AddComponent<PlayerListItem>();
+        _playerListItem.playerNameText = _gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerReadyText = _gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerIcon = _gameObject.transform.GetChild(3).GetComponent<RawImage>();
+        _playerListItem.SetPlayerValues();
+
+        //objectToClear.playerIcon = null;
+        //objectToClear.playerName = null;
+        //objectToClear.ready = false;
+        ////objectToClear.playerSteamID = null;
+        //objectToClear.connectionID = null;
+        //objectToClear.SetPlayerValues();
     }
 
     public void StartGame(string sceneName)
