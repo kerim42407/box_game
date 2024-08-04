@@ -44,17 +44,12 @@ public class GameManager : NetworkBehaviour
 
     public float bonus;
 
-    public GameObject mainCamera;
-    public List<Transform> cameraTransforms;
-    private int cameraPositionIndex;
-
     public TMP_InputField inputField;
     public GameObject customDiceButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Manager.InstantiatePlayground();
         if (isServer)
         {
             InstantiatePlayground();
@@ -76,48 +71,13 @@ public class GameManager : NetworkBehaviour
             playerObjectController.UpdatePlayerMoney(0, playerObjectController.playerMoney);
             playerObjectController.playerMoveController.mainCamera = Camera.main;
         }
-
-        //mainCamera.transform.position = cameraTransforms[cameraPositionIndex].position;
-        //mainCamera.transform.rotation = cameraTransforms[cameraPositionIndex].rotation;
-
-
+        startingPointIncome = Manager.gamePlayers[0].playerMoney / 2; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    if(cameraPositionIndex == 0)
-        //    {
-        //        cameraPositionIndex = 4;
-        //    }
-        //    else
-        //    {
-        //        cameraPositionIndex--;
-        //    }
-            
-        //    UpdateCameraPos();
-        //}
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    if (cameraPositionIndex == 4)
-        //    {
-        //        cameraPositionIndex = 0;
-        //    }
-        //    else
-        //    {
-        //        cameraPositionIndex++;
-        //    }
 
-        //    UpdateCameraPos();
-        //}
-    }
-
-    private void UpdateCameraPos()
-    {
-        mainCamera.transform.position = cameraTransforms[cameraPositionIndex].position;
-        mainCamera.transform.rotation = cameraTransforms[cameraPositionIndex].rotation;
     }
 
     [Server]
@@ -140,6 +100,17 @@ public class GameManager : NetworkBehaviour
     public void OnDiceResult(int result)
     {
         Debug.Log($"Applying dice result: {result}");
+        if(result % 2 == 0)
+        {
+            Manager.gamePlayers[turnIndex].playerMoveController.isEven = !Manager.gamePlayers[turnIndex].playerMoveController.isEven;
+        }
+        else
+        {
+            if (Manager.gamePlayers[turnIndex].playerMoveController.isEven)
+            {
+                Manager.gamePlayers[turnIndex].playerMoveController.isEven = false;
+            }
+        }
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(result);
     }
 
@@ -155,7 +126,7 @@ public class GameManager : NetworkBehaviour
             GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
             qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
             qwe.GetComponent<GamePlayerListItem>().playerSteamID = Manager.gamePlayers[i].playerSteamID;
-            qwe.GetComponent<GamePlayerListItem>().background.color = playerColors[Manager.gamePlayers[i].playerColor].color;
+            qwe.GetComponent<GamePlayerListItem>().background.color = Manager.gamePlayers[i].playerColor;
             Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
             qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
         }
@@ -171,7 +142,15 @@ public class GameManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdUpdateTurnIndex()
     {
-        TurnIndexUpdate(turnIndex, turnIndex + 1);
+        if (Manager.gamePlayers[turnIndex].GetComponent<PlayerMoveController>().isEven)
+        {
+            TurnIndexUpdate(turnIndex, turnIndex);
+        }
+        else
+        {
+            TurnIndexUpdate(turnIndex, turnIndex + 1);
+        }
+        
     }
 
     private void TurnIndexUpdate(int oldValue, int newValue)

@@ -28,7 +28,7 @@ public class CharacterCosmetics : MonoBehaviour
         {
             localPlayerObject = GameObject.Find("LocalGamePlayer");
             localPlayerController = localPlayerObject.GetComponent<PlayerObjectController>();
-            localPlayerController.CmdSendPlayerColor(currentColorIndex);
+            //localPlayerController.CmdSetPlayerColor(localPlayerController.playerColor);
         }
         else
         {
@@ -45,7 +45,7 @@ public class CharacterCosmetics : MonoBehaviour
             PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
             currentColorImage.color = playerColors[currentColorIndex].color;
             currentColorText.text = playerColors[currentColorIndex].name;
-            localPlayerController.CmdSendPlayerColor(currentColorIndex);
+            //localPlayerController.CmdSendPlayerColor(localPlayerController.playerColor);
         }
     }
 
@@ -57,7 +57,7 @@ public class CharacterCosmetics : MonoBehaviour
             PlayerPrefs.SetInt("currentColorIndex", currentColorIndex);
             currentColorImage.color = playerColors[currentColorIndex].color;
             currentColorText.text = playerColors[currentColorIndex].name;
-            localPlayerController.CmdSendPlayerColor(currentColorIndex);
+            //localPlayerController.CmdSendPlayerColor(localPlayerController.playerColor);
         }
     }
 }

@@ -10,6 +10,8 @@ public class MyNetworkManager : NetworkManager
     [SerializeField] private PlayerObjectController gamePlayerPrefab;
     public List<PlayerObjectController> gamePlayers { get; } = new List<PlayerObjectController>();
 
+    public float startingMoney;
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         if (SceneManager.GetActiveScene().name == "Lobby")
@@ -45,33 +47,8 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStartServer();
     }
-
-    //public override void OnClientConnect()
-    //{
-    //    base.OnClientConnect();
-    //    clientCount++;
-    //    Debug.Log(clientCount);
-    //}
-
-    //public override void OnClientDisconnect()
-    //{
-    //    base.OnClientDisconnect();
-    //    clientCount--;
-    //    Debug.Log(clientCount);
-    //}
-
     public override void OnStartClient()
     {
         base.OnStartClient();
     }
-
-    public void InstantiatePlayground()
-    {
-        //foreach(PlayerObjectController playerObjectController in gamePlayers)
-        //{
-        //    playerObjectController.playgroundController = currentPlayground.GetComponent<PlaygroundController>();
-        //    playerObjectController.playerMoveController.SetStartPosition();
-        //}
-    }
-
 }

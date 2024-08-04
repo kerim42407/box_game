@@ -14,13 +14,16 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerNameUpdate))] public string playerName;
     [SyncVar(hook = nameof(PlayerReadyUpdate))] public bool ready;
 
-    // Cosmetics
-    [SyncVar(hook = nameof(SendPlayerColor))] public int playerColor;
+    public PlayerListItem playerListItem;
+
+    [Header("Player Cosmetics")]
+    public List<Color> playerColors;
+    [SyncVar(hook = nameof(SetPlayerColor))] public Color playerColor;
 
     [SyncVar] public bool canPlay;
     [SyncVar] public bool canSell;
     [SyncVar] public int playerLocation;
-    [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney = 100000;
+    [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney;
 
     public GamePlayerListItem gamePlayerListItem;
 
@@ -46,6 +49,8 @@ public class PlayerObjectController : NetworkBehaviour
     public List<LocationController> ownedLocations = new();
     public List<LocationController> locationsToBeSold = new();
     public float locationsToBeSoldValue;
+
+
 
     private void Start()
     {
@@ -118,6 +123,7 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.gamePlayers.Add(this);
         LobbyController.instance.UpdateLobbyName();
         LobbyController.instance.UpdatePlayerList();
+        CmdSetPlayerColor();
     }
 
     public override void OnStopClient()
@@ -160,17 +166,46 @@ public class PlayerObjectController : NetworkBehaviour
     public void CmdCanStartGame(string sceneName)
     {
         manager.StartGame(sceneName);
-        
+
     }
 
     // Cosmetics
-    [Command]
-    public void CmdSendPlayerColor(int newValue)
-    {
-        SendPlayerColor(playerColor, newValue);
-    }
+    //[Command]
+    //public void CmdSendPlayerColor(Color newValue)
+    //{
+    //    SendPlayerColor(playerColor, newValue);
+    //}
 
-    public void SendPlayerColor(int oldValue, int newValue)
+    //public void SendPlayerColor(Color oldValue, Color newValue)
+    //{
+    //    if (isServer)
+    //    {
+    //        playerColor = newValue;
+    //    }
+    //    if (isClient && (oldValue != newValue))
+    //    {
+    //        UpdateColor(newValue);
+    //    }
+    //}
+
+    //private void UpdateColor(Color message)
+    //{
+    //    playerColor = message;
+    //}
+
+    // My Cosmetics
+    [Command(requiresAuthority = false)]
+    public void CmdSetPlayerColor()
+    {
+        List<Color> availibleColors = new List<Color>(playerColors);
+        foreach(PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            availibleColors.Remove(playerObjectController.playerColor);
+        }
+        int randomColorIndex = Random.Range(0, availibleColors.Count);
+        SetPlayerColor(playerColor, availibleColors[randomColorIndex]);
+    }
+    public void SetPlayerColor(Color oldValue, Color newValue)
     {
         if (isServer)
         {
@@ -181,10 +216,35 @@ public class PlayerObjectController : NetworkBehaviour
             UpdateColor(newValue);
         }
     }
-
-    private void UpdateColor(int message)
+    private void UpdateColor(Color message)
     {
         playerColor = message;
+        if (playerListItem)
+        {
+            playerListItem.playerColorImage.color = playerColor;
+        }
+        else
+        {
+            Invoke(nameof(Test), .25f);
+        }
+        
+    }
+    private void Test()
+    {
+        if (playerListItem)
+        {
+            playerListItem.playerColorImage.color = playerColor;
+        }
+        else
+        {
+            Invoke(nameof(Test), .25f);
+        }
+    }
+
+    // Starting Money
+    [Command(requiresAuthority = false)]
+    public void CmdSetStartingMoney() { 
+
     }
 
     // Player Money
@@ -209,6 +269,10 @@ public class PlayerObjectController : NetworkBehaviour
     private void UpdateMoney(float value)
     {
         playerMoney = value;
-        gamePlayerListItem.playerMoneyText.text = playerMoney.ToString();
+        if (gamePlayerListItem)
+        {
+            gamePlayerListItem.playerMoneyText.text = playerMoney.ToString();
+        }
+        
     }
 }

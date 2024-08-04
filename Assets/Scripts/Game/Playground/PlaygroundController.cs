@@ -63,7 +63,7 @@ public class PlaygroundController : NetworkBehaviour
             locationController.UpdateRentRate();
             factoryController.UpdateOwnerPlayer();
         }
-        locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
+        locationController.playerColorMaterial.color = newOwner.playerColor;
 
     }
 
@@ -101,7 +101,7 @@ public class PlaygroundController : NetworkBehaviour
         newOwner.ownedLocations.Add(locationController);
         locationController.UpdateRentRate();
         resourceController.UpdateOwnerPlayer();
-        locationController.playerColorMaterial.color = gameManager.playerColors[newOwner.playerColor].color;
+        locationController.playerColorMaterial.color = newOwner.playerColor;
 
     }
 

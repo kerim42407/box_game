@@ -12,9 +12,15 @@ public class PlayerListItem : MonoBehaviour
     public ulong playerSteamID;
     private bool avatarReceived;
 
+    public GameObject playerItemParent;
+    public GameObject inviteButton;
     public TextMeshProUGUI playerNameText;
     public RawImage playerIcon;
     public TextMeshProUGUI playerReadyText;
+    public GameObject hostIcon;
+    public Image playerColorImage;
+    public GameObject playerColorChangeButton;
+
     public bool ready;
 
     protected Callback<AvatarImageLoaded_t> imageLoaded;

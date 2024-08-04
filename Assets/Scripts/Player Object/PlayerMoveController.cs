@@ -9,13 +9,13 @@ public class PlayerMoveController : NetworkBehaviour
 
     // Cosmetics
     public MeshRenderer playerMesh;
-    public Material[] playerColors;
 
     [HideInInspector] public bool shouldMove;
     [HideInInspector] public int destinationIndex;
     [HideInInspector] public List<Transform> destinationTransforms;
     [HideInInspector] public Transform firstTransform;
     [HideInInspector] public float startTime;
+    [HideInInspector] public bool isEven;
     public float journeyTime = .1f;
 
     private PlayerObjectController playerObjectController;
@@ -460,6 +460,6 @@ public class PlayerMoveController : NetworkBehaviour
 
     public void PlayerCosmeticsSetup()
     {
-        playerMesh.material = playerColors[GetComponent<PlayerObjectController>().playerColor];
+        playerMesh.material.color = playerObjectController.playerColor;
     }
 }

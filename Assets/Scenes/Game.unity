@@ -982,7 +982,7 @@ MonoBehaviour:
   turnIndex: 0
   resourceBuyPrice: 20000
   resourceRentRate: 8000
-  startingPointIncome: 50000
+  startingPointIncome: 0
   baseFactoryPrice: 30000
   regularFactoryPriceCoef: 1
   bigFactoryPriceCoef: 1.2

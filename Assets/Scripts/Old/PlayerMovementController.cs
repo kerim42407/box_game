@@ -72,7 +72,7 @@ public class PlayerMovementController : NetworkBehaviour
     // Cosmetics
     public void PlayerCosmeticsSetup()
     {
-        playerMesh.material = playerColors[GetComponent<PlayerObjectController>().playerColor];
+        playerMesh.material.color = GetComponent<PlayerObjectController>().playerColor;
     }
 
     private void GetReferences()

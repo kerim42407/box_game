@@ -5,8 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Michsky.MUIP;
+using Mirror;
 
-public class LobbyController : MonoBehaviour
+public class LobbyController : NetworkBehaviour
 {
     public static LobbyController instance;
 
@@ -20,18 +22,27 @@ public class LobbyController : MonoBehaviour
 
     //
     public GameObject playerListContainer;
+    public PlayerObjectController localPlayerController;
+
+    [Header("Player Colors")]
+    public List<Color> playerColorList;
+
+    [Header("Sprites")]
+    public Sprite disabledButtonTexture;
+    public Sprite startGameButtonNormalTexture;
+    public ButtonManager startGameButton;
 
     // Other Data
     public ulong currentLobbyID;
     public bool playerItemCreated;
     private List<PlayerListItem> playerListItems = new List<PlayerListItem>();
-    public PlayerObjectController localPlayerController;
+    public ButtonManager readyButton;
+    public ButtonManager settingsButton;
 
-    // Ready
-    public Button startGameButton;
-    public TextMeshProUGUI readyButtonText;
-
-    //public int startingGameMoney;
+    [Header("Game Settings")]
+    public HorizontalSelector startingMoneySelector;
+    private int startingMoneyIndex = 1;
+    [SyncVar] public float startingMoney;
 
     // Manager
     private MyNetworkManager manager;
@@ -55,6 +66,13 @@ public class LobbyController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        startingMoneySelector.defaultIndex = startingMoneyIndex;
+        startingMoneySelector.SetupSelector();
+        startingMoney = float.Parse(startingMoneySelector.items[startingMoneyIndex].itemTitle);
+    }
+
     public void InviteFriendsUI()
     {
         SteamFriends.ActivateGameOverlayInviteDialog(new CSteamID(currentLobbyID));
@@ -69,11 +87,13 @@ public class LobbyController : MonoBehaviour
     {
         if (localPlayerController.ready)
         {
-            readyButtonText.text = "Not Ready";
+            readyButton.normalText.text = "Not Ready";
+            readyButton.highlightedText.text = "Not Ready";
         }
         else
         {
-            readyButtonText.text = "Ready";
+            readyButton.normalText.text = "Ready";
+            readyButton.highlightedText.text = "Ready";
         }
     }
 
@@ -97,16 +117,19 @@ public class LobbyController : MonoBehaviour
         {
             if (localPlayerController.playerIDNumber == 1)
             {
-                startGameButton.interactable = true;
+                startGameButton.isInteractable = true;
+                startGameButton.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = startGameButtonNormalTexture;
             }
             else
             {
-                startGameButton.interactable = false;
+                startGameButton.isInteractable = false;
+                startGameButton.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = disabledButtonTexture;
             }
         }
         else
         {
-            startGameButton.interactable = false;
+            startGameButton.isInteractable = false;
+            startGameButton.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = disabledButtonTexture;
         }
     }
 
@@ -142,6 +165,21 @@ public class LobbyController : MonoBehaviour
     {
         localPlayerObject = GameObject.Find("LocalGamePlayer");
         localPlayerController = localPlayerObject.GetComponent<PlayerObjectController>();
+        if(localPlayerController.playerLobbyIndex == 2)
+        {
+            readyButton.gameObject.SetActive(true);
+            startGameButton.gameObject.SetActive(true);
+            settingsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            readyButton.gameObject.SetActive(true);
+            startGameButton.gameObject.SetActive(false);
+            settingsButton.gameObject.SetActive(false);
+        }
+        PlayerListItem localPlayerListItem = playerListContainer.transform.GetChild(localPlayerController.playerLobbyIndex).GetComponent<PlayerListItem>();
+        localPlayerListItem.playerColorChangeButton.SetActive(true);
+        localPlayerListItem.playerColorChangeButton.GetComponent<ButtonManager>().onClick.AddListener(() => localPlayerController.CmdSetPlayerColor());
     }
 
     public void CreateHostPlayerItem()
@@ -158,45 +196,27 @@ public class LobbyController : MonoBehaviour
             newPlayerItemScript.connectionID = player.connectionID;
             newPlayerItemScript.playerSteamID = player.playerSteamID;
             newPlayerItemScript.ready = player.ready;
+            newPlayerItemScript.hostIcon.SetActive(true);
+            newPlayerItemScript.inviteButton.SetActive(false);
+
             newPlayerItemScript.SetPlayerValues();
 
             //newPlayerItem.transform.SetParent(playerListViewContent.transform);
             newPlayerItem.transform.localScale = Vector3.one;
 
             playerListItems.Add(newPlayerItemScript);
+            player.playerListItem = newPlayerItemScript;
         }
         playerItemCreated = true;
     }
 
     public void CreateClientPlayerItem()
     {
-        int index = 0;
         foreach (PlayerObjectController player in Manager.gamePlayers)
         {
             if (!playerListItems.Any(b => b.connectionID == player.connectionID))
             {
-                //GameObject newPlayerItem = Instantiate(playerListItemPrefab) as GameObject;
-                //PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
-                //if(player.playerLobbyIndex == 0)
-                //{
-                //    index = 2;
-                //}
-                //else if(player.playerIDNumber == 2)
-                //{
-                //    index = 0;
-                //}
-                //else if(player.playerIDNumber == 3)
-                //{
-                //    index = 1;
-                //}
-                //else if(player.playerIDNumber == 4)
-                //{
-                //    index = 3;
-                //}
-                //else if(player.playerIDNumber == 5)
-                //{
-                //    index = 4;
-                //}
+                
                 GameObject newPlayerItem = playerListContainer.transform.GetChild(player.playerLobbyIndex).gameObject;
                 PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
 
@@ -204,12 +224,29 @@ public class LobbyController : MonoBehaviour
                 newPlayerItemScript.connectionID = player.connectionID;
                 newPlayerItemScript.playerSteamID = player.playerSteamID;
                 newPlayerItemScript.ready = player.ready;
+                if(player.playerLobbyIndex == 2)
+                {
+                    newPlayerItemScript.hostIcon.SetActive(true);
+                }
+                else
+                {
+                    newPlayerItemScript.hostIcon.SetActive(false);
+                }
+                if (!newPlayerItemScript.playerItemParent.activeSelf)
+                {
+                    newPlayerItemScript.playerItemParent.SetActive(true);
+                }
+                if (newPlayerItemScript.inviteButton.activeSelf)
+                {
+                    newPlayerItemScript.inviteButton.SetActive(false);
+                }
                 newPlayerItemScript.SetPlayerValues();
 
                 //newPlayerItem.transform.SetParent(playerListViewContent.transform);
                 newPlayerItem.transform.localScale = Vector3.one;
 
                 playerListItems.Add(newPlayerItemScript);
+                player.playerListItem = newPlayerItemScript;
             }
             
             
@@ -266,21 +303,22 @@ public class LobbyController : MonoBehaviour
         GameObject _gameObject = objectToClear.gameObject;
         Destroy(objectToClear);
         PlayerListItem _playerListItem = _gameObject.AddComponent<PlayerListItem>();
-        _playerListItem.playerNameText = _gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        _playerListItem.playerReadyText = _gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        _playerListItem.playerIcon = _gameObject.transform.GetChild(3).GetComponent<RawImage>();
+        _playerListItem.playerItemParent = _gameObject.transform.GetChild(0).gameObject;
+        _playerListItem.playerNameText = _playerListItem.playerItemParent.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerReadyText = _playerListItem.playerItemParent.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerIcon = _playerListItem.playerItemParent.transform.GetChild(2).GetComponent<RawImage>();
+        _playerListItem.hostIcon = _playerListItem.playerItemParent.transform.GetChild(3).gameObject;
+        _playerListItem.inviteButton = _gameObject.transform.GetChild(1).gameObject;
+        _playerListItem.playerColorImage = _playerListItem.playerItemParent.transform.GetChild(4).GetComponent<Image>();
+        _playerListItem.playerColorChangeButton = _playerListItem.playerItemParent.transform.GetChild(5).gameObject;
+        _playerListItem.playerItemParent.SetActive(false);
+        _playerListItem.inviteButton.SetActive(true);
         _playerListItem.SetPlayerValues();
-
-        //objectToClear.playerIcon = null;
-        //objectToClear.playerName = null;
-        //objectToClear.ready = false;
-        ////objectToClear.playerSteamID = null;
-        //objectToClear.connectionID = null;
-        //objectToClear.SetPlayerValues();
     }
 
     public void StartGame(string sceneName)
     {
+        SetGameSettings();
         localPlayerController.CanStartGame(sceneName);
     }
 
@@ -292,7 +330,27 @@ public class LobbyController : MonoBehaviour
         }
         if (localPlayerController.isClient)
         {
-            Manager.StartClient();
+            Manager.StopClient();
         }
+    }
+
+    public void OnSettingsPanelOpen()
+    {
+        startingMoneySelector.index = startingMoneyIndex;
+        startingMoneySelector.UpdateUI();
+    }
+    public void OnSettingsPanelConfirm()
+    {
+        startingMoneyIndex = startingMoneySelector.index;
+        startingMoney = float.Parse(startingMoneySelector.items[startingMoneyIndex].itemTitle);
+    }
+
+    public void SetGameSettings()
+    {
+        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            playerObjectController.CmdUpdatePlayerMoney(startingMoney * 1000);
+        }
+        //Manager.startingMoney = startingMoney * 1000;
     }
 }
