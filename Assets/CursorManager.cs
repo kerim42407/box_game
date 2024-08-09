@@ -14,7 +14,7 @@ public class CursorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.SetCursor(normalCursorTexture, normalCursorHotspot, CursorMode.Auto);
     }
 
     // Update is called once per frame

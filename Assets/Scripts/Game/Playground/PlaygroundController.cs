@@ -99,6 +99,7 @@ public class PlaygroundController : NetworkBehaviour
 
         resourceController.ownerPlayer = newOwner;
         newOwner.ownedLocations.Add(locationController);
+        newOwner.ownedResources.Add(locationController);
         locationController.UpdateRentRate();
         resourceController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = newOwner.playerColor;
@@ -118,7 +119,7 @@ public class PlaygroundController : NetworkBehaviour
         if (locationController.factoryController)
         {
             FactoryController factoryController = locationController.factoryController;
-            
+
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
@@ -128,12 +129,40 @@ public class PlaygroundController : NetworkBehaviour
         else if (locationController.resourceController)
         {
             ResourceController resourceController = locationController.resourceController;
-            
+
             resourceController.ownerPlayer.ownedLocations.Remove(locationController);
+            resourceController.ownerPlayer.ownedResources.Remove(locationController);
             resourceController.ownerPlayer = null;
             locationController.UpdateRentRate();
             resourceController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = new Color(1, 0, 0);
+    }
+
+    // Set production type
+    [Command(requiresAuthority = false)]
+    public void CmdSetProductionType(int locationIndex, string productionType)
+    {
+        RpcSetProductionType(locationIndex, productionType);
+    }
+    [ClientRpc]
+    private void RpcSetProductionType(int locationIndex, string productionType)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        FactoryController factoryController = locationController.factoryController;
+        locationController.SetProductionType(productionType);
+    }
+
+    // Set productivity
+    [Command(requiresAuthority = false)]
+    public void CmdSetProductivity(int locationIndex, int playerIndex)
+    {
+        RpcSetProductivity(locationIndex, playerIndex);
+    }
+    [ClientRpc]
+    private void RpcSetProductivity(int locationIndex, int playerIndex)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        locationController.SetProductivity(gameManager.Manager.gamePlayers[playerIndex]);
     }
 }

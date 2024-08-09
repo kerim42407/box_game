@@ -24,6 +24,10 @@ public class LocationController : MonoBehaviour
 
     private TextMeshPro rentRateText;
 
+    [Header("Factory Variables")]
+    public float productivity;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,37 @@ public class LocationController : MonoBehaviour
 
     }
 
+    #region Productivity Functions
+    public float CheckResource(string productionType, PlayerObjectController playerObjectController)
+    {
+        if (playerObjectController.ownedResources.Count > 0)
+        {
+            foreach (LocationController locationController in playerObjectController.ownedResources)
+            {
+                if (locationController.productionType.ToString() == productionType)
+                {
+                    return playgroundController.gameManager.resourceProductivityCoef;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
+        return 0;
+    }
+    public void SetProductivity(PlayerObjectController playerObjectController)
+    {
+        productivity = (1 + CheckResource(productionType.ToString(), playerObjectController)) * 100;
+        UpdateRentRate();
+    }
+    //public int CalculateProductivity()
+    //{
+
+    //}
+    #endregion
+
+    #region Calculate Functions
     public float GetLocationBuyFromBankPrice()
     {
         if (factoryController)
@@ -81,14 +116,9 @@ public class LocationController : MonoBehaviour
         rentRate = GetLocationRentRate();
         rentRateText.text = $"{rentRate / 1000}K";
     }
+    #endregion
 
-    private void SetProductionType()
-    {
-        if (locationType == LocationType.RegularFactory || locationType == LocationType.BigFactory || locationType == LocationType.GoldenFactory)
-        {
-            factoryController = GetComponent<FactoryController>();
-        }
-    }
+    /// <summary> asd </summary>///
     private void CheckLocationType()
     {
         if (locationType == LocationType.Starting)
@@ -105,6 +135,7 @@ public class LocationController : MonoBehaviour
         }
         else if (locationType == LocationType.RegularFactory)
         {
+            productivity = 100;
             factoryController = GetComponent<FactoryController>();
             factoryController.factoryPriceCoef = playgroundController.gameManager.regularFactoryPriceCoef;
             factoryController.maxFactoryLevel = 3;
@@ -114,6 +145,7 @@ public class LocationController : MonoBehaviour
         }
         else if (locationType == LocationType.BigFactory)
         {
+            productivity = 100;
             factoryController = GetComponent<FactoryController>();
             factoryController.factoryPriceCoef = playgroundController.gameManager.bigFactoryPriceCoef;
             factoryController.maxFactoryLevel = 3;
@@ -123,6 +155,7 @@ public class LocationController : MonoBehaviour
         }
         else if (locationType == LocationType.GoldenFactory)
         {
+            productivity = 100;
             factoryController = GetComponent<FactoryController>();
             factoryController.factoryPriceCoef = playgroundController.gameManager.goldenFactoryPriceCoef;
             factoryController.maxFactoryLevel = 4;
@@ -288,6 +321,28 @@ public class LocationController : MonoBehaviour
         else
         {
             return new Vector3(75, 90, 0);
+        }
+    }
+    public void SetProductionType(string _productionType)
+    {
+        if(_productionType == "Clay")
+        {
+            productionType = ProductionType.Clay;
+        }
+        else if(_productionType == "Copper")
+        {
+            productionType = ProductionType.Copper;
+        }
+        else if (_productionType == "Iron")
+        {
+            productionType = ProductionType.Iron;
+        }
+        else if(_productionType == "Cotton") {
+        productionType= ProductionType.Cotton;
+        }
+        else
+        {
+            productionType = ProductionType.Coal;
         }
     }
 }

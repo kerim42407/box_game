@@ -31,7 +31,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // Game Variables
+    [Header("Game Variables")]
     public float resourceBuyPrice; // Resource location purchase price
     public float resourceRentRate;
     public float startingPointIncome;
@@ -42,6 +42,7 @@ public class GameManager : NetworkBehaviour
     public float goldenFactoryPriceCoef;
     public float[] factoryPriceCoefPerLevel;
 
+    public float resourceProductivityCoef;
     public float bonus;
 
     public TMP_InputField inputField;

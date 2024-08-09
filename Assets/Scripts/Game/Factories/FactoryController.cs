@@ -1,6 +1,3 @@
-using Mirror;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LocationController))]
@@ -42,7 +39,7 @@ public class FactoryController : MonoBehaviour
 
     public float CalculateSellToAnotherPrice(int _factoryLevel)
     {
-        return gameManager.baseFactoryPrice * gameManager.factoryPriceCoefPerLevel[_factoryLevel] * factoryPriceCoef * gameManager.bonus;
+        return gameManager.baseFactoryPrice * gameManager.factoryPriceCoefPerLevel[_factoryLevel] * factoryPriceCoef * (locationController.productivity / 100);
     }
 
     public float CalculateRentRate(int _factoryLevel)

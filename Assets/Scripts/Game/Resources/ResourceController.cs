@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourceController : MonoBehaviour
 {
     private GameManager gameManager;
-    private LocationController locationController;
+    [HideInInspector] public LocationController locationController;
     private LocationController.ProductionType productionType;
 
     public PlayerObjectController ownerPlayer;

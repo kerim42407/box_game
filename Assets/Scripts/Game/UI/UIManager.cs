@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     public GameObject resourceBuyPanelPrefab;
     public GameObject sellLocationsPanelPrefab;
 
+    [Header("Panel Frames")]
+    public Sprite normalFrame;
+    public Sprite goldenFrame;
+
     private void OnEnable()
     {
         Dice.OnDiceResult += SetText;

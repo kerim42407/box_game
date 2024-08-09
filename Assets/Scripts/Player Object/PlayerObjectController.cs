@@ -45,10 +45,10 @@ public class PlayerObjectController : NetworkBehaviour
     [HideInInspector] public PlaygroundController playgroundController;
     [HideInInspector] public PlayerMoveController playerMoveController;
     [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
-
-    public List<LocationController> ownedLocations = new();
-    public List<LocationController> locationsToBeSold = new();
-    public float locationsToBeSoldValue;
+    [HideInInspector] public List<LocationController> ownedLocations = new();
+    public List<LocationController> ownedResources = new();
+    [HideInInspector] public List<LocationController> locationsToBeSold = new();
+    [HideInInspector] public float locationsToBeSoldValue;
 
 
 
