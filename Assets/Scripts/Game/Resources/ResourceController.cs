@@ -32,7 +32,14 @@ public class ResourceController : MonoBehaviour
 
     public float CalculateRentRate()
     {
-        return gameManager.resourceRentRate;
+        if(ownerPlayer == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return gameManager.resourceRentRate;
+        }
     }
 
     public void UpdateOwnerPlayer()

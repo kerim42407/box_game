@@ -109,9 +109,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &2737384074158554814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,8 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &6681802609629571722
@@ -260,9 +260,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &8264620762482373688
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -393,9 +394,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &5145970073528740006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -527,9 +529,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &3844803863625562549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,8 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &509351738440279356
@@ -679,9 +681,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &6325940987192034774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
   rentRate: 0
 --- !u!64 &4333687230813653663
@@ -826,9 +830,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &8169450813093074543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1013,9 +1018,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &3461276291318439533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,8 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8208130894226847120
@@ -1165,9 +1170,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &39728688520617708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,8 +1188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5463720834878550208
@@ -1315,9 +1320,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &4858198857487650036
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1449,9 +1455,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &8882081124764081259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,8 +1473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &4855653539239812442
@@ -1601,9 +1607,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &8757591966712453675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1618,8 +1625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &3412380782912319677
@@ -1753,9 +1759,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &1535133555861832416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,8 +1777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &7647054024634706007
@@ -1958,9 +1964,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &4859093850451944824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1975,8 +1982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8681136780970967597
@@ -2108,9 +2114,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &2646475778156496582
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2292,6 +2299,11 @@ MonoBehaviour:
     type: 3}
   sellLocationTogglePrefab: {fileID: 4116634802473101548, guid: 2e52045e7ef0540448c2f90af543e2f6,
     type: 3}
+  locationInfoPanelPrefab: {fileID: 2428891164593262385, guid: 0374359ddc7e0f442935f4ca21072b80,
+    type: 3}
+  uiManager: {fileID: 0}
+  resources: []
+  goldenFactories: []
 --- !u!114 &1402665673119189410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,9 +2430,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &5989718252672223238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,8 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8922326296076631839
@@ -2570,9 +2582,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &1584855122932364420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2585,6 +2598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
   rentRate: 0
 --- !u!64 &4121557540823169694
@@ -2718,9 +2732,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &3591806682220721445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2733,6 +2748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
   rentRate: 0
 --- !u!64 &4147509759786492331
@@ -2866,9 +2882,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &162952816908780191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2881,6 +2898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
   rentRate: 0
 --- !u!64 &4594408062618621849
@@ -3014,9 +3032,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &5013655025197846155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3031,8 +3050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5460596564771495503
@@ -3166,9 +3184,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &65127510541547429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3183,8 +3202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5037638385399893082
@@ -3318,9 +3336,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &6468124411187228165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,8 +3354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &6086868849818706936
@@ -3468,9 +3486,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &70575681830906911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3602,9 +3621,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &8314426687912948098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3619,8 +3639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8310941445137257729
@@ -3754,9 +3773,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &794212926364861256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3771,8 +3791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5344005440276834711
@@ -3906,9 +3925,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &241133484168615875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3923,8 +3943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8470599965215481870
@@ -4058,9 +4077,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &4719290861907900374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4075,8 +4095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &1913321203610979530
@@ -4209,9 +4228,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &2525602759602697234
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4343,9 +4363,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &4222882246299656073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4360,8 +4381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &3363077883157204781
@@ -4495,9 +4515,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &4528193425239096138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4512,8 +4533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &2851514808907068909
@@ -4646,9 +4666,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &3035396011489984158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4780,9 +4801,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &7576874487808228920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4797,8 +4819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &4228420233989366519
@@ -4932,9 +4953,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &5673925605395647624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4949,8 +4971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &4469774360910327452
@@ -5190,9 +5211,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &1332868618281906589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5207,8 +5229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5179839409419635302
@@ -5342,9 +5363,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &6996344514506718562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5359,8 +5381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &3993239049645604652
@@ -5545,9 +5566,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &1781669195930281439
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5679,9 +5701,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &8142456725253918666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5694,6 +5717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
   rentRate: 0
 --- !u!64 &1689955451097414355
@@ -5880,9 +5904,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &6704138156752880648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5897,8 +5922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8085720086871790488
@@ -6032,9 +6056,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &1435526749660435203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6049,8 +6074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &5307111933270139063
@@ -6184,9 +6208,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!114 &3585644094668551650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6201,8 +6226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationController: {fileID: 0}
   ownerPlayer: {fileID: 0}
-  priceMultiplier: 0
-  rentRate: 0
+  factoryPriceCoef: 0
   factoryLevel: 0
   maxFactoryLevel: 0
 --- !u!64 &8228904082840993351
@@ -6387,9 +6411,10 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationValue: 0
+  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  productivity: 0
 --- !u!64 &8805232486957172691
 MeshCollider:
   m_ObjectHideFlags: 0

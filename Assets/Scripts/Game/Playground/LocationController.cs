@@ -19,13 +19,21 @@ public class LocationController : MonoBehaviour
     public bool isBuyable;
 
     [HideInInspector] public GameObject sellLocationToggle;
+
     public float rentRate;
     public PlayerObjectController ownerPlayer;
 
     private TextMeshPro rentRateText;
 
+    [Header("References")]
+    [HideInInspector] public GameObject locationInfoPanel;
+
     [Header("Factory Variables")]
     public float productivity;
+
+    private Vector2 positionOnScreen;
+
+
 
 
     // Start is called before the first frame update
@@ -38,7 +46,7 @@ public class LocationController : MonoBehaviour
             isBuyable = true;
         }
         CheckLocationType();
-
+        positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     // Update is called once per frame
@@ -50,31 +58,26 @@ public class LocationController : MonoBehaviour
     #region Productivity Functions
     public float CheckResource(string productionType, PlayerObjectController playerObjectController)
     {
-        if (playerObjectController.ownedResources.Count > 0)
+        foreach (LocationController locationController1 in playgroundController.resources)
         {
-            foreach (LocationController locationController in playerObjectController.ownedResources)
+            if (locationController1.productionType.ToString() == productionType)
             {
-                if (locationController.productionType.ToString() == productionType)
+                if (locationController1.ownerPlayer == null)
+                {
+                    return 0;
+                }
+                else if (locationController1.ownerPlayer == playerObjectController)
                 {
                     return playgroundController.gameManager.resourceProductivityCoef;
                 }
+                else
+                {
+                    return -playgroundController.gameManager.resourceProductivityCoef;
+                }
             }
-        }
-        else
-        {
-            return 0;
         }
         return 0;
     }
-    public void SetProductivity(PlayerObjectController playerObjectController)
-    {
-        productivity = (1 + CheckResource(productionType.ToString(), playerObjectController)) * 100;
-        UpdateRentRate();
-    }
-    //public int CalculateProductivity()
-    //{
-
-    //}
     #endregion
 
     #region Calculate Functions
@@ -114,7 +117,15 @@ public class LocationController : MonoBehaviour
     public void UpdateRentRate()
     {
         rentRate = GetLocationRentRate();
-        rentRateText.text = $"{rentRate / 1000}K";
+        if (rentRate != 0)
+        {
+            rentRateText.text = $"{rentRate / 1000}K";
+        }
+        else
+        {
+            rentRateText.text = "";
+        }
+
     }
     #endregion
 
@@ -142,6 +153,8 @@ public class LocationController : MonoBehaviour
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
+            //SpawnLocationInfoPanelPrefab();
         }
         else if (locationType == LocationType.BigFactory)
         {
@@ -152,20 +165,26 @@ public class LocationController : MonoBehaviour
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
+            //SpawnLocationInfoPanelPrefab();
         }
         else if (locationType == LocationType.GoldenFactory)
         {
             productivity = 100;
             factoryController = GetComponent<FactoryController>();
+            playgroundController.goldenFactories.Add(this);
             factoryController.factoryPriceCoef = playgroundController.gameManager.goldenFactoryPriceCoef;
             factoryController.maxFactoryLevel = 4;
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
+            //SpawnLocationInfoPanelPrefab();
         }
         else if (locationType == LocationType.Resource)
         {
             resourceController = GetComponent<ResourceController>();
+            playgroundController.resources.Add(this);
             Instantiate(SpawnResource(), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
@@ -272,7 +291,7 @@ public class LocationController : MonoBehaviour
             locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
             locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
         }
-        
+
         locationNameText.transform.localEulerAngles = GetLocationNameTextRotation();
         locationNameText.GetComponent<TextMeshPro>().text = locationName;
     }
@@ -280,7 +299,7 @@ public class LocationController : MonoBehaviour
     {
         if (productionType == ProductionType.Clay)
         {
-            return new Vector3(90,90,0);
+            return new Vector3(90, 90, 0);
         }
         else if (productionType == ProductionType.Copper)
         {
@@ -325,11 +344,11 @@ public class LocationController : MonoBehaviour
     }
     public void SetProductionType(string _productionType)
     {
-        if(_productionType == "Clay")
+        if (_productionType == "Clay")
         {
             productionType = ProductionType.Clay;
         }
-        else if(_productionType == "Copper")
+        else if (_productionType == "Copper")
         {
             productionType = ProductionType.Copper;
         }
@@ -337,12 +356,34 @@ public class LocationController : MonoBehaviour
         {
             productionType = ProductionType.Iron;
         }
-        else if(_productionType == "Cotton") {
-        productionType= ProductionType.Cotton;
+        else if (_productionType == "Cotton")
+        {
+            productionType = ProductionType.Cotton;
         }
         else
         {
             productionType = ProductionType.Coal;
         }
+    }
+
+    void OnMouseOver()
+    {
+        if (locationInfoPanel)
+        {
+            LocationInfoPanelController locationInfoPanelController = locationInfoPanel.GetComponent<LocationInfoPanelController>();
+            locationInfoPanel.transform.position = positionOnScreen;
+            locationInfoPanelController.locationNameText.text = locationName;
+            locationInfoPanelController.productivityText.text = $"%{productivity}";
+            locationInfoPanel.SetActive(true);
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (locationInfoPanel)
+        {
+            locationInfoPanel.SetActive(false);
+        }
+
     }
 }

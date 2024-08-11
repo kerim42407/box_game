@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     private int diceOneResult, diceTwoResult;
     private bool diceOne, diceTwo;
 
+    [Header("Panel Prefabs")]
     public GameObject factoryBuyPanelPrefab;
     public GameObject factoryUpgradePanelPrefab;
     public GameObject resourceBuyPanelPrefab;
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
     [Header("Panel Frames")]
     public Sprite normalFrame;
     public Sprite goldenFrame;
+
+    [Header("References")]
+    public GameObject infoCanvas;
+    public GameObject locationInfoPanel;
 
     private void OnEnable()
     {

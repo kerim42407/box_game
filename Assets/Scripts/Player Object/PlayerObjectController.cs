@@ -46,7 +46,8 @@ public class PlayerObjectController : NetworkBehaviour
     [HideInInspector] public PlayerMoveController playerMoveController;
     [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
     [HideInInspector] public List<LocationController> ownedLocations = new();
-    public List<LocationController> ownedResources = new();
+    [HideInInspector] public List<LocationController> ownedResources = new();
+    //[HideInInspector] public List<LocationController> ownedGoldenFactories = new();
     [HideInInspector] public List<LocationController> locationsToBeSold = new();
     [HideInInspector] public float locationsToBeSoldValue;
 
@@ -123,7 +124,11 @@ public class PlayerObjectController : NetworkBehaviour
         Manager.gamePlayers.Add(this);
         LobbyController.instance.UpdateLobbyName();
         LobbyController.instance.UpdatePlayerList();
-        CmdSetPlayerColor();
+        if (isLocalPlayer)
+        {
+            CmdSetPlayerColor();
+        }
+        
     }
 
     public override void OnStopClient()

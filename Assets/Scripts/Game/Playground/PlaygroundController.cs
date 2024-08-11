@@ -20,10 +20,22 @@ public class PlaygroundController : NetworkBehaviour
     public GameObject locationNameTextPrefab;
     public GameObject sellLocationTogglePrefab;
 
+    [Header("Prefabs")]
+    public GameObject locationInfoPanelPrefab;
+
+    public UIManager uiManager;
+
+    [Header("Location Lists")]
+    public List<LocationController> resources;
+    public List<LocationController> goldenFactories;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         //GetComponent<NetworkIdentity>().AssignClientAuthority(GameObject.Find("LocalGamePlayer").GetComponent<PlayerObjectController>().connectionToClient);
     }
 
@@ -33,15 +45,15 @@ public class PlaygroundController : NetworkBehaviour
 
     }
 
-    // Buy Factory
+    #region Buy Factory Functions
     [Command(requiresAuthority = false)]
-    public void CmdBuyFactory(int locationIndex, PlayerObjectController newOwner)
+    public void CmdBuyFactory(int locationIndex, PlayerObjectController newOwner, string newProductionType)
     {
-        RpcBuyFactory(locationIndex, newOwner);
+        RpcBuyFactory(locationIndex, newOwner, newProductionType);
     }
 
     [ClientRpc]
-    private void RpcBuyFactory(int locationIndex, PlayerObjectController newOwner)
+    private void RpcBuyFactory(int locationIndex, PlayerObjectController newOwner, string newProductionType)
     {
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
@@ -56,18 +68,47 @@ public class PlaygroundController : NetworkBehaviour
         factoryController.ownerPlayer = newOwner;
         newOwner.ownedLocations.Add(locationController);
 
+        // Set production type if golden factory
+        if (locationController.locationType == LocationController.LocationType.GoldenFactory)
+        {
+            locationController.SetProductionType(newProductionType);
+            foreach (LocationController locationController1 in resources)
+            {
+                if (locationController1.productionType == locationController.productionType)
+                {
+                    if (!locationController1.ownerPlayer)
+                    {
+                        Debug.Log(locationController1 + " has no owner");
+                    }
+                    else
+                    {
+                        if (locationController1.ownerPlayer == newOwner)
+                        {
+                            locationController.productivity += gameManager.resourceProductivityCoef * 100;
+                        }
+                        else
+                        {
+                            locationController.productivity -= gameManager.resourceProductivityCoef * 100;
+                        }
+                    }
+
+                }
+            }
+        }
+
         // If purchasing the factory for the first time, upgrade to level 1
         if (factoryController.factoryLevel == 0)
         {
             factoryController.factoryLevel = 1;
-            locationController.UpdateRentRate();
-            factoryController.UpdateOwnerPlayer();
         }
+
+        locationController.UpdateRentRate();
+        factoryController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = newOwner.playerColor;
-
     }
+    #endregion
 
-    // Upgrade Factory
+    #region Upgrade Factory Functions
     [Command(requiresAuthority = false)]
     public void CmdUpgradeFactory(int locationIndex)
     {
@@ -83,8 +124,9 @@ public class PlaygroundController : NetworkBehaviour
         factoryController.factoryLevel++;
         locationController.UpdateRentRate();
     }
+    #endregion
 
-    // Buy Resource
+    #region Buy Resource Functions
     [Command(requiresAuthority = false)]
     public void CmdBuyResource(int locationIndex, PlayerObjectController newOwner)
     {
@@ -100,13 +142,37 @@ public class PlaygroundController : NetworkBehaviour
         resourceController.ownerPlayer = newOwner;
         newOwner.ownedLocations.Add(locationController);
         newOwner.ownedResources.Add(locationController);
+        foreach (LocationController locationController1 in goldenFactories)
+        {
+            if (locationController1.productionType == locationController.productionType)
+            {
+                if (!locationController1.ownerPlayer)
+                {
+                    Debug.Log(locationController1 + " has no owner");
+                }
+                else
+                {
+                    if (locationController1.ownerPlayer == newOwner)
+                    {
+                        locationController1.productivity += gameManager.resourceProductivityCoef * 100;
+                        locationController1.UpdateRentRate();
+                    }
+                    else
+                    {
+                        locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
+                        locationController1.UpdateRentRate();
+                    }
+                }
+            }
+        }
         locationController.UpdateRentRate();
         resourceController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = newOwner.playerColor;
 
     }
+    #endregion
 
-    // Sell Locations To The Bank
+    #region Sell Location To The Bank Functions
     [Command(requiresAuthority = false)]
     public void CmdSellLocationToTheBank(int locationIndex, PlayerObjectController owner)
     {
@@ -121,6 +187,7 @@ public class PlaygroundController : NetworkBehaviour
             FactoryController factoryController = locationController.factoryController;
 
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
+            locationController.productivity = 100;
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
             locationController.UpdateRentRate();
@@ -132,37 +199,35 @@ public class PlaygroundController : NetworkBehaviour
 
             resourceController.ownerPlayer.ownedLocations.Remove(locationController);
             resourceController.ownerPlayer.ownedResources.Remove(locationController);
+            foreach (LocationController locationController1 in goldenFactories)
+            {
+                if (locationController1.productionType == locationController.productionType)
+                {
+                    if (!locationController1.ownerPlayer)
+                    {
+                        Debug.Log(locationController1 + " has no owner");
+                    }
+                    else
+                    {
+                        if (locationController1.ownerPlayer == owner)
+                        {
+                            locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
+                            locationController1.UpdateRentRate();
+                        }
+                        else
+                        {
+                            locationController1.productivity += gameManager.resourceProductivityCoef * 100;
+                            locationController1.UpdateRentRate();
+                        }
+                    }
+                }
+            }
+
             resourceController.ownerPlayer = null;
             locationController.UpdateRentRate();
             resourceController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = new Color(1, 0, 0);
     }
-
-    // Set production type
-    [Command(requiresAuthority = false)]
-    public void CmdSetProductionType(int locationIndex, string productionType)
-    {
-        RpcSetProductionType(locationIndex, productionType);
-    }
-    [ClientRpc]
-    private void RpcSetProductionType(int locationIndex, string productionType)
-    {
-        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
-        FactoryController factoryController = locationController.factoryController;
-        locationController.SetProductionType(productionType);
-    }
-
-    // Set productivity
-    [Command(requiresAuthority = false)]
-    public void CmdSetProductivity(int locationIndex, int playerIndex)
-    {
-        RpcSetProductivity(locationIndex, playerIndex);
-    }
-    [ClientRpc]
-    private void RpcSetProductivity(int locationIndex, int playerIndex)
-    {
-        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
-        locationController.SetProductivity(gameManager.Manager.gamePlayers[playerIndex]);
-    }
+    #endregion
 }

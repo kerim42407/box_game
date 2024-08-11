@@ -241,7 +241,7 @@ public class PlayerMoveController : NetworkBehaviour
         GameObject factoryBuyPanel = Instantiate(uiManager.factoryBuyPanelPrefab, uiManager.mainCanvas.transform);
         FactoryBuyPanelData factoryBuyPanelData = factoryBuyPanel.GetComponent<FactoryBuyPanelData>();
 
-        // Set panel data
+        // Set window frame
         if (factoryController.locationController.locationType == LocationController.LocationType.GoldenFactory)
         {
             factoryBuyPanelData.windowFrame.sprite = uiManager.goldenFrame;
@@ -250,9 +250,22 @@ public class PlayerMoveController : NetworkBehaviour
         {
             factoryBuyPanelData.windowFrame.sprite = uiManager.normalFrame;
         }
+
+        // Set location name text
         factoryBuyPanelData.locationNameText.text = locationName;
 
-        factoryBuyPanelData.factoryLevelText.text = factoryController.factoryLevel.ToString();
+        // Set factory level text
+        if(factoryController.factoryLevel == 0)
+        {
+            factoryBuyPanelData.factoryLevelText.text = "1";
+        }
+        else
+        {
+            factoryBuyPanelData.factoryLevelText.text = factoryController.factoryLevel.ToString();
+        }
+
+        #region Golden Factory Functions
+        // Set golden factory functions
         if (factoryController.locationController.locationType == LocationController.LocationType.GoldenFactory)
         {
             factoryBuyPanelData.previousButton.gameObject.SetActive(true);
@@ -300,10 +313,14 @@ public class PlayerMoveController : NetworkBehaviour
             factoryBuyPanelData.previousButton.gameObject.SetActive(false);
             factoryBuyPanelData.nextButton.gameObject.SetActive(false);
             factoryBuyPanelData.productionTypeText.text = factoryController.locationController.productionType.ToString();
-            factoryBuyPanelData.productivityText.text = factoryController.locationController.productivity.ToString();
+            factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity}";
         }
-        
+        #endregion
+
+        // Set buy price text
         factoryBuyPanelData.buyPriceText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", buyPrice);
+
+        // Set rent rate text
         if (factoryController.factoryLevel == 0)
         {
             factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRate(1));
@@ -312,6 +329,8 @@ public class PlayerMoveController : NetworkBehaviour
         {
             factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRate(factoryController.factoryLevel));
         }
+
+        // Set owner player text
         if (factoryController.ownerPlayer)
         {
             factoryBuyPanelData.ownerNameText.text = factoryController.ownerPlayer.playerName;
@@ -330,16 +349,7 @@ public class PlayerMoveController : NetworkBehaviour
             {
                 factoryController.ownerPlayer.CmdUpdatePlayerMoney(factoryController.ownerPlayer.playerMoney + buyPrice);
             }
-            playgroundController.CmdBuyFactory(playerObjectController.playerLocation, playerObjectController);
-
-            // Golden factory functions
-            if(factoryController.locationController.locationType == LocationController.LocationType.GoldenFactory)
-            {
-                playgroundController.CmdSetProductionType(playerObjectController.playerLocation, factoryBuyPanelData.productionTypeText.text);
-                playgroundController.CmdSetProductivity(playerObjectController.playerLocation, playerObjectController.gameManager.turnIndex);
-                //factoryController.locationController.SetProductionType(factoryBuyPanelData.productionTypeText.text);
-                //factoryController.locationController.SetProductivity(playerObjectController);
-            }
+            playgroundController.CmdBuyFactory(playerObjectController.playerLocation, playerObjectController, factoryBuyPanelData.productionType[factoryBuyPanelData.productionTypeIndex]);
             playerObjectController.gameManager.CmdUpdateTurnIndex();
             Destroy(factoryBuyPanel);
         });
@@ -362,7 +372,7 @@ public class PlayerMoveController : NetworkBehaviour
         GameObject factoryUpgradePanel = Instantiate(uiManager.factoryUpgradePanelPrefab, uiManager.mainCanvas.transform);
         FactoryUpgradePanelData factoryUpgradePanelData = factoryUpgradePanel.GetComponent<FactoryUpgradePanelData>();
 
-        // Set panel data
+        // Set window frame
         if (factoryController.locationController.locationType == LocationController.LocationType.GoldenFactory)
         {
             factoryUpgradePanelData.windowFrame.sprite = uiManager.goldenFrame;
@@ -371,12 +381,24 @@ public class PlayerMoveController : NetworkBehaviour
         {
             factoryUpgradePanelData.windowFrame.sprite = uiManager.normalFrame;
         }
+
+        // Set location name text
         factoryUpgradePanelData.locationNameText.text = locationName;
-        factoryUpgradePanelData.productionTypeText.text = factoryController.locationController.productionType.ToString();
+
+        // Set factory level text
         factoryUpgradePanelData.factoryLevelText.text = factoryController.factoryLevel.ToString();
-        factoryUpgradePanelData.productivityText.text = factoryController.locationController.productivity.ToString();
+
+        // Set production type text
+        factoryUpgradePanelData.productionTypeText.text = factoryController.locationController.productionType.ToString();
+
+        // Set productivity text
+        factoryUpgradePanelData.productivityText.text = $"%{factoryController.locationController.productivity}";
+
+        // Set upgrade price text
         factoryUpgradePanelData.upgradePriceHeader.text = $"Upgrade Price For Level {factoryController.factoryLevel + 1}";
         factoryUpgradePanelData.upgradePriceText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", upgradePrice);
+
+        // Set rent rate text
         factoryUpgradePanelData.currentRentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRate(factoryController.factoryLevel));
         factoryUpgradePanelData.nextRentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRate(factoryController.factoryLevel + 1));
 
@@ -411,7 +433,7 @@ public class PlayerMoveController : NetworkBehaviour
         resourceBuyPanelData.locationNameText.text = locationName;
         resourceBuyPanelData.productionTypeText.text = resourceController.locationController.productionType.ToString();
         resourceBuyPanelData.buyPriceText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", buyPrice);
-        resourceBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", resourceController.CalculateRentRate());
+        resourceBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", playerObjectController.gameManager.resourceRentRate);
 
         //Add listener to buy button
         resourceBuyPanelData.buyButton.onClick.AddListener(() =>
