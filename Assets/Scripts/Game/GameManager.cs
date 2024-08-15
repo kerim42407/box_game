@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
+    [Header("References")]
     public GameObject playgroundPrefab;
-
-
+    public GameObject canvas;
+    public PlayerObjectController localPlayerController;
     public GameObject gamePlayerListPanel;
     public GameObject gamePlayerListItemPrefab;
-    public PlaygroundController playgroundController;
+    [HideInInspector]public PlaygroundController playgroundController;
     public UIManager uiManager;
     [HideInInspector] public Material[] playerColors;
 
@@ -45,6 +46,12 @@ public class GameManager : NetworkBehaviour
     public float resourceProductivityCoef;
     public float bonus;
 
+    [Header("Effects")]
+    public EventBase resourcePositiveEvent;
+    public EventBase resourceNegativeEvent;
+
+
+    [Header("Debug References")]
     public TMP_InputField inputField;
     public GameObject customDiceButton;
 
@@ -118,6 +125,11 @@ public class GameManager : NetworkBehaviour
     public void CustomDiceResult(int result)
     {
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(int.Parse(inputField.text));
+    }
+
+    public void Test()
+    {
+        Manager.gamePlayers[turnIndex].playerMoveController.Test();
     }
 
     private void InstantiateGamePlayerListItems()

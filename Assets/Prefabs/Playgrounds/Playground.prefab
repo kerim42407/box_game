@@ -109,10 +109,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &2737384074158554814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,10 +262,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &8264620762482373688
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -394,10 +398,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &5145970073528740006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -529,10 +535,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &3844803863625562549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,10 +689,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &6325940987192034774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,10 +840,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &8169450813093074543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1018,10 +1030,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &3461276291318439533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,10 +1184,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &39728688520617708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,10 +1336,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &4858198857487650036
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1455,10 +1473,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &8882081124764081259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,10 +1627,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &8757591966712453675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1759,10 +1781,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &1535133555861832416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1964,10 +1988,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &4859093850451944824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,10 +2140,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &2646475778156496582
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2297,9 +2325,9 @@ MonoBehaviour:
     type: 3}
   locationNameTextPrefab: {fileID: 3297118233491189248, guid: 9ce5756c2c15b60478c050a5d73195ff,
     type: 3}
-  sellLocationTogglePrefab: {fileID: 4116634802473101548, guid: 2e52045e7ef0540448c2f90af543e2f6,
-    type: 3}
   locationInfoPanelPrefab: {fileID: 2428891164593262385, guid: 0374359ddc7e0f442935f4ca21072b80,
+    type: 3}
+  sellLocationInfoPanelPrefab: {fileID: 564552939348068716, guid: 4f417eb31603d1348a528a6237428608,
     type: 3}
   uiManager: {fileID: 0}
   resources: []
@@ -2430,10 +2458,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &5989718252672223238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2582,10 +2612,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &1584855122932364420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,10 +2764,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &3591806682220721445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2882,10 +2916,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &162952816908780191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,10 +3068,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &5013655025197846155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3184,10 +3222,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &65127510541547429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3336,10 +3376,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &6468124411187228165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3486,10 +3528,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &70575681830906911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3621,10 +3665,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &8314426687912948098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3773,10 +3819,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &794212926364861256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3925,10 +3973,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &241133484168615875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4077,10 +4127,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &4719290861907900374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4228,10 +4280,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &2525602759602697234
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4363,10 +4417,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &4222882246299656073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4515,10 +4571,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &4528193425239096138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4666,10 +4724,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &3035396011489984158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4801,10 +4861,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &7576874487808228920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4953,10 +5015,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &5673925605395647624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5211,10 +5275,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &1332868618281906589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5363,10 +5429,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &6996344514506718562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5566,10 +5634,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &1781669195930281439
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5701,10 +5771,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &8142456725253918666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5904,10 +5976,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &6704138156752880648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6056,10 +6130,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &1435526749660435203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6208,10 +6284,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!114 &3585644094668551650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6411,10 +6489,12 @@ MonoBehaviour:
   resourceController: {fileID: 0}
   isBuyable: 0
   sellLocationToggle: {fileID: 0}
-  locationInfoPanelController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
   productivity: 0
+  events: []
+  positionOnScreen: {x: 0, y: 0}
 --- !u!64 &8805232486957172691
 MeshCollider:
   m_ObjectHideFlags: 0

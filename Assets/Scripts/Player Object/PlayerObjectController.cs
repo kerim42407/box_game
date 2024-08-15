@@ -73,6 +73,10 @@ public class PlayerObjectController : NetworkBehaviour
                 if (GameObject.Find("Game Manager"))
                 {
                     gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+                    if (isLocalPlayer)
+                    {
+                        gameManager.localPlayerController = this;
+                    }
                 }
             }
             if (!playerMoveController.didCosmetic)

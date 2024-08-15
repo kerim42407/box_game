@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,10 +17,6 @@ public class LocationController : MonoBehaviour
     public ResourceController resourceController;
     private PlaygroundController playgroundController;
 
-    public bool isBuyable;
-
-    [HideInInspector] public GameObject sellLocationToggle;
-
     public float rentRate;
     public PlayerObjectController ownerPlayer;
 
@@ -31,10 +28,10 @@ public class LocationController : MonoBehaviour
     [Header("Factory Variables")]
     public float productivity;
 
-    private Vector2 positionOnScreen;
+    [Header("Events")]
+    public List<EventBase> events;
 
-
-
+    [HideInInspector] public SellLocationInfoPanelData sellLocationInfoPanelData;
 
     // Start is called before the first frame update
     void Start()
@@ -43,10 +40,8 @@ public class LocationController : MonoBehaviour
         if (locationType == LocationType.RegularFactory || locationType == LocationType.BigFactory || locationType == LocationType.GoldenFactory || locationType == LocationType.Resource)
         {
             playerColorMaterial = GetComponent<MeshRenderer>().materials[1];
-            isBuyable = true;
         }
         CheckLocationType();
-        positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     // Update is called once per frame
@@ -368,12 +363,35 @@ public class LocationController : MonoBehaviour
 
     void OnMouseOver()
     {
-        if (locationInfoPanel)
+        if (locationInfoPanel && !playgroundController.gameManager.localPlayerController.canSell)
         {
-            LocationInfoPanelController locationInfoPanelController = locationInfoPanel.GetComponent<LocationInfoPanelController>();
+            Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
+            LocationInfoPanelData locationInfoPanelData = locationInfoPanel.GetComponent<LocationInfoPanelData>();
             locationInfoPanel.transform.position = positionOnScreen;
-            locationInfoPanelController.locationNameText.text = locationName;
-            locationInfoPanelController.productivityText.text = $"%{productivity}";
+            locationInfoPanelData.locationNameText.text = locationName;
+            locationInfoPanelData.productivityText.text = $"%{productivity}";
+            if(locationInfoPanelData.eventContainer.transform.childCount > 0)
+            {
+                foreach(Transform transform in locationInfoPanelData.eventContainer.transform)
+                {
+                    Destroy(transform.gameObject);
+                }
+            }
+            foreach(EventBase eventBase in events)
+            {
+                if(eventBase.eventType == EventType.Positive)
+                {
+                    EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                    eventPanelData.productivityText.text = $"{eventBase.value}";
+                    eventPanelData.eventNameText.text = eventBase.eventName;
+                }
+                else if(eventBase.eventType == EventType.Negative)
+                {
+                    EventPanelData eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                    eventPanelData.productivityText.text = $"{eventBase.value}";
+                    eventPanelData.eventNameText.text = eventBase.eventName;
+                }
+            }
             locationInfoPanel.SetActive(true);
         }
     }

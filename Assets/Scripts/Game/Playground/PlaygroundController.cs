@@ -1,5 +1,6 @@
 using Mirror;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlaygroundController : NetworkBehaviour
@@ -18,10 +19,10 @@ public class PlaygroundController : NetworkBehaviour
     public GameObject coalResourcePrefab;
     public GameObject rentRateTextPrefab;
     public GameObject locationNameTextPrefab;
-    public GameObject sellLocationTogglePrefab;
 
     [Header("Prefabs")]
     public GameObject locationInfoPanelPrefab;
+    public GameObject sellLocationInfoPanelPrefab;
 
     public UIManager uiManager;
 
@@ -37,12 +38,6 @@ public class PlaygroundController : NetworkBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         //GetComponent<NetworkIdentity>().AssignClientAuthority(GameObject.Find("LocalGamePlayer").GetComponent<PlayerObjectController>().connectionToClient);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     #region Buy Factory Functions
@@ -78,17 +73,19 @@ public class PlaygroundController : NetworkBehaviour
                 {
                     if (!locationController1.ownerPlayer)
                     {
-                        Debug.Log(locationController1 + " has no owner");
+
                     }
                     else
                     {
                         if (locationController1.ownerPlayer == newOwner)
                         {
-                            locationController.productivity += gameManager.resourceProductivityCoef * 100;
+                            gameManager.resourcePositiveEvent.ApplyEvent(locationController);
+                            //locationController.productivity += gameManager.resourceProductivityCoef * 100;
                         }
                         else
                         {
-                            locationController.productivity -= gameManager.resourceProductivityCoef * 100;
+                            gameManager.resourceNegativeEvent.ApplyEvent(locationController);
+                            //locationController.productivity -= gameManager.resourceProductivityCoef * 100;
                         }
                     }
 
@@ -148,18 +145,18 @@ public class PlaygroundController : NetworkBehaviour
             {
                 if (!locationController1.ownerPlayer)
                 {
-                    Debug.Log(locationController1 + " has no owner");
+
                 }
                 else
                 {
                     if (locationController1.ownerPlayer == newOwner)
                     {
-                        locationController1.productivity += gameManager.resourceProductivityCoef * 100;
+                        gameManager.resourcePositiveEvent.ApplyEvent(locationController1);
                         locationController1.UpdateRentRate();
                     }
                     else
                     {
-                        locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
+                        gameManager.resourceNegativeEvent.ApplyEvent(locationController1);
                         locationController1.UpdateRentRate();
                     }
                 }
@@ -187,9 +184,14 @@ public class PlaygroundController : NetworkBehaviour
             FactoryController factoryController = locationController.factoryController;
 
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
-            locationController.productivity = 100;
+            //locationController.productivity = 100;
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
+            foreach(EventBase eventBase in locationController.events.ToList())
+            {
+                Debug.Log(eventBase.eventName);
+                eventBase.RemoveEvent(locationController);
+            }
             locationController.UpdateRentRate();
             factoryController.UpdateOwnerPlayer();
         }
@@ -205,18 +207,20 @@ public class PlaygroundController : NetworkBehaviour
                 {
                     if (!locationController1.ownerPlayer)
                     {
-                        Debug.Log(locationController1 + " has no owner");
+
                     }
                     else
                     {
                         if (locationController1.ownerPlayer == owner)
                         {
-                            locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
+                            //locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
+                            gameManager.resourcePositiveEvent.RemoveEvent(locationController1);
                             locationController1.UpdateRentRate();
                         }
                         else
                         {
-                            locationController1.productivity += gameManager.resourceProductivityCoef * 100;
+                            //locationController1.productivity += gameManager.resourceProductivityCoef * 100;
+                            gameManager.resourceNegativeEvent.RemoveEvent(locationController1);
                             locationController1.UpdateRentRate();
                         }
                     }
