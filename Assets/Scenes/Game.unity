@@ -980,6 +980,8 @@ MonoBehaviour:
     type: 2}
   resourceNegativeEvent: {fileID: 11400000, guid: 5d50be5c7e9eb0845a2e8e4a95fbb0d7,
     type: 2}
+  notificationEventBase: {fileID: 11400000, guid: 1061ee3b714e19d4185fc7dad0050366,
+    type: 2}
   inputField: {fileID: 40245838}
   customDiceButton: {fileID: 1236962913}
 --- !u!114 &583519885

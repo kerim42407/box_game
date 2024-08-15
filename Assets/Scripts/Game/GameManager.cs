@@ -50,6 +50,8 @@ public class GameManager : NetworkBehaviour
     public EventBase resourcePositiveEvent;
     public EventBase resourceNegativeEvent;
 
+    [Header("Notification Events")]
+    public NotificationEventBase notificationEventBase;
 
     [Header("Debug References")]
     public TMP_InputField inputField;
@@ -208,7 +210,16 @@ public class GameManager : NetworkBehaviour
                 Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
             }
+            ShowNotification(Manager.gamePlayers[i].connectionToClient);
         }
     }
+
+    #region Notification Event Functions
+    [TargetRpc]
+    public void ShowNotification(NetworkConnectionToClient target)
+    {
+        notificationEventBase.ShowNotification(uiManager.mainCanvas.transform);
+    }
+    #endregion
 
 }
