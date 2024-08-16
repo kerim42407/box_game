@@ -20,6 +20,7 @@ public class PlayerObjectController : NetworkBehaviour
     public List<Color> playerColors;
     [SyncVar(hook = nameof(SetPlayerColor))] public Color playerColor;
 
+    [SyncVar] public bool isBankrupt;
     [SyncVar] public bool canPlay;
     [SyncVar] public bool canSell;
     [SyncVar] public int playerLocation;
@@ -248,12 +249,6 @@ public class PlayerObjectController : NetworkBehaviour
         {
             Invoke(nameof(Test), .25f);
         }
-    }
-
-    // Starting Money
-    [Command(requiresAuthority = false)]
-    public void CmdSetStartingMoney() { 
-
     }
 
     // Player Money

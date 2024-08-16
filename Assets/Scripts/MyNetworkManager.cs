@@ -37,6 +37,7 @@ public class MyNetworkManager : NetworkManager
             }
 
             NetworkServer.AddPlayerForConnection(conn, gamePlayerInstance.gameObject);
+            //NetworkServer.RemovePlayerForConnection(conn,RemovePlayerOptions.);
         }
     }
     public void StartGame(string sceneName)

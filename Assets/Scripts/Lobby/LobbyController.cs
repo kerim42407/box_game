@@ -42,7 +42,7 @@ public class LobbyController : NetworkBehaviour
     [Header("Game Settings")]
     public HorizontalSelector startingMoneySelector;
     private int startingMoneyIndex = 1;
-    [SyncVar] public float startingMoney;
+    private float startingMoney;
 
     // Manager
     private MyNetworkManager manager;
@@ -347,10 +347,6 @@ public class LobbyController : NetworkBehaviour
 
     public void SetGameSettings()
     {
-        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
-        {
-            playerObjectController.CmdUpdatePlayerMoney(startingMoney * 1000);
-        }
-        //Manager.startingMoney = startingMoney * 1000;
+        Manager.startingMoney = startingMoney;
     }
 }

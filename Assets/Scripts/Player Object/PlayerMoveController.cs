@@ -20,7 +20,7 @@ public class PlayerMoveController : NetworkBehaviour
     public float journeyTime = .1f;
 
     private PlayerObjectController playerObjectController;
-    private PlaygroundController playgroundController;
+    [SerializeField] private PlaygroundController playgroundController;
     [HideInInspector] public Camera mainCamera;
 
     public bool didCosmetic;
@@ -107,13 +107,13 @@ public class PlayerMoveController : NetworkBehaviour
                         else // Player has not enough money to upgrade factory
                         {
                             Debug.Log("You already bought this factory, factory level is smaller than it's max level but you don't have enough money to upgrade it");
-                            playerObjectController.gameManager.turnIndex++;
+                            playerObjectController.gameManager.CmdUpdateTurnIndex();
                         }
                     }
                     else
                     {
                         Debug.Log("You already bought this factory but factory level is at it's max level. You can't upgrade this factory.");
-                        playerObjectController.gameManager.turnIndex++;
+                        playerObjectController.gameManager.CmdUpdateTurnIndex();
                     }
                 }
                 else // Factory owned by another player
@@ -158,8 +158,26 @@ public class PlayerMoveController : NetworkBehaviour
                     }
                     else
                     {
-                        RpcSetSellLocationsPanelData(target, rentRate);
-                        // TO DO Can't pay rent
+                        float playerMoneyAfterSell = 0;
+                        foreach(LocationController locationController1 in playerObjectController.ownedLocations)
+                        {
+                            playerMoneyAfterSell += locationController1.GetLocationSellPriceToTheBank();
+                        }
+                        if(playerObjectController.playerMoney + playerMoneyAfterSell >= rentRate)
+                        {
+                            RpcSetSellLocationsPanelData(target, rentRate);
+                            Debug.Log($"{playerObjectController.playerName} has enough money to pay rent after sales.");
+                        }
+                        else
+                        {
+                            foreach (LocationController locationController1 in playerObjectController.ownedLocations)
+                            {
+                                playgroundController.CmdSellLocationToTheBank(locationController1.locationIndex, playerObjectController);
+                            }
+                            playgroundController.CmdBankruptcy(playerObjectController);
+                            playerObjectController.gameManager.CmdUpdateTurnIndex();
+                            Debug.Log($"{playerObjectController.playerName} do not have enough money to pay rent after sales. Bankruptcy.");
+                        }
                     }
                 }
             }
@@ -203,7 +221,26 @@ public class PlayerMoveController : NetworkBehaviour
                     }
                     else // Player doesn't have enough money to pay rent
                     {
-                        RpcSetSellLocationsPanelData(target, rentRate);
+                        float playerMoneyAfterSell = 0;
+                        foreach (LocationController locationController1 in playerObjectController.ownedLocations)
+                        {
+                            playerMoneyAfterSell += locationController1.GetLocationSellPriceToTheBank();
+                        }
+                        if (playerObjectController.playerMoney + playerMoneyAfterSell >= rentRate)
+                        {
+                            RpcSetSellLocationsPanelData(target, rentRate);
+                            Debug.Log($"{playerObjectController.playerName} has enough money to pay rent after sales.");
+                        }
+                        else
+                        {
+                            foreach (LocationController locationController1 in playerObjectController.ownedLocations)
+                            {
+                                playgroundController.CmdSellLocationToTheBank(locationController1.locationIndex, playerObjectController);
+                            }
+                            playgroundController.CmdBankruptcy(playerObjectController);
+                            playerObjectController.gameManager.CmdUpdateTurnIndex();
+                            Debug.Log($"{playerObjectController.playerName} do not have enough money to pay rent after sales. Bankruptcy.");
+                        }
                     }
                 }
             }
@@ -222,7 +259,7 @@ public class PlayerMoveController : NetworkBehaviour
         }
         else
         {
-            playerObjectController.gameManager.turnIndex++;
+            playerObjectController.gameManager.CmdUpdateTurnIndex();
         }
     }
 
@@ -489,7 +526,11 @@ public class PlayerMoveController : NetworkBehaviour
 
     public void Test()
     {
-        RpcSetSellLocationsPanelData(playerObjectController.connectionToClient, 30000);
+        foreach (LocationController locationController1 in playerObjectController.ownedLocations)
+        {
+            playgroundController.CmdSellLocationToTheBank(locationController1.locationIndex, playerObjectController);
+        }
+        playgroundController.CmdBankruptcy(playerObjectController);
     }
 
     public void SetSellLocationsPanelButtonData()

@@ -961,6 +961,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2aced890d4c2b624292980faad2ddc15, type: 2}
   - {fileID: 2100000, guid: 4084941ff96e66c4495bc37aee508aa8, type: 2}
   turnIndex: 0
+  isGameStarted: 0
   resourceBuyPrice: 20000
   resourceRentRate: 8000
   startingPointIncome: 0

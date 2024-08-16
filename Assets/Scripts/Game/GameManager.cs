@@ -1,5 +1,4 @@
 using Mirror;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,12 +10,12 @@ public class GameManager : NetworkBehaviour
     public PlayerObjectController localPlayerController;
     public GameObject gamePlayerListPanel;
     public GameObject gamePlayerListItemPrefab;
-    [HideInInspector]public PlaygroundController playgroundController;
+    [HideInInspector] public PlaygroundController playgroundController;
     public UIManager uiManager;
     [HideInInspector] public Material[] playerColors;
 
-    [SyncVar(hook = nameof(TurnIndexUpdate))] public int turnIndex;
-    private int _turnIndex;
+    [SyncVar] public int turnIndex;
+    [SyncVar] public bool isGameStarted;
 
     // Manager
     private MyNetworkManager manager;
@@ -33,9 +32,9 @@ public class GameManager : NetworkBehaviour
     }
 
     [Header("Game Variables")]
-    public float resourceBuyPrice; // Resource location purchase price
+    public float resourceBuyPrice;
     public float resourceRentRate;
-    public float startingPointIncome;
+    [SyncVar] public float startingPointIncome;
 
     public float baseFactoryPrice;
     public float regularFactoryPriceCoef;
@@ -62,7 +61,7 @@ public class GameManager : NetworkBehaviour
     {
         if (isServer)
         {
-            InstantiatePlayground();
+            CmdSetupGame();
             inputField.gameObject.SetActive(true);
             customDiceButton.gameObject.SetActive(true);
         }
@@ -71,17 +70,6 @@ public class GameManager : NetworkBehaviour
             inputField.gameObject.SetActive(false);
             customDiceButton.gameObject.SetActive(false);
         }
-        if (isClient)
-        {
-            SetReferences();
-        }
-        InstantiateGamePlayerListItems();
-        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
-        {
-            playerObjectController.UpdatePlayerMoney(0, playerObjectController.playerMoney);
-            playerObjectController.playerMoveController.mainCamera = Camera.main;
-        }
-        startingPointIncome = Manager.gamePlayers[0].playerMoney / 2; 
     }
 
     // Update is called once per frame
@@ -90,27 +78,61 @@ public class GameManager : NetworkBehaviour
 
     }
 
-    [Server]
-    public void InstantiatePlayground()
+    [Command(requiresAuthority = false)]
+    public void CmdSetupGame()
     {
         GameObject playground = Instantiate(playgroundPrefab);
         NetworkServer.Spawn(playground);
+        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            playerObjectController.playerMoney = Manager.startingMoney * 1000;
+        }
+        startingPointIncome = (Manager.startingMoney * 1000) / 2;
+        RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
+        RpcSetupGame();
     }
 
-    public void SetReferences()
+    [ClientRpc]
+    private void RpcSetupGame()
     {
+        Debug.Log("RpcSetupGame");
         playgroundController = GameObject.FindGameObjectWithTag("Playground").GetComponent<PlaygroundController>();
         foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
         {
             playerObjectController.playgroundController = playgroundController;
             playerObjectController.playerMoveController.SetStartPosition();
         }
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
+        {
+            GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
+            qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
+            qwe.GetComponent<GamePlayerListItem>().playerSteamID = Manager.gamePlayers[i].playerSteamID;
+            qwe.GetComponent<GamePlayerListItem>().background.color = Manager.gamePlayers[i].playerColor;
+            qwe.GetComponent<GamePlayerListItem>().playerMoneyText.text = Manager.gamePlayers[i].playerMoney.ToString();
+            Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
+            qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
+        }
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
+        {
+            if (i == turnIndex)
+            {
+                Manager.gamePlayers[i].canPlay = true;
+                Manager.gamePlayers[i].playerInputController.canThrow = true;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
+            }
+            else
+            {
+                Manager.gamePlayers[i].canPlay = false;
+                Manager.gamePlayers[i].playerInputController.canThrow = false;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
+            }
+        }
     }
 
-    public void OnDiceResult(int result)
+    public void OnDiceResult(int result, bool isEven)
     {
         Debug.Log($"Applying dice result: {result}");
-        if(result % 2 == 0)
+        if (isEven)
         {
             Manager.gamePlayers[turnIndex].playerMoveController.isEven = !Manager.gamePlayers[turnIndex].playerMoveController.isEven;
         }
@@ -134,89 +156,72 @@ public class GameManager : NetworkBehaviour
         Manager.gamePlayers[turnIndex].playerMoveController.Test();
     }
 
-    private void InstantiateGamePlayerListItems()
-    {
-        for (int i = 0; i < Manager.gamePlayers.Count; i++)
-        {
-            GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
-            qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
-            qwe.GetComponent<GamePlayerListItem>().playerSteamID = Manager.gamePlayers[i].playerSteamID;
-            qwe.GetComponent<GamePlayerListItem>().background.color = Manager.gamePlayers[i].playerColor;
-            Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
-            qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
-        }
-        StartTurn();
-    }
-
-    [Server]
-    private void IncreaseTurnIndex()
-    {
-        turnIndex++;
-    }
-
     [Command(requiresAuthority = false)]
     public void CmdUpdateTurnIndex()
     {
-        if (Manager.gamePlayers[turnIndex].GetComponent<PlayerMoveController>().isEven)
+        if (!Manager.gamePlayers[turnIndex].isBankrupt)
         {
-            TurnIndexUpdate(turnIndex, turnIndex);
-        }
-        else
-        {
-            TurnIndexUpdate(turnIndex, turnIndex + 1);
-        }
-        
-    }
-
-    private void TurnIndexUpdate(int oldValue, int newValue)
-    {
-        if (isServer)
-        {
-            if (newValue == Manager.gamePlayers.Count)
+            if (Manager.gamePlayers[turnIndex].GetComponent<PlayerMoveController>().isEven)
             {
-                turnIndex = 0;
+
             }
             else
             {
-                turnIndex = newValue;
+                turnIndex++;
+                if (turnIndex == Manager.gamePlayers.Count)
+                {
+                    turnIndex = 0;
+                }
+                while (Manager.gamePlayers[turnIndex].isBankrupt)
+                {
+                    turnIndex++;
+                    if (turnIndex == Manager.gamePlayers.Count)
+                    {
+                        turnIndex = 0;
+                    }
+                }
             }
         }
-        if (isClient)
+        else
         {
-            StartTurn();
+            while (Manager.gamePlayers[turnIndex].isBankrupt)
+            {
+                turnIndex++;
+                if (turnIndex == Manager.gamePlayers.Count)
+                {
+                    turnIndex = 0;
+                }
+            }
         }
+        
+        RpcUpdateTurnIndex(turnIndex);
+        RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
 
     }
-
-    public void StartTurn()
+    [ClientRpc]
+    private void RpcUpdateTurnIndex(int index)
     {
-        //Debug.Log($"Current turn: {turnIndex}");
-        UpdateUIOnStartTurn();
-    }
-
-    private void UpdateUIOnStartTurn()
-    {
+        Debug.Log(index);
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
-            if (i == turnIndex)
+            if (i == index)
             {
                 Manager.gamePlayers[i].canPlay = true;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
             }
             else
             {
                 Manager.gamePlayers[i].canPlay = false;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
+                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
             }
-            ShowNotification(Manager.gamePlayers[i].connectionToClient);
         }
     }
 
     #region Notification Event Functions
     [TargetRpc]
-    public void ShowNotification(NetworkConnectionToClient target)
+    private void RpcShowNotification(NetworkConnectionToClient target)
     {
         notificationEventBase.ShowNotification(uiManager.mainCanvas.transform);
     }

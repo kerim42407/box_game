@@ -57,8 +57,13 @@ public class UIManager : MonoBehaviour
     {
         if (diceOne && diceTwo)
         {
+            bool isEven = false;
             //Debug.Log($"Dice result: {diceOneResult} + {diceTwoResult} = {diceOneResult + diceTwoResult}");
-            gameManager.OnDiceResult(diceOneResult + diceTwoResult);
+            if(diceOneResult == diceTwoResult)
+            {
+                isEven = true;
+            }
+            gameManager.OnDiceResult(diceOneResult + diceTwoResult, isEven);
             diceOne = false;
             diceTwo = false;
         }

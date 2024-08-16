@@ -1,3 +1,4 @@
+using Michsky.MUIP;
 using Mirror;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ public class PlaygroundController : NetworkBehaviour
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        foreach(GameObject gameObject in locations)
+        {
+            gameObject.GetComponent<LocationController>().playgroundController = this;
+            gameObject.GetComponent<LocationController>().CheckLocationType();
+        }
         //GetComponent<NetworkIdentity>().AssignClientAuthority(GameObject.Find("LocalGamePlayer").GetComponent<PlayerObjectController>().connectionToClient);
     }
 
@@ -184,12 +190,10 @@ public class PlaygroundController : NetworkBehaviour
             FactoryController factoryController = locationController.factoryController;
 
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
-            //locationController.productivity = 100;
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
             foreach(EventBase eventBase in locationController.events.ToList())
             {
-                Debug.Log(eventBase.eventName);
                 eventBase.RemoveEvent(locationController);
             }
             locationController.UpdateRentRate();
@@ -213,13 +217,11 @@ public class PlaygroundController : NetworkBehaviour
                     {
                         if (locationController1.ownerPlayer == owner)
                         {
-                            //locationController1.productivity -= gameManager.resourceProductivityCoef * 100;
                             gameManager.resourcePositiveEvent.RemoveEvent(locationController1);
                             locationController1.UpdateRentRate();
                         }
                         else
                         {
-                            //locationController1.productivity += gameManager.resourceProductivityCoef * 100;
                             gameManager.resourceNegativeEvent.RemoveEvent(locationController1);
                             locationController1.UpdateRentRate();
                         }
@@ -232,6 +234,21 @@ public class PlaygroundController : NetworkBehaviour
             resourceController.UpdateOwnerPlayer();
         }
         locationController.playerColorMaterial.color = new Color(1, 0, 0);
+    }
+    #endregion
+
+    #region Bankruptcy Functions
+    [Command(requiresAuthority = false)]
+    public void CmdBankruptcy(PlayerObjectController player)
+    {
+        player.isBankrupt = true;
+        gameManager.CmdUpdateTurnIndex();
+        RpcBankruptcy(player);
+    }
+    [ClientRpc]
+    private void RpcBankruptcy(PlayerObjectController player)
+    {
+        player.gamePlayerListItem.playerMoneyText.text = "Bankrupt";
     }
     #endregion
 }
