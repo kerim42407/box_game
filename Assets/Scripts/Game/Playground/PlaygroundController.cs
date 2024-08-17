@@ -251,4 +251,38 @@ public class PlaygroundController : NetworkBehaviour
         player.gamePlayerListItem.playerMoneyText.text = "Bankrupt";
     }
     #endregion
+
+    #region Emission On Location Functions
+
+    [Command(requiresAuthority = false)]
+    public void CmdActivateEmissionOnLocation(int locationIndex)
+    {
+        RpcActivateEmissionOnLocation(locationIndex);
+    }
+
+    [ClientRpc]
+    private void RpcActivateEmissionOnLocation(int locationIndex)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        EmissionController emissionController = locationController.GetComponent<EmissionController>();
+
+        emissionController.ActivateEmission();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDeactivateEmissionOnLocation(int locationIndex)
+    {
+        RpcDeactivateEmissionOnLocation(locationIndex);
+    }
+
+    [ClientRpc]
+    private void RpcDeactivateEmissionOnLocation(int locationIndex)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        EmissionController emissionController = locationController.GetComponent<EmissionController>();
+
+        emissionController.DeactivateEmission();
+    }
+
+    #endregion
 }

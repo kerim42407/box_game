@@ -1,17 +1,16 @@
 using Mirror;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
     [Header("References")]
+    public UIManager uiManager;
     public GameObject playgroundPrefab;
     public GameObject canvas;
     public PlayerObjectController localPlayerController;
-    public GameObject gamePlayerListPanel;
-    public GameObject gamePlayerListItemPrefab;
     [HideInInspector] public PlaygroundController playgroundController;
-    public UIManager uiManager;
     [HideInInspector] public Material[] playerColors;
 
     [SyncVar] public int turnIndex;
@@ -70,6 +69,10 @@ public class GameManager : NetworkBehaviour
             inputField.gameObject.SetActive(false);
             customDiceButton.gameObject.SetActive(false);
         }
+        if (isClient)
+        {
+            CmdSendSetupGameRequest(GetComponent<NetworkIdentity>().connectionToClient);
+        }
     }
 
     // Update is called once per frame
@@ -89,7 +92,55 @@ public class GameManager : NetworkBehaviour
         }
         startingPointIncome = (Manager.startingMoney * 1000) / 2;
         RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
-        RpcSetupGame();
+        //RpcSetupGame();
+    }
+    [Command(requiresAuthority = false)]
+    public void CmdSendSetupGameRequest(NetworkConnectionToClient target)
+    {
+        RpcSendSetupGameRequest(target);
+    }
+    [TargetRpc]
+    public void RpcSendSetupGameRequest(NetworkConnectionToClient target)
+    {
+        playgroundController = GameObject.FindGameObjectWithTag("Playground").GetComponent<PlaygroundController>();
+        foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
+        {
+            playerObjectController.playgroundController = playgroundController;
+            playerObjectController.playerMoveController.SetStartPosition();
+        }
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
+        {
+            GamePlayerListItem gamePlayerListItem;
+            if (Manager.gamePlayers[i].isLocalPlayer)
+            {
+                gamePlayerListItem = Instantiate(uiManager.localPlayerListItemPrefab, uiManager.localPlayerListItemPanel.transform).GetComponent<GamePlayerListItem>();
+            }
+            else
+            {
+                gamePlayerListItem = Instantiate(uiManager.gamePlayerListItemPrefab, uiManager.gamePlayersListItemPanel.transform).GetComponent<GamePlayerListItem>();
+            }
+            gamePlayerListItem.playerName = Manager.gamePlayers[i].playerName;
+            gamePlayerListItem.playerSteamID = Manager.gamePlayers[i].playerSteamID;
+            gamePlayerListItem.background.color = Manager.gamePlayers[i].playerColor;
+            gamePlayerListItem.playerMoneyText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", Manager.gamePlayers[i].playerMoney);
+            Manager.gamePlayers[i].gamePlayerListItem = gamePlayerListItem;
+            gamePlayerListItem.playerNameText.GetComponent<AutoSizeController>().AdjustFontSize();
+            gamePlayerListItem.playerMoneyText.GetComponent<AutoSizeController>().AdjustFontSize();
+            gamePlayerListItem.SetPlayerValues();
+        }
+        for (int i = 0; i < Manager.gamePlayers.Count; i++)
+        {
+            if (i == turnIndex)
+            {
+                Manager.gamePlayers[i].canPlay = true;
+                Manager.gamePlayers[i].playerInputController.canThrow = true;
+            }
+            else
+            {
+                Manager.gamePlayers[i].canPlay = false;
+                Manager.gamePlayers[i].playerInputController.canThrow = false;
+            }
+        }
     }
 
     [ClientRpc]
@@ -104,13 +155,24 @@ public class GameManager : NetworkBehaviour
         }
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
-            GameObject qwe = Instantiate(gamePlayerListItemPrefab, gamePlayerListPanel.transform);
-            qwe.GetComponent<GamePlayerListItem>().playerName = Manager.gamePlayers[i].playerName;
-            qwe.GetComponent<GamePlayerListItem>().playerSteamID = Manager.gamePlayers[i].playerSteamID;
-            qwe.GetComponent<GamePlayerListItem>().background.color = Manager.gamePlayers[i].playerColor;
-            qwe.GetComponent<GamePlayerListItem>().playerMoneyText.text = Manager.gamePlayers[i].playerMoney.ToString();
-            Manager.gamePlayers[i].gamePlayerListItem = qwe.GetComponent<GamePlayerListItem>();
-            qwe.GetComponent<GamePlayerListItem>().SetPlayerValues();
+            GamePlayerListItem gamePlayerListItem;
+            if (Manager.gamePlayers[i].isLocalPlayer)
+            {
+                Debug.Log("Local Player");
+                gamePlayerListItem = Instantiate(uiManager.localPlayerListItemPrefab, uiManager.localPlayerListItemPanel.transform).GetComponent<GamePlayerListItem>();
+            }
+            else
+            {
+                gamePlayerListItem = Instantiate(uiManager.gamePlayerListItemPrefab, uiManager.gamePlayersListItemPanel.transform).GetComponent<GamePlayerListItem>();
+            }
+            gamePlayerListItem.playerName = Manager.gamePlayers[i].playerName;
+            gamePlayerListItem.playerSteamID = Manager.gamePlayers[i].playerSteamID;
+            gamePlayerListItem.background.color = Manager.gamePlayers[i].playerColor;
+            gamePlayerListItem.playerMoneyText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", Manager.gamePlayers[i].playerMoney);
+            Manager.gamePlayers[i].gamePlayerListItem = gamePlayerListItem;
+            gamePlayerListItem.playerNameText.GetComponent<AutoSizeController>().AdjustFontSize();
+            gamePlayerListItem.playerMoneyText.GetComponent<AutoSizeController>().AdjustFontSize();
+            gamePlayerListItem.SetPlayerValues();
         }
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
@@ -118,13 +180,11 @@ public class GameManager : NetworkBehaviour
             {
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
             }
             else
             {
                 Manager.gamePlayers[i].canPlay = false;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
             }
         }
     }
@@ -201,20 +261,17 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateTurnIndex(int index)
     {
-        Debug.Log(index);
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
         {
             if (i == index)
             {
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.green;
             }
             else
             {
                 Manager.gamePlayers[i].canPlay = false;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
-                Manager.gamePlayers[i].gamePlayerListItem.playerTurnIcon.color = Color.red;
             }
         }
     }

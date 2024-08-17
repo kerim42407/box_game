@@ -1,6 +1,7 @@
 using Mirror;
 using Steamworks;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -139,7 +140,10 @@ public class PlayerObjectController : NetworkBehaviour
     public override void OnStopClient()
     {
         Manager.gamePlayers.Remove(this);
-        LobbyController.instance.UpdatePlayerList();
+        if(SceneManager.GetActiveScene().name == "Lobby")
+        {
+            LobbyController.instance.UpdatePlayerList();
+        }
     }
 
     [Command]
@@ -275,7 +279,7 @@ public class PlayerObjectController : NetworkBehaviour
         playerMoney = value;
         if (gamePlayerListItem)
         {
-            gamePlayerListItem.playerMoneyText.text = playerMoney.ToString();
+            gamePlayerListItem.playerMoneyText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", playerMoney);
         }
         
     }

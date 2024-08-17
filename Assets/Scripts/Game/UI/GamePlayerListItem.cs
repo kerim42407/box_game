@@ -13,10 +13,10 @@ public class GamePlayerListItem : MonoBehaviour
     private bool avatarReceived;
 
     public Image background;
-    public TextMeshProUGUI playerNameText;
     public RawImage playerIcon;
-    public Image playerTurnIcon;
+    public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI playerMoneyText;
+    public TextMeshProUGUI workforceText;
 
     protected Callback<AvatarImageLoaded_t> imageLoaded;
 

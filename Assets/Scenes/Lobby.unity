@@ -18770,7 +18770,6 @@ MonoBehaviour:
   readyButton: {fileID: 1093564805}
   settingsButton: {fileID: 1013110683}
   startingMoneySelector: {fileID: 977016550}
-  startingMoney: 0
 --- !u!4 &1862562556
 Transform:
   m_ObjectHideFlags: 0

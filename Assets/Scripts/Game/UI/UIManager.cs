@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameManager gameManager;
+    #region Variables
     public GameObject mainCanvas;
 
     [SerializeField] private TMP_Text diceOneText, diceTwoText;
     private int diceOneResult, diceTwoResult;
     private bool diceOne, diceTwo;
+
+    [Header("Prefabs")]
+    public GameObject localPlayerListItemPrefab;
+    public GameObject gamePlayerListItemPrefab;
 
     [Header("Panel Prefabs")]
     public GameObject factoryBuyPanelPrefab;
@@ -22,8 +26,12 @@ public class UIManager : MonoBehaviour
     public Sprite goldenFrame;
 
     [Header("References")]
+    public GameManager gameManager;
     public GameObject infoCanvas;
     public GameObject locationInfoPanel;
+    public GameObject localPlayerListItemPanel;
+    public GameObject gamePlayersListItemPanel;
+    #endregion
 
     private void OnEnable()
     {

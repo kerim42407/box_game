@@ -13,9 +13,7 @@ public class LocationController : MonoBehaviour
 
     public Material playerColorMaterial;
 
-    [HideInInspector] public FactoryController factoryController;
-    [HideInInspector] public ResourceController resourceController;
-    [HideInInspector] public PlaygroundController playgroundController;
+    
 
     public float rentRate;
     public PlayerObjectController ownerPlayer;
@@ -23,6 +21,10 @@ public class LocationController : MonoBehaviour
     private TextMeshPro rentRateText;
 
     [Header("References")]
+    [HideInInspector] public PlaygroundController playgroundController;
+    [HideInInspector] public FactoryController factoryController;
+    [HideInInspector] public ResourceController resourceController;
+    [HideInInspector] public EmissionController emissionController;
     [HideInInspector] public GameObject locationInfoPanel;
 
     [Header("Factory Variables")]
@@ -147,7 +149,6 @@ public class LocationController : MonoBehaviour
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
             locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
-            //SpawnLocationInfoPanelPrefab();
         }
         else if (locationType == LocationType.BigFactory)
         {
@@ -182,6 +183,7 @@ public class LocationController : MonoBehaviour
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
         }
+        SetEmissionControllerVariables();
     }
     private GameObject SpawnFactory(int factoryLevel)
     {
@@ -358,7 +360,21 @@ public class LocationController : MonoBehaviour
             productionType = ProductionType.Coal;
         }
     }
+    private void SetEmissionControllerVariables()
+    {
+        emissionController = GetComponent<EmissionController>();
 
+        if(locationType == LocationType.Starting || locationType == LocationType.Special)
+        {
+            emissionController.material = GetComponent<MeshRenderer>().materials[1];
+        }
+        else
+        {
+            emissionController.material = GetComponent<MeshRenderer>().materials[2];
+        }
+        emissionController.initialEmissionColor = emissionController.material.GetColor("_EmissionColor");
+
+    }
     void OnMouseOver()
     {
         if (playgroundController.gameManager.localPlayerController)

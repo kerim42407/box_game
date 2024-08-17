@@ -52,6 +52,7 @@ public class PlayerMoveController : NetworkBehaviour
                 }
                 if (destinationIndex == destinationTransforms.Count - 1)
                 {
+                    playgroundController.CmdDeactivateEmissionOnLocation(playerObjectController.playerLocation);
                     destinationIndex = 0;
                     shouldMove = false;
                     OnStopLocation();
@@ -599,7 +600,7 @@ public class PlayerMoveController : NetworkBehaviour
         {
             playerObjectController.playerLocation = playerObjectController.playerLocation + locationIndex;
         }
-
+        playgroundController.CmdActivateEmissionOnLocation(playerObjectController.playerLocation);
         shouldMove = true;
         startTime = Time.time;
     }
