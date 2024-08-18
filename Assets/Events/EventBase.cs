@@ -19,12 +19,14 @@ public class EventBase : ScriptableObject
     {
         locationController.productivity += value;
         locationController.events.Add(this);
-        //Debug.Log($"Event Applied: {eventName}, Value: {value}");
+        locationController.UpdateRentRate();
     }
 
     public void RemoveEvent(LocationController locationController)
     {
         locationController.productivity -= value;
         locationController.events.Remove(this);
+        locationController.UpdateRentRate();
+        Destroy(this);
     }
 }

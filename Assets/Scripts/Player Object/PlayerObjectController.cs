@@ -21,6 +21,7 @@ public class PlayerObjectController : NetworkBehaviour
     public List<Color> playerColors;
     [SyncVar(hook = nameof(SetPlayerColor))] public Color playerColor;
 
+    [SyncVar] public int turnCount;
     [SyncVar] public bool isBankrupt;
     [SyncVar] public bool canPlay;
     [SyncVar] public bool canSell;
@@ -49,11 +50,8 @@ public class PlayerObjectController : NetworkBehaviour
     [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
     [HideInInspector] public List<LocationController> ownedLocations = new();
     [HideInInspector] public List<LocationController> ownedResources = new();
-    //[HideInInspector] public List<LocationController> ownedGoldenFactories = new();
     [HideInInspector] public List<LocationController> locationsToBeSold = new();
     [HideInInspector] public float locationsToBeSoldValue;
-
-
 
     private void Start()
     {

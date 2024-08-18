@@ -1,4 +1,3 @@
-using Michsky.MUIP;
 using Mirror;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +28,7 @@ public class PlaygroundController : NetworkBehaviour
 
     [Header("Location Lists")]
     public List<LocationController> resources;
+    public List<LocationController> allFactories;
     public List<LocationController> goldenFactories;
 
 
@@ -38,7 +38,7 @@ public class PlaygroundController : NetworkBehaviour
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
-        foreach(GameObject gameObject in locations)
+        foreach (GameObject gameObject in locations)
         {
             gameObject.GetComponent<LocationController>().playgroundController = this;
             gameObject.GetComponent<LocationController>().CheckLocationType();
@@ -86,12 +86,10 @@ public class PlaygroundController : NetworkBehaviour
                         if (locationController1.ownerPlayer == newOwner)
                         {
                             gameManager.resourcePositiveEvent.ApplyEvent(locationController);
-                            //locationController.productivity += gameManager.resourceProductivityCoef * 100;
                         }
                         else
                         {
                             gameManager.resourceNegativeEvent.ApplyEvent(locationController);
-                            //locationController.productivity -= gameManager.resourceProductivityCoef * 100;
                         }
                     }
 
@@ -158,12 +156,10 @@ public class PlaygroundController : NetworkBehaviour
                     if (locationController1.ownerPlayer == newOwner)
                     {
                         gameManager.resourcePositiveEvent.ApplyEvent(locationController1);
-                        locationController1.UpdateRentRate();
                     }
                     else
                     {
                         gameManager.resourceNegativeEvent.ApplyEvent(locationController1);
-                        locationController1.UpdateRentRate();
                     }
                 }
             }
@@ -192,7 +188,7 @@ public class PlaygroundController : NetworkBehaviour
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
-            foreach(EventBase eventBase in locationController.events.ToList())
+            foreach (EventBase eventBase in locationController.events.ToList())
             {
                 eventBase.RemoveEvent(locationController);
             }
@@ -218,12 +214,10 @@ public class PlaygroundController : NetworkBehaviour
                         if (locationController1.ownerPlayer == owner)
                         {
                             gameManager.resourcePositiveEvent.RemoveEvent(locationController1);
-                            locationController1.UpdateRentRate();
                         }
                         else
                         {
                             gameManager.resourceNegativeEvent.RemoveEvent(locationController1);
-                            locationController1.UpdateRentRate();
                         }
                     }
                 }
@@ -284,5 +278,45 @@ public class PlaygroundController : NetworkBehaviour
         emissionController.DeactivateEmission();
     }
 
+    #endregion
+
+    #region Market Card Functions
+    //[Command(requiresAuthority = false)]
+    //public void CmdApplyMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
+    //{
+    //    RpcApplyMarketCardEffect(player, marketCard);
+    //}
+    //[ClientRpc]
+    //private void RpcApplyMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
+    //{
+    //    foreach (LocationController locationController in allFactories)
+    //    {
+    //        if (locationController.productionType == marketCard.productionType)
+    //        {
+    //            locationController.activeCards.Add(marketCard);
+    //        }
+    //    }
+    //    gameManager.activeCards.Add(marketCard);
+    //    player.activeCards.Add(marketCard);
+    //}
+
+    //[Command(requiresAuthority = false)]
+    //public void CmdRemoveMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
+    //{
+    //    RpcRemoveMarketCardEffect(player, marketCard);
+    //}
+    //[ClientRpc]
+    //private void RpcRemoveMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
+    //{
+    //    foreach(EventBase eventBase in marketCard.activeEvents)
+    //    {
+    //        //Debug.Log(eventBase.locationIndex);
+    //        eventBase.RemoveEvent(locations[eventBase.locationIndex].GetComponent<LocationController>());
+    //        Destroy(eventBase);
+    //    }
+    //    gameManager.activeCards.Remove(marketCard);
+    //    player.activeCards.Remove(marketCard);
+    //    //player.activeCards.Remove(marketCard);
+    //}
     #endregion
 }

@@ -106,11 +106,12 @@ MonoBehaviour:
   locationIndex: 13
   locationName: St Austell
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -167,9 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &844687931972900482
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,11 +276,12 @@ MonoBehaviour:
   locationIndex: 38
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -319,9 +321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &988564961207935218
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,11 +429,12 @@ MonoBehaviour:
   locationIndex: 30
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -471,9 +474,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &1206501544990725193
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,11 +583,12 @@ MonoBehaviour:
   locationIndex: 33
   locationName: Barnsley
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -641,9 +645,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &1221339034381085168
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,11 +754,12 @@ MonoBehaviour:
   locationIndex: 26
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -809,9 +814,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &1345488178919379835
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,11 +922,12 @@ MonoBehaviour:
   locationIndex: 14
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -961,9 +967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &1812674643144307077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,11 +1129,12 @@ MonoBehaviour:
   locationIndex: 31
   locationName: Bolton
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -1184,9 +1191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &1940819299472636027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,11 +1300,12 @@ MonoBehaviour:
   locationIndex: 19
   locationName: Corby
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -1354,9 +1362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &2547145677102953917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,11 +1469,12 @@ MonoBehaviour:
   locationIndex: 16
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -1505,9 +1514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &3004250800868616853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,11 +1623,12 @@ MonoBehaviour:
   locationIndex: 12
   locationName: Swansea
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -1675,9 +1685,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &3256891678966526947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,11 +1794,12 @@ MonoBehaviour:
   locationIndex: 15
   locationName: Camborge
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -1845,9 +1856,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &3372513582213021997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,11 +1965,12 @@ MonoBehaviour:
   locationIndex: 4
   locationName: Derby
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -2015,9 +2027,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &3599843989416038719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,11 +2189,12 @@ MonoBehaviour:
   locationIndex: 39
   locationName: Wigan
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -2238,9 +2251,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &4274174534094990630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,11 +2358,12 @@ MonoBehaviour:
   locationIndex: 32
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -2389,9 +2403,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &4430310486374559543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,11 +2693,12 @@ MonoBehaviour:
   locationIndex: 9
   locationName: Redruth
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -2740,9 +2755,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &5403410268623472611
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,11 +2864,12 @@ MonoBehaviour:
   locationIndex: 10
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -2908,9 +2924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &5722237982182871937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3017,11 +3033,12 @@ MonoBehaviour:
   locationIndex: 18
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3076,9 +3093,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &5801360046219524397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,11 +3202,12 @@ MonoBehaviour:
   locationIndex: 2
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3244,9 +3262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &5833878167410504530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,11 +3371,12 @@ MonoBehaviour:
   locationIndex: 29
   locationName: Blackburn
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3414,9 +3433,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &5931474982283395210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,11 +3542,12 @@ MonoBehaviour:
   locationIndex: 23
   locationName: Workington
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3584,9 +3604,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6024382499664432598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3693,11 +3713,12 @@ MonoBehaviour:
   locationIndex: 20
   locationName: Birmingham
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3754,9 +3775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6387399477772848527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,11 +3882,12 @@ MonoBehaviour:
   locationIndex: 0
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -3905,9 +3927,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6481227623607005290
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,11 +4036,12 @@ MonoBehaviour:
   locationIndex: 7
   locationName: Lichfield
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4075,9 +4098,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6631516512482191619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4184,11 +4207,12 @@ MonoBehaviour:
   locationIndex: 36
   locationName: Newcastle
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4245,9 +4269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6718442399108827346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4354,11 +4378,12 @@ MonoBehaviour:
   locationIndex: 17
   locationName: Rotherham
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4415,9 +4440,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6740406916249274098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,11 +4549,12 @@ MonoBehaviour:
   locationIndex: 27
   locationName: Leeds
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4585,9 +4611,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &6841903049422638098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4693,11 +4719,12 @@ MonoBehaviour:
   locationIndex: 22
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4737,9 +4764,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7058036785804172786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,11 +4873,12 @@ MonoBehaviour:
   locationIndex: 21
   locationName: Sheffield
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -4907,9 +4935,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7070321418170478088
 GameObject:
   m_ObjectHideFlags: 0
@@ -5016,11 +5044,12 @@ MonoBehaviour:
   locationIndex: 35
   locationName: Durham
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -5077,9 +5106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7117874525503164917
 GameObject:
   m_ObjectHideFlags: 0
@@ -5093,6 +5122,7 @@ GameObject:
   - component: {fileID: 773998545559092358}
   - component: {fileID: 4972178359503703956}
   - component: {fileID: 3035396011489984158}
+  - component: {fileID: 2292181855585665932}
   - component: {fileID: 7173464703773265173}
   m_Layer: 0
   m_Name: Location 6
@@ -5185,11 +5215,12 @@ MonoBehaviour:
   locationIndex: 6
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -5216,6 +5247,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6453048120371961184, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
+--- !u!114 &2292181855585665932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117874525503164917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa1a612dc7852a4ca5923e2b71a3cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDeck: {fileID: 11400000, guid: 9db7db80252f78b4aa3cdf95205c7ac1, type: 2}
 --- !u!114 &7173464703773265173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5229,9 +5273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7366661230679562046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5338,11 +5382,12 @@ MonoBehaviour:
   locationIndex: 5
   locationName: Stafford
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -5399,9 +5444,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7387185690562970692
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,11 +5553,12 @@ MonoBehaviour:
   locationIndex: 1
   locationName: Devonport
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -5569,9 +5615,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7548314048461096231
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,11 +5830,12 @@ MonoBehaviour:
   locationIndex: 28
   locationName: Manchester
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -5845,9 +5892,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &7943959700229255299
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,11 +6001,12 @@ MonoBehaviour:
   locationIndex: 25
   locationName: Oldham
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6015,9 +6063,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &8044571985704430932
 GameObject:
   m_ObjectHideFlags: 0
@@ -6175,11 +6223,12 @@ MonoBehaviour:
   locationIndex: 8
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6219,9 +6268,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &8441386585966683552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6328,11 +6377,12 @@ MonoBehaviour:
   locationIndex: 34
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6387,9 +6437,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &8583816715383324277
 GameObject:
   m_ObjectHideFlags: 0
@@ -6549,11 +6599,12 @@ MonoBehaviour:
   locationIndex: 11
   locationName: Anglesey
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6610,9 +6661,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &8692186659695855495
 GameObject:
   m_ObjectHideFlags: 0
@@ -6719,11 +6770,12 @@ MonoBehaviour:
   locationIndex: 3
   locationName: Bristol
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6780,9 +6832,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &9094255042700332618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,11 +6941,12 @@ MonoBehaviour:
   locationIndex: 37
   locationName: Sunderland
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -6950,9 +7003,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5
 --- !u!1 &9160572180592036536
 GameObject:
   m_ObjectHideFlags: 0
@@ -7110,11 +7163,12 @@ MonoBehaviour:
   locationIndex: 24
   locationName: 
   playerColorMaterial: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  playgroundController: {fileID: 0}
   rentRate: 0
   ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
   events: []
@@ -7154,6 +7208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
+  initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
-  duration: 5

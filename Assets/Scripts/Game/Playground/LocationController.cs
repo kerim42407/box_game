@@ -148,6 +148,7 @@ public class LocationController : MonoBehaviour
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            playgroundController.allFactories.Add(this);
             locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
         }
         else if (locationType == LocationType.BigFactory)
@@ -159,6 +160,7 @@ public class LocationController : MonoBehaviour
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            playgroundController.allFactories.Add(this);
             locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
             //SpawnLocationInfoPanelPrefab();
         }
@@ -172,6 +174,7 @@ public class LocationController : MonoBehaviour
             Instantiate(SpawnFactory(1), transform);
             SpawnRentRateTextPrefab();
             SpawnLocationNameTextPrefab();
+            playgroundController.allFactories.Add(this);
             locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
             //SpawnLocationInfoPanelPrefab();
         }

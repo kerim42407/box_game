@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c00780a8a97c124c8e2000d56710590, type: 3}
+  m_Name: Market Card Collection
+  m_EditorClassIdentifier: 
+  <CardsInCollection>k__BackingField:
+  - {fileID: 11400000, guid: dda9b0fcc1903e34c9d1b6f7e6404477, type: 2}
+  - {fileID: 11400000, guid: a8bc14eec9703774e9125bd3bde50b10, type: 2}
+  - {fileID: 11400000, guid: 3e5adf4cefae7454dbc889236a2c7ca5, type: 2}
+  - {fileID: 11400000, guid: af69635524f3db041862b603e7e9fcb2, type: 2}
+  - {fileID: 11400000, guid: e98050f2c94014d45928a6cfce99775c, type: 2}
+  - {fileID: 11400000, guid: d6b51421ba59d894d9601da297177733, type: 2}
+  - {fileID: 11400000, guid: ac3ed098ff439dd41bc92815d6870f4e, type: 2}
+  - {fileID: 11400000, guid: 5bfd2a6e7620b5f4cbb03405b9ff409f, type: 2}
+  - {fileID: 11400000, guid: 654704b43cc780e4c99c3de9333a04f2, type: 2}
+  - {fileID: 11400000, guid: b85d913054cb18947934bb60fce20948, type: 2}

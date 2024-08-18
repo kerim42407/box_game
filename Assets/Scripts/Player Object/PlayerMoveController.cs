@@ -87,8 +87,14 @@ public class PlayerMoveController : NetworkBehaviour
         LocationController locationController = playerLocation.GetComponent<LocationController>();
         LocationController.LocationType locationType = locationController.locationType;
         //Debug.Log($"Stopped on: {locationController.locationName}. Location type is: {locationController.locationType}.");
+        if(locationType == LocationController.LocationType.Card)
+        {
+            //CardDeckController cardDeckController = playerLocation.GetComponent<CardDeckController>();
 
-        if (locationType == LocationController.LocationType.RegularFactory || locationType == LocationController.LocationType.BigFactory || locationType == LocationController.LocationType.GoldenFactory)
+            //cardDeckController.cardDeck.DrawCard(playerObjectController);
+            playerObjectController.gameManager.CmdUpdateTurnIndex();
+        }
+        else if (locationType == LocationController.LocationType.RegularFactory || locationType == LocationController.LocationType.BigFactory || locationType == LocationController.LocationType.GoldenFactory)
         {
             FactoryController factoryController = playerLocation.GetComponent<FactoryController>();
             NetworkConnectionToClient target = playerObjectController.Manager.gamePlayers[playerObjectController.gameManager.turnIndex].connectionToClient;
