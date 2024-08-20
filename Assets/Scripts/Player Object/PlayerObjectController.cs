@@ -53,6 +53,8 @@ public class PlayerObjectController : NetworkBehaviour
     [HideInInspector] public List<LocationController> locationsToBeSold = new();
     [HideInInspector] public float locationsToBeSoldValue;
 
+    public List<Card> playerCards = new();
+
     private void Start()
     {
         playerInputController = GetComponent<PlayerInputController>();

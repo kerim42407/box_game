@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    #region Variables
+    #region Fields and Properties
     public GameObject mainCanvas;
 
     [SerializeField] private TMP_Text diceOneText, diceTwoText;
@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [Header("References")]
     public GameManager gameManager;
     public GameObject infoCanvas;
+    public GameObject playerCardContainer;
     public GameObject locationInfoPanel;
     public GameObject localPlayerListItemPanel;
     public GameObject gamePlayersListItemPanel;

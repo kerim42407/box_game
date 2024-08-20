@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CardData")]
@@ -12,6 +11,8 @@ public class ScriptableCard : ScriptableObject
     [field: SerializeField] public CardCategory Category { get; private set; }
     [field: SerializeField] public CardType Type { get; private set; }
     [field: SerializeField] public CardPlayStyle PlayStyle { get; private set; }
+    [field: SerializeField] public LocationController.ProductionType ProductionType { get; private set; }
+    [field: SerializeField] public int ProductivityValue { get; private set; }
 }
 
 public enum CardCategory

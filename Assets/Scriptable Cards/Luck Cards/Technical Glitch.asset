@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
+  m_Name: Technical Glitch
+  m_EditorClassIdentifier: 
+  <CardName>k__BackingField: Technical Glitch
+  <CardEffectDescription>k__BackingField: "You have to pay \xA325,000"
+  <CardDescription>k__BackingField: "Fabrikalar\u0131ndaki baz\u0131 makineler art\u0131k
+    \xE7al\u0131\u015Famaz halde. Yeni makineler almak i\xE7in \xA325.000 \xF6de"
+  <Image>k__BackingField: {fileID: 0}
+  <Category>k__BackingField: 0
+  <Type>k__BackingField: 1
+  <PlayStyle>k__BackingField: 0

@@ -24,6 +24,7 @@ public class LocationController : MonoBehaviour
     [HideInInspector] public PlaygroundController playgroundController;
     [HideInInspector] public FactoryController factoryController;
     [HideInInspector] public ResourceController resourceController;
+    [HideInInspector] public Deck deck;
     [HideInInspector] public EmissionController emissionController;
     [HideInInspector] public GameObject locationInfoPanel;
 
@@ -32,6 +33,9 @@ public class LocationController : MonoBehaviour
 
     [Header("Events")]
     public List<EventBase> events;
+
+    [Header("Active Cards")]
+    public List<Card> activeCards;
 
     [HideInInspector] public SellLocationInfoPanelData sellLocationInfoPanelData;
 
@@ -72,6 +76,11 @@ public class LocationController : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public void UpdateProductivity(float value)
+    {
+        productivity += value;
     }
     #endregion
 
@@ -138,6 +147,8 @@ public class LocationController : MonoBehaviour
         else if (locationType == LocationType.Card)
         {
             SpawnLocationNameTextPrefab();
+            deck = GetComponent<Deck>();
+            deck.playerCardContainer = playgroundController.uiManager.playerCardContainer;
         }
         else if (locationType == LocationType.RegularFactory)
         {
@@ -396,20 +407,27 @@ public class LocationController : MonoBehaviour
                         Destroy(transform.gameObject);
                     }
                 }
-                foreach (EventBase eventBase in events)
+                //foreach (EventBase eventBase in events)
+                //{
+                //    if (eventBase.eventType == EventType.Positive)
+                //    {
+                //        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                //        eventPanelData.productivityText.text = $"{eventBase.value}";
+                //        eventPanelData.eventNameText.text = eventBase.eventName;
+                //    }
+                //    else if (eventBase.eventType == EventType.Negative)
+                //    {
+                //        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                //        eventPanelData.productivityText.text = $"{eventBase.value}";
+                //        eventPanelData.eventNameText.text = eventBase.eventName;
+                //    }
+                //}
+
+                foreach(Card card in activeCards)
                 {
-                    if (eventBase.eventType == EventType.Positive)
-                    {
-                        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                        eventPanelData.productivityText.text = $"{eventBase.value}";
-                        eventPanelData.eventNameText.text = eventBase.eventName;
-                    }
-                    else if (eventBase.eventType == EventType.Negative)
-                    {
-                        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                        eventPanelData.productivityText.text = $"{eventBase.value}";
-                        eventPanelData.eventNameText.text = eventBase.eventName;
-                    }
+                    EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                    eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
+                    eventPanelData.eventNameText.text = card.CardData.CardName;
                 }
                 locationInfoPanel.SetActive(true);
             }

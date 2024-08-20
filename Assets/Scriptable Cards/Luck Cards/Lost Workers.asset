@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
+  m_Name: Lost Workers
+  m_EditorClassIdentifier: 
+  <CardName>k__BackingField: Lost Workers
+  <CardEffectDescription>k__BackingField: You lost 4 workforces
+  <CardDescription>k__BackingField: "Baz\u0131 i\u015F\xE7ilerine ula\u015Fam\u0131yoruz.
+    Son zamanlarda ortaya \xE7\u0131kan \xE7etelerin i\u015Fi olabilir"
+  <Image>k__BackingField: {fileID: 0}
+  <Category>k__BackingField: 0
+  <Type>k__BackingField: 1
+  <PlayStyle>k__BackingField: 0

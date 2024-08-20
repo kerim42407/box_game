@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaygroundController : NetworkBehaviour
@@ -31,7 +32,21 @@ public class PlaygroundController : NetworkBehaviour
     public List<LocationController> allFactories;
     public List<LocationController> goldenFactories;
 
+    public static PlaygroundController Instance { get; private set; }
 
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -277,6 +292,41 @@ public class PlaygroundController : NetworkBehaviour
 
         emissionController.DeactivateEmission();
     }
+
+    #endregion
+
+    #region Card Functions
+
+    [Command(requiresAuthority = false)]
+    public void CmdDrawCard(PlayerObjectController player, int locationIndex, int cardCollectionCount)
+    {
+        int cardIndex = Random.Range(0, cardCollectionCount);
+        RpcDrawCard(player, locationIndex, cardIndex);
+    }
+
+    [ClientRpc] 
+    private void RpcDrawCard(PlayerObjectController player, int locationIndex, int cardIndex)
+    {
+        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        Deck deck = locationController.deck;
+        deck.DrawCard(player, cardIndex);
+    }
+
+    #region Market Card Functions
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayCard(PlayerObjectController player, int cardIndex)
+    {
+        RpcPlayCard(player, cardIndex);
+    }
+
+    [ClientRpc]
+    private void RpcPlayCard(PlayerObjectController player, int cardIndex)
+    {
+        player.playerCards[cardIndex].PlayCard();
+        //player.playerCards[cardIndex]
+    }
+    #endregion
 
     #endregion
 

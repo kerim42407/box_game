@@ -111,6 +111,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -182,9 +183,10 @@ GameObject:
   - component: {fileID: 477344045434390259}
   - component: {fileID: 2003664529581039227}
   - component: {fileID: 7976712321912233699}
-  - component: {fileID: 5745260542389817868}
   - component: {fileID: 8264620762482373688}
+  - component: {fileID: 5745260542389817868}
   - component: {fileID: 6504675157712497104}
+  - component: {fileID: 2559699743372096498}
   m_Layer: 0
   m_Name: Location 38
   m_TagString: Untagged
@@ -259,33 +261,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5745260542389817868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844687931972900482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 2
-  locationIndex: 38
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &8264620762482373688
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -308,6 +283,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5508606044473477087, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
+--- !u!114 &5745260542389817868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844687931972900482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionType: 4
+  locationType: 2
+  locationIndex: 38
+  locationName: 
+  playerColorMaterial: {fileID: 0}
+  rentRate: 0
+  ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  deck: {fileID: 0}
+  emissionController: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
+  productivity: 0
+  events: []
+  sellLocationInfoPanelData: {fileID: 0}
 --- !u!114 &6504675157712497104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +327,22 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
+--- !u!114 &2559699743372096498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844687931972900482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
 --- !u!1 &988564961207935218
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,9 +354,10 @@ GameObject:
   - component: {fileID: 4826754202739417961}
   - component: {fileID: 372074915777033613}
   - component: {fileID: 179506466112648291}
-  - component: {fileID: 4712222652228009333}
   - component: {fileID: 5145970073528740006}
+  - component: {fileID: 4712222652228009333}
   - component: {fileID: 2421551857246398338}
+  - component: {fileID: 2548905668257588454}
   m_Layer: 0
   m_Name: Location 30
   m_TagString: Untagged
@@ -412,33 +432,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4712222652228009333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988564961207935218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 2
-  locationIndex: 30
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &5145970073528740006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -461,6 +454,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3337077421885417496, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
+--- !u!114 &4712222652228009333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988564961207935218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionType: 3
+  locationType: 2
+  locationIndex: 30
+  locationName: 
+  playerColorMaterial: {fileID: 0}
+  rentRate: 0
+  ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  deck: {fileID: 0}
+  emissionController: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
+  productivity: 0
+  events: []
+  sellLocationInfoPanelData: {fileID: 0}
 --- !u!114 &2421551857246398338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +498,22 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
+--- !u!114 &2548905668257588454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988564961207935218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
 --- !u!1 &1206501544990725193
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +625,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -759,6 +797,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -828,9 +867,10 @@ GameObject:
   - component: {fileID: 3569355929826652431}
   - component: {fileID: 7029291960238455114}
   - component: {fileID: 9099950217822755405}
-  - component: {fileID: 7379978340901341533}
   - component: {fileID: 8169450813093074543}
+  - component: {fileID: 7379978340901341533}
   - component: {fileID: 5952460935084683720}
+  - component: {fileID: 5519847564572475209}
   m_Layer: 0
   m_Name: Location 14
   m_TagString: Untagged
@@ -905,33 +945,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7379978340901341533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345488178919379835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 2
-  locationIndex: 14
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &8169450813093074543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -954,6 +967,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4684100842907799541, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
+--- !u!114 &7379978340901341533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345488178919379835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionType: 1
+  locationType: 2
+  locationIndex: 14
+  locationName: 
+  playerColorMaterial: {fileID: 0}
+  rentRate: 0
+  ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  deck: {fileID: 0}
+  emissionController: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
+  productivity: 0
+  events: []
+  sellLocationInfoPanelData: {fileID: 0}
 --- !u!114 &5952460935084683720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,6 +1011,22 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
+--- !u!114 &5519847564572475209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345488178919379835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
 --- !u!1 &1812674643144307077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1191,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -1305,6 +1363,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -1474,6 +1533,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -1628,6 +1688,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -1799,6 +1860,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -1970,6 +2032,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -2194,6 +2257,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -2363,6 +2427,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -2569,6 +2634,7 @@ MonoBehaviour:
     type: 3}
   uiManager: {fileID: 0}
   resources: []
+  allFactories: []
   goldenFactories: []
 --- !u!114 &1402665673119189410
 MonoBehaviour:
@@ -2698,6 +2764,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -2869,6 +2936,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3038,6 +3106,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3207,6 +3276,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3376,6 +3446,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3547,6 +3618,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3718,6 +3790,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -3887,6 +3960,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -4041,6 +4115,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -4212,6 +4287,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -4383,6 +4459,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -4554,6 +4631,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -4625,9 +4703,10 @@ GameObject:
   - component: {fileID: 2193670508036303088}
   - component: {fileID: 2117402765185619514}
   - component: {fileID: 2623618909734886826}
-  - component: {fileID: 9034717710440495667}
   - component: {fileID: 2525602759602697234}
+  - component: {fileID: 9034717710440495667}
   - component: {fileID: 3226966696487581276}
+  - component: {fileID: 4456465454685883709}
   m_Layer: 0
   m_Name: Location 22
   m_TagString: Untagged
@@ -4702,33 +4781,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9034717710440495667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841903049422638098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 2
-  locationIndex: 22
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &2525602759602697234
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4751,6 +4803,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3849651763464826424, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
+--- !u!114 &9034717710440495667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841903049422638098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productionType: 2
+  locationType: 2
+  locationIndex: 22
+  locationName: 
+  playerColorMaterial: {fileID: 0}
+  rentRate: 0
+  ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  deck: {fileID: 0}
+  emissionController: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
+  productivity: 0
+  events: []
+  sellLocationInfoPanelData: {fileID: 0}
 --- !u!114 &3226966696487581276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4767,6 +4847,22 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
+--- !u!114 &4456465454685883709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841903049422638098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
 --- !u!1 &7058036785804172786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,6 +4974,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -5049,6 +5146,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -5120,10 +5218,10 @@ GameObject:
   - component: {fileID: 8134463039926401784}
   - component: {fileID: 101615652953739140}
   - component: {fileID: 773998545559092358}
-  - component: {fileID: 4972178359503703956}
   - component: {fileID: 3035396011489984158}
-  - component: {fileID: 2292181855585665932}
+  - component: {fileID: 4972178359503703956}
   - component: {fileID: 7173464703773265173}
+  - component: {fileID: 4011151760183904766}
   m_Layer: 0
   m_Name: Location 6
   m_TagString: Untagged
@@ -5198,33 +5296,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4972178359503703956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7117874525503164917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 2
-  locationIndex: 6
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &3035396011489984158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5247,7 +5318,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6453048120371961184, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &2292181855585665932
+--- !u!114 &4972178359503703956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5256,10 +5327,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7117874525503164917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa1a612dc7852a4ca5923e2b71a3cef, type: 3}
+  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardDeck: {fileID: 11400000, guid: 9db7db80252f78b4aa3cdf95205c7ac1, type: 2}
+  productionType: 0
+  locationType: 2
+  locationIndex: 6
+  locationName: 
+  playerColorMaterial: {fileID: 0}
+  rentRate: 0
+  ownerPlayer: {fileID: 0}
+  playgroundController: {fileID: 0}
+  factoryController: {fileID: 0}
+  resourceController: {fileID: 0}
+  deck: {fileID: 0}
+  emissionController: {fileID: 0}
+  locationInfoPanel: {fileID: 0}
+  productivity: 0
+  events: []
+  sellLocationInfoPanelData: {fileID: 0}
 --- !u!114 &7173464703773265173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5276,6 +5362,22 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
+--- !u!114 &4011151760183904766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117874525503164917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
 --- !u!1 &7366661230679562046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5387,6 +5489,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -5558,6 +5661,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -5835,6 +5939,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6006,6 +6111,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6228,6 +6334,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6382,6 +6489,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6604,6 +6712,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6775,6 +6884,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -6946,6 +7056,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0
@@ -7168,6 +7279,7 @@ MonoBehaviour:
   playgroundController: {fileID: 0}
   factoryController: {fileID: 0}
   resourceController: {fileID: 0}
+  deck: {fileID: 0}
   emissionController: {fileID: 0}
   locationInfoPanel: {fileID: 0}
   productivity: 0

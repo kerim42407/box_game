@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c00780a8a97c124c8e2000d56710590, type: 3}
+  m_Name: Sabotage Card Collection
+  m_EditorClassIdentifier: 
+  <CardsInCollection>k__BackingField:
+  - {fileID: 11400000, guid: b6142bb9ad9d04e4ba0986f289fe74ed, type: 2}
+  - {fileID: 11400000, guid: 45cdf9c49ad944341a58e05d4ca63cd7, type: 2}
+  - {fileID: 11400000, guid: 5fb2622f99f18ee42a7150f7f94da14f, type: 2}
+  - {fileID: 11400000, guid: 7c841f12c19e05b4fa5b5f8965c24ac8, type: 2}
+  - {fileID: 11400000, guid: 2c82e3b399a1de147bf116ebf1a448b3, type: 2}

@@ -13,6 +13,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cardEffectDescription;
     [SerializeField] private TextMeshProUGUI cardDescription;
+    [SerializeField] private Image hiddenImage;
 
     #endregion
 
@@ -21,7 +22,7 @@ public class CardUI : MonoBehaviour
     private void Awake()
     {
         card = GetComponent<Card>();
-        SetCardUI();
+        SetCardUI(false);
     }
 
     private void OnValidate()
@@ -29,11 +30,12 @@ public class CardUI : MonoBehaviour
         Awake();
     }
 
-    public void SetCardUI()
+    public void SetCardUI(bool shouldHide)
     {
         if (card != null && card.CardData != null)
         {
             SetCardTexts();
+            SetCardImage(shouldHide);
         }
     }
 
@@ -44,9 +46,13 @@ public class CardUI : MonoBehaviour
         cardDescription.text = card.CardData.CardDescription;
     }
 
-    private void SetCardImage()
+    private void SetCardImage(bool shouldHide)
     {
         cardImage.sprite = card.CardData.Image;
+        if (shouldHide)
+        {
+            hiddenImage.gameObject.SetActive(true);
+        }
     }
 
     #endregion

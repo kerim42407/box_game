@@ -6,12 +6,10 @@ public class Deck : MonoBehaviour
 {
     #region Fields and Properties
 
-    public static Deck Instance { get; private set; }
-
-    [SerializeField] private CardCollection playerDeck;
+    public CardCollection cardCollection;
     [SerializeField] private Card cardPrefab;
 
-    [SerializeField] private Canvas canvas;
+    public GameObject playerCardContainer;
 
     private List<Card> deckPile = new();
 
@@ -23,51 +21,72 @@ public class Deck : MonoBehaviour
 
     #region Methods
 
-    private void Awake()
+    private void Start()
     {
-        if(Instance == null)
+
+    }
+
+    public void DrawCard(PlayerObjectController player, int cardIndex)
+    {
+        Card card;
+        
+        if (player.isLocalPlayer)
         {
-            Instance = this;
+            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, playerCardContainer.transform);
+            card.SetUp(cardCollection.CardsInCollection[cardIndex], false);
+            card.transform.localScale = new Vector3(.25f, .25f, .25f);
         }
         else
         {
-            Destroy(gameObject);
+            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, playerCardContainer.transform.parent);
+            card.SetUp(cardCollection.CardsInCollection[cardIndex], true);
+            card.transform.localScale = new Vector3(.25f, .25f, .25f);
+            StartCoroutine(card.cardAnimation.MoveToTarget(player.gamePlayerListItem.transform.position));
         }
-    }
-
-    private void Start()
-    {
-        InstantiateDeck();
-        DrawHand();
-    }
-
-    private void InstantiateDeck()
-    {
-        for(int i = 0; i < playerDeck.CardsInCollection.Count; i++)
+        player.playerCards.Add(card);
+        if (player.isLocalPlayer)
         {
-            Card card = Instantiate(cardPrefab, canvas.transform);
-            card.SetUp(playerDeck.CardsInCollection[i]);
-            deckPile.Add(card);
-            card.gameObject.SetActive(false);
+            if (card.CardData.Category == CardCategory.Market)
+            {
+                PlaygroundController.Instance.CmdPlayCard(player, player.playerCards.IndexOf(card));
+            }
         }
         
+
+        //int i = Random.Range(0, playerDeck.CardsInCollection.Count);
+        //Card card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, playerCardContainer.transform);
+        //card.transform.localScale = new Vector3(.25f, .25f, .25f);
+        //card.SetUp(playerDeck.CardsInCollection[i]);
+        //card.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(transform.position);
+
+
+        //Debug.Log(card.GetComponent<RectTransform>().anchoredPosition);
+        //Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+        //card.transform.SetParent(playerCardContainer.transform, true);
+        //StartCoroutine(card.cardAnimation.MoveToTarget(playerCardContainer.transform.position, playerCardContainer.transform));
+        //Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+        //Debug.Log(playerCardContainer.GetComponent<RectTransform>().anchoredPosition);
+        //Debug.Log(card.cardAnimation);
+        //card.cardAnimation.MoveCard(Camera.main.WorldToScreenPoint(transform.position), playerCardContainer.GetComponent<RectTransform>().anchoredPosition);
+        //HandCards.Add(card);
     }
 
-    public void DrawHand()
-    {
-        int i = Random.Range(0, deckPile.Count);
-        HandCards.Add(deckPile[i]);
-        deckPile[i].gameObject.SetActive(true);
-    }
+    //public void DrawHand()
+    //{
+    //    int i = Random.Range(0, playerDeck.CardsInCollection.Count);
+    //    Card card = Instantiate(cardPrefab);
+    //    HandCards.Add(deckPile[i]);
+    //    deckPile[i].gameObject.SetActive(true);
+    //}
 
-    public void DiscardCard(Card card)
-    {
-        if (HandCards.Contains(card))
-        {
-            HandCards.Remove(card);
-            card.gameObject.SetActive(false);
-        }
-    }
+    //public void DiscardCard(Card card)
+    //{
+    //    if (HandCards.Contains(card))
+    //    {
+    //        HandCards.Remove(card);
+    //        card.gameObject.SetActive(false);
+    //    }
+    //}
 
     #endregion
 }

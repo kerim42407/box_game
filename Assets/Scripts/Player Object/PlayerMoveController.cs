@@ -89,10 +89,9 @@ public class PlayerMoveController : NetworkBehaviour
         //Debug.Log($"Stopped on: {locationController.locationName}. Location type is: {locationController.locationType}.");
         if(locationType == LocationController.LocationType.Card)
         {
-            //CardDeckController cardDeckController = playerLocation.GetComponent<CardDeckController>();
-
-            //cardDeckController.cardDeck.DrawCard(playerObjectController);
-            playerObjectController.gameManager.CmdUpdateTurnIndex();
+            Deck deck = playerLocation.GetComponent<Deck>();
+            playgroundController.CmdDrawCard(playerObjectController, locationController.locationIndex, deck.cardCollection.CardsInCollection.Count);
+            //playerObjectController.gameManager.CmdUpdateTurnIndex();
         }
         else if (locationType == LocationController.LocationType.RegularFactory || locationType == LocationController.LocationType.BigFactory || locationType == LocationController.LocationType.GoldenFactory)
         {
