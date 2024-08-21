@@ -31,9 +31,6 @@ public class LocationController : MonoBehaviour
     [Header("Factory Variables")]
     public float productivity;
 
-    [Header("Events")]
-    public List<EventBase> events;
-
     [Header("Active Cards")]
     public List<Card> activeCards;
 
@@ -78,9 +75,34 @@ public class LocationController : MonoBehaviour
         return 0;
     }
 
-    public void UpdateProductivity(float value)
+    public float GetProductivityByProductionType(string productionType)
     {
-        productivity += value;
+        float _productivity = 100;
+        foreach(PlayerObjectController playerObjectController in playgroundController.gameManager.Manager.gamePlayers)
+        {
+            foreach(Card card in playerObjectController.playerCards)
+            {
+                if(card.CardData.Category == CardCategory.Market && card.CardData.ProductionType.ToString() == productionType)
+                {
+                    _productivity += card.CardData.ProductivityValue;
+                }
+            }
+        }
+        return _productivity;
+    }
+
+    public void UpdateProductivity()
+    {
+        float _productivity = 100;
+        foreach(Card card in activeCards)
+        {
+            if(card.CardData.Category == CardCategory.Market && card.CardData.ProductionType == productionType)
+            {
+                _productivity += card.CardData.ProductivityValue;
+            }
+        }
+        productivity = _productivity;
+        UpdateRentRate();
     }
     #endregion
 
@@ -407,27 +429,28 @@ public class LocationController : MonoBehaviour
                         Destroy(transform.gameObject);
                     }
                 }
-                //foreach (EventBase eventBase in events)
-                //{
-                //    if (eventBase.eventType == EventType.Positive)
-                //    {
-                //        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                //        eventPanelData.productivityText.text = $"{eventBase.value}";
-                //        eventPanelData.eventNameText.text = eventBase.eventName;
-                //    }
-                //    else if (eventBase.eventType == EventType.Negative)
-                //    {
-                //        EventPanelData eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                //        eventPanelData.productivityText.text = $"{eventBase.value}";
-                //        eventPanelData.eventNameText.text = eventBase.eventName;
-                //    }
-                //}
 
                 foreach(Card card in activeCards)
                 {
-                    EventPanelData eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                    eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                    eventPanelData.eventNameText.text = card.CardData.CardName;
+                    EventPanelData eventPanelData;
+                    switch (card.CardData.EffectType)
+                    {
+                        case CardEffectType.Positive:
+                            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
+                            eventPanelData.eventNameText.text = card.CardData.CardName;
+                            break;
+                        case CardEffectType.Negative:
+                            eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
+                            eventPanelData.eventNameText.text = card.CardData.CardName;
+                            break;
+                        case CardEffectType.Neutral:
+                            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
+                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
+                            eventPanelData.eventNameText.text = card.CardData.CardName;
+                            break;
+                    }
                 }
                 locationInfoPanel.SetActive(true);
             }

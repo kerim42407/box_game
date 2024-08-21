@@ -47,6 +47,16 @@ public class FactoryController : MonoBehaviour
         return CalculateSellToAnotherPrice(_factoryLevel) / 3;
     }
 
+    public float CalculateRentRateGoldenFactory(int _factoryLevel, float productivity)
+    {
+        return CalculateSellToAnotherPriceGoldenFactory(_factoryLevel, productivity) / 3;
+    }
+
+    public float CalculateSellToAnotherPriceGoldenFactory(int _factoryLevel, float productivity)
+    {
+        return gameManager.baseFactoryPrice * gameManager.factoryPriceCoefPerLevel[_factoryLevel] * factoryPriceCoef * (productivity / 100);
+    }
+
     public void UpdateOwnerPlayer()
     {
         locationController.ownerPlayer = ownerPlayer;

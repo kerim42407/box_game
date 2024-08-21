@@ -22,5 +22,6 @@ MonoBehaviour:
   <Category>k__BackingField: 1
   <Type>k__BackingField: 1
   <PlayStyle>k__BackingField: 0
-  <ProductionType>k__BackingField: 0
-  <ProductivityValue>k__BackingField: 0
+  <ProductionType>k__BackingField: 1
+  <ProductivityValue>k__BackingField: -40
+  <CardDuration>k__BackingField: 3

@@ -27,12 +27,29 @@ public class UIManager : MonoBehaviour
 
     [Header("References")]
     public GameManager gameManager;
+    public GameObject playCardArea;
     public GameObject infoCanvas;
     public GameObject playerCardContainer;
     public GameObject locationInfoPanel;
     public GameObject localPlayerListItemPanel;
     public GameObject gamePlayersListItemPanel;
+
+    public static UIManager Instance { get; private set; }
     #endregion
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void OnEnable()
     {

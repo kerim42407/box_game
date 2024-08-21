@@ -32,21 +32,28 @@ public class Deck : MonoBehaviour
         
         if (player.isLocalPlayer)
         {
-            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, playerCardContainer.transform);
+            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, UIManager.Instance.mainCanvas.transform);
+            if(card.CardData.Type == CardType.Holdable)
+            {
+                card.transform.SetParent(playerCardContainer.transform);
+            }
             card.SetUp(cardCollection.CardsInCollection[cardIndex], false);
             card.transform.localScale = new Vector3(.25f, .25f, .25f);
         }
         else
         {
-            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, playerCardContainer.transform.parent);
+            card = Instantiate(cardPrefab, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, UIManager.Instance.mainCanvas.transform);
             card.SetUp(cardCollection.CardsInCollection[cardIndex], true);
             card.transform.localScale = new Vector3(.25f, .25f, .25f);
-            StartCoroutine(card.cardAnimation.MoveToTarget(player.gamePlayerListItem.transform.position));
+            if(card.CardData.Type == CardType.Holdable)
+            {
+                StartCoroutine(card.cardAnimation.MoveToTarget(player.gamePlayerListItem.transform.position));
+            }
         }
         player.playerCards.Add(card);
         if (player.isLocalPlayer)
         {
-            if (card.CardData.Category == CardCategory.Market)
+            if (card.CardData.Type == CardType.NotHoldable)
             {
                 PlaygroundController.Instance.CmdPlayCard(player, player.playerCards.IndexOf(card));
             }

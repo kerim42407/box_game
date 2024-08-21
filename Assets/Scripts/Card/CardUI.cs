@@ -13,7 +13,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cardEffectDescription;
     [SerializeField] private TextMeshProUGUI cardDescription;
-    [SerializeField] private Image hiddenImage;
+    public Image hiddenImage;
 
     #endregion
 

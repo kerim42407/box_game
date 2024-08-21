@@ -6,6 +6,12 @@ public class CardAnimation : MonoBehaviour
 {
     public float speed = 5.0f;
     public RectTransform rectTransform;
+    public Card card;
+
+    private void Start()
+    {
+        card = GetComponent<Card>();
+    }
 
     public IEnumerator MoveToTarget(Vector2 targetPosition)
     {
@@ -17,5 +23,22 @@ public class CardAnimation : MonoBehaviour
 
         transform.position = targetPosition;
         gameObject.SetActive(false);
+    }
+
+    public IEnumerator MoveToPlayArea(PlayerObjectController player, float duration)
+    {
+        card.GetComponent<CardUI>().hiddenImage.gameObject.SetActive(false);
+        float elapsedTime = 0;
+        while(elapsedTime < duration)
+        {
+            transform.position = Vector2.Lerp(transform.position, UIManager.Instance.playCardArea.transform.position, elapsedTime / duration);
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = UIManager.Instance.playCardArea.transform.position;
+        transform.localScale = Vector3.one;
+        card.playCardEvent?.Invoke(player);
     }
 }

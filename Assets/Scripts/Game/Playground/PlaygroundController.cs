@@ -88,28 +88,29 @@ public class PlaygroundController : NetworkBehaviour
         if (locationController.locationType == LocationController.LocationType.GoldenFactory)
         {
             locationController.SetProductionType(newProductionType);
-            foreach (LocationController locationController1 in resources)
-            {
-                if (locationController1.productionType == locationController.productionType)
-                {
-                    if (!locationController1.ownerPlayer)
-                    {
 
-                    }
-                    else
+            foreach(PlayerObjectController player in gameManager.Manager.gamePlayers)
+            {
+                foreach(Card card in player.playerCards)
+                {
+                    if(card.CardData.Category == CardCategory.Market)
                     {
-                        if (locationController1.ownerPlayer == newOwner)
+                        if(card.CardData.ProductionType == locationController.productionType)
                         {
-                            gameManager.resourcePositiveEvent.ApplyEvent(locationController);
+                            locationController.activeCards.Add(card);
                         }
                         else
                         {
-                            gameManager.resourceNegativeEvent.ApplyEvent(locationController);
+                            if (locationController.activeCards.Contains(card))
+                            {
+                                locationController.activeCards.Remove(card);
+                            }
                         }
+                        
                     }
-
                 }
             }
+            locationController.UpdateProductivity();
         }
 
         // If purchasing the factory for the first time, upgrade to level 1
@@ -158,27 +159,7 @@ public class PlaygroundController : NetworkBehaviour
         resourceController.ownerPlayer = newOwner;
         newOwner.ownedLocations.Add(locationController);
         newOwner.ownedResources.Add(locationController);
-        foreach (LocationController locationController1 in goldenFactories)
-        {
-            if (locationController1.productionType == locationController.productionType)
-            {
-                if (!locationController1.ownerPlayer)
-                {
 
-                }
-                else
-                {
-                    if (locationController1.ownerPlayer == newOwner)
-                    {
-                        gameManager.resourcePositiveEvent.ApplyEvent(locationController1);
-                    }
-                    else
-                    {
-                        gameManager.resourceNegativeEvent.ApplyEvent(locationController1);
-                    }
-                }
-            }
-        }
         locationController.UpdateRentRate();
         resourceController.UpdateOwnerPlayer();
         locationController.playerColorMaterial.color = newOwner.playerColor;
@@ -203,10 +184,7 @@ public class PlaygroundController : NetworkBehaviour
             factoryController.ownerPlayer.ownedLocations.Remove(locationController);
             factoryController.ownerPlayer = null;
             factoryController.factoryLevel = 0;
-            foreach (EventBase eventBase in locationController.events.ToList())
-            {
-                eventBase.RemoveEvent(locationController);
-            }
+
             locationController.UpdateRentRate();
             factoryController.UpdateOwnerPlayer();
         }
@@ -216,27 +194,6 @@ public class PlaygroundController : NetworkBehaviour
 
             resourceController.ownerPlayer.ownedLocations.Remove(locationController);
             resourceController.ownerPlayer.ownedResources.Remove(locationController);
-            foreach (LocationController locationController1 in goldenFactories)
-            {
-                if (locationController1.productionType == locationController.productionType)
-                {
-                    if (!locationController1.ownerPlayer)
-                    {
-
-                    }
-                    else
-                    {
-                        if (locationController1.ownerPlayer == owner)
-                        {
-                            gameManager.resourcePositiveEvent.RemoveEvent(locationController1);
-                        }
-                        else
-                        {
-                            gameManager.resourceNegativeEvent.RemoveEvent(locationController1);
-                        }
-                    }
-                }
-            }
 
             resourceController.ownerPlayer = null;
             locationController.UpdateRentRate();
@@ -318,13 +275,26 @@ public class PlaygroundController : NetworkBehaviour
     public void CmdPlayCard(PlayerObjectController player, int cardIndex)
     {
         RpcPlayCard(player, cardIndex);
+        gameManager.CmdUpdateTurnIndex();
     }
 
     [ClientRpc]
     private void RpcPlayCard(PlayerObjectController player, int cardIndex)
     {
-        player.playerCards[cardIndex].PlayCard();
+        player.playerCards[cardIndex].PlayCard(player);
         //player.playerCards[cardIndex]
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDestroyCard(PlayerObjectController player, int cardIndex)
+    {
+        RpcDestroyCard(player, cardIndex);
+    }
+
+    [ClientRpc]
+    public void RpcDestroyCard(PlayerObjectController player, int cardIndex)
+    {
+        player.playerCards[cardIndex].DestroyCard(player);
     }
     #endregion
 

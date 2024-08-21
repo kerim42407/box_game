@@ -11,8 +11,10 @@ public class ScriptableCard : ScriptableObject
     [field: SerializeField] public CardCategory Category { get; private set; }
     [field: SerializeField] public CardType Type { get; private set; }
     [field: SerializeField] public CardPlayStyle PlayStyle { get; private set; }
+    [field: SerializeField] public CardEffectType EffectType { get; private set; }
     [field: SerializeField] public LocationController.ProductionType ProductionType { get; private set; }
     [field: SerializeField] public int ProductivityValue { get; private set; }
+    [field: SerializeField] public int CardDuration { get; private set; }
 }
 
 public enum CardCategory
@@ -32,4 +34,11 @@ public enum CardPlayStyle
 {
     Random,
     Selectable
+}
+
+public enum CardEffectType
+{
+    Negative,
+    Neutral,
+    Positive
 }

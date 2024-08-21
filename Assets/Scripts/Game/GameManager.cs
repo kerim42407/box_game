@@ -48,10 +48,6 @@ public class GameManager : NetworkBehaviour
     public float resourceProductivityCoef;
     public float bonus;
 
-    [Header("Effects")]
-    public EventBase resourcePositiveEvent;
-    public EventBase resourceNegativeEvent;
-
     [Header("Notification Events")]
     public NotificationEventBase notificationEventBase;
 
@@ -217,16 +213,15 @@ public class GameManager : NetworkBehaviour
 
         if (shouldIncreaseTurnCount)
         {
-            //foreach(Card card in Manager.gamePlayers[turnIndex].activeCards)
-            //{
-            //    card.count++;
-            //    if(card.count == card.duration)
-            //    {
-            //        card.DestroyCard(Manager.gamePlayers[turnIndex]);
-            //        Debug.Log("Destroy Card");
-            //    }
+            foreach (Card card in Manager.gamePlayers[turnIndex].playerCards)
+            {
+                card.count++;
+                if (card.count == card.CardData.CardDuration)
+                {
+                    playgroundController.RpcDestroyCard(Manager.gamePlayers[turnIndex], Manager.gamePlayers[turnIndex].playerCards.IndexOf(card));
+                }
 
-            //}
+            }
             Manager.gamePlayers[turnIndex].turnCount++;
             
         }

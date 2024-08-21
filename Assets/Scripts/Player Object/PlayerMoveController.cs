@@ -328,7 +328,17 @@ public class PlayerMoveController : NetworkBehaviour
                     factoryBuyPanelData.productionTypeIndex--;
                 }
                 factoryBuyPanelData.productionTypeText.text = factoryBuyPanelData.productionType[factoryBuyPanelData.productionTypeIndex];
-                factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
+                factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)}";
+                if (factoryController.factoryLevel == 0)
+                {
+                    factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRateGoldenFactory(1, factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)));
+                }
+                else
+                {
+                    factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRateGoldenFactory(factoryController.factoryLevel, factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)));
+                }
+                //factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
+
             });
             factoryBuyPanelData.nextButton.onClick.AddListener(() =>
             {
@@ -341,10 +351,20 @@ public class PlayerMoveController : NetworkBehaviour
                     factoryBuyPanelData.productionTypeIndex++;
                 }
                 factoryBuyPanelData.productionTypeText.text = factoryBuyPanelData.productionType[factoryBuyPanelData.productionTypeIndex];
-                factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
+                factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)}";
+                if (factoryController.factoryLevel == 0)
+                {
+                    factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRateGoldenFactory(1, factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)));
+                }
+                else
+                {
+                    factoryBuyPanelData.rentRateText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", factoryController.CalculateRentRateGoldenFactory(factoryController.factoryLevel, factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)));
+                }
+                //factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
             });
             factoryBuyPanelData.productionTypeText.text = factoryBuyPanelData.productionType[factoryBuyPanelData.productionTypeIndex];
-            factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
+            factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.GetProductivityByProductionType(factoryBuyPanelData.productionTypeText.text)}";
+            //factoryBuyPanelData.productivityText.text = $"%{factoryController.locationController.productivity + factoryController.locationController.CheckResource(factoryBuyPanelData.productionTypeText.text, playerObjectController) * 100}";
         }
         else
         {
