@@ -1,7 +1,5 @@
 using Mirror;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaygroundController : NetworkBehaviour
@@ -28,16 +26,14 @@ public class PlaygroundController : NetworkBehaviour
     public UIManager uiManager;
 
     [Header("Location Lists")]
-    public List<LocationController> resources;
-    public List<LocationController> allFactories;
-    public List<LocationController> goldenFactories;
+    public List<ResourceController> resources;
+    public List<FactoryController> allFactories;
+    public List<FactoryController> goldenFactories;
 
     public static PlaygroundController Instance { get; private set; }
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -53,154 +49,200 @@ public class PlaygroundController : NetworkBehaviour
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
-        foreach (GameObject gameObject in locations)
+    }
+
+    /// <summary>
+    /// Checks resource state and sets productivity
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    [Server]
+    private float ServerCheckFactoryResourceState(FactoryController factoryController)
+    {
+        float _productivity = 0;
+        switch (factoryController.s_ResourceState)
         {
-            gameObject.GetComponent<LocationController>().playgroundController = this;
-            gameObject.GetComponent<LocationController>().CheckLocationType();
+            case ResourceState.Positive:
+                _productivity += gameManager.resourceProductivityCoef;
+                break;
+            case ResourceState.Negative:
+                _productivity -= gameManager.resourceProductivityCoef;
+                break;
+            case ResourceState.Neutral:
+                break;
         }
-        //GetComponent<NetworkIdentity>().AssignClientAuthority(GameObject.Find("LocalGamePlayer").GetComponent<PlayerObjectController>().connectionToClient);
+        return _productivity;
+    }
+
+    /// <summary>
+    /// Check all active factory cards and sets productivity
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    [Server]
+    private float ServerCheckFactoryActiveCards(FactoryController factoryController)
+    {
+        float _productivity = 0;
+        foreach (Card card in factoryController.s_ActiveCards)
+        {
+            switch (card.CardData.Category)
+            {
+                case CardCategory.Market:
+                    if (card.CardData.ProductionType == factoryController.s_ProductionType)
+                    {
+                        _productivity += card.CardData.ProductivityValue;
+                    }
+                    break;
+            }
+        }
+        return _productivity;
+    }
+
+    /// <summary>
+    /// Clears active cards. Checks all active cards and add if they production type matches
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    [Server]
+    private void ServerSetFactoryActiveCards(FactoryController factoryController)
+    {
+        factoryController.s_ActiveCards.Clear();
+        foreach (Card card in gameManager.s_ActiveCards)
+        {
+            switch (card.CardData.Category)
+            {
+                case CardCategory.Market:
+                    if (card.CardData.ProductionType == factoryController.s_ProductionType)
+                    {
+                        factoryController.s_ActiveCards.Add(card);
+                    }
+                    break;
+            }
+        }
     }
 
     #region Buy Factory Functions
     [Command(requiresAuthority = false)]
     public void CmdBuyFactory(int locationIndex, PlayerObjectController newOwner, string newProductionType)
     {
-        RpcBuyFactory(locationIndex, newOwner, newProductionType);
-    }
-
-    [ClientRpc]
-    private void RpcBuyFactory(int locationIndex, PlayerObjectController newOwner, string newProductionType)
-    {
-        FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
+        // Get references
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
 
         // Remove old owner
-        if (factoryController.ownerPlayer)
+        if (factoryController.s_OwnerPlayer)
         {
-            factoryController.ownerPlayer.ownedLocations.Remove(locationController);
+            factoryController.s_OwnerPlayer.s_PlayerOwnedLocations.Remove(locationController);
         }
 
-        // Assign new owner
-        factoryController.ownerPlayer = newOwner;
-        newOwner.ownedLocations.Add(locationController);
+        // Set factory level to 1 if it is 0
+        if (factoryController.s_FactoryLevel == 0)
+        {
+            factoryController.s_FactoryLevel = 1;
+        }
+
+        // Set new owner
+        factoryController.s_OwnerPlayer = newOwner;
+        newOwner.s_PlayerOwnedLocations.Add(locationController);
 
         // Set production type if golden factory
-        if (locationController.locationType == LocationController.LocationType.GoldenFactory)
+        if (factoryController.locationType == LocationType.GoldenFactory)
         {
-            locationController.SetProductionType(newProductionType);
-
-            foreach(PlayerObjectController player in gameManager.Manager.gamePlayers)
-            {
-                foreach(Card card in player.playerCards)
-                {
-                    if(card.CardData.Category == CardCategory.Market)
-                    {
-                        if(card.CardData.ProductionType == locationController.productionType)
-                        {
-                            locationController.activeCards.Add(card);
-                        }
-                        else
-                        {
-                            if (locationController.activeCards.Contains(card))
-                            {
-                                locationController.activeCards.Remove(card);
-                            }
-                        }
-                        
-                    }
-                }
-            }
-            locationController.UpdateProductivity();
+            factoryController.SetProductionType(newProductionType);
+            factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController);
+            ServerSetFactoryActiveCards(factoryController);
+            factoryController.s_Productivity = 100 + ServerCheckFactoryResourceState(factoryController) + ServerCheckFactoryActiveCards(factoryController);
+            //factoryController.s_Productivity = ServerSideCalculateProductivity(factoryController);
         }
 
-        // If purchasing the factory for the first time, upgrade to level 1
-        if (factoryController.factoryLevel == 0)
-        {
-            factoryController.factoryLevel = 1;
-        }
-
-        locationController.UpdateRentRate();
-        factoryController.UpdateOwnerPlayer();
-        locationController.playerColorMaterial.color = newOwner.playerColor;
+        // Calculate productivity and rent rate
+        factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
     }
+
     #endregion
 
     #region Upgrade Factory Functions
+
     [Command(requiresAuthority = false)]
     public void CmdUpgradeFactory(int locationIndex)
     {
-        RpcUpgradeFactory(locationIndex);
-    }
-
-    [ClientRpc]
-    private void RpcUpgradeFactory(int locationIndex)
-    {
-        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
-
-        factoryController.factoryLevel++;
-        locationController.UpdateRentRate();
+        factoryController.s_FactoryLevel++;
+        factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
     }
+
     #endregion
 
     #region Buy Resource Functions
+
     [Command(requiresAuthority = false)]
     public void CmdBuyResource(int locationIndex, PlayerObjectController newOwner)
     {
-        RpcBuyResource(locationIndex, newOwner);
-    }
-
-    [ClientRpc]
-    private void RpcBuyResource(int locationIndex, PlayerObjectController newOwner)
-    {
         ResourceController resourceController = locations[locationIndex].GetComponent<ResourceController>();
-        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
+        resourceController.s_OwnerPlayer = newOwner;
+        newOwner.s_PlayerOwnedLocations.Add(resourceController);
+        newOwner.s_PlayerOwnedResources.Add(resourceController);
 
-        resourceController.ownerPlayer = newOwner;
-        newOwner.ownedLocations.Add(locationController);
-        newOwner.ownedResources.Add(locationController);
+        foreach (FactoryController factoryController in goldenFactories)
+        {
+            if (factoryController.s_ProductionType == resourceController.s_ProductionType)
+            {
+                factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController, resourceController);
+                factoryController.s_Productivity += ServerCheckFactoryResourceState(factoryController);
+                factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
+            }
+        }
 
-        locationController.UpdateRentRate();
-        resourceController.UpdateOwnerPlayer();
-        locationController.playerColorMaterial.color = newOwner.playerColor;
-
+        resourceController.s_RentRate = gameManager.CalculateResourceRentRate(resourceController);
     }
+
     #endregion
 
     #region Sell Location To The Bank Functions
     [Command(requiresAuthority = false)]
     public void CmdSellLocationToTheBank(int locationIndex, PlayerObjectController owner)
     {
-        RpcSellLocationToTheBank(locationIndex, owner);
-    }
-    [ClientRpc]
-    private void RpcSellLocationToTheBank(int locationIndex, PlayerObjectController owner)
-    {
         LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
-        if (locationController.factoryController)
+        LocationType locationType = locationController.locationType;
+
+        owner.s_PlayerOwnedLocations.Remove(locationController);
+
+        locationController.s_OwnerPlayer = null;
+
+        if (locationType == LocationType.Resource)
         {
-            FactoryController factoryController = locationController.factoryController;
-
-            factoryController.ownerPlayer.ownedLocations.Remove(locationController);
-            factoryController.ownerPlayer = null;
-            factoryController.factoryLevel = 0;
-
-            locationController.UpdateRentRate();
-            factoryController.UpdateOwnerPlayer();
+            ResourceController resourceController = locations[locationIndex].GetComponent<ResourceController>();
+            owner.s_PlayerOwnedResources.Remove(locationController);
+            foreach (FactoryController factoryController in goldenFactories)
+            {
+                if (factoryController.s_ProductionType == resourceController.s_ProductionType)
+                {
+                    factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController, resourceController);
+                    factoryController.s_Productivity += ServerCheckFactoryResourceState(factoryController);
+                    factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
+                }
+            }
+            resourceController.s_RentRate = gameManager.CalculateResourceRentRate(resourceController);
         }
-        else if (locationController.resourceController)
+        else
         {
-            ResourceController resourceController = locationController.resourceController;
-
-            resourceController.ownerPlayer.ownedLocations.Remove(locationController);
-            resourceController.ownerPlayer.ownedResources.Remove(locationController);
-
-            resourceController.ownerPlayer = null;
-            locationController.UpdateRentRate();
-            resourceController.UpdateOwnerPlayer();
+            FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
+            factoryController.s_FactoryLevel = 0;
+            if (factoryController.locationType == LocationType.GoldenFactory)
+            {
+                factoryController.SetProductionType("Default");
+                factoryController.s_ResourceState = ResourceState.Neutral;
+                ServerSetFactoryActiveCards(factoryController);
+                factoryController.s_Productivity = 100 + ServerCheckFactoryResourceState(factoryController) + ServerCheckFactoryActiveCards(factoryController);
+            }
+            else
+            {
+                
+            }
+            factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
         }
-        locationController.playerColorMaterial.color = new Color(1, 0, 0);
     }
+
     #endregion
 
     #region Bankruptcy Functions
@@ -251,92 +293,32 @@ public class PlaygroundController : NetworkBehaviour
     }
 
     #endregion
+}
 
-    #region Card Functions
+public enum RegionType
+{
+    Clay,
+    Copper,
+    Iron,
+    Cotton,
+    Coal
+}
 
-    [Command(requiresAuthority = false)]
-    public void CmdDrawCard(PlayerObjectController player, int locationIndex, int cardCollectionCount)
-    {
-        int cardIndex = Random.Range(0, cardCollectionCount);
-        RpcDrawCard(player, locationIndex, cardIndex);
-    }
-
-    [ClientRpc] 
-    private void RpcDrawCard(PlayerObjectController player, int locationIndex, int cardIndex)
-    {
-        LocationController locationController = locations[locationIndex].GetComponent<LocationController>();
-        Deck deck = locationController.deck;
-        deck.DrawCard(player, cardIndex);
-    }
-
-    #region Market Card Functions
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayCard(PlayerObjectController player, int cardIndex)
-    {
-        RpcPlayCard(player, cardIndex);
-        gameManager.CmdUpdateTurnIndex();
-    }
-
-    [ClientRpc]
-    private void RpcPlayCard(PlayerObjectController player, int cardIndex)
-    {
-        player.playerCards[cardIndex].PlayCard(player);
-        //player.playerCards[cardIndex]
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdDestroyCard(PlayerObjectController player, int cardIndex)
-    {
-        RpcDestroyCard(player, cardIndex);
-    }
-
-    [ClientRpc]
-    public void RpcDestroyCard(PlayerObjectController player, int cardIndex)
-    {
-        player.playerCards[cardIndex].DestroyCard(player);
-    }
-    #endregion
-
-    #endregion
-
-    #region Market Card Functions
-    //[Command(requiresAuthority = false)]
-    //public void CmdApplyMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
-    //{
-    //    RpcApplyMarketCardEffect(player, marketCard);
-    //}
-    //[ClientRpc]
-    //private void RpcApplyMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
-    //{
-    //    foreach (LocationController locationController in allFactories)
-    //    {
-    //        if (locationController.productionType == marketCard.productionType)
-    //        {
-    //            locationController.activeCards.Add(marketCard);
-    //        }
-    //    }
-    //    gameManager.activeCards.Add(marketCard);
-    //    player.activeCards.Add(marketCard);
-    //}
-
-    //[Command(requiresAuthority = false)]
-    //public void CmdRemoveMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
-    //{
-    //    RpcRemoveMarketCardEffect(player, marketCard);
-    //}
-    //[ClientRpc]
-    //private void RpcRemoveMarketCardEffect(PlayerObjectController player, MarketCard marketCard)
-    //{
-    //    foreach(EventBase eventBase in marketCard.activeEvents)
-    //    {
-    //        //Debug.Log(eventBase.locationIndex);
-    //        eventBase.RemoveEvent(locations[eventBase.locationIndex].GetComponent<LocationController>());
-    //        Destroy(eventBase);
-    //    }
-    //    gameManager.activeCards.Remove(marketCard);
-    //    player.activeCards.Remove(marketCard);
-    //    //player.activeCards.Remove(marketCard);
-    //}
-    #endregion
+public enum ProductionType
+{
+    Clay,
+    Copper,
+    Iron,
+    Cotton,
+    Coal
+}
+public enum LocationType
+{
+    Starting,
+    Special,
+    Card,
+    RegularFactory,
+    BigFactory,
+    GoldenFactory,
+    Resource
 }

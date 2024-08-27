@@ -16,7 +16,12 @@ MonoBehaviour:
   <CardEffectDescription>k__BackingField: You got a piece of resource
   <CardDescription>k__BackingField: "Fabrikan\u0131n bulundu\u011Fu b\xF6lgelerden
     bir tanesine ait kaynak elde et"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 0
-  <Type>k__BackingField: 1
+  <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 0
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

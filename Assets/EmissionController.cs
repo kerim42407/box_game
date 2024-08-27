@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(LocationController))]
 public class EmissionController : MonoBehaviour
 {
     #region Variables

@@ -16,7 +16,12 @@ MonoBehaviour:
   <CardEffectDescription>k__BackingField: Send an spy to a opponent
   <CardDescription>k__BackingField: "Ajanlar\u0131n haz\u0131r! Bir rakibinin elindeki
     sabotaj kartlar\u0131ndan bir tanesini \xF6\u011Frenebilirsin"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 0
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 0
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

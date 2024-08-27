@@ -17,7 +17,12 @@ MonoBehaviour:
     turns
   <CardDescription>k__BackingField: "Rakibinin i\u015F\xE7ilerini greve ikna edeceksin.
     Rakibin 2 Tur boyunca \u0130\u015F G\xFCc\xFCn\xFC kullanamayacak"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 2
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 1
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

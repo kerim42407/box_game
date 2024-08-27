@@ -1,49 +1,99 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceController : MonoBehaviour
+public class ResourceController : LocationController
 {
-    private GameManager gameManager;
-    [HideInInspector] public LocationController locationController;
-    private LocationController.ProductionType productionType;
+    #region Fields and Properties
 
-    public PlayerObjectController ownerPlayer;
+    [Header("Resource Controller")]
+    [Header("Sync Variables")]
+    [SyncVar] public ProductionType s_ProductionType;
+    [SyncVar(hook = nameof(SetRentRate))] public float s_RentRate;
+    [SyncVar] public List<FactoryController> s_AffectedFactories;
 
-    public float rentRate;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
+
+    #region Methods
+
+    public override void UpdateOwnerPlayer(PlayerObjectController newOwner)
     {
-        locationController = GetComponent<LocationController>();
-        productionType = locationController.productionType;
-        gameManager = locationController.transform.parent.GetComponent<PlaygroundController>().gameManager;
+        base.UpdateOwnerPlayer(newOwner);
+        UpdateRentRate();
     }
 
-    public float CalculateBuyFromBankPrice()
+    public  void UpdateRentRate()
     {
-        return gameManager.resourceBuyPrice;
+
     }
 
-    public float CalculateSellToBankPrice()
+    #region Setup Functions
+
+    public override void SetupEmissionController()
     {
-        return CalculateBuyFromBankPrice() / 2;
+        emissionController.material = GetComponent<MeshRenderer>().materials[2];
+        emissionController.initialEmissionColor = emissionController.material.GetColor("_EmissionColor");
     }
 
-    public float CalculateRentRate()
+    public override void SetupLocation()
     {
-        if(ownerPlayer == null)
+        base.SetupLocation();
+        SpawnRentRateTextPrefab();
+        SpawnResourcePrefab();
+        SetupResourceVariables();
+    }
+
+    /// <summary>
+    /// Set resource variables
+    /// </summary>
+    private void SetupResourceVariables()
+    {
+        playerColorMaterial = GetComponent<MeshRenderer>().materials[1];
+        playgroundController.resources.Add(this);
+    }
+
+    #endregion
+
+    public override float GetProductivity()
+    {
+        return base.GetProductivity();
+    }
+
+    public override float GetCalculateSellToBankPrice()
+    {
+        return gameManager.CalculateResourceSellToBankPrice();
+    }
+
+    public override float GetRentRate()
+    {
+        return s_RentRate;
+    }
+
+    public void SetRentRate(float oldValue, float newValue)
+    {
+        if (isServer)
         {
-            return 0;
+            s_RentRate = newValue;
+        }
+        if (isClient)
+        {
+            UpdateRentRate(newValue);
+        }
+    }
+
+    public void UpdateRentRate(float rentRate)
+    {
+        if (rentRate != 0)
+        {
+            rentRateText.text = $"{rentRate / 1000}K";
         }
         else
         {
-            return gameManager.resourceRentRate;
+            rentRateText.text = "";
         }
     }
 
-    public void UpdateOwnerPlayer()
-    {
-        locationController.ownerPlayer = ownerPlayer;
-    }
+    #endregion
 }

@@ -4917,37 +4917,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089750176}
   m_CullTransparentMesh: 0
---- !u!1 &1092328432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1092328433}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1092328433
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1092328432}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121108581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10237,8 +10206,9 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 5153096612930116058, guid: 4b6cc1ab8be4664448631b31dac74444, type: 3}
+  - {fileID: 6554510882203312682, guid: 7be08fc45297ec44c9e2791f7312acd0, type: 3}
   - {fileID: 4432381936566570498, guid: 245e936503fcddd4bb044d54c05e255b, type: 3}
+  - {fileID: 5153096612930116058, guid: 4b6cc1ab8be4664448631b31dac74444, type: 3}
   - {fileID: 4430310486374559543, guid: 2350685b2b7666248a5fc89ffd909df9, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
@@ -10356,4 +10326,3 @@ SceneRoots:
   - {fileID: 1735639990}
   - {fileID: 8053983229036763650}
   - {fileID: 5580721018487684523}
-  - {fileID: 1092328433}

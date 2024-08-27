@@ -16,7 +16,12 @@ MonoBehaviour:
   <CardEffectDescription>k__BackingField: Untouchable for 3 turns
   <CardDescription>k__BackingField: "Bir fabrikan veya kayna\u011F\u0131n 3 tur boyunca
     sat\u0131lamaz veya sabote edilemez"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 0
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 0
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

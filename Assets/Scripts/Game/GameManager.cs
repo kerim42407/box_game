@@ -1,6 +1,4 @@
-using Michsky.MUIP;
-using Mirror;
-using System.Collections.Generic;
+﻿using Mirror;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -12,6 +10,7 @@ public class GameManager : NetworkBehaviour
     [Header("References")]
     public UIManager uiManager;
     public GameObject playgroundPrefab;
+    public GameObject cardPrefab;
     public GameObject canvas;
     public PlayerObjectController localPlayerController;
     [HideInInspector] public PlaygroundController playgroundController;
@@ -19,6 +18,7 @@ public class GameManager : NetworkBehaviour
 
     [SyncVar] public int turnIndex;
     [SyncVar] public int turnCount;
+    public readonly SyncList<Card> s_ActiveCards = new();
 
     // Manager
     private MyNetworkManager manager;
@@ -54,6 +54,23 @@ public class GameManager : NetworkBehaviour
     [Header("Debug References")]
     public TMP_InputField inputField;
     public GameObject customDiceButton;
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -170,6 +187,11 @@ public class GameManager : NetworkBehaviour
         Manager.gamePlayers[turnIndex].playerMoveController.Test();
     }
 
+    public void SellTest()
+    {
+        Manager.gamePlayers[turnIndex].playerMoveController.SellTest(Manager.gamePlayers[turnIndex].connectionToClient,10000);
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdUpdateTurnIndex()
     {
@@ -213,17 +235,19 @@ public class GameManager : NetworkBehaviour
 
         if (shouldIncreaseTurnCount)
         {
-            foreach (Card card in Manager.gamePlayers[turnIndex].playerCards)
+            foreach (Card card in Manager.gamePlayers[turnIndex].s_PlayerActiveCards)
             {
                 card.count++;
-                if (card.count == card.CardData.CardDuration)
+                if (card.count == card.CardData.CardDuration + 3)
                 {
-                    playgroundController.RpcDestroyCard(Manager.gamePlayers[turnIndex], Manager.gamePlayers[turnIndex].playerCards.IndexOf(card));
+                    CmdDestroyCard(Manager.gamePlayers[turnIndex], card);
+                    //card.DestroyCard();
+                    //playgroundController.RpcDestroyCard(Manager.gamePlayers[turnIndex], Manager.gamePlayers[turnIndex].playerCards.IndexOf(card));
                 }
 
             }
             Manager.gamePlayers[turnIndex].turnCount++;
-            
+
         }
         RpcUpdateTurnIndex(turnIndex);
         RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
@@ -253,6 +277,349 @@ public class GameManager : NetworkBehaviour
     {
         notificationEventBase.ShowNotification(uiManager.mainCanvas.transform);
     }
+    #endregion
+
+    [Command]
+    public void CmdTargetDebugLog()
+    {
+
+    }
+
+    [TargetRpc]
+    public void RpcTargetDebugLog(NetworkConnectionToClient target, string log)
+    {
+        Debug.Log(log);
+    }
+
+    public ResourceState SetGoldenFactoryResourceState(FactoryController factoryController)
+    {
+        foreach (ResourceController resourceController in playgroundController.resources)
+        {
+            if (resourceController.s_ProductionType == factoryController.s_ProductionType)
+            {
+                if (resourceController.s_OwnerPlayer != null)
+                {
+                    if (resourceController.s_OwnerPlayer == factoryController.s_OwnerPlayer)
+                    {
+                        return ResourceState.Positive;
+                    }
+                    else
+                    {
+                        return ResourceState.Negative;
+                    }
+                }
+            }
+        }
+
+        return ResourceState.Neutral;
+    }
+
+    public ResourceState SetGoldenFactoryResourceState(FactoryController factoryController, ResourceController resourceController)
+    {
+        if (factoryController.s_OwnerPlayer == null)
+        {
+            return ResourceState.Neutral;
+        }
+        else
+        {
+            if (resourceController.s_OwnerPlayer == factoryController.s_OwnerPlayer)
+            {
+                return ResourceState.Positive;
+            }
+            else
+            {
+                return ResourceState.Negative;
+            }
+        }
+    }
+
+    #region Calculation Functions
+
+    /// <summary>
+    /// Calculates and returns factory controller's buy from bank price
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    public float CalculateFactoryBuyFromBankPrice(FactoryController factoryController)
+    {
+        return baseFactoryPrice * factoryController.factoryPriceCoef;
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's sell to bank price
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    public float CalculateFactorySellToBankPrice(FactoryController factoryController)
+    {
+        return CalculateFactoryBuyFromBankPrice(factoryController) / 2;
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's rent rate
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    public float CalculateFactoryRentRate(FactoryController factoryController)
+    {
+        if (factoryController.s_OwnerPlayer)
+        {
+            return CalculateFactorySellToAnotherPlayerPrice(factoryController) / 3;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's sell to another player price
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    public float CalculateFactorySellToAnotherPlayerPrice(FactoryController factoryController)
+    {
+        return baseFactoryPrice * factoryPriceCoefPerLevel[factoryController.s_FactoryLevel] * factoryController.factoryPriceCoef * (factoryController.s_Productivity / 100);
+    }
+
+    /// <summary>
+    /// Calculates and returns resource controller's rent rate
+    /// </summary>
+    /// <param name="resourceController"></param>
+    /// <returns></returns>
+    public float CalculateResourceRentRate(ResourceController resourceController)
+    {
+        if (resourceController.s_OwnerPlayer)
+        {
+            return resourceRentRate;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's rent rate
+    /// </summary>
+    /// <param name="_factoryLevel"></param>
+    /// <param name="_factoryPriceCoef"></param>
+    /// <param name="_productivity"></param>
+    /// <returns></returns>
+    public float CalculateFactoryRentRate(int _factoryLevel, float _factoryPriceCoef, float _productivity)
+    {
+        return CalculateFactorySellToAnotherPlayerPrice(_factoryLevel, _factoryPriceCoef, _productivity) / 3;
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's sell to another player price
+    /// </summary>
+    /// <param name="_factoryLevel"></param>
+    /// <param name="_factoryPriceCoef"></param>
+    /// <param name="_productivity"></param>
+    /// <returns></returns>
+    public float CalculateFactorySellToAnotherPlayerPrice(int _factoryLevel, float _factoryPriceCoef, float _productivity)
+    {
+        return baseFactoryPrice * factoryPriceCoefPerLevel[_factoryLevel] * _factoryPriceCoef * (_productivity / 100);
+    }
+
+    /// <summary>
+    /// Calculates and returns productivity by player and production type
+    /// </summary>
+    /// <param name="buyer"></param>
+    /// <param name="_productionType"></param>
+    /// <returns></returns>
+    public float CalculateProductivityByProductionType(PlayerObjectController buyer, string _productionType)
+    {
+        float _productivity = 100;
+        foreach (ResourceController resourceController in playgroundController.resources)
+        {
+            if (resourceController.s_ProductionType.ToString() == _productionType)
+            {
+                if (resourceController.s_OwnerPlayer)
+                {
+                    if (resourceController.s_OwnerPlayer == buyer)
+                    {
+                        _productivity += resourceProductivityCoef;
+                    }
+                    else
+                    {
+                        _productivity -= resourceProductivityCoef;
+                    }
+                }
+            }
+        }
+        foreach (Card card in s_ActiveCards)
+        {
+            switch (card.CardData.Category)
+            {
+                case CardCategory.Market:
+                    if (card.CardData.ProductionType.ToString() == _productionType)
+                    {
+                        _productivity += card.CardData.ProductivityValue;
+                    }
+                    break;
+            }
+        }
+        return _productivity;
+    }
+
+    /// <summary>
+    /// Calculates and returns factory controller's upgrade price
+    /// </summary>
+    /// <param name="factoryController"></param>
+    /// <returns></returns>
+    public float CalculateFactoryUpgradePrice(FactoryController factoryController)
+    {
+        return baseFactoryPrice * factoryPriceCoefPerLevel[factoryController.s_FactoryLevel + 1] * factoryController.factoryPriceCoef;
+    }
+
+    /// <summary>
+    /// Calculates and returns resource controller's buy from bank price
+    /// </summary>
+    /// <returns></returns>
+    public float CalculateResourceBuyFromBankPrice()
+    {
+        return resourceBuyPrice;
+    }
+
+    /// <summary>
+    /// Calculates and returns resource controller's sell to bank price
+    /// </summary>
+    /// <returns></returns>
+    public float CalculateResourceSellToBankPrice()
+    {
+        return CalculateResourceBuyFromBankPrice() / 2;
+    }
+
+    #endregion
+
+    #region Card Functions
+
+    [Command(requiresAuthority = false)]
+    public void CmdDrawCardForPlayer(PlayerObjectController player, DeckController deckController)
+    {
+        int cardIndex = Random.Range(0, deckController.cardCollection.CardsInCollection.Count);
+        GameObject cardObject = Instantiate(cardPrefab);
+        NetworkServer.Spawn(cardObject, player.connectionToClient);
+        Card card = cardObject.GetComponent<Card>();
+        //card.SetUpEvent();
+
+        RpcDrawCardForPlayer(player, card, cardIndex, deckController);
+    }
+
+    [ClientRpc]
+    private void RpcDrawCardForPlayer(PlayerObjectController player, Card card, int cardIndex, DeckController deckController)
+    {
+        card.transform.localScale = new Vector3(.25f, .25f, .25f);
+        card.transform.position = Camera.main.WorldToScreenPoint(deckController.transform.position);
+        if (card.isOwned)
+        {
+            card.s_OwnerPlayer = player;
+            card.SetUpUI(deckController.cardCollection.CardsInCollection[cardIndex], false);
+            card.SetUpEvent();
+            if (card.CardData.Type == CardType.Holdable)
+            {
+                card.transform.SetParent(uiManager.playerCardContainer.transform);
+            }
+            else
+            {
+                card.transform.SetParent(uiManager.mainCanvas.transform);
+            }
+        }
+        else
+        {
+            card.SetUpUI(deckController.cardCollection.CardsInCollection[cardIndex], true);
+            card.SetUpEvent();
+            card.transform.SetParent(uiManager.mainCanvas.transform);
+            if (card.CardData.Type == CardType.Holdable)
+            {
+                StartCoroutine(card.cardAnimation.MoveToPlayerUI(player.gamePlayerListItem.transform.position));
+            }
+            else
+            {
+                card.transform.SetParent(uiManager.mainCanvas.transform);
+
+            }
+        }
+        if (card.CardData.Type == CardType.NotHoldable)
+        {
+            card.PlayCard();
+        }
+
+
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayCard(PlayerObjectController player, Card card)
+    {
+        s_ActiveCards.Add(card);
+        player.s_PlayerActiveCards.Add(card);
+        card.playCardEvent?.Invoke(card);
+
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDestroyCard(PlayerObjectController player, Card card)
+    {
+        s_ActiveCards.Remove(card);
+        player.s_PlayerActiveCards.Remove(card);
+        card.destroyCardEvent?.Invoke(card);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayMarketCard(Card card)
+    {
+
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if (factoryController.s_ProductionType == card.CardData.ProductionType)
+            {
+                CmdApplyMarketCardEffect(factoryController, card);
+            }
+        }
+        CmdUpdateTurnIndex();
+        RpcPlayMarketCard(card);
+    }
+
+    [ClientRpc]
+    private void RpcPlayMarketCard(Card card)
+    {
+        card.gameObject.SetActive(false);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDestroyMarketCard(Card card)
+    {
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if (factoryController.s_ProductionType == card.CardData.ProductionType)
+            {
+                CmdRemoveMarketCardEffect(factoryController, card);
+            }
+        }
+        //Destroy(card);
+        //NetworkServer.Destroy(card.gameObject);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdApplyMarketCardEffect(FactoryController factoryController, Card card)
+    {
+        factoryController.s_ActiveCards.Add(card);
+        factoryController.s_Productivity += card.CardData.ProductivityValue;
+        factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdRemoveMarketCardEffect(FactoryController factoryController, Card card)
+    {
+        factoryController.s_ActiveCards.Remove(card);
+        factoryController.s_Productivity -= card.CardData.ProductivityValue;
+        factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+    }
+
+
+
     #endregion
 
 }

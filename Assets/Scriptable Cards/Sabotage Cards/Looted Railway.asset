@@ -17,7 +17,12 @@ MonoBehaviour:
   <CardDescription>k__BackingField: "Se\xE7ilen bir kayna\u011F\u0131n demiryolunu
     ya\u011Fmala. Rakip oyuncu 2 tur boyunca demiryollar\u0131na ba\u011Fl\u0131
     fabrikas\u0131n\u0131 i\u015Fletemez"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 2
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 1
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

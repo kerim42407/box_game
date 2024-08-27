@@ -16,7 +16,12 @@ MonoBehaviour:
   <CardEffectDescription>k__BackingField: The opponent receives a tax penalty
   <CardDescription>k__BackingField: "Rakibin mal varl\u0131\u011F\u0131na g\xF6re
     hesaplanacak vergiyi \xF6demek zorunda kalacak"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 2
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 1
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

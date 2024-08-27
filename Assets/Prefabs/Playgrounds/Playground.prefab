@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 954482796640610043}
   - component: {fileID: 2152522024030839061}
   - component: {fileID: 2329000878635050234}
-  - component: {fileID: 4899563737359492769}
-  - component: {fileID: 2737384074158554814}
   - component: {fileID: 6681802609629571722}
-  - component: {fileID: 1793799086830809549}
+  - component: {fileID: 6818910775609717896}
+  - component: {fileID: 7239687358604959765}
   m_Layer: 0
   m_Name: Location 13
   m_TagString: Untagged
@@ -89,51 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4899563737359492769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436807995980148384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 4
-  locationIndex: 13
-  locationName: St Austell
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &2737384074158554814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436807995980148384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &6681802609629571722
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -156,7 +110,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8887318896295321577, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1793799086830809549
+--- !u!114 &6818910775609717896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436807995980148384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: St Austell
+  locationIndex: 13
+  locationType: 4
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &7239687358604959765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,9 +172,8 @@ GameObject:
   - component: {fileID: 2003664529581039227}
   - component: {fileID: 7976712321912233699}
   - component: {fileID: 8264620762482373688}
-  - component: {fileID: 5745260542389817868}
-  - component: {fileID: 6504675157712497104}
-  - component: {fileID: 2559699743372096498}
+  - component: {fileID: 7660111262485415978}
+  - component: {fileID: 3712111200977156555}
   m_Layer: 0
   m_Name: Location 38
   m_TagString: Untagged
@@ -283,7 +270,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5508606044473477087, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &5745260542389817868
+--- !u!114 &7660111262485415978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,26 +279,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 844687931972900482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 2
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Card
   locationIndex: 38
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
+  locationType: 2
+  regionType: 0
   playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
   sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &6504675157712497104
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
+--- !u!114 &3712111200977156555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,22 +316,6 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
---- !u!114 &2559699743372096498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844687931972900482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
-  playerCardContainer: {fileID: 0}
 --- !u!1 &988564961207935218
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,9 +328,8 @@ GameObject:
   - component: {fileID: 372074915777033613}
   - component: {fileID: 179506466112648291}
   - component: {fileID: 5145970073528740006}
-  - component: {fileID: 4712222652228009333}
-  - component: {fileID: 2421551857246398338}
-  - component: {fileID: 2548905668257588454}
+  - component: {fileID: 2651240275234939780}
+  - component: {fileID: 8030755891383278865}
   m_Layer: 0
   m_Name: Location 30
   m_TagString: Untagged
@@ -454,7 +426,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3337077421885417496, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &4712222652228009333
+--- !u!114 &2651240275234939780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -463,26 +435,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 988564961207935218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 2
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Card
   locationIndex: 30
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
+  locationType: 2
+  regionType: 3
   playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
   sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &2421551857246398338
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
+--- !u!114 &8030755891383278865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,22 +472,6 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
---- !u!114 &2548905668257588454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988564961207935218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
-  playerCardContainer: {fileID: 0}
 --- !u!1 &1206501544990725193
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,10 +483,9 @@ GameObject:
   - component: {fileID: 4554125506222466962}
   - component: {fileID: 460934577064677015}
   - component: {fileID: 7041972195935974644}
-  - component: {fileID: 5923328097518819682}
-  - component: {fileID: 3844803863625562549}
   - component: {fileID: 509351738440279356}
-  - component: {fileID: 8773449317962409084}
+  - component: {fileID: 7884352654301224172}
+  - component: {fileID: 5059268435899987317}
   m_Layer: 0
   m_Name: Location 33
   m_TagString: Untagged
@@ -603,51 +560,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5923328097518819682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206501544990725193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 3
-  locationIndex: 33
-  locationName: Barnsley
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &3844803863625562549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206501544990725193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &509351738440279356
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -670,7 +582,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8403504059528698334, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &8773449317962409084
+--- !u!114 &7884352654301224172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206501544990725193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Barnsley
+  locationIndex: 33
+  locationType: 3
+  regionType: 4
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &5059268435899987317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -697,10 +643,9 @@ GameObject:
   - component: {fileID: 2287660541921888928}
   - component: {fileID: 7466658282219165391}
   - component: {fileID: 3315791652653902362}
-  - component: {fileID: 2709862155371915159}
-  - component: {fileID: 6325940987192034774}
   - component: {fileID: 4333687230813653663}
-  - component: {fileID: 630701196143154368}
+  - component: {fileID: 8443737994459930296}
+  - component: {fileID: 4524802804639797841}
   m_Layer: 0
   m_Name: Location 26
   m_TagString: Untagged
@@ -775,49 +720,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2709862155371915159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221339034381085168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 6
-  locationIndex: 26
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &6325940987192034774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221339034381085168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  rentRate: 0
 --- !u!64 &4333687230813653663
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -840,7 +742,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5099766056511863558, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &630701196143154368
+--- !u!114 &8443737994459930296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221339034381085168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Resource
+  locationIndex: 26
+  locationType: 6
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_RentRate: 0
+  s_AffectedFactories: []
+--- !u!114 &4524802804639797841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -868,9 +799,8 @@ GameObject:
   - component: {fileID: 7029291960238455114}
   - component: {fileID: 9099950217822755405}
   - component: {fileID: 8169450813093074543}
-  - component: {fileID: 7379978340901341533}
-  - component: {fileID: 5952460935084683720}
-  - component: {fileID: 5519847564572475209}
+  - component: {fileID: 6681319556722970035}
+  - component: {fileID: 874402213247667490}
   m_Layer: 0
   m_Name: Location 14
   m_TagString: Untagged
@@ -967,7 +897,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4684100842907799541, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &7379978340901341533
+--- !u!114 &6681319556722970035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -976,26 +906,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345488178919379835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 2
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Card
   locationIndex: 14
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
+  locationType: 2
+  regionType: 1
   playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
   sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &5952460935084683720
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
+--- !u!114 &874402213247667490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1011,22 +943,6 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
---- !u!114 &5519847564572475209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345488178919379835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
-  playerCardContainer: {fileID: 0}
 --- !u!1 &1812674643144307077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,10 +1007,9 @@ GameObject:
   - component: {fileID: 7795826869529083779}
   - component: {fileID: 1091221394775272655}
   - component: {fileID: 6378782242769425875}
-  - component: {fileID: 7366284177041211634}
-  - component: {fileID: 3461276291318439533}
   - component: {fileID: 8208130894226847120}
-  - component: {fileID: 7886385899983988991}
+  - component: {fileID: 8169750697242242432}
+  - component: {fileID: 9134232691514331002}
   m_Layer: 0
   m_Name: Location 31
   m_TagString: Untagged
@@ -1169,51 +1084,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7366284177041211634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844728059572813558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 3
-  locationIndex: 31
-  locationName: Bolton
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &3461276291318439533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844728059572813558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8208130894226847120
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1236,7 +1106,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8762492070429298984, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &7886385899983988991
+--- !u!114 &8169750697242242432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844728059572813558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Bolton
+  locationIndex: 31
+  locationType: 3
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &9134232691514331002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1263,10 +1167,9 @@ GameObject:
   - component: {fileID: 8671939806086830743}
   - component: {fileID: 2633013110930794931}
   - component: {fileID: 7080920686695772580}
-  - component: {fileID: 6048576072962147416}
-  - component: {fileID: 39728688520617708}
   - component: {fileID: 5463720834878550208}
-  - component: {fileID: 752729637341890681}
+  - component: {fileID: 5016510208914761879}
+  - component: {fileID: 7036465610482050279}
   m_Layer: 0
   m_Name: Location 19
   m_TagString: Untagged
@@ -1341,51 +1244,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6048576072962147416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940819299472636027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 4
-  locationIndex: 19
-  locationName: Corby
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &39728688520617708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940819299472636027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5463720834878550208
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1408,7 +1266,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7709533543519701425, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &752729637341890681
+--- !u!114 &5016510208914761879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940819299472636027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Corby
+  locationIndex: 19
+  locationType: 4
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &7036465610482050279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1435,9 +1327,9 @@ GameObject:
   - component: {fileID: 934661957911871843}
   - component: {fileID: 3126435949458048354}
   - component: {fileID: 4356491204545781983}
-  - component: {fileID: 857169746651860252}
   - component: {fileID: 4858198857487650036}
-  - component: {fileID: 6616533505796136553}
+  - component: {fileID: 5286196118724320359}
+  - component: {fileID: 7969585724889821009}
   m_Layer: 0
   m_Name: Location 16
   m_TagString: Untagged
@@ -1511,34 +1403,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &857169746651860252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547145677102953917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 1
-  locationIndex: 16
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &4858198857487650036
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1561,7 +1425,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2892233231009193914, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &6616533505796136553
+--- !u!114 &5286196118724320359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547145677102953917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2135cf4ebbeff4f82cb0d4431e35da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: 
+  locationIndex: 16
+  locationType: 1
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+--- !u!114 &7969585724889821009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1588,10 +1478,9 @@ GameObject:
   - component: {fileID: 7565953505555190580}
   - component: {fileID: 3304803107370955654}
   - component: {fileID: 3912757135520134828}
-  - component: {fileID: 1635601006763048160}
-  - component: {fileID: 8882081124764081259}
   - component: {fileID: 4855653539239812442}
-  - component: {fileID: 7955754120085877375}
+  - component: {fileID: 725051014586666476}
+  - component: {fileID: 3181161686721670148}
   m_Layer: 0
   m_Name: Location 12
   m_TagString: Untagged
@@ -1666,51 +1555,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1635601006763048160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004250800868616853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 5
-  locationIndex: 12
-  locationName: Swansea
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &8882081124764081259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004250800868616853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &4855653539239812442
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1733,7 +1577,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -93345586351620638, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &7955754120085877375
+--- !u!114 &725051014586666476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004250800868616853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Swansea
+  locationIndex: 12
+  locationType: 5
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &3181161686721670148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1760,10 +1638,9 @@ GameObject:
   - component: {fileID: 6929720616555028843}
   - component: {fileID: 4977308928088306163}
   - component: {fileID: 6775102097084080164}
-  - component: {fileID: 5175740667645036375}
-  - component: {fileID: 8757591966712453675}
   - component: {fileID: 3412380782912319677}
-  - component: {fileID: 7570651213085878748}
+  - component: {fileID: 1334826880321501352}
+  - component: {fileID: 4603713830971931383}
   m_Layer: 0
   m_Name: Location 15
   m_TagString: Untagged
@@ -1838,51 +1715,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5175740667645036375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3256891678966526947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 3
-  locationIndex: 15
-  locationName: Camborge
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &8757591966712453675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3256891678966526947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &3412380782912319677
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1905,7 +1737,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 53557902061568081, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &7570651213085878748
+--- !u!114 &1334826880321501352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256891678966526947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Camborge
+  locationIndex: 15
+  locationType: 3
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &4603713830971931383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1932,10 +1798,9 @@ GameObject:
   - component: {fileID: 8005019296968169454}
   - component: {fileID: 2123864336101880951}
   - component: {fileID: 4316956745237629437}
-  - component: {fileID: 5217599291682712863}
-  - component: {fileID: 1535133555861832416}
   - component: {fileID: 7647054024634706007}
-  - component: {fileID: 4907466181699679147}
+  - component: {fileID: 2870601339794574119}
+  - component: {fileID: 7549754594312578309}
   m_Layer: 0
   m_Name: Location 4
   m_TagString: Untagged
@@ -2010,51 +1875,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5217599291682712863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372513582213021997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 5
-  locationIndex: 4
-  locationName: Derby
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &1535133555861832416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372513582213021997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &7647054024634706007
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2077,7 +1897,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6087275098587828513, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &4907466181699679147
+--- !u!114 &2870601339794574119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372513582213021997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Derby
+  locationIndex: 4
+  locationType: 5
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &7549754594312578309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2157,10 +2011,9 @@ GameObject:
   - component: {fileID: 8784366672536492099}
   - component: {fileID: 2004233290246027797}
   - component: {fileID: 4270788097998337870}
-  - component: {fileID: 6691307032968914199}
-  - component: {fileID: 4859093850451944824}
   - component: {fileID: 8681136780970967597}
-  - component: {fileID: 5850848264070852366}
+  - component: {fileID: 6135213191815447213}
+  - component: {fileID: 3291261155280341225}
   m_Layer: 0
   m_Name: Location 39
   m_TagString: Untagged
@@ -2235,51 +2088,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6691307032968914199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222844452911435013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 3
-  locationIndex: 39
-  locationName: Wigan
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &4859093850451944824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222844452911435013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8681136780970967597
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2302,7 +2110,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4380264935988472012, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &5850848264070852366
+--- !u!114 &6135213191815447213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222844452911435013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Wigan
+  locationIndex: 39
+  locationType: 3
+  regionType: 4
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &3291261155280341225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2329,9 +2171,9 @@ GameObject:
   - component: {fileID: 7245474220384616734}
   - component: {fileID: 8354973020896557431}
   - component: {fileID: 2792506669927874994}
-  - component: {fileID: 4107255359579351508}
   - component: {fileID: 2646475778156496582}
-  - component: {fileID: 5437935540389278859}
+  - component: {fileID: 1682227674569678848}
+  - component: {fileID: 2395325917503215384}
   m_Layer: 0
   m_Name: Location 32
   m_TagString: Untagged
@@ -2405,34 +2247,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4107255359579351508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4274174534094990630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 1
-  locationIndex: 32
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &2646475778156496582
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2455,7 +2269,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7401851189978095876, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &5437935540389278859
+--- !u!114 &1682227674569678848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274174534094990630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2135cf4ebbeff4f82cb0d4431e35da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: 
+  locationIndex: 32
+  locationType: 1
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+--- !u!114 &2395325917503215384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2664,10 +2504,9 @@ GameObject:
   - component: {fileID: 4369459352260065975}
   - component: {fileID: 8448514269671894594}
   - component: {fileID: 8365997506832781278}
-  - component: {fileID: 6815868070478645451}
-  - component: {fileID: 5989718252672223238}
   - component: {fileID: 8922326296076631839}
-  - component: {fileID: 5213229859075211203}
+  - component: {fileID: 1028173178073417293}
+  - component: {fileID: 8210459815472978522}
   m_Layer: 0
   m_Name: Location 9
   m_TagString: Untagged
@@ -2742,51 +2581,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6815868070478645451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5114565229599628161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 3
-  locationIndex: 9
-  locationName: Redruth
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &5989718252672223238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5114565229599628161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8922326296076631839
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2809,7 +2603,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8473340155278150441, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &5213229859075211203
+--- !u!114 &1028173178073417293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114565229599628161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Redruth
+  locationIndex: 9
+  locationType: 3
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &8210459815472978522
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2836,10 +2664,9 @@ GameObject:
   - component: {fileID: 3276798320048171714}
   - component: {fileID: 6298693610763411046}
   - component: {fileID: 8340154891297688928}
-  - component: {fileID: 2260555957458634313}
-  - component: {fileID: 1584855122932364420}
   - component: {fileID: 4121557540823169694}
-  - component: {fileID: 8035065138782327854}
+  - component: {fileID: 1149255669303164184}
+  - component: {fileID: 3979247727811782644}
   m_Layer: 0
   m_Name: Location 10
   m_TagString: Untagged
@@ -2914,49 +2741,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2260555957458634313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5403410268623472611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 6
-  locationIndex: 10
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &1584855122932364420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5403410268623472611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  rentRate: 0
 --- !u!64 &4121557540823169694
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2979,7 +2763,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3514623296584042524, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &8035065138782327854
+--- !u!114 &1149255669303164184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403410268623472611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Resource
+  locationIndex: 10
+  locationType: 6
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_RentRate: 0
+  s_AffectedFactories: []
+--- !u!114 &3979247727811782644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3006,10 +2819,9 @@ GameObject:
   - component: {fileID: 1276960223725888551}
   - component: {fileID: 5465369460638365808}
   - component: {fileID: 546679731096216472}
-  - component: {fileID: 2672295223973517107}
-  - component: {fileID: 3591806682220721445}
   - component: {fileID: 4147509759786492331}
-  - component: {fileID: 8599000935247364319}
+  - component: {fileID: 3050966652319133657}
+  - component: {fileID: 2245667140530613390}
   m_Layer: 0
   m_Name: Location 18
   m_TagString: Untagged
@@ -3084,49 +2896,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2672295223973517107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722237982182871937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 6
-  locationIndex: 18
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &3591806682220721445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722237982182871937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  rentRate: 0
 --- !u!64 &4147509759786492331
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3149,7 +2918,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7780725826388392090, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &8599000935247364319
+--- !u!114 &3050966652319133657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5722237982182871937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Resource
+  locationIndex: 18
+  locationType: 6
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_RentRate: 0
+  s_AffectedFactories: []
+--- !u!114 &2245667140530613390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3176,10 +2974,9 @@ GameObject:
   - component: {fileID: 2389535678157528382}
   - component: {fileID: 4495941580027697787}
   - component: {fileID: 254172328730765121}
-  - component: {fileID: 9052116979317305316}
-  - component: {fileID: 162952816908780191}
   - component: {fileID: 4594408062618621849}
-  - component: {fileID: 694941303202139978}
+  - component: {fileID: 7322703098812694341}
+  - component: {fileID: 8781608369312027611}
   m_Layer: 0
   m_Name: Location 2
   m_TagString: Untagged
@@ -3254,49 +3051,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9052116979317305316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5801360046219524397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 6
-  locationIndex: 2
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &162952816908780191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5801360046219524397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  rentRate: 0
 --- !u!64 &4594408062618621849
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3319,7 +3073,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -9198102468337270890, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &694941303202139978
+--- !u!114 &7322703098812694341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5801360046219524397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Resource
+  locationIndex: 2
+  locationType: 6
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_RentRate: 0
+  s_AffectedFactories: []
+--- !u!114 &8781608369312027611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3346,10 +3129,9 @@ GameObject:
   - component: {fileID: 7150977630352102335}
   - component: {fileID: 953279959226923908}
   - component: {fileID: 8435043258738873618}
-  - component: {fileID: 8544975487633270947}
-  - component: {fileID: 5013655025197846155}
   - component: {fileID: 5460596564771495503}
-  - component: {fileID: 1877133581386818331}
+  - component: {fileID: 690752063191881211}
+  - component: {fileID: 8788237365022563346}
   m_Layer: 0
   m_Name: Location 29
   m_TagString: Untagged
@@ -3424,51 +3206,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8544975487633270947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5833878167410504530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 4
-  locationIndex: 29
-  locationName: Blackburn
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &5013655025197846155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5833878167410504530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5460596564771495503
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3491,7 +3228,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1615175714506285135, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1877133581386818331
+--- !u!114 &690752063191881211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833878167410504530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Blackburn
+  locationIndex: 29
+  locationType: 4
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &8788237365022563346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3518,10 +3289,9 @@ GameObject:
   - component: {fileID: 3974073607622042097}
   - component: {fileID: 2971701820715730098}
   - component: {fileID: 2952081740931122421}
-  - component: {fileID: 1854877877383913227}
-  - component: {fileID: 65127510541547429}
   - component: {fileID: 5037638385399893082}
-  - component: {fileID: 2044019392199186244}
+  - component: {fileID: 9155008310014098526}
+  - component: {fileID: 371676097832297397}
   m_Layer: 0
   m_Name: Location 23
   m_TagString: Untagged
@@ -3596,51 +3366,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1854877877383913227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5931474982283395210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 3
-  locationIndex: 23
-  locationName: Workington
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &65127510541547429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5931474982283395210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5037638385399893082
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3663,7 +3388,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1552760991992000064, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &2044019392199186244
+--- !u!114 &9155008310014098526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931474982283395210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Workington
+  locationIndex: 23
+  locationType: 3
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &371676097832297397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3690,10 +3449,9 @@ GameObject:
   - component: {fileID: 5827005614752453712}
   - component: {fileID: 6892536617190193431}
   - component: {fileID: 4714064042214477932}
-  - component: {fileID: 5390715318122730890}
-  - component: {fileID: 6468124411187228165}
   - component: {fileID: 6086868849818706936}
-  - component: {fileID: 3237688594803266789}
+  - component: {fileID: 5193804514310897445}
+  - component: {fileID: 7880918942361885564}
   m_Layer: 0
   m_Name: Location 20
   m_TagString: Untagged
@@ -3768,51 +3526,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5390715318122730890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6024382499664432598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 5
-  locationIndex: 20
-  locationName: Birmingham
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &6468124411187228165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6024382499664432598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &6086868849818706936
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3835,7 +3548,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3081410727297430304, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &3237688594803266789
+--- !u!114 &5193804514310897445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024382499664432598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Birmingham
+  locationIndex: 20
+  locationType: 5
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &7880918942361885564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3862,9 +3609,9 @@ GameObject:
   - component: {fileID: 455835707748095768}
   - component: {fileID: 4635534609175085402}
   - component: {fileID: 2740115134824145085}
-  - component: {fileID: 7186935380605477210}
   - component: {fileID: 70575681830906911}
-  - component: {fileID: 1248871254260418543}
+  - component: {fileID: 829881244141889996}
+  - component: {fileID: 5876547862026035272}
   m_Layer: 0
   m_Name: Location 0
   m_TagString: Untagged
@@ -3938,34 +3685,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7186935380605477210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6387399477772848527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 0
-  locationIndex: 0
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &70575681830906911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3988,7 +3707,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8879153363490924899, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1248871254260418543
+--- !u!114 &829881244141889996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387399477772848527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4a2164d100ad24e8d6fe6eb1c3cdf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: 
+  locationIndex: 0
+  locationType: 0
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+--- !u!114 &5876547862026035272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4015,10 +3760,9 @@ GameObject:
   - component: {fileID: 1181384632747952140}
   - component: {fileID: 2646688215342043189}
   - component: {fileID: 182894890455654874}
-  - component: {fileID: 7167921380783606694}
-  - component: {fileID: 8314426687912948098}
   - component: {fileID: 8310941445137257729}
-  - component: {fileID: 6729253299821292069}
+  - component: {fileID: 7026418325350042457}
+  - component: {fileID: 8468126725323169935}
   m_Layer: 0
   m_Name: Location 7
   m_TagString: Untagged
@@ -4093,51 +3837,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7167921380783606694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6481227623607005290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 3
-  locationIndex: 7
-  locationName: Lichfield
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &8314426687912948098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6481227623607005290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8310941445137257729
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4160,7 +3859,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8778304816259451555, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &6729253299821292069
+--- !u!114 &7026418325350042457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481227623607005290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Lichfield
+  locationIndex: 7
+  locationType: 3
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &8468126725323169935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4187,10 +3920,9 @@ GameObject:
   - component: {fileID: 3742045946073970171}
   - component: {fileID: 6269024656266660903}
   - component: {fileID: 867495526664276162}
-  - component: {fileID: 45690417361680054}
-  - component: {fileID: 794212926364861256}
   - component: {fileID: 5344005440276834711}
-  - component: {fileID: 1516511569418519077}
+  - component: {fileID: 3356576956072239863}
+  - component: {fileID: 1769014815183884491}
   m_Layer: 0
   m_Name: Location 36
   m_TagString: Untagged
@@ -4265,51 +3997,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &45690417361680054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6631516512482191619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 5
-  locationIndex: 36
-  locationName: Newcastle
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &794212926364861256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6631516512482191619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5344005440276834711
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4332,7 +4019,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3775033487194467210, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1516511569418519077
+--- !u!114 &3356576956072239863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631516512482191619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Newcastle
+  locationIndex: 36
+  locationType: 5
+  regionType: 4
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &1769014815183884491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4359,10 +4080,9 @@ GameObject:
   - component: {fileID: 4604945667874718602}
   - component: {fileID: 8016310758975841668}
   - component: {fileID: 4764600470173724920}
-  - component: {fileID: 3112454749768179837}
-  - component: {fileID: 241133484168615875}
   - component: {fileID: 8470599965215481870}
-  - component: {fileID: 202663523950054185}
+  - component: {fileID: 7304685994957546914}
+  - component: {fileID: 6430969260476979306}
   m_Layer: 0
   m_Name: Location 17
   m_TagString: Untagged
@@ -4437,51 +4157,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3112454749768179837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6718442399108827346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 3
-  locationIndex: 17
-  locationName: Rotherham
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &241133484168615875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6718442399108827346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8470599965215481870
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4504,7 +4179,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8608579968210322943, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &202663523950054185
+--- !u!114 &7304685994957546914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718442399108827346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Rotherham
+  locationIndex: 17
+  locationType: 3
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &6430969260476979306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4531,10 +4240,9 @@ GameObject:
   - component: {fileID: 5938548286065754451}
   - component: {fileID: 6347135938485775143}
   - component: {fileID: 8631922926821992792}
-  - component: {fileID: 8202056472928191913}
-  - component: {fileID: 4719290861907900374}
   - component: {fileID: 1913321203610979530}
-  - component: {fileID: 3594928074572149618}
+  - component: {fileID: 2837515025449908511}
+  - component: {fileID: 6047884668763787486}
   m_Layer: 0
   m_Name: Location 27
   m_TagString: Untagged
@@ -4609,51 +4317,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8202056472928191913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6740406916249274098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 4
-  locationIndex: 27
-  locationName: Leeds
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &4719290861907900374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6740406916249274098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &1913321203610979530
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4676,7 +4339,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4745038304333872788, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &3594928074572149618
+--- !u!114 &2837515025449908511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740406916249274098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Leeds
+  locationIndex: 27
+  locationType: 4
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &6047884668763787486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4704,9 +4401,8 @@ GameObject:
   - component: {fileID: 2117402765185619514}
   - component: {fileID: 2623618909734886826}
   - component: {fileID: 2525602759602697234}
-  - component: {fileID: 9034717710440495667}
-  - component: {fileID: 3226966696487581276}
-  - component: {fileID: 4456465454685883709}
+  - component: {fileID: 3608346790445449898}
+  - component: {fileID: 5084382096791683650}
   m_Layer: 0
   m_Name: Location 22
   m_TagString: Untagged
@@ -4803,7 +4499,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3849651763464826424, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &9034717710440495667
+--- !u!114 &3608346790445449898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4812,26 +4508,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 6841903049422638098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 2
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Card
   locationIndex: 22
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
+  locationType: 2
+  regionType: 2
   playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
   sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &3226966696487581276
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
+--- !u!114 &5084382096791683650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4847,22 +4545,6 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
---- !u!114 &4456465454685883709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841903049422638098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
-  playerCardContainer: {fileID: 0}
 --- !u!1 &7058036785804172786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4874,10 +4556,9 @@ GameObject:
   - component: {fileID: 6206853654082199516}
   - component: {fileID: 2347581055243588005}
   - component: {fileID: 5815099251785375040}
-  - component: {fileID: 3899082954444233238}
-  - component: {fileID: 4222882246299656073}
   - component: {fileID: 3363077883157204781}
-  - component: {fileID: 6998707044666197348}
+  - component: {fileID: 2320463499185904963}
+  - component: {fileID: 4229519613126877632}
   m_Layer: 0
   m_Name: Location 21
   m_TagString: Untagged
@@ -4952,51 +4633,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3899082954444233238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058036785804172786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 2
-  locationType: 4
-  locationIndex: 21
-  locationName: Sheffield
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &4222882246299656073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058036785804172786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &3363077883157204781
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5019,7 +4655,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1373616582831418380, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &6998707044666197348
+--- !u!114 &2320463499185904963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058036785804172786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Sheffield
+  locationIndex: 21
+  locationType: 4
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 2
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &4229519613126877632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5046,10 +4716,9 @@ GameObject:
   - component: {fileID: 3023305574751155305}
   - component: {fileID: 8796807997935282272}
   - component: {fileID: 5496317347046785308}
-  - component: {fileID: 9048428206035006009}
-  - component: {fileID: 4528193425239096138}
   - component: {fileID: 2851514808907068909}
-  - component: {fileID: 4195168719346991494}
+  - component: {fileID: 4348351214400977858}
+  - component: {fileID: 4925654393263650033}
   m_Layer: 0
   m_Name: Location 35
   m_TagString: Untagged
@@ -5124,51 +4793,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9048428206035006009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7070321418170478088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 4
-  locationIndex: 35
-  locationName: Durham
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &4528193425239096138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7070321418170478088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &2851514808907068909
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5191,7 +4815,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 58832603950803250, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &4195168719346991494
+--- !u!114 &4348351214400977858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070321418170478088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Durham
+  locationIndex: 35
+  locationType: 4
+  regionType: 4
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &4925654393263650033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5219,9 +4877,8 @@ GameObject:
   - component: {fileID: 101615652953739140}
   - component: {fileID: 773998545559092358}
   - component: {fileID: 3035396011489984158}
-  - component: {fileID: 4972178359503703956}
-  - component: {fileID: 7173464703773265173}
-  - component: {fileID: 4011151760183904766}
+  - component: {fileID: 8751647583641819160}
+  - component: {fileID: 8715895679582642471}
   m_Layer: 0
   m_Name: Location 6
   m_TagString: Untagged
@@ -5318,7 +4975,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6453048120371961184, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &4972178359503703956
+--- !u!114 &8751647583641819160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5327,26 +4984,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 7117874525503164917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 2
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Card
   locationIndex: 6
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
+  locationType: 2
+  regionType: 0
   playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
   sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &7173464703773265173
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
+  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
+    type: 3}
+  playerCardContainer: {fileID: 0}
+--- !u!114 &8715895679582642471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5362,22 +5021,6 @@ MonoBehaviour:
   initialEmissionColor: {r: 0, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 1, b: 1, a: 1}
   pulseSpeed: 1
---- !u!114 &4011151760183904766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7117874525503164917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ff58ee76fa59c4a83b3ba5464de9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
-  playerCardContainer: {fileID: 0}
 --- !u!1 &7366661230679562046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5389,10 +5032,9 @@ GameObject:
   - component: {fileID: 9196199198096538054}
   - component: {fileID: 5610620018806154828}
   - component: {fileID: 4758655592405482754}
-  - component: {fileID: 3124941281615087144}
-  - component: {fileID: 7576874487808228920}
   - component: {fileID: 4228420233989366519}
-  - component: {fileID: 5131272759859935553}
+  - component: {fileID: 8977620351670662136}
+  - component: {fileID: 9197007009130831177}
   m_Layer: 0
   m_Name: Location 5
   m_TagString: Untagged
@@ -5467,51 +5109,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3124941281615087144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366661230679562046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 4
-  locationIndex: 5
-  locationName: Stafford
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &7576874487808228920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366661230679562046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &4228420233989366519
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5534,7 +5131,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8386127363733450470, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &5131272759859935553
+--- !u!114 &8977620351670662136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366661230679562046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Stafford
+  locationIndex: 5
+  locationType: 4
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &9197007009130831177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5561,10 +5192,9 @@ GameObject:
   - component: {fileID: 5338112042897894103}
   - component: {fileID: 1882067707876044152}
   - component: {fileID: 4545011337653855708}
-  - component: {fileID: 4726528850076692756}
-  - component: {fileID: 5673925605395647624}
   - component: {fileID: 4469774360910327452}
-  - component: {fileID: 6090428287254272503}
+  - component: {fileID: 4380232957047137043}
+  - component: {fileID: 2564875734995050328}
   m_Layer: 0
   m_Name: Location 1
   m_TagString: Untagged
@@ -5639,51 +5269,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4726528850076692756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7387185690562970692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 3
-  locationIndex: 1
-  locationName: Devonport
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &5673925605395647624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7387185690562970692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &4469774360910327452
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5706,7 +5291,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8137542910398838577, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &6090428287254272503
+--- !u!114 &4380232957047137043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387185690562970692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Devonport
+  locationIndex: 1
+  locationType: 3
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &2564875734995050328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5839,10 +5458,9 @@ GameObject:
   - component: {fileID: 5539658431357257332}
   - component: {fileID: 1611697269256650130}
   - component: {fileID: 6424139939533468619}
-  - component: {fileID: 8277396644194002240}
-  - component: {fileID: 1332868618281906589}
   - component: {fileID: 5179839409419635302}
-  - component: {fileID: 8117030458497205810}
+  - component: {fileID: 3050127294314152308}
+  - component: {fileID: 5241067679921483157}
   m_Layer: 0
   m_Name: Location 28
   m_TagString: Untagged
@@ -5917,51 +5535,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8277396644194002240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7595782045641937850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 5
-  locationIndex: 28
-  locationName: Manchester
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &1332868618281906589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7595782045641937850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5179839409419635302
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5984,7 +5557,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6585887175464429083, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &8117030458497205810
+--- !u!114 &3050127294314152308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595782045641937850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Manchester
+  locationIndex: 28
+  locationType: 5
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &5241067679921483157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6011,10 +5618,9 @@ GameObject:
   - component: {fileID: 4879410147451831127}
   - component: {fileID: 5945828553042205610}
   - component: {fileID: 8436453372254961514}
-  - component: {fileID: 2104414180721692747}
-  - component: {fileID: 6996344514506718562}
   - component: {fileID: 3993239049645604652}
-  - component: {fileID: 1930669322168392046}
+  - component: {fileID: 4982647743362523163}
+  - component: {fileID: 4589374132685563581}
   m_Layer: 0
   m_Name: Location 25
   m_TagString: Untagged
@@ -6089,51 +5695,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2104414180721692747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943959700229255299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 3
-  locationType: 3
-  locationIndex: 25
-  locationName: Oldham
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &6996344514506718562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943959700229255299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &3993239049645604652
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6156,7 +5717,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2179181015192206366, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1930669322168392046
+--- !u!114 &4982647743362523163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943959700229255299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Oldham
+  locationIndex: 25
+  locationType: 3
+  regionType: 3
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 3
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &4589374132685563581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6236,9 +5831,9 @@ GameObject:
   - component: {fileID: 5953738128225560647}
   - component: {fileID: 5376577157998988129}
   - component: {fileID: 8600213672111669560}
-  - component: {fileID: 8580330827139932589}
   - component: {fileID: 1781669195930281439}
-  - component: {fileID: 1359208622992546721}
+  - component: {fileID: 4963847426358994990}
+  - component: {fileID: 3414838054207456844}
   m_Layer: 0
   m_Name: Location 8
   m_TagString: Untagged
@@ -6312,34 +5907,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8580330827139932589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8054091603425379839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 1
-  locationIndex: 8
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &1781669195930281439
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6362,7 +5929,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7281803984427583117, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1359208622992546721
+--- !u!114 &4963847426358994990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8054091603425379839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2135cf4ebbeff4f82cb0d4431e35da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: 
+  locationIndex: 8
+  locationType: 1
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+--- !u!114 &3414838054207456844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6389,10 +5982,9 @@ GameObject:
   - component: {fileID: 3419685259692565879}
   - component: {fileID: 4665787147458375341}
   - component: {fileID: 4028726182943822921}
-  - component: {fileID: 435245768822978642}
-  - component: {fileID: 8142456725253918666}
   - component: {fileID: 1689955451097414355}
-  - component: {fileID: 3810338308091894587}
+  - component: {fileID: 843304043491612551}
+  - component: {fileID: 1700234595365347239}
   m_Layer: 0
   m_Name: Location 34
   m_TagString: Untagged
@@ -6467,49 +6059,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &435245768822978642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441386585966683552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 6
-  locationIndex: 34
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &8142456725253918666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441386585966683552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  rentRate: 0
 --- !u!64 &1689955451097414355
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6532,7 +6081,36 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7045542389019954686, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &3810338308091894587
+--- !u!114 &843304043491612551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441386585966683552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae5300adec3ba440ac73c785ac9249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Resource
+  locationIndex: 34
+  locationType: 6
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_RentRate: 0
+  s_AffectedFactories: []
+--- !u!114 &1700234595365347239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6612,10 +6190,9 @@ GameObject:
   - component: {fileID: 4499245157319526139}
   - component: {fileID: 8292774814488656700}
   - component: {fileID: 76893720851442217}
-  - component: {fileID: 6435902954265629870}
-  - component: {fileID: 6704138156752880648}
   - component: {fileID: 8085720086871790488}
-  - component: {fileID: 1152935394864424006}
+  - component: {fileID: 2414771173630114044}
+  - component: {fileID: 4883658495194763182}
   m_Layer: 0
   m_Name: Location 11
   m_TagString: Untagged
@@ -6690,51 +6267,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6435902954265629870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8632684920803384347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 1
-  locationType: 4
-  locationIndex: 11
-  locationName: Anglesey
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &6704138156752880648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8632684920803384347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8085720086871790488
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6757,7 +6289,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 381523802120761999, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1152935394864424006
+--- !u!114 &2414771173630114044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632684920803384347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Anglesey
+  locationIndex: 11
+  locationType: 4
+  regionType: 1
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 1
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &4883658495194763182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6784,10 +6350,9 @@ GameObject:
   - component: {fileID: 1695729579351429734}
   - component: {fileID: 1319092014699861315}
   - component: {fileID: 498130360687729205}
-  - component: {fileID: 6941831364991357148}
-  - component: {fileID: 1435526749660435203}
   - component: {fileID: 5307111933270139063}
-  - component: {fileID: 1550128016887881169}
+  - component: {fileID: 1463337503562656818}
+  - component: {fileID: 1201922846168139751}
   m_Layer: 0
   m_Name: Location 3
   m_TagString: Untagged
@@ -6862,51 +6427,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6941831364991357148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692186659695855495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 4
-  locationIndex: 3
-  locationName: Bristol
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &1435526749660435203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692186659695855495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &5307111933270139063
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6929,7 +6449,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4146517449214585491, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &1550128016887881169
+--- !u!114 &1463337503562656818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692186659695855495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Bristol
+  locationIndex: 3
+  locationType: 4
+  regionType: 0
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 0
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &1201922846168139751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6956,10 +6510,9 @@ GameObject:
   - component: {fileID: 2566505185893036843}
   - component: {fileID: 827883291032200012}
   - component: {fileID: 6255400661568067419}
-  - component: {fileID: 4235135994682704744}
-  - component: {fileID: 3585644094668551650}
   - component: {fileID: 8228904082840993351}
-  - component: {fileID: 3127765822167033003}
+  - component: {fileID: 6360841065076802526}
+  - component: {fileID: 1346697334949078348}
   m_Layer: 0
   m_Name: Location 37
   m_TagString: Untagged
@@ -7034,51 +6587,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4235135994682704744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9094255042700332618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 4
-  locationType: 4
-  locationIndex: 37
-  locationName: Sunderland
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
---- !u!114 &3585644094668551650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9094255042700332618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationController: {fileID: 0}
-  ownerPlayer: {fileID: 0}
-  factoryPriceCoef: 0
-  factoryLevel: 0
-  maxFactoryLevel: 0
 --- !u!64 &8228904082840993351
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7101,7 +6609,41 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 438242541286940734, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &3127765822167033003
+--- !u!114 &6360841065076802526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094255042700332618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31afe74ccc429704392ab4d907f35369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: Sunderland
+  locationIndex: 37
+  locationType: 4
+  regionType: 4
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+  s_ProductionType: 4
+  s_Productivity: 100
+  s_FactoryLevel: 0
+  s_RentRate: 0
+  s_ResourceState: 1
+  locationInfoPanel: {fileID: 0}
+  maxFactoryLevel: 0
+  factoryPriceCoef: 0
+--- !u!114 &1346697334949078348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7181,9 +6723,9 @@ GameObject:
   - component: {fileID: 4306404606807074770}
   - component: {fileID: 3188304740662187529}
   - component: {fileID: 5683443716164071948}
-  - component: {fileID: 5700024504763397282}
   - component: {fileID: 8805232486957172691}
-  - component: {fileID: 6144455274257345510}
+  - component: {fileID: 1163399177126096721}
+  - component: {fileID: 3038663121707584215}
   m_Layer: 0
   m_Name: Location 24
   m_TagString: Untagged
@@ -7257,34 +6799,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5700024504763397282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9184981006555204059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5559b51a626cbd946bc58a7cfb098193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productionType: 0
-  locationType: 1
-  locationIndex: 24
-  locationName: 
-  playerColorMaterial: {fileID: 0}
-  rentRate: 0
-  ownerPlayer: {fileID: 0}
-  playgroundController: {fileID: 0}
-  factoryController: {fileID: 0}
-  resourceController: {fileID: 0}
-  deck: {fileID: 0}
-  emissionController: {fileID: 0}
-  locationInfoPanel: {fileID: 0}
-  productivity: 0
-  events: []
-  sellLocationInfoPanelData: {fileID: 0}
 --- !u!64 &8805232486957172691
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7307,7 +6821,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5248787467160620850, guid: f67ebff643ab9d040b927bb8700fbe0b, type: 3}
---- !u!114 &6144455274257345510
+--- !u!114 &1163399177126096721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9184981006555204059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2135cf4ebbeff4f82cb0d4431e35da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  locationName: 
+  locationIndex: 24
+  locationType: 1
+  regionType: 2
+  playgroundController: {fileID: 0}
+  playerColorMaterial: {fileID: 0}
+  s_OwnerPlayer: {fileID: 0}
+  gameManager: {fileID: 0}
+  rentRateText: {fileID: 0}
+  emissionController: {fileID: 0}
+  sellLocationInfoPanelData: {fileID: 0}
+--- !u!114 &3038663121707584215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

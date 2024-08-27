@@ -16,7 +16,12 @@ MonoBehaviour:
   <CardEffectDescription>k__BackingField: You lost 4 workforces
   <CardDescription>k__BackingField: "Baz\u0131 i\u015F\xE7ilerine ula\u015Fam\u0131yoruz.
     Son zamanlarda ortaya \xE7\u0131kan \xE7etelerin i\u015Fi olabilir"
-  <Image>k__BackingField: {fileID: 0}
+  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+    type: 3}
   <Category>k__BackingField: 0
-  <Type>k__BackingField: 1
+  <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 0
+  <EffectType>k__BackingField: 0
+  <ProductionType>k__BackingField: 0
+  <ProductivityValue>k__BackingField: 0
+  <CardDuration>k__BackingField: 0

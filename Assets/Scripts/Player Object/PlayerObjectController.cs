@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerObjectController : NetworkBehaviour
 {
+    #region Fields and Properties
+
+
     // Player Data
     [SyncVar] public int connectionID;
     [SyncVar] public int playerIDNumber;
@@ -44,16 +47,20 @@ public class PlayerObjectController : NetworkBehaviour
     }
     public GameManager gameManager;
 
+    [Header("Sync Variables")]
+    //[SyncVar] public List<LocationController> s_PlayerOwnedLocations;
+    //[SyncVar] public List<LocationController> s_PlayerOwnedResources; 
+    public readonly SyncList<LocationController> s_PlayerOwnedLocations = new ();
+    public readonly SyncList<LocationController> s_PlayerOwnedResources = new();
+    public readonly SyncList<Card> s_PlayerActiveCards = new ();
     [HideInInspector] public PlayerInputController playerInputController;
     [HideInInspector] public PlaygroundController playgroundController;
     [HideInInspector] public PlayerMoveController playerMoveController;
     [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
-    [HideInInspector] public List<LocationController> ownedLocations = new();
-    [HideInInspector] public List<LocationController> ownedResources = new();
     [HideInInspector] public List<LocationController> locationsToBeSold = new();
     [HideInInspector] public float locationsToBeSoldValue;
 
-    public List<Card> playerCards = new();
+    #endregion
 
     private void Start()
     {
@@ -75,6 +82,7 @@ public class PlayerObjectController : NetworkBehaviour
                 if (GameObject.Find("Game Manager"))
                 {
                     gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+                    playerMoveController.gameManager = gameManager;
                     if (isLocalPlayer)
                     {
                         gameManager.localPlayerController = this;

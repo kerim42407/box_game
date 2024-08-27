@@ -7,6 +7,7 @@ public class CardAnimation : MonoBehaviour
     public float speed = 5.0f;
     public RectTransform rectTransform;
     public Card card;
+    private int duration = 2;
 
     private void Start()
     {
@@ -25,8 +26,31 @@ public class CardAnimation : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public IEnumerator MoveToPlayArea(PlayerObjectController player, float duration)
+    /// <summary>
+    /// Moves card to the game player list item
+    /// </summary>
+    /// <param name="targetPosition"></param>
+    /// <returns></returns>
+    public IEnumerator MoveToPlayerUI(Vector2 targetPosition)
     {
+        float elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector2.Lerp(transform.position, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
+        gameObject.SetActive(false);
+    }
+
+    public IEnumerator MoveToPlayArea()
+    {
+        if(card == null)
+        {
+            card = GetComponent<Card>();
+        }
+
         card.GetComponent<CardUI>().hiddenImage.gameObject.SetActive(false);
         float elapsedTime = 0;
         while(elapsedTime < duration)
@@ -39,6 +63,11 @@ public class CardAnimation : MonoBehaviour
 
         transform.position = UIManager.Instance.playCardArea.transform.position;
         transform.localScale = Vector3.one;
-        card.playCardEvent?.Invoke(player);
+        if (card.isOwned)
+        {
+            GameManager.Instance.CmdPlayCard(card.s_OwnerPlayer, card);
+            //card.playCardEvent?.Invoke(card);
+        }
+
     }
 }

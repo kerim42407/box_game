@@ -1,469 +1,190 @@
-using System.Collections.Generic;
+using Mirror;
 using TMPro;
 using UnityEngine;
 
-public class LocationController : MonoBehaviour
+[RequireComponent(typeof(EmissionController))]
+public abstract class LocationController : NetworkBehaviour
 {
-    public enum ProductionType { Clay, Copper, Iron, Cotton, Coal }
-    public ProductionType productionType;
-    public enum LocationType { Starting, Special, Card, RegularFactory, BigFactory, GoldenFactory, Resource }
-    public LocationType locationType;
-    public int locationIndex;
-    public string locationName;
+    #region Fields and Properties
 
+    [Header("Location Controller")]
+    public string locationName;
+    public int locationIndex;
+    public LocationType locationType;
+    public RegionType regionType;
+    public PlaygroundController playgroundController;
     public Material playerColorMaterial;
 
-    
+    [Header("Sync Variables")]
+    [SyncVar(hook = nameof(SetOwnerPlayer))] public PlayerObjectController s_OwnerPlayer;
+    public readonly SyncList<Card> s_ActiveCards = new();
 
-    public float rentRate;
-    public PlayerObjectController ownerPlayer;
-
-    private TextMeshPro rentRateText;
+    #endregion
 
     [Header("References")]
-    [HideInInspector] public PlaygroundController playgroundController;
-    [HideInInspector] public FactoryController factoryController;
-    [HideInInspector] public ResourceController resourceController;
-    [HideInInspector] public Deck deck;
+    [HideInInspector] public GameManager gameManager;
+    [HideInInspector] public TextMeshPro rentRateText;
     [HideInInspector] public EmissionController emissionController;
-    [HideInInspector] public GameObject locationInfoPanel;
-
-    [Header("Factory Variables")]
-    public float productivity;
-
-    [Header("Active Cards")]
-    public List<Card> activeCards;
-
     [HideInInspector] public SellLocationInfoPanelData sellLocationInfoPanelData;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (locationType == LocationType.RegularFactory || locationType == LocationType.BigFactory || locationType == LocationType.GoldenFactory || locationType == LocationType.Resource)
-        {
-            playerColorMaterial = GetComponent<MeshRenderer>().materials[1];
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    #region Productivity Functions
-    public float CheckResource(string productionType, PlayerObjectController playerObjectController)
-    {
-        foreach (LocationController locationController1 in playgroundController.resources)
-        {
-            if (locationController1.productionType.ToString() == productionType)
-            {
-                if (locationController1.ownerPlayer == null)
-                {
-                    return 0;
-                }
-                else if (locationController1.ownerPlayer == playerObjectController)
-                {
-                    return playgroundController.gameManager.resourceProductivityCoef;
-                }
-                else
-                {
-                    return -playgroundController.gameManager.resourceProductivityCoef;
-                }
-            }
-        }
-        return 0;
-    }
-
-    public float GetProductivityByProductionType(string productionType)
-    {
-        float _productivity = 100;
-        foreach(PlayerObjectController playerObjectController in playgroundController.gameManager.Manager.gamePlayers)
-        {
-            foreach(Card card in playerObjectController.playerCards)
-            {
-                if(card.CardData.Category == CardCategory.Market && card.CardData.ProductionType.ToString() == productionType)
-                {
-                    _productivity += card.CardData.ProductivityValue;
-                }
-            }
-        }
-        return _productivity;
-    }
-
-    public void UpdateProductivity()
-    {
-        float _productivity = 100;
-        foreach(Card card in activeCards)
-        {
-            if(card.CardData.Category == CardCategory.Market && card.CardData.ProductionType == productionType)
-            {
-                _productivity += card.CardData.ProductivityValue;
-            }
-        }
-        productivity = _productivity;
-        UpdateRentRate();
-    }
-    #endregion
-
-    #region Calculate Functions
-    public float GetLocationBuyFromBankPrice()
-    {
-        if (factoryController)
-        {
-            return factoryController.CalculateBuyFromBankPrice();
-        }
-        else
-        {
-            return resourceController.CalculateBuyFromBankPrice();
-        }
-    }
-    public float GetLocationSellPriceToTheBank()
-    {
-        if (factoryController)
-        {
-            return factoryController.CalculateSellToBankPrice();
-        }
-        else
-        {
-            return resourceController.CalculateSellToBankPrice();
-        }
-    }
-    public float GetLocationRentRate()
-    {
-        if (factoryController)
-        {
-            return factoryController.CalculateRentRate(factoryController.factoryLevel);
-        }
-        else
-        {
-            return resourceController.CalculateRentRate();
-        }
-    }
-    public void UpdateRentRate()
-    {
-        rentRate = GetLocationRentRate();
-        if (rentRate != 0)
-        {
-            rentRateText.text = $"{rentRate / 1000}K";
-        }
-        else
-        {
-            rentRateText.text = "";
-        }
-
-    }
-    #endregion
-
-    /// <summary> asd </summary>///
-    public void CheckLocationType()
-    {
-        if (locationType == LocationType.Starting)
-        {
-            SpawnLocationNameTextPrefab();
-        }
-        else if (locationType == LocationType.Special)
-        {
-            SpawnLocationNameTextPrefab();
-        }
-        else if (locationType == LocationType.Card)
-        {
-            SpawnLocationNameTextPrefab();
-            deck = GetComponent<Deck>();
-            deck.playerCardContainer = playgroundController.uiManager.playerCardContainer;
-        }
-        else if (locationType == LocationType.RegularFactory)
-        {
-            productivity = 100;
-            factoryController = GetComponent<FactoryController>();
-            factoryController.factoryPriceCoef = playgroundController.gameManager.regularFactoryPriceCoef;
-            factoryController.maxFactoryLevel = 3;
-            Instantiate(SpawnFactory(1), transform);
-            SpawnRentRateTextPrefab();
-            SpawnLocationNameTextPrefab();
-            playgroundController.allFactories.Add(this);
-            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
-        }
-        else if (locationType == LocationType.BigFactory)
-        {
-            productivity = 100;
-            factoryController = GetComponent<FactoryController>();
-            factoryController.factoryPriceCoef = playgroundController.gameManager.bigFactoryPriceCoef;
-            factoryController.maxFactoryLevel = 3;
-            Instantiate(SpawnFactory(1), transform);
-            SpawnRentRateTextPrefab();
-            SpawnLocationNameTextPrefab();
-            playgroundController.allFactories.Add(this);
-            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
-            //SpawnLocationInfoPanelPrefab();
-        }
-        else if (locationType == LocationType.GoldenFactory)
-        {
-            productivity = 100;
-            factoryController = GetComponent<FactoryController>();
-            playgroundController.goldenFactories.Add(this);
-            factoryController.factoryPriceCoef = playgroundController.gameManager.goldenFactoryPriceCoef;
-            factoryController.maxFactoryLevel = 4;
-            Instantiate(SpawnFactory(1), transform);
-            SpawnRentRateTextPrefab();
-            SpawnLocationNameTextPrefab();
-            playgroundController.allFactories.Add(this);
-            locationInfoPanel = playgroundController.uiManager.locationInfoPanel;
-            //SpawnLocationInfoPanelPrefab();
-        }
-        else if (locationType == LocationType.Resource)
-        {
-            resourceController = GetComponent<ResourceController>();
-            playgroundController.resources.Add(this);
-            Instantiate(SpawnResource(), transform);
-            SpawnRentRateTextPrefab();
-            SpawnLocationNameTextPrefab();
-        }
-        SetEmissionControllerVariables();
-    }
-    private GameObject SpawnFactory(int factoryLevel)
-    {
-        if (factoryLevel == 1)
-        {
-            return playgroundController.level1FactoryPrefab;
-        }
-        else if (factoryLevel == 2)
-        {
-            return playgroundController.level2FactoryPrefab;
-        }
-        else if (factoryLevel == 3)
-        {
-            return playgroundController.level3FactoryPrefab;
-        }
-        else
-        {
-            return playgroundController.level4FactoryPrefab;
-        }
-    }
-    private GameObject SpawnResource()
-    {
-        if (productionType == ProductionType.Clay)
-        {
-            return playgroundController.clayResourcePrefab;
-        }
-        else if (productionType == ProductionType.Copper)
-        {
-            return playgroundController.copperResourcePrefab;
-        }
-        else if (productionType == ProductionType.Iron)
-        {
-            return playgroundController.ironResourcePrefab;
-        }
-        else if (productionType == ProductionType.Cotton)
-        {
-            return playgroundController.cottonResourcePrefab;
-        }
-        else
-        {
-            return playgroundController.coalResourcePrefab;
-
-        }
-
-        //public void UpdatePlayerColorMaterial()
-        //{
-        //    GetComponent<MeshRenderer>().materials[1].color = playerColorMaterial.color;
-        //}
-    }
-    private void SpawnRentRateTextPrefab()
-    {
-        if (productionType == ProductionType.Clay)
-        {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
-        }
-        else if (productionType == ProductionType.Copper)
-        {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
-        }
-        else if (productionType == ProductionType.Iron)
-        {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
-        }
-        else if (productionType == ProductionType.Cotton)
-        {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
-        }
-        else
-        {
-            rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
-        }
-        rentRateText.transform.localPosition = new Vector3(.675f, 0, 0);
-        rentRateText.transform.localEulerAngles = GetRentRateTextRotation();
-    }
-    private void SpawnLocationNameTextPrefab()
-    {
-        GameObject locationNameText;
-        if (productionType == ProductionType.Clay)
-        {
-            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
-            locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
-        }
-        else if (productionType == ProductionType.Copper)
-        {
-            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
-            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
-        }
-        else if (productionType == ProductionType.Iron)
-        {
-            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
-            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
-        }
-        else if (productionType == ProductionType.Cotton)
-        {
-            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
-            locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
-        }
-        else
-        {
-            locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform);
-            locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
-        }
-
-        locationNameText.transform.localEulerAngles = GetLocationNameTextRotation();
-        locationNameText.GetComponent<TextMeshPro>().text = locationName;
-    }
-    private Vector3 GetRentRateTextRotation()
-    {
-        if (productionType == ProductionType.Clay)
-        {
-            return new Vector3(90, 90, 0);
-        }
-        else if (productionType == ProductionType.Copper)
-        {
-            return new Vector3(90, -90, 0);
-        }
-        else if (productionType == ProductionType.Iron)
-        {
-            return new Vector3(90, -90, 0);
-        }
-        else if (productionType == ProductionType.Cotton)
-        {
-            return new Vector3(90, -90, 0);
-        }
-        else
-        {
-            return new Vector3(90, 90, 0);
-
-        }
-    }
-    private Vector3 GetLocationNameTextRotation()
-    {
-        if (productionType == ProductionType.Clay)
-        {
-            return new Vector3(75, 90, 0);
-        }
-        else if (productionType == ProductionType.Copper)
-        {
-            return new Vector3(50, -90, 0);
-        }
-        else if (productionType == ProductionType.Iron)
-        {
-            return new Vector3(50, -90, 0);
-        }
-        else if (productionType == ProductionType.Cotton)
-        {
-            return new Vector3(50, -90, 0);
-        }
-        else
-        {
-            return new Vector3(75, 90, 0);
-        }
-    }
-    public void SetProductionType(string _productionType)
-    {
-        if (_productionType == "Clay")
-        {
-            productionType = ProductionType.Clay;
-        }
-        else if (_productionType == "Copper")
-        {
-            productionType = ProductionType.Copper;
-        }
-        else if (_productionType == "Iron")
-        {
-            productionType = ProductionType.Iron;
-        }
-        else if (_productionType == "Cotton")
-        {
-            productionType = ProductionType.Cotton;
-        }
-        else
-        {
-            productionType = ProductionType.Coal;
-        }
-    }
-    private void SetEmissionControllerVariables()
-    {
+        gameManager = GameManager.Instance;
+        playgroundController = PlaygroundController.Instance;
         emissionController = GetComponent<EmissionController>();
+        SetupEmissionController();
+        SetupLocation();
+    }
 
-        if(locationType == LocationType.Starting || locationType == LocationType.Special)
+    public abstract void SetupEmissionController();
+
+    #region Update Functions
+    public void SetOwnerPlayer(PlayerObjectController oldOwner, PlayerObjectController newOwner)
+    {
+        if (isServer)
         {
-            emissionController.material = GetComponent<MeshRenderer>().materials[1];
+            s_OwnerPlayer = newOwner;
+        }
+        if (isClient && (oldOwner != newOwner))
+        {
+            UpdateOwnerPlayer(newOwner);
+        }
+
+    }
+
+    public virtual void UpdateOwnerPlayer(PlayerObjectController newOwner)
+    {
+        if(newOwner == null)
+        {
+            playerColorMaterial.color = Color.red;
         }
         else
         {
-            emissionController.material = GetComponent<MeshRenderer>().materials[2];
-        }
-        emissionController.initialEmissionColor = emissionController.material.GetColor("_EmissionColor");
-
-    }
-    void OnMouseOver()
-    {
-        if (playgroundController.gameManager.localPlayerController)
-        {
-            if (locationInfoPanel && !playgroundController.gameManager.localPlayerController.canSell)
-            {
-                Vector2 positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
-                LocationInfoPanelData locationInfoPanelData = locationInfoPanel.GetComponent<LocationInfoPanelData>();
-                locationInfoPanel.transform.position = positionOnScreen;
-                locationInfoPanelData.locationNameText.text = locationName;
-                locationInfoPanelData.productivityText.text = $"%{productivity}";
-                if (locationInfoPanelData.eventContainer.transform.childCount > 0)
-                {
-                    foreach (Transform transform in locationInfoPanelData.eventContainer.transform)
-                    {
-                        Destroy(transform.gameObject);
-                    }
-                }
-
-                foreach(Card card in activeCards)
-                {
-                    EventPanelData eventPanelData;
-                    switch (card.CardData.EffectType)
-                    {
-                        case CardEffectType.Positive:
-                            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                            eventPanelData.eventNameText.text = card.CardData.CardName;
-                            break;
-                        case CardEffectType.Negative:
-                            eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                            eventPanelData.eventNameText.text = card.CardData.CardName;
-                            break;
-                        case CardEffectType.Neutral:
-                            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                            eventPanelData.eventNameText.text = card.CardData.CardName;
-                            break;
-                    }
-                }
-                locationInfoPanel.SetActive(true);
-            }
+            playerColorMaterial.color = newOwner.playerColor;
         }
         
     }
 
-    void OnMouseExit()
+    #endregion
+
+    #region Setup Functions
+
+    public virtual void SetupLocation()
     {
-        if (locationInfoPanel)
-        {
-            locationInfoPanel.SetActive(false);
-        }
 
     }
+
+
+    /// <summary>
+    /// Spawns location name text prefab according to the region type
+    /// </summary>
+    public void SpawnLocationNameTextPrefab()
+    {
+        TextMeshPro locationNameText = Instantiate(playgroundController.locationNameTextPrefab, transform).GetComponent<TextMeshPro>();
+        locationNameText.text = locationName;
+
+        switch (regionType)
+        {
+            case RegionType.Clay:
+                locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
+                locationNameText.transform.localEulerAngles = new Vector3(75, 90, 0);
+                break;
+            case RegionType.Copper:
+                locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+                locationNameText.transform.localEulerAngles = new Vector3(50, -90, 0);
+                break;
+            case RegionType.Iron:
+                locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+                locationNameText.transform.localEulerAngles = new Vector3(50, -90, 0);
+                break;
+            case RegionType.Cotton:
+                locationNameText.transform.localPosition = new Vector3(-0.64f, 0.135f, 0);
+                locationNameText.transform.localEulerAngles = new Vector3(50, -90, 0);
+                break;
+            case RegionType.Coal:
+                locationNameText.transform.localPosition = new Vector3(-0.625f, 0.0065f, 0);
+                locationNameText.transform.localEulerAngles = new Vector3(75, 90, 0);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Spawns rent rate text prefab according to the region type
+    /// </summary>
+    public void SpawnRentRateTextPrefab()
+    {
+        rentRateText = Instantiate(playgroundController.rentRateTextPrefab, transform).GetComponent<TextMeshPro>();
+        switch (regionType)
+        {
+            case RegionType.Clay:
+                rentRateText.transform.localEulerAngles = new Vector3(90, 90, 0);
+                break;
+            case RegionType.Copper:
+                rentRateText.transform.localEulerAngles = new Vector3(90, -90, 0);
+                break;
+            case RegionType.Iron:
+                rentRateText.transform.localEulerAngles = new Vector3(90, -90, 0);
+                break;
+            case RegionType.Cotton:
+                rentRateText.transform.localEulerAngles = new Vector3(90, -90, 0);
+                break;
+            case RegionType.Coal:
+                rentRateText.transform.localEulerAngles = new Vector3(90, 90, 0);
+                break;
+        }
+        rentRateText.transform.localPosition = new Vector3(.675f, 0, 0);
+    }
+
+    /// <summary>
+    /// Spawns factory prefab
+    /// </summary>
+    public void SpawnFactoryPrefab()
+    {
+        Instantiate(playgroundController.level1FactoryPrefab, transform);
+    }
+
+    /// <summary>
+    /// Spawns resource prefab according to the region type
+    /// </summary>
+    public void SpawnResourcePrefab()
+    {
+        switch (regionType)
+        {
+            case RegionType.Clay:
+                Instantiate(playgroundController.clayResourcePrefab, transform);
+                break;
+            case RegionType.Copper:
+                Instantiate(playgroundController.copperResourcePrefab, transform);
+                break;
+            case RegionType.Iron:
+                Instantiate(playgroundController.ironResourcePrefab, transform);
+                break;
+            case RegionType.Cotton:
+                Instantiate(playgroundController.cottonResourcePrefab, transform);
+                break;
+            case RegionType.Coal:
+                Instantiate(playgroundController.coalResourcePrefab, transform);
+                break;
+        }
+    }
+
+    #endregion
+
+    #region Get Functions
+    public virtual float GetProductivity()
+    {
+        return 100;
+    }
+
+    public virtual float GetCalculateSellToBankPrice()
+    {
+        return 0;
+    }
+
+    public virtual float GetRentRate()
+    {
+        return 0;
+    }
+    #endregion
 }
