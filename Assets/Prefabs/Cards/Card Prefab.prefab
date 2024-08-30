@@ -368,6 +368,10 @@ MonoBehaviour:
   playCardEvent:
     m_PersistentCalls:
       m_Calls: []
+  destroyCardEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  s_OwnerPlayer: {fileID: 0}
 --- !u!114 &6055126705239216319
 MonoBehaviour:
   m_ObjectHideFlags: 0

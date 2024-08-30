@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
-  m_Name: Industrial Action
+  m_Name: Factory Strike
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Industrial Action
+  <CardName>k__BackingField: Factory Strike
+  <CardIndex>k__BackingField: 0
   <CardEffectDescription>k__BackingField: The opponent cannot use workforce for 2
     turns
-  <CardDescription>k__BackingField: "Rakibinin i\u015F\xE7ilerini greve ikna edeceksin.
-    Rakibin 2 Tur boyunca \u0130\u015F G\xFCc\xFCn\xFC kullanamayacak"
+  <CardDescription>k__BackingField: You will convince your opponent's workers to
+    strike and your opponent will not be able to use his Workforce for 2 turns
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 2

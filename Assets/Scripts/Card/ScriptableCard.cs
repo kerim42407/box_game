@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScriptableCard : ScriptableObject
 {
     [field: SerializeField] public string CardName { get; private set; }
+    [field: SerializeField] public int CardIndex { get; private set; }
     [field: SerializeField, TextArea] public string CardEffectDescription { get; private set; }
     [field: SerializeField, TextArea] public string CardDescription { get; private set; }
     [field: SerializeField] public Sprite Image { get; private set; }

@@ -14,17 +14,18 @@ public class CardAnimation : MonoBehaviour
         card = GetComponent<Card>();
     }
 
-    public IEnumerator MoveToTarget(Vector2 targetPosition)
-    {
-        while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
-        {
-            transform.position = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
-            yield return null;
-        }
 
-        transform.position = targetPosition;
-        gameObject.SetActive(false);
-    }
+    //public IEnumerator MoveToTarget(Vector2 targetPosition)
+    //{
+    //    while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
+    //    {
+    //        transform.position = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+    //        yield return null;
+    //    }
+
+    //    transform.position = targetPosition;
+    //    gameObject.SetActive(false);
+    //}
 
     /// <summary>
     /// Moves card to the game player list item
@@ -38,12 +39,20 @@ public class CardAnimation : MonoBehaviour
         {
             transform.position = Vector2.Lerp(transform.position, targetPosition, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
+            if(elapsedTime > duration * 0.75f)
+            {
+                gameObject.SetActive(false);
+            }
             yield return null;
         }
         transform.position = targetPosition;
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Moves card to the play card area
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator MoveToPlayArea()
     {
         if(card == null)

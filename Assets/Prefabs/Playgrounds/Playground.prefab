@@ -296,9 +296,8 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
+  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &3712111200977156555
 MonoBehaviour:
@@ -452,9 +451,8 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
+  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &8030755891383278865
 MonoBehaviour:
@@ -923,9 +921,8 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
+  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &874402213247667490
 MonoBehaviour:
@@ -4525,9 +4522,8 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
+  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &5084382096791683650
 MonoBehaviour:
@@ -5001,9 +4997,8 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
-  cardPrefab: {fileID: 968833197522067058, guid: 7be08fc45297ec44c9e2791f7312acd0,
-    type: 3}
+  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &8715895679582642471
 MonoBehaviour:

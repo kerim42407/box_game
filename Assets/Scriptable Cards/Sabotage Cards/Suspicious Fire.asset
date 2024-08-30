@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Suspicious Fire
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Suspicious Fire
+  <CardIndex>k__BackingField: 3
   <CardEffectDescription>k__BackingField: Reduce an opponent's factory level by 1
-  <CardDescription>k__BackingField: "Rakibinin bir fabrikas\u0131nda yang\u0131n
-    \xE7\u0131kart. Yang\u0131n fabrikan\u0131n 1 seviye d\xFC\u015Fmesine neden
-    olur"
+  <CardDescription>k__BackingField: Start a fire in an opponent's factory. The fire
+    will cause the factory to drop 1 level
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 2

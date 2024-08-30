@@ -1,4 +1,4 @@
-using Mirror;
+﻿using Mirror;
 using UnityEngine;
 
 public class PlayerInputController : NetworkBehaviour
@@ -37,7 +37,8 @@ public class PlayerInputController : NetworkBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && canThrow)
             {
                 canThrow = false;
-                CmdRollDice();
+                UIManager.Instance.yourTurnNotification.Close();
+                GameManager.Instance.CmdRollDice();
             }
         }
     }

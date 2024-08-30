@@ -26,6 +26,7 @@ public class PlaygroundController : NetworkBehaviour
     public UIManager uiManager;
 
     [Header("Location Lists")]
+    public List<LocationController> allLocations;
     public List<ResourceController> resources;
     public List<FactoryController> allFactories;
     public List<FactoryController> goldenFactories;
@@ -57,7 +58,7 @@ public class PlaygroundController : NetworkBehaviour
     /// <param name="factoryController"></param>
     /// <returns></returns>
     [Server]
-    private float ServerCheckFactoryResourceState(FactoryController factoryController)
+    public float ServerCheckFactoryResourceState(FactoryController factoryController)
     {
         float _productivity = 0;
         switch (factoryController.s_ResourceState)
@@ -80,7 +81,7 @@ public class PlaygroundController : NetworkBehaviour
     /// <param name="factoryController"></param>
     /// <returns></returns>
     [Server]
-    private float ServerCheckFactoryActiveCards(FactoryController factoryController)
+    public float ServerCheckFactoryActiveCards(FactoryController factoryController)
     {
         float _productivity = 0;
         foreach (Card card in factoryController.s_ActiveCards)
@@ -104,7 +105,7 @@ public class PlaygroundController : NetworkBehaviour
     /// <param name="factoryController"></param>
     /// <returns></returns>
     [Server]
-    private void ServerSetFactoryActiveCards(FactoryController factoryController)
+    public void ServerSetFactoryActiveCards(FactoryController factoryController)
     {
         factoryController.s_ActiveCards.Clear();
         foreach (Card card in gameManager.s_ActiveCards)
@@ -237,7 +238,7 @@ public class PlaygroundController : NetworkBehaviour
             }
             else
             {
-                
+
             }
             factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
         }

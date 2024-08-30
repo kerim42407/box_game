@@ -28,6 +28,7 @@ public class PlayerObjectController : NetworkBehaviour
     [SyncVar] public bool isBankrupt;
     [SyncVar] public bool canPlay;
     [SyncVar] public bool canSell;
+    [SyncVar] public bool canPlayCard;
     [SyncVar] public int playerLocation;
     [SyncVar(hook = nameof(UpdatePlayerMoney))] public float playerMoney;
 
@@ -48,8 +49,6 @@ public class PlayerObjectController : NetworkBehaviour
     public GameManager gameManager;
 
     [Header("Sync Variables")]
-    //[SyncVar] public List<LocationController> s_PlayerOwnedLocations;
-    //[SyncVar] public List<LocationController> s_PlayerOwnedResources; 
     public readonly SyncList<LocationController> s_PlayerOwnedLocations = new ();
     public readonly SyncList<LocationController> s_PlayerOwnedResources = new();
     public readonly SyncList<Card> s_PlayerActiveCards = new ();

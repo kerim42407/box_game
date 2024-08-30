@@ -199,29 +199,6 @@ public class FactoryController : LocationController
                             break;
                     }
                 }
-
-                //foreach(Card card in activeCards)
-                //{
-                //    EventPanelData eventPanelData;
-                //    switch (card.CardData.EffectType)
-                //    {
-                //        case CardEffectType.Positive:
-                //            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                //            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                //            eventPanelData.eventNameText.text = card.CardData.CardName;
-                //            break;
-                //        case CardEffectType.Negative:
-                //            eventPanelData = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                //            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                //            eventPanelData.eventNameText.text = card.CardData.CardName;
-                //            break;
-                //        case CardEffectType.Neutral:
-                //            eventPanelData = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
-                //            eventPanelData.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                //            eventPanelData.eventNameText.text = card.CardData.CardName;
-                //            break;
-                //    }
-                //}
                 locationInfoPanel.SetActive(true);
             }
         }

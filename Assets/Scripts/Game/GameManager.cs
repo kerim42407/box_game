@@ -8,7 +8,9 @@ using UnityEngine;
 public class GameManager : NetworkBehaviour
 {
     [Header("References")]
+    public GameObject mainLight;
     public UIManager uiManager;
+    public DiceThrower diceThrower;
     public GameObject playgroundPrefab;
     public GameObject cardPrefab;
     public GameObject canvas;
@@ -48,9 +50,6 @@ public class GameManager : NetworkBehaviour
     public float resourceProductivityCoef;
     public float bonus;
 
-    [Header("Notification Events")]
-    public NotificationEventBase notificationEventBase;
-
     [Header("Debug References")]
     public TMP_InputField inputField;
     public GameObject customDiceButton;
@@ -59,8 +58,6 @@ public class GameManager : NetworkBehaviour
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -70,7 +67,6 @@ public class GameManager : NetworkBehaviour
             Instance = this;
         }
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +106,7 @@ public class GameManager : NetworkBehaviour
         startingPointIncome = (Manager.startingMoney * 1000) / 2;
         RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
         Manager.gamePlayers[turnIndex].turnCount++;
+        Manager.gamePlayers[turnIndex].canPlayCard = true;
     }
     [Command(requiresAuthority = false)]
     public void CmdSendSetupGameRequest(NetworkConnectionToClient target)
@@ -160,8 +157,38 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Calls CmdRollDice function if player can play
+    /// </summary>
+    public void RollDice()
+    {
+        if (localPlayerController.playerInputController.canThrow)
+        {
+            CmdRollDice();
+            uiManager.yourTurnNotification.Close();
+        }
+    }
+
+    /// <summary>
+    /// Rolls dice
+    /// </summary>
+    [Command(requiresAuthority = false)]
+    public void CmdRollDice()
+    {
+        diceThrower.RollDice();
+    }
+
+    /// <summary>
+    /// Moves player on dice result
+    /// </summary>
+    /// <param name="result"></param>
+    /// <param name="isEven"></param>
     public void OnDiceResult(int result, bool isEven)
     {
+        RpcShowNotification(result.ToString());
+        //uiManager.diceResultNotification.description = result.ToString();
+        //uiManager.diceResultNotification.UpdateUI();
+        //uiManager.diceResultNotification.Open();
         Debug.Log($"Applying dice result: {result}");
         if (isEven)
         {
@@ -177,6 +204,14 @@ public class GameManager : NetworkBehaviour
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(result);
     }
 
+    [ClientRpc]
+    public void RpcShowNotification(string description)
+    {
+        uiManager.diceResultNotification.description = description;
+        uiManager.diceResultNotification.UpdateUI();
+        uiManager.diceResultNotification.Open();
+    }
+
     public void CustomDiceResult(int result)
     {
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(int.Parse(inputField.text));
@@ -189,7 +224,7 @@ public class GameManager : NetworkBehaviour
 
     public void SellTest()
     {
-        Manager.gamePlayers[turnIndex].playerMoveController.SellTest(Manager.gamePlayers[turnIndex].connectionToClient,10000);
+        Manager.gamePlayers[turnIndex].playerMoveController.SellTest(Manager.gamePlayers[turnIndex].connectionToClient, 10000);
     }
 
     [Command(requiresAuthority = false)]
@@ -238,21 +273,19 @@ public class GameManager : NetworkBehaviour
             foreach (Card card in Manager.gamePlayers[turnIndex].s_PlayerActiveCards)
             {
                 card.count++;
-                if (card.count == card.CardData.CardDuration + 3)
+                if (card.count == card.CardData.CardDuration)
                 {
                     CmdDestroyCard(Manager.gamePlayers[turnIndex], card);
-                    //card.DestroyCard();
-                    //playgroundController.RpcDestroyCard(Manager.gamePlayers[turnIndex], Manager.gamePlayers[turnIndex].playerCards.IndexOf(card));
                 }
 
             }
             Manager.gamePlayers[turnIndex].turnCount++;
-
         }
+
         RpcUpdateTurnIndex(turnIndex);
         RpcShowNotification(Manager.gamePlayers[turnIndex].connectionToClient);
-
     }
+
     [ClientRpc]
     private void RpcUpdateTurnIndex(int index)
     {
@@ -260,11 +293,13 @@ public class GameManager : NetworkBehaviour
         {
             if (i == index)
             {
+                Manager.gamePlayers[i].canPlayCard = true;
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
             }
             else
             {
+                Manager.gamePlayers[i].canPlayCard = false;
                 Manager.gamePlayers[i].canPlay = false;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
             }
@@ -275,9 +310,14 @@ public class GameManager : NetworkBehaviour
     [TargetRpc]
     private void RpcShowNotification(NetworkConnectionToClient target)
     {
-        notificationEventBase.ShowNotification(uiManager.mainCanvas.transform);
+        uiManager.yourTurnNotification.Open();
     }
     #endregion
+
+    public void Testttt()
+    {
+        uiManager.yourTurnNotification.Open();
+    }
 
     [Command]
     public void CmdTargetDebugLog()
@@ -316,7 +356,8 @@ public class GameManager : NetworkBehaviour
 
     public ResourceState SetGoldenFactoryResourceState(FactoryController factoryController, ResourceController resourceController)
     {
-        if (factoryController.s_OwnerPlayer == null)
+        // Return neutral if factory or resource has no owner
+        if (factoryController.s_OwnerPlayer == null || resourceController.s_OwnerPlayer == null)
         {
             return ResourceState.Neutral;
         }
@@ -503,6 +544,7 @@ public class GameManager : NetworkBehaviour
         GameObject cardObject = Instantiate(cardPrefab);
         NetworkServer.Spawn(cardObject, player.connectionToClient);
         Card card = cardObject.GetComponent<Card>();
+        card.s_OwnerPlayer = player;
         //card.SetUpEvent();
 
         RpcDrawCardForPlayer(player, card, cardIndex, deckController);
@@ -515,7 +557,7 @@ public class GameManager : NetworkBehaviour
         card.transform.position = Camera.main.WorldToScreenPoint(deckController.transform.position);
         if (card.isOwned)
         {
-            card.s_OwnerPlayer = player;
+            //card.s_OwnerPlayer = player;
             card.SetUpUI(deckController.cardCollection.CardsInCollection[cardIndex], false);
             card.SetUpEvent();
             if (card.CardData.Type == CardType.Holdable)
@@ -546,8 +588,29 @@ public class GameManager : NetworkBehaviour
         {
             card.PlayCard();
         }
+        else
+        {
+            // If is local player and card type is holdable, update turn index
+            if (card.isOwned)
+            {
+                CmdUpdateTurnIndex();
+            }
+        }
 
 
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayHoldableCard(PlayerObjectController player, Card card)
+    {
+        RpcPlayHoldableCard(player, card);
+
+    }
+
+    [ClientRpc]
+    private void RpcPlayHoldableCard(PlayerObjectController player, Card card)
+    {
+        card.PlayCard();
     }
 
     [Command(requiresAuthority = false)]
@@ -618,7 +681,248 @@ public class GameManager : NetworkBehaviour
         factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
     }
 
+    #region Sabotage Card Functions
 
+    #region Factory Strike Card Functions ( index == 0 )
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayFactoryStrikeCard(Card card)
+    {
+        CmdUpdateTurnIndex();
+        RpcPlayFactoryStrikeCard(card);
+    }
+
+    [ClientRpc]
+    private void RpcPlayFactoryStrikeCard(Card card)
+    {
+        Debug.Log("Played factory strike card");
+    }
+
+    #endregion
+
+    #region Tax Report Card Functions ( index == 1 )
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayTaxReportCard(Card card)
+    {
+        CmdUpdateTurnIndex();
+        RpcPlayTaxReportCard(card);
+    }
+
+    [ClientRpc]
+    private void RpcPlayTaxReportCard(Card card)
+    {
+        Debug.Log("Played tax report card");
+    }
+
+    #endregion
+
+    #region Looted Railway Card Functions ( index == 2 )
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayLootedRailwayCard(Card card)
+    {
+        CmdUpdateTurnIndex();
+        RpcPlayLootedRailwayCard(card);
+    }
+
+    [ClientRpc]
+    private void RpcPlayLootedRailwayCard(Card card)
+    {
+        Debug.Log("Played looted railway card");
+    }
+
+    #endregion
+
+    #region Suspicious Fire Card Functions ( index == 3 )
+
+    /// <summary>
+    /// Checks if player can play suspicious fire card
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public bool CheckSuspiciousFirePlayable(Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allFactories)
+        {
+            if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlaySuspiciousFireCard(Card card)
+    {
+        TRpcPlaySuspiciousFireCard(card.s_OwnerPlayer.connectionToClient, card);
+    }
+
+    [TargetRpc]
+    private void TRpcPlaySuspiciousFireCard(NetworkConnectionToClient target, Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allLocations)
+        {
+            if(locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
+            {
+                if(locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+                {
+                    locationController.IndicateLocation(true);
+                    locationController.playedCard = card;
+                    locationController.onClickEvent.AddListener(CmdApplySuspiciousFireCardEffect);
+                }
+                else
+                {
+                    locationController.IndicateLocation(false);
+                }
+            }
+            else
+            {
+                locationController.IndicateLocation(false);
+            }
+        }
+        mainLight.SetActive(false);
+    }
+
+    /// <summary>
+    /// Applies suspicious fire card effect to selected location
+    /// </summary>
+    /// <param name="locationController"></param>
+    /// <param name="card"></param>
+    [Command(requiresAuthority = false)]
+    public void CmdApplySuspiciousFireCardEffect(LocationController locationController, Card card)
+    {
+        FactoryController factoryController = playgroundController.locations[locationController.locationIndex].GetComponent<FactoryController>();
+
+        if(factoryController.s_FactoryLevel == 1)
+        {
+            playgroundController.CmdSellLocationToTheBank(locationController.locationIndex,locationController.s_OwnerPlayer);
+            
+        }
+        else
+        {
+            factoryController.s_FactoryLevel--;
+            factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+        }
+
+        TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
+        Destroy(card.gameObject);
+    }
+
+    #endregion
+
+    #region Resource Disaster Card Functions ( index == 4 )
+
+    /// <summary>
+    /// Checks if player can play resource disaster card
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public bool CheckResourceDisasterPlayable(Card card)
+    {
+        foreach (LocationController locationController in playgroundController.resources)
+        {
+            if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Tells server to play resource disaster card
+    /// </summary>
+    /// <param name="card"></param>
+    [Command(requiresAuthority = false)]
+    public void CmdPlayResourceDisasterCard(Card card)
+    {
+        TRpcPlayResourceDisasterCard(card.s_OwnerPlayer.connectionToClient, card);
+    }
+
+    /// <summary>
+    /// Activates UI and events on target player for resource disaster card
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="card"></param>
+    [TargetRpc]
+    private void TRpcPlayResourceDisasterCard(NetworkConnectionToClient target, Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allLocations)
+        {
+            if (locationController.locationType != LocationType.Resource)
+            {
+                locationController.IndicateLocation(false);
+            }
+            else
+            {
+                if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+                {
+                    locationController.IndicateLocation(true);
+                    locationController.playedCard = card;
+                    locationController.onClickEvent.AddListener(CmdApplyResourceDisasterCardEffect);
+                }
+                else
+                {
+                    locationController.IndicateLocation(false);
+                }
+            }
+        }
+        mainLight.SetActive(false);
+    }
+
+    /// <summary>
+    /// Applies resource disaster card effect to selected location
+    /// </summary>
+    /// <param name="locationController"></param>
+    /// <param name="card"></param>
+    [Command(requiresAuthority = false)]
+    public void CmdApplyResourceDisasterCardEffect(LocationController locationController, Card card)
+    {
+        locationController.s_OwnerPlayer.s_PlayerOwnedLocations.Remove(locationController);
+        locationController.s_OwnerPlayer.s_PlayerOwnedResources.Remove(locationController);
+
+        locationController.s_OwnerPlayer = null;
+
+        Debug.Log(locationController.locationIndex);
+        ResourceController resourceController = playgroundController.locations[locationController.locationIndex].GetComponent<ResourceController>();
+        foreach (FactoryController factoryController in playgroundController.goldenFactories)
+        {
+            if (factoryController.s_ProductionType == resourceController.s_ProductionType)
+            {
+                factoryController.s_ResourceState = SetGoldenFactoryResourceState(factoryController, resourceController);
+                factoryController.s_Productivity = 100 + playgroundController.ServerCheckFactoryResourceState(factoryController) + playgroundController.ServerCheckFactoryActiveCards(factoryController);
+                factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+            }
+        }
+        resourceController.s_RentRate = CalculateResourceRentRate(resourceController);
+
+        TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
+        Destroy(card.gameObject);
+    }
+
+
+
+    #endregion
+
+    #endregion
+
+    /// <summary>
+    /// Deactivates UI and reset events on target player
+    /// </summary>
+    /// <param name="target"></param>
+    [TargetRpc]
+    private void TRpcResetLocationIndicators(NetworkConnectionToClient target)
+    {
+        foreach (LocationController locationController in playgroundController.allLocations)
+        {
+            locationController.onClickEvent.RemoveAllListeners();
+            locationController.playedCard = null;
+            locationController.ResetIndicateLocation();
+        }
+        mainLight.SetActive(true);
+    }
 
     #endregion
 

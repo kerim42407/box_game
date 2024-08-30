@@ -217,8 +217,55 @@ public class CardContainer : MonoBehaviour {
     }
 
     public void OnCardDragEnd() {
+
         // If card is in play area, play it!
         if (IsCursorInPlayArea()) {
+            // Get reference of card
+            Card card = currentDraggedCard.GetComponent<Card>();
+
+            // Check if player can play card
+            if (GameManager.Instance.localPlayerController.canPlayCard)
+            {
+                // Check if card is playable.
+                if (currentDraggedCard.GetComponent<Card>().CheckCardPlayable())
+                {
+                    // Play card
+                    currentDraggedCard.enabled = false;
+                    GameManager.Instance.CmdPlayHoldableCard(card.s_OwnerPlayer, card);
+                    GameManager.Instance.localPlayerController.canPlayCard = false;
+
+
+                    //currentDraggedCard.enabled = false;
+                    //GameManager.Instance.CmdPlayCard(card.s_OwnerPlayer, card);
+                    //GameManager.Instance.localPlayerController.canPlayCard = false;
+
+
+
+                    //currentDraggedCard.GetComponent<Card>().playCardEvent?.Invoke(currentDraggedCard.GetComponent<Card>());
+                    //currentDraggedCard.GetComponent<CardAnimation>().MoveToPlayArea();
+                    //currentDraggedCard.transform.position = cardPlayConfig.playArea.position;
+
+                }
+                else
+                {
+                    //currentDraggedCard.enabled = false;
+                    //GameManager.Instance.CmdPlayHoldableCard(card.s_OwnerPlayer, card);
+                    //GameManager.Instance.localPlayerController.canPlayCard = false;
+                    //GameManager.Instance.CmdPlayCard(card.s_OwnerPlayer, card);
+
+                    Debug.Log("You can't play this card right now");
+                }
+            }
+            else
+            {
+                Debug.Log("Wait for your turn");
+            }
+            
+            
+            //cards.Remove(currentDraggedCard);
+            //currentDraggedCard.container = null;
+            //currentDraggedCard.transform.SetParent(cardPlayConfig.playArea);
+            //currentDraggedCard.transform.position = cardPlayConfig.playArea.position;
             eventsConfig?.OnCardPlayed?.Invoke(new CardPlayed(currentDraggedCard));
             if (cardPlayConfig.destroyOnPlay) {
                 DestroyCard(currentDraggedCard);
@@ -230,7 +277,7 @@ public class CardContainer : MonoBehaviour {
     public void DestroyCard(CardWrapper card) {
         cards.Remove(card);
         eventsConfig.OnCardDestroy?.Invoke(new CardDestroy(card));
-        Destroy(card.gameObject);
+        //Destroy(card.gameObject);
     }
 
     private bool IsCursorInPlayArea() {

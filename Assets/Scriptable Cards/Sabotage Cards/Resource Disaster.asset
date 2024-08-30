@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Resource Disaster
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Resource Disaster
+  <CardIndex>k__BackingField: 4
   <CardEffectDescription>k__BackingField: The opponent's resource is forfeited
-  <CardDescription>k__BackingField: "Rakibinin bir kayna\u011F\u0131n\u0131 kaybetmesini
-    sa\u011Fla"
+  <CardDescription>k__BackingField: Force your opponent to lose a resource
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 2

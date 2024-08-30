@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
-  m_Name: Tax Notice
+  m_Name: Tax Report
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Tax Notice
+  <CardName>k__BackingField: Tax Report
+  <CardIndex>k__BackingField: 1
   <CardEffectDescription>k__BackingField: The opponent receives a tax penalty
-  <CardDescription>k__BackingField: "Rakibin mal varl\u0131\u011F\u0131na g\xF6re
-    hesaplanacak vergiyi \xF6demek zorunda kalacak"
+  <CardDescription>k__BackingField: The opponent will have to pay the tax calculated
+    according to the opponent's assets
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 2

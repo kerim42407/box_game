@@ -31,6 +31,10 @@ public class Card : NetworkBehaviour
 
     public void PlayCard()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
         StartCoroutine(cardAnimation.MoveToPlayArea());
         //playCardEvent?.Invoke(this);
     }
@@ -48,12 +52,57 @@ public class Card : NetworkBehaviour
                 playCardEvent.AddListener(GameManager.Instance.CmdPlayMarketCard);
                 destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
                 break;
+            case CardCategory.Sabotage:
+                switch (CardData.CardIndex)
+                {
+                    case 0:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayFactoryStrikeCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                    case 1:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayTaxReportCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                    case 2:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayLootedRailwayCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                    case 3:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlaySuspiciousFireCard);
+                        //destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                    case 4:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayResourceDisasterCard);
+                        //destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                }
+                break;
         }
-        //if (CardData.Category == CardCategory.Market)
-        //{
-        //    playCardEvent.AddListener(GameManager.Instance.CmdPlayCard);
-        //    destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyCard);
-        //}
+    }
+
+    public bool CheckCardPlayable()
+    {
+        switch (CardData.Category)
+        {
+            case CardCategory.Market:
+                return true;
+            case CardCategory.Sabotage:
+                switch (CardData.CardIndex)
+                {
+                    case 0:
+                        return true;
+                    case 1:
+                        return true;
+                    case 2:
+                        return true;
+                    case 3:
+                        return GameManager.Instance.CheckSuspiciousFirePlayable(this);
+                    case 4:
+                        return GameManager.Instance.CheckResourceDisasterPlayable(this);
+                }
+                return true;
+        }
+        return true;
     }
 
     #endregion

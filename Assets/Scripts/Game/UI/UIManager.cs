@@ -1,3 +1,4 @@
+using Michsky.MUIP;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class UIManager : MonoBehaviour
     public GameObject locationInfoPanel;
     public GameObject localPlayerListItemPanel;
     public GameObject gamePlayersListItemPanel;
+
+    [Header("Notifications")]
+    public NotificationManager yourTurnNotification;
+    public NotificationManager diceResultNotification;
 
     public static UIManager Instance { get; private set; }
     #endregion
