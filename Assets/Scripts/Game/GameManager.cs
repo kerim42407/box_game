@@ -2,6 +2,7 @@
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 
@@ -119,7 +120,6 @@ public class GameManager : NetworkBehaviour
         playgroundController = GameObject.FindGameObjectWithTag("Playground").GetComponent<PlaygroundController>();
         foreach (PlayerObjectController playerObjectController in Manager.gamePlayers)
         {
-            playerObjectController.playgroundController = playgroundController;
             playerObjectController.playerMoveController.SetStartPosition();
         }
         for (int i = 0; i < Manager.gamePlayers.Count; i++)
@@ -293,12 +293,14 @@ public class GameManager : NetworkBehaviour
         {
             if (i == index)
             {
+                Manager.gamePlayers[i].playerTurnIndicator.SetActive(true);
                 Manager.gamePlayers[i].canPlayCard = true;
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
             }
             else
             {
+                Manager.gamePlayers[i].playerTurnIndicator.SetActive(false);
                 Manager.gamePlayers[i].canPlayCard = false;
                 Manager.gamePlayers[i].canPlay = false;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;
@@ -719,6 +721,23 @@ public class GameManager : NetworkBehaviour
 
     #region Looted Railway Card Functions ( index == 2 )
 
+    /// <summary>
+    /// Checks if player can play looted railway card
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public bool CheckLootedRailwayPlayable(Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allFactories)
+        {
+            if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdPlayLootedRailwayCard(Card card)
     {
@@ -902,8 +921,6 @@ public class GameManager : NetworkBehaviour
         Destroy(card.gameObject);
     }
 
-
-
     #endregion
 
     #endregion
@@ -922,6 +939,7 @@ public class GameManager : NetworkBehaviour
             locationController.ResetIndicateLocation();
         }
         mainLight.SetActive(true);
+        localPlayerController.playerInputController.canThrow = true;
     }
 
     #endregion

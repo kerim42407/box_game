@@ -9,7 +9,6 @@ public class PlayerObjectController : NetworkBehaviour
 {
     #region Fields and Properties
 
-
     // Player Data
     [SyncVar] public int connectionID;
     [SyncVar] public int playerIDNumber;
@@ -22,6 +21,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     [Header("Player Cosmetics")]
     public List<Color> playerColors;
+    public GameObject playerTurnIndicator;
     [SyncVar(hook = nameof(SetPlayerColor))] public Color playerColor;
 
     [SyncVar] public int turnCount;
@@ -53,7 +53,6 @@ public class PlayerObjectController : NetworkBehaviour
     public readonly SyncList<LocationController> s_PlayerOwnedResources = new();
     public readonly SyncList<Card> s_PlayerActiveCards = new ();
     [HideInInspector] public PlayerInputController playerInputController;
-    [HideInInspector] public PlaygroundController playgroundController;
     [HideInInspector] public PlayerMoveController playerMoveController;
     [HideInInspector] public SellLocationsPanelData sellLocationsPanelData;
     [HideInInspector] public List<LocationController> locationsToBeSold = new();
@@ -191,30 +190,6 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     // Cosmetics
-    //[Command]
-    //public void CmdSendPlayerColor(Color newValue)
-    //{
-    //    SendPlayerColor(playerColor, newValue);
-    //}
-
-    //public void SendPlayerColor(Color oldValue, Color newValue)
-    //{
-    //    if (isServer)
-    //    {
-    //        playerColor = newValue;
-    //    }
-    //    if (isClient && (oldValue != newValue))
-    //    {
-    //        UpdateColor(newValue);
-    //    }
-    //}
-
-    //private void UpdateColor(Color message)
-    //{
-    //    playerColor = message;
-    //}
-
-    // My Cosmetics
     [Command(requiresAuthority = false)]
     public void CmdSetPlayerColor()
     {

@@ -230,6 +230,7 @@ public class CardContainer : MonoBehaviour {
                 if (currentDraggedCard.GetComponent<Card>().CheckCardPlayable())
                 {
                     // Play card
+                    card.s_OwnerPlayer.playerInputController.canThrow = false;
                     currentDraggedCard.enabled = false;
                     GameManager.Instance.CmdPlayHoldableCard(card.s_OwnerPlayer, card);
                     GameManager.Instance.localPlayerController.canPlayCard = false;

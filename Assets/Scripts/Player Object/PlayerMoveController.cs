@@ -661,5 +661,6 @@ public class PlayerMoveController : NetworkBehaviour
     public void PlayerCosmeticsSetup()
     {
         playerMesh.material.color = playerObjectController.playerColor;
+        playerObjectController.playerTurnIndicator.GetComponent<MeshRenderer>().material.color = playerObjectController.playerColor;
     }
 }

@@ -3,30 +3,19 @@ using UnityEngine;
 
 public class PlayerInputController : NetworkBehaviour
 {
-    public NetworkIdentity identity;
-    public DiceThrower diceThrower;
-
+    #region Fields and Properties
+    [HideInInspector]public NetworkIdentity identity;
+    [HideInInspector]public DiceThrower diceThrower;
     private PlayerObjectController localPlayerController;
-    private Camera mainCamera;
-
     public bool canThrow;
+    #endregion
 
+    #region Methods
 
     private void Awake()
     {
         identity = GetComponent<NetworkIdentity>();
         localPlayerController = GetComponent<PlayerObjectController>();
-
-    }
-
-    private void OnEnable()
-    {
-        GetReferences();
-    }
-
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -43,10 +32,9 @@ public class PlayerInputController : NetworkBehaviour
         }
     }
 
-    [Command]
-    private void CmdRollDice()
+    private void OnEnable()
     {
-        diceThrower.RollDice();
+        GetReferences();
     }
 
     private void GetReferences()
@@ -55,11 +43,12 @@ public class PlayerInputController : NetworkBehaviour
         {
             GameObject gameManager = GameObject.Find("Game Manager");
             diceThrower = gameManager.GetComponent<DiceThrower>();
-            mainCamera = Camera.main;
         }
         else
         {
             Invoke(nameof(GetReferences), 1f);
         }
     }
+
+    #endregion
 }

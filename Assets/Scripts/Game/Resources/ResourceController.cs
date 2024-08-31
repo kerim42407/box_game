@@ -21,12 +21,6 @@ public class ResourceController : LocationController
     public override void UpdateOwnerPlayer(PlayerObjectController newOwner)
     {
         base.UpdateOwnerPlayer(newOwner);
-        UpdateRentRate();
-    }
-
-    public  void UpdateRentRate()
-    {
-
     }
 
     #region Setup Functions
