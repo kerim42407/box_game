@@ -52,4 +52,22 @@ public class MyNetworkManager : NetworkManager
     {
         base.OnStartClient();
     }
+
+    public override void OnStopHost()
+    {
+        base.OnStopHost();
+        Debug.Log("Stopped host");
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        Debug.Log("Stopped client");
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        Debug.Log("Stopped server");
+    }
 }

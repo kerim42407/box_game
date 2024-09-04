@@ -131,8 +131,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -291,12 +297,18 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &3712111200977156555
@@ -446,12 +458,18 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &8030755891383278865
@@ -601,8 +619,14 @@ MonoBehaviour:
   regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -761,8 +785,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -916,12 +946,18 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &874402213247667490
@@ -1124,8 +1160,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -1284,8 +1326,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -1443,8 +1491,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -1595,8 +1649,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -1755,8 +1815,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -1915,8 +1981,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -2128,8 +2200,14 @@ MonoBehaviour:
   regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -2287,8 +2365,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -2470,6 +2554,7 @@ MonoBehaviour:
   sellLocationInfoPanelPrefab: {fileID: 564552939348068716, guid: 4f417eb31603d1348a528a6237428608,
     type: 3}
   uiManager: {fileID: 0}
+  allLocations: []
   resources: []
   allFactories: []
   goldenFactories: []
@@ -2621,8 +2706,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -2781,8 +2872,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -2936,8 +3033,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3091,8 +3194,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3246,8 +3355,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3406,8 +3521,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3566,8 +3687,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3725,8 +3852,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -3877,8 +4010,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4037,8 +4176,14 @@ MonoBehaviour:
   regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4197,8 +4342,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4357,8 +4508,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4517,12 +4674,18 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &5084382096791683650
@@ -4672,8 +4835,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4832,8 +5001,14 @@ MonoBehaviour:
   regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -4992,12 +5167,18 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &8715895679582642471
@@ -5147,8 +5328,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -5307,8 +5494,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -5573,8 +5766,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -5733,8 +5932,14 @@ MonoBehaviour:
   regionType: 3
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -5945,8 +6150,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -6097,8 +6308,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -6305,8 +6522,14 @@ MonoBehaviour:
   regionType: 1
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -6465,8 +6688,14 @@ MonoBehaviour:
   regionType: 0
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -6625,8 +6854,14 @@ MonoBehaviour:
   regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
@@ -6837,8 +7072,14 @@ MonoBehaviour:
   regionType: 2
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
+  indicateMaterials: []
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playedCard: {fileID: 0}
   s_OwnerPlayer: {fileID: 0}
   gameManager: {fileID: 0}
+  locationNameText: {fileID: 0}
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}

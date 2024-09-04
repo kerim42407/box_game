@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using Steamworks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerListItem : MonoBehaviour
 {
@@ -47,7 +45,7 @@ public class PlayerListItem : MonoBehaviour
 
     private void OnImageLoaded(AvatarImageLoaded_t callback)
     {
-        if(callback.m_steamID.m_SteamID == playerSteamID)
+        if (callback.m_steamID.m_SteamID == playerSteamID)
         {
             playerIcon.texture = GetSteamImageAsTexture(callback.m_iImage);
         }
@@ -61,17 +59,13 @@ public class PlayerListItem : MonoBehaviour
     {
         playerNameText.text = playerName;
         ChangeReadyStatus();
-        if (!avatarReceived)
-        {
-            GetPlayerIcon();
-        }
-        
+        GetPlayerIcon();
     }
 
     void GetPlayerIcon()
     {
         int imageID = SteamFriends.GetLargeFriendAvatar((CSteamID)playerSteamID);
-        if(imageID == -1)
+        if (imageID == -1)
         {
             return;
         }

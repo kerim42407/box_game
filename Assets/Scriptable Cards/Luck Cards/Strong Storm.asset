@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
-  m_Name: Big Storm
+  m_Name: Strong Storm
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Big Storm
+  <CardName>k__BackingField: Strong Storm
+  <CardIndex>k__BackingField: 3
   <CardEffectDescription>k__BackingField: Your factory lost 1 level
-  <CardDescription>k__BackingField: "\u015Eiddetli f\u0131rt\u0131nalar fabrikalar\u0131n\u0131
-    olumsuz etkiliyor. Fabrikalarda maddi hasarlar meydana geldi"
+  <CardDescription>k__BackingField: Powerful storms negatively affect the factories.
+    Material damages occurred in factories.
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 0
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 1
   <PlayStyle>k__BackingField: 0
   <EffectType>k__BackingField: 0
   <ProductionType>k__BackingField: 0

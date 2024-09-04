@@ -16,6 +16,8 @@ public class SteamLobby : MonoBehaviour
     protected Callback<GameLobbyJoinRequested_t> gameLobbyJoinRequested;
     protected Callback<LobbyEnter_t> lobbyEntered;
 
+
+
     // Lobbies Callbacks
     protected Callback<LobbyMatchList_t> lobbyList;
     protected Callback<LobbyDataUpdate_t> lobbyDataUpdated;
@@ -25,7 +27,20 @@ public class SteamLobby : MonoBehaviour
     // Variables
     public ulong currentLobbyID;
     private const string hostAddressKey = "HostAddress";
-    private MyNetworkManager myNetworkManager;
+
+    // Manager
+    private MyNetworkManager manager;
+    private MyNetworkManager Manager
+    {
+        get
+        {
+            if (manager != null)
+            {
+                return manager;
+            }
+            return manager = MyNetworkManager.singleton as MyNetworkManager;
+        }
+    }
 
     private void Start()
     {
@@ -39,8 +54,6 @@ public class SteamLobby : MonoBehaviour
             instance = this;
         }
 
-        myNetworkManager = GetComponent<MyNetworkManager>();
-
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         gameLobbyJoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnGameLobbyJoinRequested);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
@@ -51,7 +64,7 @@ public class SteamLobby : MonoBehaviour
 
     public void HostLobby()
     {
-        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, myNetworkManager.maxConnections);
+        SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, Manager.maxConnections);
         //SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, myNetworkManager.maxConnections);
     }
 
@@ -62,7 +75,13 @@ public class SteamLobby : MonoBehaviour
             return;
         }
 
-        myNetworkManager.StartHost();
+        if (NetworkServer.active)
+        {
+            NetworkServer.Shutdown();
+        }
+
+
+        Manager.StartHost();
 
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey, SteamUser.GetSteamID().ToString());
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "name", SteamFriends.GetPersonaName().ToString() + "'s Lobby");
@@ -85,8 +104,8 @@ public class SteamLobby : MonoBehaviour
             return;
         }
 
-        myNetworkManager.networkAddress = SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey);
-        myNetworkManager.StartClient();
+        Manager.networkAddress = SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), hostAddressKey);
+        Manager.StartClient();
     }
 
     public void JoinLobby(CSteamID lobbyID)
@@ -124,5 +143,4 @@ public class SteamLobby : MonoBehaviour
     {
         LobbiesListManager.instance.DisplayLobbies(lobbyIDs, result);
     }
-
 }

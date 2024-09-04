@@ -1,12 +1,11 @@
+﻿using Michsky.MUIP;
+using Mirror;
 using Steamworks;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Michsky.MUIP;
-using Mirror;
 
 public class LobbyController : NetworkBehaviour
 {
@@ -165,7 +164,7 @@ public class LobbyController : NetworkBehaviour
     {
         localPlayerObject = GameObject.Find("LocalGamePlayer");
         localPlayerController = localPlayerObject.GetComponent<PlayerObjectController>();
-        if(localPlayerController.playerLobbyIndex == 2)
+        if (localPlayerController.playerLobbyIndex == 2)
         {
             readyButton.gameObject.SetActive(true);
             startGameButton.gameObject.SetActive(true);
@@ -216,7 +215,7 @@ public class LobbyController : NetworkBehaviour
         {
             if (!playerListItems.Any(b => b.connectionID == player.connectionID))
             {
-                
+
                 GameObject newPlayerItem = playerListContainer.transform.GetChild(player.playerLobbyIndex).gameObject;
                 PlayerListItem newPlayerItemScript = newPlayerItem.GetComponent<PlayerListItem>();
 
@@ -224,7 +223,7 @@ public class LobbyController : NetworkBehaviour
                 newPlayerItemScript.connectionID = player.connectionID;
                 newPlayerItemScript.playerSteamID = player.playerSteamID;
                 newPlayerItemScript.ready = player.ready;
-                if(player.playerLobbyIndex == 2)
+                if (player.playerLobbyIndex == 2)
                 {
                     newPlayerItemScript.hostIcon.SetActive(true);
                 }
@@ -248,8 +247,8 @@ public class LobbyController : NetworkBehaviour
                 playerListItems.Add(newPlayerItemScript);
                 player.playerListItem = newPlayerItemScript;
             }
-            
-            
+
+
         }
     }
 
@@ -324,13 +323,19 @@ public class LobbyController : NetworkBehaviour
 
     public void BackButton()
     {
-        if (localPlayerController.isServer)
+        if (NetworkServer.active && NetworkClient.isConnected)
         {
-            Manager.StopHost();
+            SteamMatchmaking.LeaveLobby(new CSteamID(SteamLobby.instance.currentLobbyID));
+            manager.StopHost();
         }
-        if (localPlayerController.isClient)
+        else if (NetworkClient.isConnected)
         {
-            Manager.StopClient();
+            SteamMatchmaking.LeaveLobby(new CSteamID(SteamLobby.instance.currentLobbyID));
+            manager.StopClient();
+        }
+        else if (NetworkServer.active)
+        {
+            manager.StopServer();
         }
     }
 

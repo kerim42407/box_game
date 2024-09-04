@@ -14,12 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CardsInCollection>k__BackingField:
   - {fileID: 11400000, guid: 1a014d9f6c2e21b43b5f0e3679850778, type: 2}
-  - {fileID: 11400000, guid: bfef823606c38c64294e0cd26ce9d7f6, type: 2}
-  - {fileID: 11400000, guid: 9f2e53863f656ce4da03c41defed6517, type: 2}
-  - {fileID: 11400000, guid: 5b30998ef1e38cb43bb5a50bd926e100, type: 2}
-  - {fileID: 11400000, guid: f37d11ed932942148ac5579c57d13cf2, type: 2}
-  - {fileID: 11400000, guid: d4eed413dc4089149880b8e0c0f45c49, type: 2}
-  - {fileID: 11400000, guid: b3fefd216ced93d429b9319cce869fae, type: 2}
-  - {fileID: 11400000, guid: 838b8ff53d3521c4fbcfbc80e803d115, type: 2}
-  - {fileID: 11400000, guid: 5c73ecd888a4cb64c910c10cae824d84, type: 2}
-  - {fileID: 11400000, guid: 0ed47fb17565765448c03e008d591a65, type: 2}

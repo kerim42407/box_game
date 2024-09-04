@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3267095280834347253
+--- !u!1 &6230145845779209221
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9222980350622055055}
-  - component: {fileID: 7210483681483462635}
-  - component: {fileID: 1637382927966904067}
-  - component: {fileID: 7239151605974719661}
+  - component: {fileID: 3678099889324158621}
+  - component: {fileID: 6843252863257008726}
+  - component: {fileID: 4330480446037360925}
+  - component: {fileID: 775398008941704709}
   m_Layer: 0
   m_Name: My Network Manager Steam
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9222980350622055055
+--- !u!4 &3678099889324158621
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3267095280834347253}
+  m_GameObject: {fileID: 6230145845779209221}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,13 +34,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7210483681483462635
+--- !u!114 &6843252863257008726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3267095280834347253}
+  m_GameObject: {fileID: 6230145845779209221}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2be6acc9233e87e4badfb1485ab69e61, type: 3}
@@ -55,7 +55,7 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   offlineScene: Assets/Scenes/MainMenu.unity
   onlineScene: Assets/Scenes/Lobby.unity
-  transport: {fileID: 7239151605974719661}
+  transport: {fileID: 775398008941704709}
   networkAddress: localhost
   maxConnections: 5
   disconnectInactiveConnections: 0
@@ -66,8 +66,9 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 5153096612930116058, guid: 4b6cc1ab8be4664448631b31dac74444, type: 3}
+  - {fileID: 6554510882203312682, guid: 7be08fc45297ec44c9e2791f7312acd0, type: 3}
   - {fileID: 4432381936566570498, guid: 245e936503fcddd4bb044d54c05e255b, type: 3}
+  - {fileID: 5153096612930116058, guid: 4b6cc1ab8be4664448631b31dac74444, type: 3}
   - {fileID: 4430310486374559543, guid: 2350685b2b7666248a5fc89ffd909df9, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
@@ -87,13 +88,13 @@ MonoBehaviour:
   gamePlayerPrefab: {fileID: 2740312576520242844, guid: 4b6cc1ab8be4664448631b31dac74444,
     type: 3}
   startingMoney: 0
---- !u!114 &1637382927966904067
+--- !u!114 &4330480446037360925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3267095280834347253}
+  m_GameObject: {fileID: 6230145845779209221}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 088affc8e222d3b4b82cec3b83b37ae5, type: 3}
@@ -101,13 +102,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyIDs: []
   currentLobbyID: 0
---- !u!114 &7239151605974719661
+--- !u!114 &775398008941704709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3267095280834347253}
+  m_GameObject: {fileID: 6230145845779209221}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}

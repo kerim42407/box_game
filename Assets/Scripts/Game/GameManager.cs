@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -606,7 +607,6 @@ public class GameManager : NetworkBehaviour
     public void CmdPlayHoldableCard(PlayerObjectController player, Card card)
     {
         RpcPlayHoldableCard(player, card);
-
     }
 
     [ClientRpc]
@@ -635,7 +635,6 @@ public class GameManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdPlayMarketCard(Card card)
     {
-
         foreach (FactoryController factoryController in playgroundController.allFactories)
         {
             if (factoryController.s_ProductionType == card.CardData.ProductionType)
@@ -682,6 +681,45 @@ public class GameManager : NetworkBehaviour
         factoryController.s_Productivity -= card.CardData.ProductivityValue;
         factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
     }
+
+    #region Luck Card Functions
+
+    #region Strong Storm Card Functions ( index == 3 )
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayStrongStormCard(Card card)
+    {
+        List<FactoryController> selectableFactories = new();
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if(factoryController.s_OwnerPlayer != null)
+            {
+                selectableFactories.Add(factoryController);
+            }
+        }
+
+        if(selectableFactories.Count != 0)
+        {
+            int index = Random.Range(0, selectableFactories.Count);
+            FactoryController selectedFactory = selectableFactories[index];
+
+            if (selectedFactory.s_FactoryLevel > 1)
+            {
+                selectedFactory.s_FactoryLevel--;
+                CalculateFactoryRentRate(selectedFactory);
+            }
+            else
+            {
+                playgroundController.CmdSellLocationToTheBank(selectedFactory.locationIndex, selectedFactory.s_OwnerPlayer);
+            }
+        }
+        Destroy(card.gameObject);
+        CmdUpdateTurnIndex();
+    }
+
+    #endregion
+
+    #endregion
 
     #region Sabotage Card Functions
 

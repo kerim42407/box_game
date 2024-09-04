@@ -48,6 +48,20 @@ public class Card : NetworkBehaviour
     {
         switch (CardData.Category)
         {
+            case CardCategory.Luck:
+                switch (CardData.CardIndex)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayStrongStormCard);
+                        break;
+                }
+                break;
             case CardCategory.Market:
                 playCardEvent.AddListener(GameManager.Instance.CmdPlayMarketCard);
                 destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
@@ -84,6 +98,21 @@ public class Card : NetworkBehaviour
     {
         switch (CardData.Category)
         {
+            case CardCategory.Luck:
+                switch (CardData.CardIndex)
+                {
+                    case 0:
+                        return true;
+                    case 1:
+                        return true;
+                    case 2:
+                        return true;
+                    case 3:
+                        return true;
+                    case 4:
+                        return true;
+                }
+                return true;
             case CardCategory.Market:
                 return true;
             case CardCategory.Sabotage:

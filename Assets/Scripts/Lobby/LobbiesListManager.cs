@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Steamworks;
+using Mirror;
 
 public class LobbiesListManager : MonoBehaviour
 {
     public static LobbiesListManager instance;
+    public GameObject myNetworkManagerPrefab;
 
     // Lobbies List Variables
     public GameObject lobbiesMenu;
@@ -16,11 +18,18 @@ public class LobbiesListManager : MonoBehaviour
 
     public List<GameObject> listOfLobbies = new List<GameObject>();
 
+
+
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
+        }
+
+        if (FindObjectOfType<NetworkManager>() == null)
+        {
+            Instantiate(myNetworkManagerPrefab);
         }
     }
 
@@ -76,6 +85,11 @@ public class LobbiesListManager : MonoBehaviour
         hostButton.SetActive(true);
 
         lobbiesMenu.SetActive(false);
+    }
+
+    public void HostLobby()
+    {
+        FindObjectOfType<NetworkManager>().GetComponent<SteamLobby>().HostLobby();
     }
 
 }
