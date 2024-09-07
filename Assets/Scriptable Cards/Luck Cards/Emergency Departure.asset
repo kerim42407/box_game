@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
-  m_Name: Suspicious Fire
+  m_Name: Emergency Departure
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Suspicious Fire
-  <CardIndex>k__BackingField: 3
-  <CardEffectDescription>k__BackingField: Reduce an opponent's factory level by 1
-  <CardDescription>k__BackingField: Start a fire in an opponent's factory. The fire
-    will cause the factory to drop 1 level
-  <Image>k__BackingField: {fileID: 21300000, guid: de587c9d55e7be84fb3215768811a5b3,
+  <CardName>k__BackingField: Emergency Departure
+  <CardIndex>k__BackingField: 7
+  <CardEffectDescription>k__BackingField: Go to a factory or resource
+  <CardDescription>k__BackingField: You can go to any factory or source without stopping
+  <Image>k__BackingField: {fileID: 21300000, guid: 750e91791cab54449a28ce75dae6fdd9,
     type: 3}
-  <Category>k__BackingField: 2
+  <Category>k__BackingField: 0
   <Type>k__BackingField: 0
   <PlayStyle>k__BackingField: 1
   <EffectType>k__BackingField: 0

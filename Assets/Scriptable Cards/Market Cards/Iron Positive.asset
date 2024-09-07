@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Iron Positive
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Iron Positive
+  <CardIndex>k__BackingField: 0
   <CardEffectDescription>k__BackingField: Over 3 rounds, the value of iron increased
     by %40
   <CardDescription>k__BackingField: Over 3 rounds, the value of iron increased by
     %40
-  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+  <Image>k__BackingField: {fileID: 21300000, guid: 1c873e3f63322f64889d78f3f2463e3f,
     type: 3}
   <Category>k__BackingField: 1
   <Type>k__BackingField: 1

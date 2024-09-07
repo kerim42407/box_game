@@ -36,7 +36,6 @@ public class Card : NetworkBehaviour
             gameObject.SetActive(true);
         }
         StartCoroutine(cardAnimation.MoveToPlayArea());
-        //playCardEvent?.Invoke(this);
     }
 
     public void DestroyCard()
@@ -51,20 +50,15 @@ public class Card : NetworkBehaviour
             case CardCategory.Luck:
                 switch (CardData.CardIndex)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
                     case 3:
                         playCardEvent.AddListener(GameManager.Instance.CmdPlayStrongStormCard);
                         break;
-                    case 4:
-                        break;
                     case 5:
-                        playCardEvent.AddListener(GameManager.Instance.CmdPlayFertileSoilsCard);
-                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyFertileSoilsCard);
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlaySatisfiedWorkersCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroySatisfiedWorkersCard);
+                        break;
+                    case 7:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayEmergencyDepartureCard);
                         break;
                 }
                 break;
@@ -75,12 +69,6 @@ public class Card : NetworkBehaviour
             case CardCategory.Sabotage:
                 switch (CardData.CardIndex)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
                     case 3:
                         playCardEvent.AddListener(GameManager.Instance.CmdPlaySuspiciousFireCard);
                         break;
@@ -103,15 +91,11 @@ public class Card : NetworkBehaviour
             case CardCategory.Luck:
                 switch (CardData.CardIndex)
                 {
-                    case 0:
-                        return true;
-                    case 1:
-                        return true;
-                    case 2:
-                        return true;
                     case 3:
                         return true;
-                    case 4:
+                    case 5:
+                        return true;
+                    case 7:
                         return true;
                 }
                 return true;
@@ -120,12 +104,6 @@ public class Card : NetworkBehaviour
             case CardCategory.Sabotage:
                 switch (CardData.CardIndex)
                 {
-                    case 0:
-                        return true;
-                    case 1:
-                        return true;
-                    case 2:
-                        return true;
                     case 3:
                         return GameManager.Instance.CheckSuspiciousFirePlayable(this);
                     case 4:

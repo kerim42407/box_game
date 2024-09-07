@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Coal Positive
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Coal Positive
+  <CardIndex>k__BackingField: 0
   <CardEffectDescription>k__BackingField: Over 3 rounds, the value of coal increased
     by %40
   <CardDescription>k__BackingField: Over 3 rounds, the value of coal increased by
     %40
-  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+  <Image>k__BackingField: {fileID: 21300000, guid: 6e662032ef35d6e40b1e56103f4d2805,
     type: 3}
   <Category>k__BackingField: 1
   <Type>k__BackingField: 1

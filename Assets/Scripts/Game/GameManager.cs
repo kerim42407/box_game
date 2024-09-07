@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 
 
@@ -187,9 +186,6 @@ public class GameManager : NetworkBehaviour
     public void OnDiceResult(int result, bool isEven)
     {
         RpcShowNotification(result.ToString());
-        //uiManager.diceResultNotification.description = result.ToString();
-        //uiManager.diceResultNotification.UpdateUI();
-        //uiManager.diceResultNotification.Open();
         Debug.Log($"Applying dice result: {result}");
         if (isEven)
         {
@@ -216,6 +212,7 @@ public class GameManager : NetworkBehaviour
     public void CustomDiceResult(int result)
     {
         Manager.gamePlayers[turnIndex].playerMoveController.MovePlayer(int.Parse(inputField.text));
+        uiManager.yourTurnNotification.Close();
     }
 
     public void Test()
@@ -687,7 +684,7 @@ public class GameManager : NetworkBehaviour
 
     #region Luck Card Functions
 
-    #region Strong Storm Card Functions (index == 3)
+    #region Strong Storm Card Functions (index = 3)
 
     [Command(requiresAuthority = false)]
     public void CmdPlayStrongStormCard(Card card)
@@ -697,14 +694,14 @@ public class GameManager : NetworkBehaviour
         // Set list for selectable factories
         foreach (FactoryController factoryController in playgroundController.allFactories)
         {
-            if(factoryController.s_OwnerPlayer == card.s_OwnerPlayer)
+            if (factoryController.s_OwnerPlayer == card.s_OwnerPlayer)
             {
                 selectableFactories.Add(factoryController);
             }
         }
 
         // Apply card effect if list is not empty
-        if(selectableFactories.Count != 0)
+        if (selectableFactories.Count != 0)
         {
             int index = Random.Range(0, selectableFactories.Count);
             FactoryController selectedFactory = selectableFactories[index];
@@ -725,10 +722,10 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
-    #region Fertile Soils Card Functions (index == 5)
+    #region Satisfied Workers Card Functions (index = 5)
 
     [Command(requiresAuthority = false)]
-    public void CmdPlayFertileSoilsCard(Card card)
+    public void CmdPlaySatisfiedWorkersCard(Card card)
     {
         List<FactoryController> selectableFactories = new(); // Create list for selectable factories
 
@@ -755,19 +752,19 @@ public class GameManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdDestroyFertileSoilsCard(Card card)
+    public void CmdDestroySatisfiedWorkersCard(Card card)
     {
         foreach (FactoryController factoryController in playgroundController.allFactories)
         {
             if (factoryController.s_ActiveCards.Contains(card))
             {
-                CmdRemoveFertileSoilsCardEffect(factoryController, card);
+                CmdRemoveSatisfiedWorkersCardEffect(factoryController, card);
             }
         }
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdRemoveFertileSoilsCardEffect(FactoryController factoryController, Card card)
+    public void CmdRemoveSatisfiedWorkersCardEffect(FactoryController factoryController, Card card)
     {
         factoryController.s_ActiveCards.Remove(card);
         factoryController.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(factoryController);
@@ -776,11 +773,64 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
+    #region Emergency Departure Card Functions (index = 7)
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayEmergencyDepartureCard(Card card)
+    {
+        TRpcPlayEmergencyDepartureCard(card.s_OwnerPlayer.connectionToClient, card);
+    }
+
+    [TargetRpc]
+    private void TRpcPlayEmergencyDepartureCard(NetworkConnectionToClient target, Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allLocations)
+        {
+            if (locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory || locationController.locationType == LocationType.Resource)
+            {
+                locationController.IndicateLocation(true);
+                locationController.playedCard = card;
+                locationController.onClickEvent.AddListener(CmdApplyEmergencyDepartureCardEffect);
+            }
+            else
+            {
+                locationController.IndicateLocation(false);
+            }
+        }
+        mainLight.SetActive(false);
+        uiManager.yourTurnNotification.Close();
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdApplyEmergencyDepartureCardEffect(LocationController locationController, Card card)
+    {
+        PlayerObjectController player = card.s_OwnerPlayer;
+        int index = 0;
+
+        if(locationController.locationIndex > player.playerLocation)
+        {
+            index = locationController.locationIndex - player.playerLocation;
+        }
+        else if(locationController.locationIndex < player.playerLocation)
+        {
+            index = (40 - player.playerLocation) + locationController.locationIndex;
+        }
+        else
+        {
+            index = 40;
+        }
+        OnDiceResult(index, false);
+        TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
+        Destroy(card.gameObject);
+    }
+
+    #endregion
+
     #endregion
 
     #region Sabotage Card Functions
 
-    #region Suspicious Fire Card Functions (index == 3)
+    #region Suspicious Fire Card Functions (index = 3)
 
     /// <summary>
     /// Checks if player can play suspicious fire card
@@ -810,9 +860,9 @@ public class GameManager : NetworkBehaviour
     {
         foreach (LocationController locationController in playgroundController.allLocations)
         {
-            if(locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
+            if (locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
             {
-                if(locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+                if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
                 {
                     locationController.IndicateLocation(true);
                     locationController.playedCard = card;
@@ -841,10 +891,10 @@ public class GameManager : NetworkBehaviour
     {
         FactoryController factoryController = playgroundController.locations[locationController.locationIndex].GetComponent<FactoryController>();
 
-        if(factoryController.s_FactoryLevel == 1)
+        if (factoryController.s_FactoryLevel == 1)
         {
-            playgroundController.CmdSellLocationToTheBank(locationController.locationIndex,locationController.s_OwnerPlayer);
-            
+            playgroundController.CmdSellLocationToTheBank(locationController.locationIndex, locationController.s_OwnerPlayer);
+
         }
         else
         {
@@ -858,7 +908,7 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
-    #region Resource Disaster Card Functions (index == 4)
+    #region Resource Disaster Card Functions (index = 4)
 
     /// <summary>
     /// Checks if player can play resource disaster card
@@ -950,7 +1000,7 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
-    #region Factory Shutdown Card Functions (index  == 5)
+    #region Factory Shutdown Card Functions (index  = 5)
 
     public bool CheckFactoryShutdownPlayable(Card card)
     {
@@ -973,9 +1023,9 @@ public class GameManager : NetworkBehaviour
     [TargetRpc]
     private void TRpcPlayFactoryShutdownCard(NetworkConnectionToClient target, Card card)
     {
-        foreach(LocationController locationController in playgroundController.allLocations)
+        foreach (LocationController locationController in playgroundController.allLocations)
         {
-            if(locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
+            if (locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
             {
                 if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
                 {

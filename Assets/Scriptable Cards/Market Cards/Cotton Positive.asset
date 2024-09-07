@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Cotton Positive
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Cotton Positive
+  <CardIndex>k__BackingField: 0
   <CardEffectDescription>k__BackingField: Over 3 rounds, the value of cotton increased
     by %40
   <CardDescription>k__BackingField: Over 3 rounds, the value of cotton increased
     by %40
-  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+  <Image>k__BackingField: {fileID: 21300000, guid: abbf75545317e6d4bbcd84a157bbd34b,
     type: 3}
   <Category>k__BackingField: 1
   <Type>k__BackingField: 1

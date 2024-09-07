@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Copper Negative
   m_EditorClassIdentifier: 
   <CardName>k__BackingField: Copper Negative
+  <CardIndex>k__BackingField: 0
   <CardEffectDescription>k__BackingField: Over 3 rounds, the value of copper decreased
     by %40
   <CardDescription>k__BackingField: Over 3 rounds, the value of copper decreased
     by %40
-  <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
+  <Image>k__BackingField: {fileID: 21300000, guid: 2f09c583eeef2b84381b2b6448e459a7,
     type: 3}
   <Category>k__BackingField: 1
   <Type>k__BackingField: 1
   <PlayStyle>k__BackingField: 0
+  <EffectType>k__BackingField: 0
   <ProductionType>k__BackingField: 1
   <ProductivityValue>k__BackingField: -40
   <CardDuration>k__BackingField: 3

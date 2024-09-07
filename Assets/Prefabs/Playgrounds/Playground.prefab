@@ -309,7 +309,7 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 353eb3a53110bd444bb06f605b041b7e, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &3712111200977156555
@@ -4701,7 +4701,7 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &5084382096791683650
@@ -5196,7 +5196,7 @@ MonoBehaviour:
   rentRateText: {fileID: 0}
   emissionController: {fileID: 0}
   sellLocationInfoPanelData: {fileID: 0}
-  cardCollection: {fileID: 11400000, guid: 70a910a4f69633e4f86fde9c59c9cd70, type: 2}
+  cardCollection: {fileID: 11400000, guid: 5590845b7138a5049a0e3e56104d5e96, type: 2}
   cardPrefab: {fileID: 0}
   playerCardContainer: {fileID: 0}
 --- !u!114 &8715895679582642471
