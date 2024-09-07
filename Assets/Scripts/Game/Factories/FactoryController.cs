@@ -13,6 +13,7 @@ public class FactoryController : LocationController
     [SyncVar] public int s_FactoryLevel;
     [SyncVar(hook = nameof(SetRentRate))] public float s_RentRate;
     [SyncVar] public ResourceState s_ResourceState;
+    [SyncVar] public bool s_IsShuttedDown;
 
 
     private ProductionType defaultProductionType;

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sabotage Card Collection
   m_EditorClassIdentifier: 
   <CardsInCollection>k__BackingField:
-  - {fileID: 11400000, guid: 7c841f12c19e05b4fa5b5f8965c24ac8, type: 2}
+  - {fileID: 11400000, guid: 2e71008f77cf2e24fbf735f6634a4799, type: 2}

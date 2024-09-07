@@ -408,7 +408,14 @@ public class GameManager : NetworkBehaviour
     {
         if (factoryController.s_OwnerPlayer)
         {
-            return CalculateFactorySellToAnotherPlayerPrice(factoryController) / 3;
+            if (factoryController.s_IsShuttedDown)
+            {
+                return 0;
+            }
+            else
+            {
+                return CalculateFactorySellToAnotherPlayerPrice(factoryController) / 3;
+            }
         }
         else
         {
@@ -540,6 +547,8 @@ public class GameManager : NetworkBehaviour
 
     #region Card Functions
 
+    #region Market Card Functions
+
     [Command(requiresAuthority = false)]
     public void CmdDrawCardForPlayer(PlayerObjectController player, DeckController deckController)
     {
@@ -599,8 +608,6 @@ public class GameManager : NetworkBehaviour
                 CmdUpdateTurnIndex();
             }
         }
-
-
     }
 
     [Command(requiresAuthority = false)]
@@ -643,13 +650,7 @@ public class GameManager : NetworkBehaviour
             }
         }
         CmdUpdateTurnIndex();
-        RpcPlayMarketCard(card);
-    }
-
-    [ClientRpc]
-    private void RpcPlayMarketCard(Card card)
-    {
-        card.gameObject.SetActive(false);
+        RpcDeactivateCard(card);
     }
 
     [Command(requiresAuthority = false)]
@@ -682,22 +683,27 @@ public class GameManager : NetworkBehaviour
         factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
     }
 
+    #endregion
+
     #region Luck Card Functions
 
-    #region Strong Storm Card Functions ( index == 3 )
+    #region Strong Storm Card Functions (index == 3)
 
     [Command(requiresAuthority = false)]
     public void CmdPlayStrongStormCard(Card card)
     {
-        List<FactoryController> selectableFactories = new();
+        List<FactoryController> selectableFactories = new(); // Create list for selectable factories
+
+        // Set list for selectable factories
         foreach (FactoryController factoryController in playgroundController.allFactories)
         {
-            if(factoryController.s_OwnerPlayer != null)
+            if(factoryController.s_OwnerPlayer == card.s_OwnerPlayer)
             {
                 selectableFactories.Add(factoryController);
             }
         }
 
+        // Apply card effect if list is not empty
         if(selectableFactories.Count != 0)
         {
             int index = Random.Range(0, selectableFactories.Count);
@@ -719,79 +725,62 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
+    #region Fertile Soils Card Functions (index == 5)
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayFertileSoilsCard(Card card)
+    {
+        List<FactoryController> selectableFactories = new(); // Create list for selectable factories
+
+        // Set list for selectable factories
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if (factoryController.s_OwnerPlayer == card.s_OwnerPlayer)
+            {
+                selectableFactories.Add(factoryController);
+            }
+        }
+
+        // Apply card effect if list is not empty
+        if (selectableFactories.Count != 0)
+        {
+            int index = Random.Range(0, selectableFactories.Count);
+            FactoryController selectedFactory = selectableFactories[index];
+
+            selectedFactory.s_ActiveCards.Add(card);
+            selectedFactory.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(selectedFactory);
+            selectedFactory.s_RentRate = CalculateFactoryRentRate(selectedFactory);
+        }
+        RpcDeactivateCard(card);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDestroyFertileSoilsCard(Card card)
+    {
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if (factoryController.s_ActiveCards.Contains(card))
+            {
+                CmdRemoveFertileSoilsCardEffect(factoryController, card);
+            }
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdRemoveFertileSoilsCardEffect(FactoryController factoryController, Card card)
+    {
+        factoryController.s_ActiveCards.Remove(card);
+        factoryController.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(factoryController);
+        factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+    }
+
+    #endregion
+
     #endregion
 
     #region Sabotage Card Functions
 
-    #region Factory Strike Card Functions ( index == 0 )
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayFactoryStrikeCard(Card card)
-    {
-        CmdUpdateTurnIndex();
-        RpcPlayFactoryStrikeCard(card);
-    }
-
-    [ClientRpc]
-    private void RpcPlayFactoryStrikeCard(Card card)
-    {
-        Debug.Log("Played factory strike card");
-    }
-
-    #endregion
-
-    #region Tax Report Card Functions ( index == 1 )
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayTaxReportCard(Card card)
-    {
-        CmdUpdateTurnIndex();
-        RpcPlayTaxReportCard(card);
-    }
-
-    [ClientRpc]
-    private void RpcPlayTaxReportCard(Card card)
-    {
-        Debug.Log("Played tax report card");
-    }
-
-    #endregion
-
-    #region Looted Railway Card Functions ( index == 2 )
-
-    /// <summary>
-    /// Checks if player can play looted railway card
-    /// </summary>
-    /// <param name="card"></param>
-    /// <returns></returns>
-    public bool CheckLootedRailwayPlayable(Card card)
-    {
-        foreach (LocationController locationController in playgroundController.allFactories)
-        {
-            if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayLootedRailwayCard(Card card)
-    {
-        CmdUpdateTurnIndex();
-        RpcPlayLootedRailwayCard(card);
-    }
-
-    [ClientRpc]
-    private void RpcPlayLootedRailwayCard(Card card)
-    {
-        Debug.Log("Played looted railway card");
-    }
-
-    #endregion
-
-    #region Suspicious Fire Card Functions ( index == 3 )
+    #region Suspicious Fire Card Functions (index == 3)
 
     /// <summary>
     /// Checks if player can play suspicious fire card
@@ -869,7 +858,7 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
-    #region Resource Disaster Card Functions ( index == 4 )
+    #region Resource Disaster Card Functions (index == 4)
 
     /// <summary>
     /// Checks if player can play resource disaster card
@@ -949,7 +938,7 @@ public class GameManager : NetworkBehaviour
             if (factoryController.s_ProductionType == resourceController.s_ProductionType)
             {
                 factoryController.s_ResourceState = SetGoldenFactoryResourceState(factoryController, resourceController);
-                factoryController.s_Productivity = 100 + playgroundController.ServerCheckFactoryResourceState(factoryController) + playgroundController.ServerCheckFactoryActiveCards(factoryController);
+                factoryController.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(factoryController);
                 factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
             }
         }
@@ -957,6 +946,88 @@ public class GameManager : NetworkBehaviour
 
         TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
         Destroy(card.gameObject);
+    }
+
+    #endregion
+
+    #region Factory Shutdown Card Functions (index  == 5)
+
+    public bool CheckFactoryShutdownPlayable(Card card)
+    {
+        foreach (LocationController locationController in playgroundController.allFactories)
+        {
+            if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayFactoryShutdownCard(Card card)
+    {
+        TRpcPlayFactoryShutdownCard(card.s_OwnerPlayer.connectionToClient, card);
+    }
+
+    [TargetRpc]
+    private void TRpcPlayFactoryShutdownCard(NetworkConnectionToClient target, Card card)
+    {
+        foreach(LocationController locationController in playgroundController.allLocations)
+        {
+            if(locationController.locationType == LocationType.RegularFactory || locationController.locationType == LocationType.BigFactory || locationController.locationType == LocationType.GoldenFactory)
+            {
+                if (locationController.s_OwnerPlayer != null && locationController.s_OwnerPlayer != card.s_OwnerPlayer)
+                {
+                    locationController.IndicateLocation(true);
+                    locationController.playedCard = card;
+                    locationController.onClickEvent.AddListener(CmdApplyFactoryShutdownCardEffect);
+                }
+                else
+                {
+                    locationController.IndicateLocation(false);
+                }
+            }
+            else
+            {
+                locationController.IndicateLocation(false);
+            }
+        }
+        mainLight.SetActive(false);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdApplyFactoryShutdownCardEffect(LocationController locationController, Card card)
+    {
+        FactoryController factoryController = playgroundController.locations[locationController.locationIndex].GetComponent<FactoryController>();
+
+        factoryController.s_ActiveCards.Add(card);
+        factoryController.s_IsShuttedDown = true;
+        factoryController.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(factoryController);
+        factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+        TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
+        RpcDeactivateCard(card);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDestroyFactoryShutdownCard(Card card)
+    {
+        foreach (FactoryController factoryController in playgroundController.allFactories)
+        {
+            if (factoryController.s_ActiveCards.Contains(card))
+            {
+                CmdRemoveFactoryShutdownCardEffect(factoryController, card);
+            }
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdRemoveFactoryShutdownCardEffect(FactoryController factoryController, Card card)
+    {
+        factoryController.s_ActiveCards.Remove(card);
+        factoryController.s_IsShuttedDown = false;
+        factoryController.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(factoryController);
+        factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
     }
 
     #endregion
@@ -978,6 +1049,16 @@ public class GameManager : NetworkBehaviour
         }
         mainLight.SetActive(true);
         localPlayerController.playerInputController.canThrow = true;
+    }
+
+    /// <summary>
+    /// Deactivates card on all clients
+    /// </summary>
+    /// <param name="card"></param>
+    [ClientRpc]
+    private void RpcDeactivateCard(Card card)
+    {
+        card.gameObject.SetActive(false);
     }
 
     #endregion

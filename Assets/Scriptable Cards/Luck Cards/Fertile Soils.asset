@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c0be3a1ddc202459d5c2d51c40bf6c, type: 3}
-  m_Name: Solid Management
+  m_Name: Fertile Soils
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Solid Management
-  <CardEffectDescription>k__BackingField: Untouchable for 3 turns
-  <CardDescription>k__BackingField: "Bir fabrikan veya kayna\u011F\u0131n 3 tur boyunca
-    sat\u0131lamaz veya sabote edilemez"
+  <CardName>k__BackingField: Fertile Land
+  <CardEffectDescription>k__BackingField: Production increases by +20% for 2 turns
+  <CardDescription>k__BackingField: "\u0130\u015F\xE7ilerin \xE7al\u0131\u015Fma
+    \u015Fartlar\u0131ndan memnun g\xF6r\xFCn\xFCyor hi\xE7 olmad\u0131\u011F\u0131
+    kadar verimli \xE7al\u0131\u015F\u0131yorlar"
   <Image>k__BackingField: {fileID: 21300000, guid: 0713bd5d700a30648a2da4a414910224,
     type: 3}
   <Category>k__BackingField: 0

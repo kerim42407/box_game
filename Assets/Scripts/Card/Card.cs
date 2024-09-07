@@ -60,6 +60,12 @@ public class Card : NetworkBehaviour
                     case 3:
                         playCardEvent.AddListener(GameManager.Instance.CmdPlayStrongStormCard);
                         break;
+                    case 4:
+                        break;
+                    case 5:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayFertileSoilsCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyFertileSoilsCard);
+                        break;
                 }
                 break;
             case CardCategory.Market:
@@ -70,24 +76,20 @@ public class Card : NetworkBehaviour
                 switch (CardData.CardIndex)
                 {
                     case 0:
-                        playCardEvent.AddListener(GameManager.Instance.CmdPlayFactoryStrikeCard);
-                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
                         break;
                     case 1:
-                        playCardEvent.AddListener(GameManager.Instance.CmdPlayTaxReportCard);
-                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
                         break;
                     case 2:
-                        playCardEvent.AddListener(GameManager.Instance.CmdPlayLootedRailwayCard);
-                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
                         break;
                     case 3:
                         playCardEvent.AddListener(GameManager.Instance.CmdPlaySuspiciousFireCard);
-                        //destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
                         break;
                     case 4:
                         playCardEvent.AddListener(GameManager.Instance.CmdPlayResourceDisasterCard);
-                        //destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyMarketCard);
+                        break;
+                    case 5:
+                        playCardEvent.AddListener(GameManager.Instance.CmdPlayFactoryShutdownCard);
+                        destroyCardEvent.AddListener(GameManager.Instance.CmdDestroyFactoryShutdownCard);
                         break;
                 }
                 break;
@@ -128,6 +130,8 @@ public class Card : NetworkBehaviour
                         return GameManager.Instance.CheckSuspiciousFirePlayable(this);
                     case 4:
                         return GameManager.Instance.CheckResourceDisasterPlayable(this);
+                    case 5:
+                        return GameManager.Instance.CheckFactoryShutdownPlayable(this);
                 }
                 return true;
         }

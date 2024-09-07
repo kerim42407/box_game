@@ -52,6 +52,27 @@ public class PlaygroundController : NetworkBehaviour
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
 
+    [Server]
+    public float ServerCalculateFactoryProductivity(FactoryController factoryController)
+    {
+        float _productivity = 100;
+        if (factoryController.s_IsShuttedDown)
+        {
+            _productivity = 0;
+        }
+        else
+        {
+            if (factoryController.locationType == LocationType.GoldenFactory)
+            {
+                _productivity += ServerCheckFactoryResourceState(factoryController);
+            }
+
+            _productivity += ServerCheckFactoryActiveCards(factoryController);
+        }
+
+        return _productivity;
+    }
+
     /// <summary>
     /// Checks resource state and sets productivity
     /// </summary>
@@ -60,7 +81,9 @@ public class PlaygroundController : NetworkBehaviour
     [Server]
     public float ServerCheckFactoryResourceState(FactoryController factoryController)
     {
-        float _productivity = 0;
+        float _productivity = 0; // Set initial productivity
+
+        // Set productivity by resource state
         switch (factoryController.s_ResourceState)
         {
             case ResourceState.Positive:
@@ -72,7 +95,8 @@ public class PlaygroundController : NetworkBehaviour
             case ResourceState.Neutral:
                 break;
         }
-        return _productivity;
+
+        return _productivity; // Return calculated productivity
     }
 
     /// <summary>
@@ -83,11 +107,21 @@ public class PlaygroundController : NetworkBehaviour
     [Server]
     public float ServerCheckFactoryActiveCards(FactoryController factoryController)
     {
-        float _productivity = 0;
+        float _productivity = 0; // Set initial productivity
+
+        // Set productivity by active cards
         foreach (Card card in factoryController.s_ActiveCards)
         {
             switch (card.CardData.Category)
             {
+                case CardCategory.Luck:
+                    switch (card.CardData.CardIndex)
+                    {
+                        case 5:
+                            _productivity += card.CardData.ProductivityValue;
+                            break;
+                    }
+                    break;
                 case CardCategory.Market:
                     if (card.CardData.ProductionType == factoryController.s_ProductionType)
                     {
@@ -96,7 +130,8 @@ public class PlaygroundController : NetworkBehaviour
                     break;
             }
         }
-        return _productivity;
+
+        return _productivity; // Return calculated productivity
     }
 
     /// <summary>
@@ -107,7 +142,16 @@ public class PlaygroundController : NetworkBehaviour
     [Server]
     public void ServerSetFactoryActiveCards(FactoryController factoryController)
     {
-        factoryController.s_ActiveCards.Clear();
+        foreach (Card card in factoryController.s_ActiveCards)
+        {
+            switch (card.CardData.Category)
+            {
+                case CardCategory.Market:
+                    factoryController.s_ActiveCards.Remove(card);
+                    break;
+            }
+        }
+
         foreach (Card card in gameManager.s_ActiveCards)
         {
             switch (card.CardData.Category)
@@ -152,8 +196,7 @@ public class PlaygroundController : NetworkBehaviour
             factoryController.SetProductionType(newProductionType);
             factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController);
             ServerSetFactoryActiveCards(factoryController);
-            factoryController.s_Productivity = 100 + ServerCheckFactoryResourceState(factoryController) + ServerCheckFactoryActiveCards(factoryController);
-            //factoryController.s_Productivity = ServerSideCalculateProductivity(factoryController);
+            factoryController.s_Productivity = ServerCalculateFactoryProductivity(factoryController);
         }
 
         // Calculate productivity and rent rate
@@ -189,7 +232,7 @@ public class PlaygroundController : NetworkBehaviour
             if (factoryController.s_ProductionType == resourceController.s_ProductionType)
             {
                 factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController, resourceController);
-                factoryController.s_Productivity += ServerCheckFactoryResourceState(factoryController);
+                factoryController.s_Productivity = ServerCalculateFactoryProductivity(factoryController);
                 factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
             }
         }
@@ -219,7 +262,7 @@ public class PlaygroundController : NetworkBehaviour
                 if (factoryController.s_ProductionType == resourceController.s_ProductionType)
                 {
                     factoryController.s_ResourceState = gameManager.SetGoldenFactoryResourceState(factoryController, resourceController);
-                    factoryController.s_Productivity += ServerCheckFactoryResourceState(factoryController);
+                    factoryController.s_Productivity = ServerCalculateFactoryProductivity(factoryController);
                     factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
                 }
             }
@@ -234,7 +277,7 @@ public class PlaygroundController : NetworkBehaviour
                 factoryController.SetProductionType("Default");
                 factoryController.s_ResourceState = ResourceState.Neutral;
                 ServerSetFactoryActiveCards(factoryController);
-                factoryController.s_Productivity = 100 + ServerCheckFactoryResourceState(factoryController) + ServerCheckFactoryActiveCards(factoryController);
+                factoryController.s_Productivity = ServerCalculateFactoryProductivity(factoryController);
             }
             else
             {
