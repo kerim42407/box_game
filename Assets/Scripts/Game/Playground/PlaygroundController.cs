@@ -7,10 +7,15 @@ public class PlaygroundController : NetworkBehaviour
     public GameManager gameManager;
     public List<GameObject> locations;
     public GameObject startPoint;
+
+    [Header("Factory Prefabs")]
+    public GameObject level0FactoryPrefab;
     public GameObject level1FactoryPrefab;
     public GameObject level2FactoryPrefab;
     public GameObject level3FactoryPrefab;
     public GameObject level4FactoryPrefab;
+
+    [Header("Resource Prefabs")]
     public GameObject clayResourcePrefab;
     public GameObject copperResourcePrefab;
     public GameObject ironResourcePrefab;

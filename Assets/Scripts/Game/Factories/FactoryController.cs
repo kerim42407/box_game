@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FactoryController : LocationController
@@ -10,14 +11,16 @@ public class FactoryController : LocationController
     [Header("Sync Variables")]
     [SyncVar] public ProductionType s_ProductionType;
     [SyncVar] public float s_Productivity;
-    [SyncVar] public int s_FactoryLevel;
+    [SyncVar(hook = nameof(SetFactoryLevel))] public int s_FactoryLevel;
     [SyncVar(hook = nameof(SetRentRate))] public float s_RentRate;
     [SyncVar] public ResourceState s_ResourceState;
     [SyncVar] public bool s_IsShuttedDown;
 
-
+    [Header("References")]
+    private GameObject factoryModel;
     private ProductionType defaultProductionType;
     [HideInInspector] public GameObject locationInfoPanel;
+    [HideInInspector] private List<Material> factoryOwnerMaterials = new();
     #endregion
 
     [Header("Variables")]
@@ -67,8 +70,16 @@ public class FactoryController : LocationController
                 break;
         }
         playgroundController.allFactories.Add(this);
-        playerColorMaterial = GetComponent<MeshRenderer>().materials[1];
+        locationOwnerMaterial = GetComponent<MeshRenderer>().materials[1];
         locationInfoPanel = UIManager.Instance.locationInfoPanel;
+    }
+
+    /// <summary>
+    /// Spawns factory prefab
+    /// </summary>
+    public void SpawnFactoryPrefab()
+    {
+        factoryModel = Instantiate(playgroundController.level0FactoryPrefab, transform);
     }
 
     #endregion
@@ -90,14 +101,32 @@ public class FactoryController : LocationController
         return s_RentRate;
     }
 
-    public override void UpdateOwnerPlayer(PlayerObjectController newOwner)
-    {
-        base.UpdateOwnerPlayer(newOwner);
-    }
+
 
     #endregion
 
     #region Set Functions
+
+    public override void UpdateOwnerPlayer(PlayerObjectController newOwner)
+    {
+        base.UpdateOwnerPlayer(newOwner);
+        UpdateFactoryOwnerPlayer(newOwner);
+    }
+
+    private void UpdateFactoryOwnerPlayer(PlayerObjectController newOwner)
+    {
+        if (newOwner != null)
+        {
+            if (factoryOwnerMaterials.Count > 0)
+            {
+                foreach (Material material in factoryOwnerMaterials)
+                {
+                    material.color = newOwner.playerColor;
+                }
+            }
+        }
+
+    }
 
     public void SetRentRate(float oldValue, float newValue)
     {
@@ -122,7 +151,6 @@ public class FactoryController : LocationController
             rentRateText.text = "";
         }
     }
-    #endregion
 
     /// <summary>
     /// Sets production type by input
@@ -151,6 +179,68 @@ public class FactoryController : LocationController
                 s_ProductionType = defaultProductionType;
                 break;
         }
+    }
+
+    #endregion
+
+    private void SetFactoryLevel(int oldValue, int newValue)
+    {
+        if (isServer)
+        {
+            s_FactoryLevel = newValue;
+        }
+        if (isClient && oldValue != newValue)
+        {
+            UpdateFactoryLevel(newValue);
+        }
+    }
+
+    private void UpdateFactoryLevel(int newValue)
+    {
+        Destroy(factoryModel);
+        factoryOwnerMaterials = new();
+
+        switch (newValue)
+        {
+            case 0:
+                factoryModel = Instantiate(playgroundController.level0FactoryPrefab, transform);
+                break;
+            case 1:
+                factoryModel = Instantiate(playgroundController.level1FactoryPrefab, transform);
+                factoryModel.transform.localPosition = new Vector3(.25f, .035f, 0);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(1).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(10).GetComponent<MeshRenderer>().materials[0]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(19).GetComponent<MeshRenderer>().materials[1]);
+                break;
+            case 2:
+                factoryModel = Instantiate(playgroundController.level2FactoryPrefab, transform);
+                factoryModel.transform.localPosition = new Vector3(.25f, .035f, 0);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(1).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(3).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(10).GetComponent<MeshRenderer>().materials[0]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(20).GetComponent<MeshRenderer>().materials[1]);
+                break;
+            case 3:
+                factoryModel = Instantiate(playgroundController.level3FactoryPrefab, transform);
+                factoryModel.transform.localPosition = new Vector3(.2f, .035f, 0);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(10).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(19).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(32).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(33).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(34).GetComponent<MeshRenderer>().materials[1]);
+                break;
+            case 4:
+                factoryModel = Instantiate(playgroundController.level4FactoryPrefab, transform);
+                factoryModel.transform.localPosition = new Vector3(.15f, .035f, 0);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(3).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(4).GetComponent<MeshRenderer>().materials[0]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(7).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(28).GetComponent<MeshRenderer>().materials[1]);
+                factoryOwnerMaterials.Add(factoryModel.transform.GetChild(29).GetComponent<MeshRenderer>().materials[1]);
+                break;
+        }
+
+        UpdateFactoryOwnerPlayer(s_OwnerPlayer);
     }
 
     void OnMouseOver()

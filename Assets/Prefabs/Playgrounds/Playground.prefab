@@ -2429,7 +2429,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 455835707748095768}
   - {fileID: 5338112042897894103}
@@ -2537,11 +2537,15 @@ MonoBehaviour:
   - {fileID: 844687931972900482}
   - {fileID: 4222844452911435013}
   startPoint: {fileID: 6387399477772848527}
-  level1FactoryPrefab: {fileID: 1254764600616008870, guid: 4998b26c12f570741b76567cdbc7b956,
+  level0FactoryPrefab: {fileID: 7997488318999887290, guid: 86ed985c33a2af44586e27edded583ec,
     type: 3}
-  level2FactoryPrefab: {fileID: 0}
-  level3FactoryPrefab: {fileID: 0}
-  level4FactoryPrefab: {fileID: 7364692808995715162, guid: 14d5ce03d84d8054fbf28ba1533a9107,
+  level1FactoryPrefab: {fileID: 5411333546202098537, guid: 4998b26c12f570741b76567cdbc7b956,
+    type: 3}
+  level2FactoryPrefab: {fileID: 487539630360733988, guid: 7db18c885b4a9604eb588444364624a6,
+    type: 3}
+  level3FactoryPrefab: {fileID: 5515631135383783753, guid: 675c018ee766a9042b20ef92305c80b8,
+    type: 3}
+  level4FactoryPrefab: {fileID: 2846108235694101843, guid: 14d5ce03d84d8054fbf28ba1533a9107,
     type: 3}
   clayResourcePrefab: {fileID: 8097265766854861114, guid: ed94e9377c262b64493b0ddbf12ae1cb,
     type: 3}
@@ -6327,7 +6331,7 @@ MonoBehaviour:
   locationName: Resource
   locationIndex: 34
   locationType: 6
-  regionType: 0
+  regionType: 4
   playgroundController: {fileID: 0}
   playerColorMaterial: {fileID: 0}
   indicateMaterials: []

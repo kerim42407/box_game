@@ -44,7 +44,7 @@ public class ResourceController : LocationController
     /// </summary>
     private void SetupResourceVariables()
     {
-        playerColorMaterial = GetComponent<MeshRenderer>().materials[1];
+        locationOwnerMaterial = GetComponent<MeshRenderer>().materials[1];
         playgroundController.resources.Add(this);
     }
 

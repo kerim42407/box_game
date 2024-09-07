@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +15,7 @@ public abstract class LocationController : NetworkBehaviour
     public LocationType locationType;
     public RegionType regionType;
     public PlaygroundController playgroundController;
-    public Material playerColorMaterial;
+    [HideInInspector] public Material locationOwnerMaterial;
     public Material[] indicateMaterials;
     private bool isSelectable;
     public UnityEvent<LocationController, Card> onClickEvent;
@@ -116,11 +117,11 @@ public abstract class LocationController : NetworkBehaviour
     {
         if(newOwner == null)
         {
-            playerColorMaterial.color = Color.red;
+            locationOwnerMaterial.color = Color.red;
         }
         else
         {
-            playerColorMaterial.color = newOwner.playerColor;
+            locationOwnerMaterial.color = newOwner.playerColor;
         }
         
     }
@@ -193,14 +194,6 @@ public abstract class LocationController : NetworkBehaviour
                 break;
         }
         rentRateText.transform.localPosition = new Vector3(.675f, 0, 0);
-    }
-
-    /// <summary>
-    /// Spawns factory prefab
-    /// </summary>
-    public void SpawnFactoryPrefab()
-    {
-        Instantiate(playgroundController.level1FactoryPrefab, transform);
     }
 
     /// <summary>
