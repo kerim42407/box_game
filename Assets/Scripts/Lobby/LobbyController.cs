@@ -23,9 +23,6 @@ public class LobbyController : NetworkBehaviour
     public GameObject playerListContainer;
     public PlayerObjectController localPlayerController;
 
-    [Header("Player Colors")]
-    public List<Color> playerColorList;
-
     [Header("Sprites")]
     public Sprite disabledButtonTexture;
     public Sprite startGameButtonNormalTexture;
@@ -179,6 +176,10 @@ public class LobbyController : NetworkBehaviour
         PlayerListItem localPlayerListItem = playerListContainer.transform.GetChild(localPlayerController.playerLobbyIndex).GetComponent<PlayerListItem>();
         localPlayerListItem.playerColorChangeButton.SetActive(true);
         localPlayerListItem.playerColorChangeButton.GetComponent<ButtonManager>().onClick.AddListener(() => localPlayerController.CmdSetPlayerColor());
+        localPlayerListItem.previousPawnButton.GetComponent<ButtonManager>().onClick.AddListener(() => localPlayerController.CmdSetPlayerPawn(false));
+        localPlayerListItem.nextPawnButton.GetComponent<ButtonManager>().onClick.AddListener(() => localPlayerController.CmdSetPlayerPawn(true));
+        localPlayerListItem.previousPawnButton.SetActive(true);
+        localPlayerListItem.nextPawnButton.SetActive(true);
     }
 
     public void CreateHostPlayerItem()
@@ -303,13 +304,17 @@ public class LobbyController : NetworkBehaviour
         Destroy(objectToClear);
         PlayerListItem _playerListItem = _gameObject.AddComponent<PlayerListItem>();
         _playerListItem.playerItemParent = _gameObject.transform.GetChild(0).gameObject;
-        _playerListItem.playerNameText = _playerListItem.playerItemParent.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        _playerListItem.playerReadyText = _playerListItem.playerItemParent.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        _playerListItem.playerIcon = _playerListItem.playerItemParent.transform.GetChild(2).GetComponent<RawImage>();
-        _playerListItem.hostIcon = _playerListItem.playerItemParent.transform.GetChild(3).gameObject;
+        _playerListItem.playerPawnImage = _playerListItem.playerItemParent.transform.GetChild(0).GetComponent<Image>();
+        _playerListItem.playerNameText = _playerListItem.playerItemParent.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerReadyText = _playerListItem.playerItemParent.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        _playerListItem.playerIcon = _playerListItem.playerItemParent.transform.GetChild(3).GetComponent<RawImage>();
+        _playerListItem.hostIcon = _playerListItem.playerItemParent.transform.GetChild(4).gameObject;
+        _playerListItem.playerColorImage = _playerListItem.playerItemParent.transform.GetChild(5).GetComponent<Image>();
+        _playerListItem.playerColorChangeButton = _playerListItem.playerItemParent.transform.GetChild(6).gameObject;
+        _playerListItem.previousPawnButton = _playerListItem.playerItemParent.transform.GetChild(7).gameObject;
+        _playerListItem.nextPawnButton = _playerListItem.playerItemParent.transform.GetChild(8).gameObject;
         _playerListItem.inviteButton = _gameObject.transform.GetChild(1).gameObject;
-        _playerListItem.playerColorImage = _playerListItem.playerItemParent.transform.GetChild(4).GetComponent<Image>();
-        _playerListItem.playerColorChangeButton = _playerListItem.playerItemParent.transform.GetChild(5).gameObject;
+        
         _playerListItem.playerItemParent.SetActive(false);
         _playerListItem.inviteButton.SetActive(true);
         _playerListItem.SetPlayerValues();

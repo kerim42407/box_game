@@ -239,7 +239,7 @@ public class FactoryController : LocationController
                 factoryOwnerMaterials.Add(factoryModel.transform.GetChild(29).GetComponent<MeshRenderer>().materials[1]);
                 break;
         }
-
+        FactoryModelController factoryModelController = factoryModel.GetComponent<FactoryModelController>();
         UpdateFactoryOwnerPlayer(s_OwnerPlayer);
     }
 

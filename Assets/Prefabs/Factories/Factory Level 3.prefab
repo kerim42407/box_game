@@ -1756,6 +1756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6947150931160962836}
+  - component: {fileID: -4564407083766947405}
   m_Layer: 0
   m_Name: Factory Level 3
   m_TagString: Untagged
@@ -1818,6 +1819,61 @@ Transform:
   - {fileID: 4117706727187612321}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4564407083766947405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515631135383783753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79399a2df698eab408e51809c55a418c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childObjects:
+  - {fileID: 2223270277576255345}
+  - {fileID: 102478209416343420}
+  - {fileID: 4897124425929080942}
+  - {fileID: 7504596549258176543}
+  - {fileID: 8697179424167409830}
+  - {fileID: 6102388193624127450}
+  - {fileID: 9006282647303235817}
+  - {fileID: 1177395449080561853}
+  - {fileID: 5169425043227236976}
+  - {fileID: 5774475292856274832}
+  - {fileID: 9084286512882971638}
+  - {fileID: 2741611638185651606}
+  - {fileID: 3036770295605278668}
+  - {fileID: 1981937442457264402}
+  - {fileID: 4376236266630180499}
+  - {fileID: 4327828082231499075}
+  - {fileID: 8762270118907250332}
+  - {fileID: 4990474628290565723}
+  - {fileID: 3089380391183676725}
+  - {fileID: 8535950336058378184}
+  - {fileID: 929915742205033077}
+  - {fileID: 4056029877534515182}
+  - {fileID: 885863581114529749}
+  - {fileID: 5223354754523570867}
+  - {fileID: 87460946555262160}
+  - {fileID: 1241071439746635848}
+  - {fileID: 4273668677050208841}
+  - {fileID: 412489514584838102}
+  - {fileID: 4962522359711575409}
+  - {fileID: 3875283799028222425}
+  - {fileID: 8665350057853417647}
+  - {fileID: 3537884309480710020}
+  - {fileID: 2139367414802963444}
+  - {fileID: 7163944643622656101}
+  - {fileID: 7047792209699226965}
+  - {fileID: 1954676066344514041}
+  - {fileID: 5645972768867661214}
+  - {fileID: 2852030898581578670}
+  - {fileID: 4153721820986427953}
+  - {fileID: 4117706727187612321}
+  randomOffset: {x: 15, y: 15, z: 15}
+  moveDuration: 30
 --- !u!1 &5575127410160867736
 GameObject:
   m_ObjectHideFlags: 0

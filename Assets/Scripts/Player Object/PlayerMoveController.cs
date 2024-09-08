@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerMoveController : NetworkBehaviour
 {
-    public GameObject playerModel;
-
     // Cosmetics
-    public MeshRenderer playerMesh;
+    public List<MeshRenderer> playerMeshes;
 
     [HideInInspector] public bool shouldMove;
     [HideInInspector] public int destinationIndex;
@@ -24,8 +22,6 @@ public class PlayerMoveController : NetworkBehaviour
     [HideInInspector] public GameManager gameManager;
 
     public bool didCosmetic;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -660,7 +656,10 @@ public class PlayerMoveController : NetworkBehaviour
 
     public void PlayerCosmeticsSetup()
     {
-        playerMesh.material.color = playerObjectController.playerColor;
+        foreach (MeshRenderer meshRenderer in playerMeshes)
+        {
+            meshRenderer.material.color = playerObjectController.playerColor;
+        }
         playerObjectController.playerTurnIndicator.GetComponent<MeshRenderer>().material.color = playerObjectController.playerColor;
     }
 }

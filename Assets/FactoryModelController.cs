@@ -1,21 +1,48 @@
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class FactoryModelController : MonoBehaviour
 {
-    public List<MeshRenderer> qwe;
-    public List<Material> asd;
+    public Transform[] childObjects;
+    public Vector3 randomOffset;
+    public float moveDuration;
 
-    // Start is called before the first frame update
+    private Vector3[] initialPositions;
+
     void Start()
     {
-        asd.Add(qwe[0].materials[1]);
+        initialPositions = new Vector3[childObjects.Length];
+        for (int i = 0; i < childObjects.Length; i++)
+        {
+            initialPositions[i] = childObjects[i].localPosition;
+            childObjects[i].localPosition += new Vector3(
+                Random.Range(-randomOffset.x, randomOffset.x),
+                Random.Range(-randomOffset.y, randomOffset.y),
+                Random.Range(-randomOffset.z, randomOffset.z)
+            );
+        }
+
+        StartCoroutine(MoveToInitialPositions());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator MoveToInitialPositions()
     {
-        
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            for (int i = 0; i < childObjects.Length; i++)
+            {
+                childObjects[i].localPosition = Vector3.Lerp(childObjects[i].localPosition, initialPositions[i], elapsedTime / moveDuration);
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        for (int i = 0; i < childObjects.Length; i++)
+        {
+            childObjects[i].localPosition = initialPositions[i];
+        }
     }
 }

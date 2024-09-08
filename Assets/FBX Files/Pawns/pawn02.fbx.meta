@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b2ce6ee83a088af4788cd320b530a704
+guid: 582f861eed7b8174e96964dd01b9d0ea
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,48 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: factoryLV1_base
-    second: {fileID: 2100000, guid: 75cef8c5be33d7040baff5e01fb395c8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factoryLV1_playerColorRoof
-    second: {fileID: 2100000, guid: f8e298249b765bc4097cac5cb6411ce6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factoryLV1_smallBase
-    second: {fileID: 2100000, guid: 4bce4d443ef1f3642b1143f71256dea0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factoryLV1_topWindow
-    second: {fileID: 2100000, guid: 713adcaf45be326468e5bcc739c4b852, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factory_chimney
-    second: {fileID: 2100000, guid: 2c578127412be7746ae2cd3599719bad, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factory_door
-    second: {fileID: 2100000, guid: 2d70fee70eedeca4b9c95db8f9c02ab9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factory_window
-    second: {fileID: 2100000, guid: 4588778c6c5555b4e958dd189b45057e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: factory_windowSquare
-    second: {fileID: 2100000, guid: 8967805f61d95a14c975ea6eeeba22ee, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: playerColor
-    second: {fileID: 2100000, guid: 88edbcbb08d8bd844bd0dce1cab87fa1, type: 2}
+      name: pawn02
+    second: {fileID: 2100000, guid: b11643b20c0bf574698da4c4bcc5025e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -77,7 +37,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

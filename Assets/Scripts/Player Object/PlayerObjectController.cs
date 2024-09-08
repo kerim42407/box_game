@@ -23,6 +23,11 @@ public class PlayerObjectController : NetworkBehaviour
     public List<Color> playerColors;
     public GameObject playerTurnIndicator;
     [SyncVar(hook = nameof(SetPlayerColor))] public Color playerColor;
+    public List<GameObject> playerPawns;
+    public List<Sprite> playerPawnImages;
+    [SyncVar(hook = nameof(SetPlayerPawn))] public int playerPawnIndex;
+    public GameObject playerModel;
+    public GameObject playerMeshParent;
 
     [SyncVar] public int turnCount;
     [SyncVar] public bool isBankrupt;
@@ -172,7 +177,6 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     // Start Game
-
     public void CanStartGame(string sceneName)
     {
         if (GetComponent<NetworkIdentity>().isOwned)
@@ -217,7 +221,12 @@ public class PlayerObjectController : NetworkBehaviour
         playerColor = message;
         if (playerListItem)
         {
+            foreach (MeshRenderer meshRenderer in playerModel.GetComponent<PawnController>().meshes)
+            {
+                meshRenderer.material.color = playerColor;
+            }
             playerListItem.playerColorImage.color = playerColor;
+            playerListItem.playerPawnImage.color = playerColor;
         }
         else
         {
@@ -230,6 +239,7 @@ public class PlayerObjectController : NetworkBehaviour
         if (playerListItem)
         {
             playerListItem.playerColorImage.color = playerColor;
+            playerListItem.playerPawnImage.color = playerColor;
         }
         else
         {
@@ -265,4 +275,60 @@ public class PlayerObjectController : NetworkBehaviour
         }
         
     }
+
+    #region Player Pawn Functions
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetPlayerPawn(bool isNext)
+    {
+        if (isNext)
+        {
+            if(playerPawnIndex == playerPawns.Count - 1)
+            {
+                playerPawnIndex = 0;
+            }
+            else
+            {
+                playerPawnIndex++;
+            }
+            
+        }
+        else
+        {
+            if(playerPawnIndex == 0)
+            {
+                playerPawnIndex = playerPawns.Count - 1;
+            }
+            else
+            {
+                playerPawnIndex--;
+            }
+        }
+    }
+
+    private void SetPlayerPawn(int oldValue, int newValue)
+    {
+        if (isServer)
+        {
+            playerPawnIndex = newValue;
+        }
+        if(isClient && (oldValue != newValue))
+        {
+            UpdatePlayerPawn(newValue);
+        }
+    }
+
+    private void UpdatePlayerPawn(int newValue)
+    {
+        Destroy(playerMeshParent.transform.GetChild(0).gameObject);
+        playerModel = Instantiate(playerPawns[newValue], playerMeshParent.transform);
+        playerMoveController.playerMeshes = playerModel.GetComponent<PawnController>().meshes;
+        foreach(MeshRenderer meshRenderer in playerModel.GetComponent<PawnController>().meshes)
+        {
+            meshRenderer.material.color = playerColor;
+        }
+        playerListItem.playerPawnImage.sprite = playerPawnImages[newValue];
+        playerListItem.playerPawnImage.color = playerColor;
+    }
+    #endregion
 }

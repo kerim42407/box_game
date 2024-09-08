@@ -18,6 +18,9 @@ public class PlayerListItem : MonoBehaviour
     public GameObject hostIcon;
     public Image playerColorImage;
     public GameObject playerColorChangeButton;
+    public GameObject previousPawnButton;
+    public GameObject nextPawnButton;
+    public Image playerPawnImage;
 
     public bool ready;
 
