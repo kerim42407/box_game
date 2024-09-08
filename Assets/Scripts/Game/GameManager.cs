@@ -748,6 +748,7 @@ public class GameManager : NetworkBehaviour
             selectedFactory.s_Productivity = playgroundController.ServerCalculateFactoryProductivity(selectedFactory);
             selectedFactory.s_RentRate = CalculateFactoryRentRate(selectedFactory);
         }
+        CmdUpdateTurnIndex();
         RpcDeactivateCard(card);
     }
 

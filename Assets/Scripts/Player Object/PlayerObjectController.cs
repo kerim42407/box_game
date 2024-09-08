@@ -86,6 +86,7 @@ public class PlayerObjectController : NetworkBehaviour
                 {
                     gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
                     playerMoveController.gameManager = gameManager;
+                    playerMoveController.playerModelTransform = playerModel.transform;
                     if (isLocalPlayer)
                     {
                         gameManager.localPlayerController = this;

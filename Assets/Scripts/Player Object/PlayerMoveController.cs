@@ -23,16 +23,13 @@ public class PlayerMoveController : NetworkBehaviour
 
     public bool didCosmetic;
 
+    [Header("References")]
+    [HideInInspector] public Transform playerModelTransform;
+
     // Start is called before the first frame update
     void Start()
     {
         playerObjectController = GetComponent<PlayerObjectController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -72,6 +69,7 @@ public class PlayerMoveController : NetworkBehaviour
 
                 transform.position = Vector3.Slerp(firstPosCenter, lastPosCenter, fracComplete);
                 transform.position += center;
+                playerModelTransform.position = Vector3.Lerp(playerModelTransform.position, transform.position + (destinationTransforms[destinationIndex].right * -.25f), fracComplete);
             }
         }
     }
