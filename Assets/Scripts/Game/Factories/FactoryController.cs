@@ -80,6 +80,7 @@ public class FactoryController : LocationController
     public void SpawnFactoryPrefab()
     {
         factoryModel = Instantiate(playgroundController.level0FactoryPrefab, transform);
+        factoryModel.transform.localPosition = new Vector3(.2f, .035f, 0);
     }
 
     #endregion
@@ -204,6 +205,7 @@ public class FactoryController : LocationController
         {
             case 0:
                 factoryModel = Instantiate(playgroundController.level0FactoryPrefab, transform);
+                factoryModel.transform.localPosition = new Vector3(.2f, .035f, 0);
                 break;
             case 1:
                 factoryModel = Instantiate(playgroundController.level1FactoryPrefab, transform);
