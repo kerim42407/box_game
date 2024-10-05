@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using Cinemachine;
+using Mirror;
 using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
@@ -57,8 +58,11 @@ public class GameManager : NetworkBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    public CinemachinePathBase m_Path;
+
     private void Awake()
     {
+        
         if (Instance != null && Instance != this)
         {
             Destroy(this);
