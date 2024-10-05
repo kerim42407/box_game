@@ -48,7 +48,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  diceToThrow: {fileID: 519321256716007828, guid: 245e936503fcddd4bb044d54c05e255b,
+  diceToThrow: {fileID: 5914686752889632694, guid: 9419d9feace9d1c4aa6838c1fb6b96cb,
     type: 3}
   amountOfDice: 1
   throwForce: 5

@@ -283,12 +283,12 @@ public class FactoryController : LocationController
                         case CardEffectType.Positive:
                             EventPanelData eventPanelData1 = Instantiate(locationInfoPanelData.positiveEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
                             eventPanelData1.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                            eventPanelData1.eventNameText.text = $"{card.CardData.CardEffectDescription}";
+                            eventPanelData1.eventNameText.text = $"{card.CardData.CardName}";
                             break;
                         case CardEffectType.Negative:
                             EventPanelData eventPanelData2 = Instantiate(locationInfoPanelData.negativeEventPrefab.GetComponent<EventPanelData>(), locationInfoPanelData.eventContainer.transform);
                             eventPanelData2.productivityText.text = $"%{card.CardData.ProductivityValue}";
-                            eventPanelData2.eventNameText.text = $"{card.CardData.CardEffectDescription}";
+                            eventPanelData2.eventNameText.text = $"{card.CardData.CardName}";
                             break;
                     }
                 }

@@ -1,5 +1,5 @@
-﻿using Cinemachine;
-using Mirror;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
@@ -23,6 +23,8 @@ public class GameManager : NetworkBehaviour
     [SyncVar] public int turnIndex;
     [SyncVar] public int turnCount;
     public readonly SyncList<Card> s_ActiveCards = new();
+
+    public GameObject tornadoVFX;
 
     // Manager
     private MyNetworkManager manager;
@@ -58,11 +60,8 @@ public class GameManager : NetworkBehaviour
 
     public static GameManager Instance { get; private set; }
 
-    public CinemachinePathBase m_Path;
-
     private void Awake()
     {
-        
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -710,16 +709,39 @@ public class GameManager : NetworkBehaviour
             int index = Random.Range(0, selectableFactories.Count);
             FactoryController selectedFactory = selectableFactories[index];
 
-            if (selectedFactory.s_FactoryLevel > 1)
-            {
-                selectedFactory.s_FactoryLevel--;
-                CalculateFactoryRentRate(selectedFactory);
-            }
-            else
-            {
-                playgroundController.CmdSellLocationToTheBank(selectedFactory.locationIndex, selectedFactory.s_OwnerPlayer);
-            }
+            GameObject tornado = Instantiate(tornadoVFX);
+            tornado.GetComponent<RandomPathMovement>().targetPosition = selectedFactory.transform.position;
+            NetworkServer.Spawn(tornado);
+
+            StartCoroutine(ServerApplyStrongStormCardEffect(card,selectedFactory,3));
+            
         }
+        else
+        {
+            Destroy(card.gameObject);
+            CmdUpdateTurnIndex();
+        }
+    }
+
+    [Server]
+    public IEnumerator ServerApplyStrongStormCardEffect(Card card, FactoryController selectedFactory, int seconds)
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < seconds)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        if (selectedFactory.s_FactoryLevel > 1)
+        {
+            selectedFactory.s_FactoryLevel--;
+            CalculateFactoryRentRate(selectedFactory);
+        }
+        else
+        {
+            playgroundController.CmdSellLocationToTheBank(selectedFactory.locationIndex, selectedFactory.s_OwnerPlayer);
+        }
+
         Destroy(card.gameObject);
         CmdUpdateTurnIndex();
     }
@@ -812,11 +834,11 @@ public class GameManager : NetworkBehaviour
         PlayerObjectController player = card.s_OwnerPlayer;
         int index = 0;
 
-        if(locationController.locationIndex > player.playerLocation)
+        if (locationController.locationIndex > player.playerLocation)
         {
             index = locationController.locationIndex - player.playerLocation;
         }
-        else if(locationController.locationIndex < player.playerLocation)
+        else if (locationController.locationIndex < player.playerLocation)
         {
             index = (40 - player.playerLocation) + locationController.locationIndex;
         }

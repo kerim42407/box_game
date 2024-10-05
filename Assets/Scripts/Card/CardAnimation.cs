@@ -14,19 +14,6 @@ public class CardAnimation : MonoBehaviour
         card = GetComponent<Card>();
     }
 
-
-    //public IEnumerator MoveToTarget(Vector2 targetPosition)
-    //{
-    //    while (Vector2.Distance(transform.position, targetPosition) > 0.1f)
-    //    {
-    //        transform.position = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
-    //        yield return null;
-    //    }
-
-    //    transform.position = targetPosition;
-    //    gameObject.SetActive(false);
-    //}
-
     /// <summary>
     /// Moves card to the game player list item
     /// </summary>
