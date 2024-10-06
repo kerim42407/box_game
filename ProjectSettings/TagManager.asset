@@ -8,6 +8,7 @@ TagManager:
   - Playground
   - Resource
   - Saleable Location
+  - Ground
   layers:
   - Default
   - TransparentFX

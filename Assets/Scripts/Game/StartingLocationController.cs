@@ -16,6 +16,7 @@ public class StartingLocationController : LocationController
     public override void SetupLocation()
     {
         base.SetupLocation();
+        SpawnLocationNameTextPrefab();
     }
 
     #endregion

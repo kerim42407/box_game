@@ -37,6 +37,7 @@ public class ResourceController : LocationController
         SpawnRentRateTextPrefab();
         SpawnResourcePrefab();
         SetupResourceVariables();
+        SpawnLocationNameTextPrefab();
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DeckController : LocationController    
@@ -32,6 +33,7 @@ public class DeckController : LocationController
     public override void SetupLocation()
     {
         base.SetupLocation();
+        SpawnLocationNameTextPrefab();
         playerCardContainer = UIManager.Instance.playerCardContainer;
     }
 
