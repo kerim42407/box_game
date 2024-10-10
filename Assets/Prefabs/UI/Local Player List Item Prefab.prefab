@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 1021759479934953317}
   - component: {fileID: 7240040933320942564}
   - component: {fileID: 7752758888022349113}
+  - component: {fileID: 3258400026947913476}
   m_Layer: 5
   m_Name: Local Player List Item Prefab
   m_TagString: Untagged
@@ -255,7 +256,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2043880451067799071}
   - {fileID: 3557969182346574499}
@@ -325,6 +326,28 @@ MonoBehaviour:
   playerNameText: {fileID: 7262465020375327847}
   playerMoneyText: {fileID: 4899289716495846181}
   workforceText: {fileID: 0}
+  animator: {fileID: 3258400026947913476}
+--- !u!95 &3258400026947913476
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437526342671023169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6e3ca22cbfef244c9341594c0577f7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6293252059981555882
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class PlayerMoveController : NetworkBehaviour
 
     [Header("References")]
     [HideInInspector] public Transform playerModelTransform;
+    public AudioSource moveSound;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class PlayerMoveController : NetworkBehaviour
         {
             if (transform.position == destinationTransforms[destinationIndex].position)
             {
+                moveSound.Play();
                 if (destinationTransforms[destinationIndex] == playgroundController.locations[0].transform)
                 {
                     playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney + gameManager.startingPointIncome);
@@ -654,10 +656,15 @@ public class PlayerMoveController : NetworkBehaviour
 
     public void PlayerCosmeticsSetup()
     {
-        foreach (MeshRenderer meshRenderer in playerMeshes)
+        foreach (MeshRenderer meshRenderer in playerObjectController.playerModel.GetComponent<PawnController>().meshes)
         {
-            meshRenderer.material.color = playerObjectController.playerColor;
+            GetComponent<PlayerEmissionController>().materials.Add(meshRenderer.material);
         }
         playerObjectController.playerTurnIndicator.GetComponent<MeshRenderer>().material.color = playerObjectController.playerColor;
+
+        GetComponent<PlayerEmissionController>().emissionColor = playerObjectController.playerColor;
+        GetComponent<PlayerEmissionController>().initialEmissionColor = playerObjectController.playerColor;
+        Debug.Log(playerObjectController.playerColor);
+        didCosmetic = true;
     }
 }

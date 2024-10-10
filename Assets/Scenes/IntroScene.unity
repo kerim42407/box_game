@@ -185,6 +185,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: My Network Manager Steam
       objectReference: {fileID: 0}
+    - target: {fileID: 6843252863257008726, guid: bd6e96c2c3317e341966359cb05fc138,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843252863257008726, guid: bd6e96c2c3317e341966359cb05fc138,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 9086304121082843623, guid: ce0e683770cc925448170902cfff5238,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

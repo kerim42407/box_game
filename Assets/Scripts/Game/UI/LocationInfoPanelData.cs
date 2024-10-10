@@ -7,8 +7,12 @@ public class LocationInfoPanelData : MonoBehaviour
 {
     [Header("References")]
     public GameObject eventContainer;
-    public TextMeshProUGUI locationNameText;
     public TextMeshProUGUI productivityText;
+    public TextMeshProUGUI factoryLevelText;
+    public TextMeshProUGUI productionTypeText;
+    public TextMeshProUGUI locationNameText;
+
+    public GameObject productionTypeIcon;
 
     [Header("Prefabs")]
     public GameObject positiveEventPrefab;

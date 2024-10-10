@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 89199880734295161}
   - component: {fileID: 5824638787529044253}
   - component: {fileID: 1534896065352894986}
+  - component: {fileID: 3274147389798067217}
   m_Layer: 5
   m_Name: Game Player List Item Prefab
   m_TagString: Untagged
@@ -247,6 +248,28 @@ MonoBehaviour:
   playerNameText: {fileID: 3399474643204898508}
   playerMoneyText: {fileID: 5323845431052172529}
   workforceText: {fileID: 0}
+  animator: {fileID: 3274147389798067217}
+--- !u!95 &3274147389798067217
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996307193831382553}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6e3ca22cbfef244c9341594c0577f7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3179078894922759790
 GameObject:
   m_ObjectHideFlags: 0

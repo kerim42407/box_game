@@ -35,8 +35,12 @@ public class UIManager : MonoBehaviour
     public GameObject localPlayerListItemPanel;
     public GameObject gamePlayersListItemPanel;
 
+    [Header("Sound Effects")]
+    public AudioSource factoryBuildSound;
+
     [Header("Notifications")]
     public NotificationManager yourTurnNotification;
+    public NotificationManager updateMoneyNotification;
     public NotificationManager diceResultNotification;
 
     public static UIManager Instance { get; private set; }

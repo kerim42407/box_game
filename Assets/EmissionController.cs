@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(LocationController))]
 public class EmissionController : MonoBehaviour
 {
     #region Variables
-    [HideInInspector] public Material material;
+    public Material material;
     [HideInInspector] public Color initialEmissionColor;
 
     public Color emissionColor = Color.white;
@@ -12,10 +11,6 @@ public class EmissionController : MonoBehaviour
 
     private bool isPulsing = false;
     #endregion
-
-    void Start()
-    {
-    }
 
     void Update()
     {

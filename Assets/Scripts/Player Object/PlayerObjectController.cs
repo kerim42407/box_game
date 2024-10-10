@@ -1,3 +1,4 @@
+using Michsky.MUIP;
 using Mirror;
 using Steamworks;
 using System.Collections.Generic;
@@ -263,18 +264,33 @@ public class PlayerObjectController : NetworkBehaviour
         }
         if (isClient && (oldValue != newValue))
         {
-            UpdateMoney(newValue);
+            UpdateMoney(oldValue, newValue);
         }
     }
 
-    private void UpdateMoney(float value)
+    private void UpdateMoney(float oldValue, float newValue)
     {
-        playerMoney = value;
+        float moneySpent = Mathf.Abs(oldValue - newValue);
+        playerMoney = newValue;
         if (gamePlayerListItem)
         {
-            gamePlayerListItem.playerMoneyText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", playerMoney);
+            gamePlayerListItem.animator.SetTrigger("Update Money");
+
+            if (!UIManager.Instance.updateMoneyNotification.isOn)
+            {
+                UIManager.Instance.updateMoneyNotification.description = $"{moneySpent / 1000}K";
+                UIManager.Instance.updateMoneyNotification.UpdateUI();
+                UIManager.Instance.updateMoneyNotification.Open();
+            }
+            
+            Invoke(nameof(UpdateMoneyAnim), .5f);
         }
         
+    }
+
+    public void UpdateMoneyAnim()
+    {
+        gamePlayerListItem.playerMoneyText.text = "$" + string.Format(CultureInfo.InvariantCulture, "{0:N0}", playerMoney);
     }
 
     #region Player Pawn Functions

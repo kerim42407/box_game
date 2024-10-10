@@ -294,14 +294,16 @@ public class GameManager : NetworkBehaviour
         {
             if (i == index)
             {
-                Manager.gamePlayers[i].playerTurnIndicator.SetActive(true);
+                //Manager.gamePlayers[i].playerTurnIndicator.SetActive(true);
+                Manager.gamePlayers[i].GetComponent<PlayerEmissionController>().ActivateEmission();
                 Manager.gamePlayers[i].canPlayCard = true;
                 Manager.gamePlayers[i].canPlay = true;
                 Manager.gamePlayers[i].playerInputController.canThrow = true;
             }
             else
             {
-                Manager.gamePlayers[i].playerTurnIndicator.SetActive(false);
+                //Manager.gamePlayers[i].playerTurnIndicator.SetActive(false);
+                Manager.gamePlayers[i].GetComponent<PlayerEmissionController>().DeactivateEmission();
                 Manager.gamePlayers[i].canPlayCard = false;
                 Manager.gamePlayers[i].canPlay = false;
                 Manager.gamePlayers[i].playerInputController.canThrow = false;

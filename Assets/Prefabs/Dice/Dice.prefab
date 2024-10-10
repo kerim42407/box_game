@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minVolume: 0.2
-  maxVolume: 1
+  maxVolume: 0.5
   maxCollisionForce: 10
 --- !u!54 &2899423873324706953
 Rigidbody:
@@ -381,7 +381,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0bd0f7354942c784aa4aec5ba5448229, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0

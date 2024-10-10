@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -192,12 +193,14 @@ public class FactoryController : LocationController
         }
         if (isClient && oldValue != newValue)
         {
-            UpdateFactoryLevel(newValue);
+            //UpdateFactoryLevel(newValue);
+            StartCoroutine(UpdateFactoryLevel(newValue));
         }
     }
 
-    private void UpdateFactoryLevel(int newValue)
+    private IEnumerator UpdateFactoryLevel(int newValue)
     {
+        yield return new WaitForSeconds(2);
         Destroy(factoryModel);
         factoryOwnerMaterials = new();
 
@@ -241,6 +244,7 @@ public class FactoryController : LocationController
                 factoryOwnerMaterials.Add(factoryModel.transform.GetChild(29).GetComponent<MeshRenderer>().materials[1]);
                 break;
         }
+        UIManager.Instance.factoryBuildSound.Play();
         FactoryModelController factoryModelController = factoryModel.GetComponent<FactoryModelController>();
         UpdateFactoryOwnerPlayer(s_OwnerPlayer);
     }
@@ -256,6 +260,18 @@ public class FactoryController : LocationController
                 locationInfoPanel.transform.position = positionOnScreen;
                 locationInfoPanelData.locationNameText.text = locationName;
                 locationInfoPanelData.productivityText.text = $"%{s_Productivity}";
+                locationInfoPanelData.factoryLevelText.text = $"Lv. {s_FactoryLevel}";
+                if(locationType == LocationType.GoldenFactory)
+                {
+                    locationInfoPanelData.productionTypeIcon.SetActive(true);
+                    locationInfoPanelData.productionTypeText.text = s_ProductionType.ToString();
+                }
+                else
+                {
+                    locationInfoPanelData.productionTypeIcon.SetActive(false);
+                    locationInfoPanelData.productionTypeText.text = "";
+                }
+
                 if (locationInfoPanelData.eventContainer.transform.childCount > 0)
                 {
                     foreach (Transform transform in locationInfoPanelData.eventContainer.transform)

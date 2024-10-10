@@ -17,6 +17,7 @@ public class GamePlayerListItem : MonoBehaviour
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI playerMoneyText;
     public TextMeshProUGUI workforceText;
+    public Animator animator;
 
     protected Callback<AvatarImageLoaded_t> imageLoaded;
 
