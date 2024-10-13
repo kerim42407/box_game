@@ -664,7 +664,6 @@ public class PlayerMoveController : NetworkBehaviour
 
         GetComponent<PlayerEmissionController>().emissionColor = playerObjectController.playerColor;
         GetComponent<PlayerEmissionController>().initialEmissionColor = playerObjectController.playerColor;
-        Debug.Log(playerObjectController.playerColor);
         didCosmetic = true;
     }
 }

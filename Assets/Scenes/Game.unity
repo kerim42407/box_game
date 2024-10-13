@@ -1951,7 +1951,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0b700dbc1680b3245993929eeb957ad3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 21ac626093834ee4691d857416e93b09, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4251,7 +4251,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 120K
+  m_text: Notification description. Size of this area will change based on the size
+    of its content at runtime.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3a307d0922ded1468ca1ce7753a81ee, type: 2}
   m_sharedMaterial: {fileID: 5645895409336768159, guid: f3a307d0922ded1468ca1ce7753a81ee,
@@ -4279,7 +4280,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
