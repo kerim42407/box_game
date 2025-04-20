@@ -261,16 +261,7 @@ public class FactoryController : LocationController
                 locationInfoPanelData.locationNameText.text = locationName;
                 locationInfoPanelData.productivityText.text = $"%{s_Productivity}";
                 locationInfoPanelData.factoryLevelText.text = $"Lv. {s_FactoryLevel}";
-                if(locationType == LocationType.GoldenFactory)
-                {
-                    locationInfoPanelData.productionTypeIcon.SetActive(true);
-                    locationInfoPanelData.productionTypeText.text = s_ProductionType.ToString();
-                }
-                else
-                {
-                    locationInfoPanelData.productionTypeIcon.SetActive(false);
-                    locationInfoPanelData.productionTypeText.text = "";
-                }
+                locationInfoPanelData.productionTypeText.text = s_ProductionType.ToString();
 
                 if (locationInfoPanelData.eventContainer.transform.childCount > 0)
                 {

@@ -24,7 +24,12 @@ public class GameManager : NetworkBehaviour
     [SyncVar] public int turnCount;
     public readonly SyncList<Card> s_ActiveCards = new();
 
+    [Header("SFX")]
+    public AudioSource drawCardSFX;
+
+    [Header("VFX")]
     public GameObject tornadoVFX;
+    public GameObject suspiciousFireVFX;
 
     // Manager
     private MyNetworkManager manager;
@@ -75,6 +80,7 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         if (isServer)
         {
             CmdSetupGame();
@@ -567,6 +573,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcDrawCardForPlayer(PlayerObjectController player, Card card, int cardIndex, DeckController deckController)
     {
+        drawCardSFX.Play();
         card.transform.localScale = new Vector3(.25f, .25f, .25f);
         card.transform.position = Camera.main.WorldToScreenPoint(deckController.transform.position);
         if (card.isOwned)
@@ -607,7 +614,7 @@ public class GameManager : NetworkBehaviour
             // If is local player and card type is holdable, update turn index
             if (card.isOwned)
             {
-                CmdUpdateTurnIndex();
+                Invoke(nameof(CmdUpdateTurnIndex), 3);
             }
         }
     }
@@ -675,6 +682,7 @@ public class GameManager : NetworkBehaviour
         factoryController.s_ActiveCards.Add(card);
         factoryController.s_Productivity += card.CardData.ProductivityValue;
         factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+        RpcApplyMarketCardEffect(factoryController, card);
     }
 
     [Command(requiresAuthority = false)]
@@ -683,6 +691,33 @@ public class GameManager : NetworkBehaviour
         factoryController.s_ActiveCards.Remove(card);
         factoryController.s_Productivity -= card.CardData.ProductivityValue;
         factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
+        RpcRemoveMarketCardEffect(factoryController, card);
+    }
+
+    [ClientRpc]
+    private void RpcApplyMarketCardEffect(FactoryController factoryController, Card card)
+    {
+        if(card.CardData.EffectType == CardEffectType.Positive)
+        {
+            StartCoroutine(factoryController.GetComponent<EmissionController>().ChangeEmission(true));
+        }
+        else
+        {
+            StartCoroutine(factoryController.GetComponent<EmissionController>().ChangeEmission(false));
+        } 
+    }
+
+    [ClientRpc]
+    private void RpcRemoveMarketCardEffect(FactoryController factoryController, Card card)
+    {
+        if (card.CardData.EffectType == CardEffectType.Positive)
+        {
+            StartCoroutine(factoryController.GetComponent<EmissionController>().ChangeEmission(false));
+        }
+        else
+        {
+            StartCoroutine(factoryController.GetComponent<EmissionController>().ChangeEmission(true));
+        }
     }
 
     #endregion
@@ -826,7 +861,8 @@ public class GameManager : NetworkBehaviour
                 locationController.IndicateLocation(false);
             }
         }
-        mainLight.SetActive(false);
+        //mainLight.SetActive(false);
+        mainLight.GetComponent<Light>().intensity = .25f;
         uiManager.yourTurnNotification.Close();
     }
 
@@ -907,7 +943,7 @@ public class GameManager : NetworkBehaviour
                 locationController.IndicateLocation(false);
             }
         }
-        mainLight.SetActive(false);
+       mainLight.GetComponent<Light>().intensity = .25f;
     }
 
     /// <summary>
@@ -930,7 +966,8 @@ public class GameManager : NetworkBehaviour
             factoryController.s_FactoryLevel--;
             factoryController.s_RentRate = CalculateFactoryRentRate(factoryController);
         }
-
+        GameObject fire = Instantiate(suspiciousFireVFX, locationController.transform.position + new Vector3(0,0.1f,0), Quaternion.identity);
+        NetworkServer.Spawn(fire);
         TRpcResetLocationIndicators(card.s_OwnerPlayer.connectionToClient);
         Destroy(card.gameObject);
     }
@@ -994,7 +1031,7 @@ public class GameManager : NetworkBehaviour
                 }
             }
         }
-        mainLight.SetActive(false);
+        mainLight.GetComponent<Light>().intensity = .25f;
     }
 
     /// <summary>
@@ -1072,7 +1109,7 @@ public class GameManager : NetworkBehaviour
                 locationController.IndicateLocation(false);
             }
         }
-        mainLight.SetActive(false);
+        mainLight.GetComponent<Light>().intensity = .25f;
     }
 
     [Command(requiresAuthority = false)]
@@ -1126,7 +1163,8 @@ public class GameManager : NetworkBehaviour
             locationController.playedCard = null;
             locationController.ResetIndicateLocation();
         }
-        mainLight.SetActive(true);
+        //mainLight.SetActive(true);
+        mainLight.GetComponent<Light>().intensity = 2;
         localPlayerController.playerInputController.canThrow = true;
     }
 

@@ -97,6 +97,11 @@ public class PlayerObjectController : NetworkBehaviour
             if (!playerMoveController.didCosmetic)
             {
                 playerMoveController.PlayerCosmeticsSetup();
+                playerMoveController.playerMeshes = playerModel.GetComponent<PawnController>().meshes;
+                foreach (MeshRenderer meshRenderer in playerModel.GetComponent<PawnController>().meshes)
+                {
+                    meshRenderer.material.color = playerColor;
+                }
             }
         }
 
@@ -329,7 +334,7 @@ public class PlayerObjectController : NetworkBehaviour
         {
             playerPawnIndex = newValue;
         }
-        if(isClient && (oldValue != newValue))
+        if(isClient)
         {
             UpdatePlayerPawn(newValue);
         }
@@ -337,6 +342,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void UpdatePlayerPawn(int newValue)
     {
+        Debug.Log("asda");
         Destroy(playerMeshParent.transform.GetChild(0).gameObject);
         playerModel = Instantiate(playerPawns[newValue], playerMeshParent.transform);
         playerMoveController.playerMeshes = playerModel.GetComponent<PawnController>().meshes;

@@ -33,13 +33,19 @@ public class PlayerMoveController : NetworkBehaviour
         playerObjectController = GetComponent<PlayerObjectController>();
     }
 
+    [ClientRpc]
+    private void PlayMoveSound()
+    {
+        moveSound.Play();
+    }
+
     private void FixedUpdate()
     {
         if (shouldMove)
         {
             if (transform.position == destinationTransforms[destinationIndex].position)
             {
-                moveSound.Play();
+                PlayMoveSound();
                 if (destinationTransforms[destinationIndex] == playgroundController.locations[0].transform)
                 {
                     playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney + gameManager.startingPointIncome);
@@ -416,7 +422,6 @@ public class PlayerMoveController : NetworkBehaviour
                 factoryController.s_OwnerPlayer.CmdUpdatePlayerMoney(factoryController.s_OwnerPlayer.playerMoney + buyPrice);
             }
             playgroundController.CmdBuyFactory(playerObjectController.playerLocation, playerObjectController, factoryBuyPanelData.productionType[factoryBuyPanelData.productionTypeIndex]);
-            gameManager.CmdUpdateTurnIndex();
             Destroy(factoryBuyPanel);
         });
 
@@ -474,7 +479,6 @@ public class PlayerMoveController : NetworkBehaviour
         {
             playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - upgradePrice);
             playgroundController.CmdUpgradeFactory(playerObjectController.playerLocation);
-            gameManager.CmdUpdateTurnIndex();
             Destroy(factoryUpgradePanel);
         });
 
@@ -507,7 +511,6 @@ public class PlayerMoveController : NetworkBehaviour
         {
             playerObjectController.CmdUpdatePlayerMoney(playerObjectController.playerMoney - buyPrice);
             playgroundController.CmdBuyResource(playerObjectController.playerLocation, playerObjectController);
-            gameManager.CmdUpdateTurnIndex();
             Destroy(resourceBuyPanel);
         });
 

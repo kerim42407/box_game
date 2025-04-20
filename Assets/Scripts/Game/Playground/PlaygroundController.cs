@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -206,6 +207,13 @@ public class PlaygroundController : NetworkBehaviour
 
         // Calculate productivity and rent rate
         factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
+        Invoke(nameof(ServerUpdateTurnIndex), 3);
+    }
+
+    [Server]
+    private void ServerUpdateTurnIndex()
+    {
+        gameManager.CmdUpdateTurnIndex();
     }
 
     #endregion
@@ -218,6 +226,7 @@ public class PlaygroundController : NetworkBehaviour
         FactoryController factoryController = locations[locationIndex].GetComponent<FactoryController>();
         factoryController.s_FactoryLevel++;
         factoryController.s_RentRate = gameManager.CalculateFactoryRentRate(factoryController);
+        Invoke(nameof(ServerUpdateTurnIndex), 3);
     }
 
     #endregion
@@ -243,6 +252,7 @@ public class PlaygroundController : NetworkBehaviour
         }
 
         resourceController.s_RentRate = gameManager.CalculateResourceRentRate(resourceController);
+        Invoke(nameof(ServerUpdateTurnIndex), 3);
     }
 
     #endregion

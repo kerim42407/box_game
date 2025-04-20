@@ -12,8 +12,6 @@ public class LocationInfoPanelData : MonoBehaviour
     public TextMeshProUGUI productionTypeText;
     public TextMeshProUGUI locationNameText;
 
-    public GameObject productionTypeIcon;
-
     [Header("Prefabs")]
     public GameObject positiveEventPrefab;
     public GameObject negativeEventPrefab;

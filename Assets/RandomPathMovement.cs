@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Mirror;
 
-public class RandomPathMovement : MonoBehaviour
+public class RandomPathMovement : NetworkBehaviour
 {
     public Vector3 targetPosition;  // Hedef pozisyon
     public float moveDuration = 5f; // Hedefe ulaşmak için belirlenen süre (saniye)
@@ -20,6 +21,7 @@ public class RandomPathMovement : MonoBehaviour
         StartCoroutine(MoveTowardsTargetWithDuration());
     }
 
+    [Server]
     IEnumerator MoveTowardsTargetWithDuration()
     {
         float elapsedTime = 0f;  // Geçen süreyi takip eden değişken
@@ -55,5 +57,11 @@ public class RandomPathMovement : MonoBehaviour
 
         // Hedefe tam olarak ulaştıktan sonra pozisyonu hedefle eşitle
         transform.position = targetPosition;
+        Invoke(nameof(OnEnd), 5f);
+    }
+
+    private void OnEnd()
+    {
+        Destroy(transform.gameObject);
     }
 }
